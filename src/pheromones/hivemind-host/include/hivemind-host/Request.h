@@ -3,6 +3,6 @@
 
 #include "FunctionCallRequest.h"
 
-typedef std::variant<FunctionCallRequest> Request;
+typedef std::variant<FunctionCallRequest2> Request2;
 
 #endif //__REQUEST_H_

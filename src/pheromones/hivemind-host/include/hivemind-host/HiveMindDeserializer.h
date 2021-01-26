@@ -12,12 +12,12 @@ class HiveMindDeserializer {
     HiveMindDeserializer(IProtobufStream& stream);
     ~HiveMindDeserializer() = default;
 
-    std::variant<std::monostate, Request> deserialize();
+    std::variant<std::monostate, Request2> deserialize();
 
   private:
     IProtobufStream& m_stream;
-    const pb_ostream_t m_outputStream;
-    const pb_istream_t m_inputStream;
+    // const pb_ostream_t m_outputStream;
+    // const pb_istream_t m_inputStream;
 };
 
 #endif // __HIVEMINDDESERIALIZER_H_
