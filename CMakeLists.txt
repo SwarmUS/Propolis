@@ -54,6 +54,5 @@ if(ENABLE_TESTS)
     endif()
 endif()
 
-# Add libraries
-add_subdirectory(pheromones)
+add_subdirectory(src)
 

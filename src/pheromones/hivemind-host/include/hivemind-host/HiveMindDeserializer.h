@@ -4,9 +4,9 @@
 #include <common/IProtobufStream.h>
 
 class HiveMindDeserializer {
-public:
-  HiveMindDeserializer();
-  ~HiveMindDeserializer();
+  public:
+    HiveMindDeserializer();
+    ~HiveMindDeserializer();
 };
 
 #endif // __HIVEMINDDESERIALIZER_H_
