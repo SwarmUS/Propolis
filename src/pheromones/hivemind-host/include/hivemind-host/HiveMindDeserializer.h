@@ -18,6 +18,7 @@ class HiveMindDeserializer {
     IProtobufStream& m_stream;
     // const pb_ostream_t m_outputStream;
     // const pb_istream_t m_inputStream;
+    static bool streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count);
 };
 
 #endif // __HIVEMINDDESERIALIZER_H_

@@ -9,23 +9,14 @@ std::variant<std::monostate, Request2> HiveMindDeserializer::deserialize() {
     // stream definition
 
     /*-------- SENDER -------*/
-    // Packet definition
-    // FunctionArgument arg = {};
-    // arg.which_argument = FunctionArgument_int_arg_tag;
-    // arg.argument.int_arg = 10;
+    Message msg_receive = Message_init_default;
 
-    // FunctionCallRequest2 f_req = FunctionCallRequest_init_default;
-    // f_req.arguments_count = 1;
-    // f_req.arguments[0] = arg;
-    // strcpy(f_req.functionName, "hello_world");
+    pb_istream_t inputStream;
 
-    // Request2 req = Request_init_default;
-    // req.id = 1;
-    // req.which_message = Request_function_call_tag;
-    // req.message.function_call = f_req;
+    inputStream.callback = HiveMindDeserializer::streamCallback;
+    inputStream.state = this;
 
-    // Message msg = Message_init_default;
-    // msg.which_message = Message_request_tag;
-    // msg.message.request = req
+    bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
+
     return std::monostate();
 }

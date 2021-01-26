@@ -7,12 +7,12 @@
 
 static const uint16_t s_functionCallArgumentsMaxLenght = 16;
 
-class FunctionCallRequest2 {
+class FunctionCallRequest {
 
   public:
-    FunctionCallRequest2() = default;
+    FunctionCallRequest() = default;
 
-    ~FunctionCallRequest2() = default;
+    ~FunctionCallRequest() = default;
 
     std::optional<FunctionCallArgument> get(uint16_t index);
 
