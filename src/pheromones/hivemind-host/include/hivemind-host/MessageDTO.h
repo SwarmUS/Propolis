@@ -14,7 +14,7 @@ class MessageDTO {
 
     uint32_t m_destinationId;
 
-    std::variant<RequestDTO> m_message;
+    std::variant<std::monostate, RequestDTO> m_message;
 
     static MessageDTO encode(const Message& message);
 };
