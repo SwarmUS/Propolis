@@ -5,31 +5,28 @@
 
 HiveMindDeserializer::HiveMindDeserializer(IProtobufStream& stream) : m_stream(stream) {}
 
-std::variant<std::monostate, Request2> HiveMindDeserializer::deserialize() {
+std::variant<std::monostate, RequestDTO> HiveMindDeserializer::deserialize() {
     // stream definition
 
     /*-------- SENDER -------*/
     Message msg_receive = Message_init_default;
 
-    pb_istream_t inputStream {HiveMindDeserializer::streamCallback, this, SIZE_MAX, 0};
+    pb_istream_t inputStream{HiveMindDeserializer::streamCallback, this, SIZE_MAX, 0};
 
     bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
-    if (status){
+    if (status) {
         switch (msg_receive.which_message) {
-            case Message_request_tag:
-                Request2 req;
-                return std::monostate();
+        case Message_request_tag:
+            return std::monostate();
 
-            default:
-                return std::monostate();
+        default:
+            return std::monostate();
         }
-        
-
     }
     return std::monostate();
 }
 
-bool HiveMindDeserializer::streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count){
+bool HiveMindDeserializer::streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count) {
     HiveMindDeserializer* _this = (HiveMindDeserializer*)stream->state;
     return _this->m_stream.receive(buf, count);
 }

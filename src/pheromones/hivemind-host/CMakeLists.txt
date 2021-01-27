@@ -2,8 +2,6 @@ set(LIB_NAME "swarmus-propolis-pheromones-hivemind-host")
 set(LIB_ALIAS "SwarmUS::Propolis::Pheromones::HiveMind::Host")
 
 set(LIB_SOURCES
-    src/FunctionCallArgument.cpp
-    src/FunctionCallRequest.cpp
     src/HiveMindDeserializer.cpp
 )
 
@@ -11,11 +9,9 @@ set(LIB_HEADERS
     include/hivemind-host/HiveMindDeserializer.h
     include/hivemind-host/IHiveMindDeserializer.h
 
-    include/hivemind-host/FunctionCallArgument.h
-
-    include/hivemind-host/FunctionCallRequest.h
-
-    include/hivemind-host/Request.h
+    include/hivemind-host/FunctionCallArgumentDTO.h
+    include/hivemind-host/FunctionCallRequestDTO.h
+    include/hivemind-host/RequestDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
