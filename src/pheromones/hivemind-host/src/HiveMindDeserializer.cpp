@@ -5,7 +5,7 @@
 
 HiveMindDeserializer::HiveMindDeserializer(IProtobufStream& stream) : m_stream(stream) {}
 
-std::variant<std::monostate, RequestDTO> HiveMindDeserializer::deserialize() {
+std::variant<std::monostate, MessageDTO> HiveMindDeserializer::deserialize() {
     // stream definition
 
     /*-------- SENDER -------*/
@@ -15,14 +15,10 @@ std::variant<std::monostate, RequestDTO> HiveMindDeserializer::deserialize() {
 
     bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
     if (status) {
-        switch (msg_receive.which_message) {
-        case Message_request_tag:
-            return std::monostate();
 
-        default:
-            return std::monostate();
-        }
+        return MessageDTO(msg_receive);
     }
+
     return std::monostate();
 }
 

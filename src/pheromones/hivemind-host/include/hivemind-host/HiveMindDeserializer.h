@@ -1,7 +1,7 @@
 #ifndef __HIVEMINDDESERIALIZER_H_
 #define __HIVEMINDDESERIALIZER_H_
 
-#include "RequestDTO.h"
+#include "MessageDTO.h"
 #include <common/IProtobufStream.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -12,7 +12,7 @@ class HiveMindDeserializer {
     HiveMindDeserializer(IProtobufStream& stream);
     ~HiveMindDeserializer() = default;
 
-    std::variant<std::monostate, RequestDTO> deserialize();
+    std::variant<std::monostate, MessageDTO> deserialize();
 
   private:
     IProtobufStream& m_stream;

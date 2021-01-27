@@ -10,13 +10,12 @@ class MessageDTO {
   public:
     MessageDTO(const Message& message);
 
+  private:
     uint32_t m_sourceId;
 
     uint32_t m_destinationId;
 
     std::variant<std::monostate, RequestDTO> m_message;
-
-    static MessageDTO encode(const Message& message);
 };
 
 #endif // __MESSAGEDTO_H_

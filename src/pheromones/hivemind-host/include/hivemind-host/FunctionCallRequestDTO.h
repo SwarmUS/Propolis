@@ -13,13 +13,12 @@ class FunctionCallRequestDTO {
   public:
     FunctionCallRequestDTO(const FunctionCallRequest& request);
 
+  private:
     std::array<FunctionCallArgumentDTO, s_functionCallArgumentsMaxLenght> m_arguments;
 
     char m_functionName[16];
 
     uint16_t m_argumentsLength = 0;
-
-    static FunctionCallRequestDTO encode(const FunctionCallRequest& request);
 };
 
 #endif // __FUNCTIONCALLREQUESTDTO_H_

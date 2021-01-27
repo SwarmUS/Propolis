@@ -12,9 +12,10 @@ class FunctionCallArgumentDTO {
   public:
     FunctionCallArgumentDTO(const FunctionArgument& argument);
 
-    std::variant<int32_t> m_argument;
+    FunctionCallArgumentDTO();
 
-    static FunctionCallArgumentDTO encode(const FunctionArgument& argument);
+  private:
+    std::variant<std::monostate, int32_t> m_argument;
 };
 
 #endif // __FUNCTIONCALLARGUMENTDTO_H_

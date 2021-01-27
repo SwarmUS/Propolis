@@ -9,11 +9,10 @@ class RequestDTO {
   public:
     RequestDTO(const Request& request);
 
+  private:
     uint32_t m_id;
 
     std::variant<std::monostate, FunctionCallRequestDTO> m_request;
-
-    static RequestDTO encode(const Request& request);
 };
 
 #endif //__REQUESTDTO_H_
