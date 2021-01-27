@@ -21,3 +21,8 @@ std::variant<std::monostate, Request2> HiveMindDeserializer::deserialize() {
 
     return std::monostate();
 }
+
+bool HiveMindDeserializer::streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count){
+    HiveMindDeserializer* _this = (HiveMindDeserializer*)stream->state;
+    return _this->m_stream.receive(buf, count);
+}
