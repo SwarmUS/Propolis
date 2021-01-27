@@ -15,14 +15,7 @@ class FunctionCallArgument {
 
     ~FunctionCallArgument() = default;
 
-    /**
-     *@brief get the stored argument
-     *
-     *@return an std::variant conaining the argument*/
-    std::variant<int32_t> getArgument();
-
-  private:
-    const std::variant<int32_t> m_argument;
+    std::variant<int32_t> m_argument;
 };
 
 #endif // __FUNCTIONCALLARGUMENT_H_

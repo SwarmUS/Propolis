@@ -17,6 +17,7 @@ std::variant<std::monostate, Request2> HiveMindDeserializer::deserialize() {
     inputStream.state = this;
 
     bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
+    (void) status;
 
     return std::monostate();
 }
