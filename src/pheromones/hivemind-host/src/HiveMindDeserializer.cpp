@@ -11,14 +11,21 @@ std::variant<std::monostate, Request2> HiveMindDeserializer::deserialize() {
     /*-------- SENDER -------*/
     Message msg_receive = Message_init_default;
 
-    pb_istream_t inputStream;
-
-    inputStream.callback = HiveMindDeserializer::streamCallback;
-    inputStream.state = this;
+    pb_istream_t inputStream {HiveMindDeserializer::streamCallback, this, SIZE_MAX, 0};
 
     bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
-    (void) status;
+    if (status){
+        switch (msg_receive.which_message) {
+            case Message_request_tag:
+                Request2 req;
+                return std::monostate();
 
+            default:
+                return std::monostate();
+        }
+        
+
+    }
     return std::monostate();
 }
 
