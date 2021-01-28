@@ -3,7 +3,7 @@
 
 FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& request) {
 
-    strcpy(m_functionName, request.function_name);
+    strncpy(m_functionName, request.function_name, s_functionNameMaxLength);
 
     m_argumentsLength = request.arguments_count;
 

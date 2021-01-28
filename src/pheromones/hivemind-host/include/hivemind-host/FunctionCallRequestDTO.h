@@ -7,6 +7,7 @@
 #include <optional>
 
 static const uint16_t s_functionCallArgumentsMaxLenght = 16;
+static const uint16_t s_functionNameMaxLength = 16;
 
 class FunctionCallRequestDTO {
 
@@ -16,7 +17,7 @@ class FunctionCallRequestDTO {
   private:
     std::array<FunctionCallArgumentDTO, s_functionCallArgumentsMaxLenght> m_arguments;
 
-    char m_functionName[16];
+    char m_functionName[s_functionNameMaxLength];
 
     uint16_t m_argumentsLength = 0;
 };

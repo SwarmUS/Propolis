@@ -6,8 +6,9 @@ RequestDTO::RequestDTO(const Request& request) {
 
     switch (request.which_message) {
 
-    case Request_message_function_call_MSGTYPE:
+    case Request_function_call_tag:
         m_request = FunctionCallRequestDTO(request.message.function_call);
+        break;
     default:
         m_request = std::monostate();
     }
