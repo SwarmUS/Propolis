@@ -9,6 +9,14 @@ class RequestDTO {
   public:
     RequestDTO(const Request& request);
 
+    RequestDTO(uint32_t id, const FunctionCallRequestDTO& request);
+
+    uint32_t getId() const;
+
+    const std::variant<std::monostate, FunctionCallRequestDTO>& getRequest() const;
+
+    Request serialize() const;
+
   private:
     uint32_t m_id;
 

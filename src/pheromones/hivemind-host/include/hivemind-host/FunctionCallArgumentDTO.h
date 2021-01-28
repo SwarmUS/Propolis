@@ -9,10 +9,17 @@
  *@brief Class to manage function call arguments
  **/
 class FunctionCallArgumentDTO {
+
   public:
     FunctionCallArgumentDTO(const FunctionArgument& argument);
 
+    FunctionCallArgumentDTO(int32_t argument);
+
     FunctionCallArgumentDTO();
+
+    const std::variant<std::monostate, int32_t>& getArgument() const;
+
+    FunctionArgument serialize() const;
 
   private:
     std::variant<std::monostate, int32_t> m_argument;

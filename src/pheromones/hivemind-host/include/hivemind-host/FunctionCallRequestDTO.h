@@ -6,20 +6,32 @@
 #include <function-call.pb.h>
 #include <optional>
 
-static const uint16_t s_functionCallArgumentsMaxLenght = 16;
-static const uint16_t s_functionNameMaxLength = 16;
+constexpr uint16_t s_functionCallArgumentsMaxLenght = 16;
+constexpr uint16_t s_functionNameMaxLength = 16;
 
 class FunctionCallRequestDTO {
 
   public:
     FunctionCallRequestDTO(const FunctionCallRequest& request);
 
+    FunctionCallRequestDTO(char* functionName,
+                           FunctionCallArgumentDTO* arguments,
+                           uint16_t argumentsLength);
+
+    uint16_t getArgumentsLength() const;
+
+    const char* getFunctionName() const;
+
+    const FunctionCallArgumentDTO& getArgument(uint16_t index) const;
+
+    FunctionCallRequest serialize() const;
+
   private:
     std::array<FunctionCallArgumentDTO, s_functionCallArgumentsMaxLenght> m_arguments;
 
-    char m_functionName[s_functionNameMaxLength];
-
     uint16_t m_argumentsLength = 0;
+
+    char m_functionName[s_functionNameMaxLength];
 };
 
 #endif // __FUNCTIONCALLREQUESTDTO_H_

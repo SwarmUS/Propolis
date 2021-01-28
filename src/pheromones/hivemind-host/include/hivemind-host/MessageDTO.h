@@ -10,6 +10,16 @@ class MessageDTO {
   public:
     MessageDTO(const Message& message);
 
+    MessageDTO(uint32_t m_sourceId, uint32_t m_destinationiId, const RequestDTO& request);
+
+    Message serialize() const;
+
+    const std::variant<std::monostate, RequestDTO>& getMessage() const;
+
+    uint32_t getSourceId() const;
+
+    uint32_t getDestinationId() const;
+
   private:
     uint32_t m_sourceId;
 

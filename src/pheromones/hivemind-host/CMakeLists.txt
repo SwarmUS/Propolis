@@ -3,6 +3,7 @@ set(LIB_ALIAS "SwarmUS::Propolis::Pheromones::HiveMind::Host")
 
 set(LIB_SOURCES
     src/HiveMindDeserializer.cpp
+    src/HiveMindSerializer.cpp
 
     src/FunctionCallArgumentDTO.cpp
     src/FunctionCallRequestDTO.cpp
@@ -13,6 +14,8 @@ set(LIB_SOURCES
 set(LIB_HEADERS
     include/hivemind-host/HiveMindDeserializer.h
     include/hivemind-host/IHiveMindDeserializer.h
+    include/hivemind-host/HiveMindSerializer.h
+    include/hivemind-host/IHiveMindSerializer.h
 
     include/hivemind-host/FunctionCallArgumentDTO.h
     include/hivemind-host/FunctionCallRequestDTO.h

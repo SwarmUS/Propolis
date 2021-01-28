@@ -12,3 +12,7 @@ FunctionCallArgumentDTO::FunctionCallArgumentDTO(const FunctionArgument& argumen
         m_argument = std::monostate();
     }
 }
+
+const std::variant<std::monostate, int32_t>& FunctionCallArgumentDTO::getArgument() const {
+    return m_argument;
+}

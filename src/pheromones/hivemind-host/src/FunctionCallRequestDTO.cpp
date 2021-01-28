@@ -1,13 +1,33 @@
 #include "FunctionCallRequestDTO.h"
 #include <cstring>
 
-FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& request) {
+FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& request) :
+    m_argumentsLength(request.arguments_count) {
 
     strncpy(m_functionName, request.function_name, s_functionNameMaxLength);
-
-    m_argumentsLength = request.arguments_count;
 
     for (uint16_t i = 0; i < request.arguments_count; i++) {
         m_arguments[i] = FunctionCallArgumentDTO(request.arguments[i]);
     }
 }
+
+FunctionCallRequestDTO::FunctionCallRequestDTO(char* functionName,
+                                               FunctionCallArgumentDTO* arguments,
+                                               uint16_t argumentsLength) {
+
+    strncpy(m_functionName, functionName, s_functionNameMaxLength);
+    m_argumentsLength = argumentsLength ? argumentsLength < s_functionCallArgumentsMaxLenght
+                                        : s_functionNameMaxLength;
+
+    for (uint16_t i = 0; m_argumentsLength; i++) {
+        m_arguments[i] = arguments[i];
+    }
+}
+
+const FunctionCallArgumentDTO& FunctionCallRequestDTO::getArgument(uint16_t index) const {
+    return m_arguments[index];
+}
+
+uint16_t FunctionCallRequestDTO::getArgumentsLength() const { return m_argumentsLength; }
+
+const char* FunctionCallRequestDTO::getFunctionName() const { return m_functionName; }
