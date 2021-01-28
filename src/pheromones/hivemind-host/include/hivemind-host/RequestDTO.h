@@ -15,7 +15,7 @@ class RequestDTO {
 
     const std::variant<std::monostate, FunctionCallRequestDTO>& getRequest() const;
 
-    Request serialize() const;
+    bool serialize(Request&) const;
 
   private:
     uint32_t m_id;

@@ -12,7 +12,7 @@ class MessageDTO {
 
     MessageDTO(uint32_t m_sourceId, uint32_t m_destinationiId, const RequestDTO& request);
 
-    Message serialize() const;
+    bool serialize(Message& message) const;
 
     const std::variant<std::monostate, RequestDTO>& getMessage() const;
 

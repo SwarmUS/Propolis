@@ -4,7 +4,8 @@ HiveMindSerializer::HiveMindSerializer(IProtobufStream& stream) : m_stream(strea
 
 bool HiveMindSerializer::serialize(const MessageDTO& message) {
 
-    Message msg_send = message.serialize();
+    Message msg_send;
+    message.serialize(msg_send);
 
     pb_ostream_t outputStream{HiveMindSerializer::streamCallback, this, SIZE_MAX, 0, 0};
 

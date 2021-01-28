@@ -24,7 +24,7 @@ class FunctionCallRequestDTO {
 
     const FunctionCallArgumentDTO& getArgument(uint16_t index) const;
 
-    FunctionCallRequest serialize() const;
+    bool serialize(FunctionCallRequest& request) const;
 
   private:
     std::array<FunctionCallArgumentDTO, s_functionCallArgumentsMaxLenght> m_arguments;

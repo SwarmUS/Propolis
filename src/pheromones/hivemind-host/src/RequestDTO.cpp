@@ -20,3 +20,16 @@ const std::variant<std::monostate, FunctionCallRequestDTO>& RequestDTO::getReque
 }
 
 uint32_t RequestDTO::getId() const { return m_id; }
+
+bool RequestDTO::serialize(Request& request) const {
+    request.id = (int32_t)m_id;
+
+    if (const FunctionCallRequestDTO* functionRequest =
+            std::get_if<FunctionCallRequestDTO>(&m_request)) {
+
+        request.which_message = Request_function_call_tag;
+        return functionRequest->serialize(request.message.function_call);
+    }
+
+    return false;
+}

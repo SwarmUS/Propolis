@@ -31,3 +31,17 @@ const FunctionCallArgumentDTO& FunctionCallRequestDTO::getArgument(uint16_t inde
 uint16_t FunctionCallRequestDTO::getArgumentsLength() const { return m_argumentsLength; }
 
 const char* FunctionCallRequestDTO::getFunctionName() const { return m_functionName; }
+
+bool FunctionCallRequestDTO::serialize(FunctionCallRequest& request) const {
+    request.arguments_count = m_argumentsLength;
+    strncpy(request.function_name, m_functionName, s_functionNameMaxLength);
+
+    for (uint16_t i = 0; i < m_argumentsLength; i++) {
+
+        if (m_arguments[i].serialize(request.arguments[i]) != true) {
+            return false;
+        }
+    }
+
+    return true;
+}
