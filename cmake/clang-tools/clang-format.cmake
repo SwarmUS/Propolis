@@ -3,7 +3,7 @@ if(CLANG_FORMAT)
     set(SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 
     add_custom_target(
-        ${PROJECT_NAME}_format
+        ${PROJECT_NAME}-format
         COMMAND 
         ${PROJECT_SOURCE_DIR}/tools/run-clang-format.py
         --recursive
@@ -12,7 +12,7 @@ if(CLANG_FORMAT)
         ${SOURCE_DIR})
 
     add_custom_target(
-        ${PROJECT_NAME}_check-format
+        ${PROJECT_NAME}-check-format
         COMMAND 
         ${PROJECT_SOURCE_DIR}/tools/run-clang-format.py
         --recursive

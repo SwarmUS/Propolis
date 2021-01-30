@@ -39,7 +39,7 @@ if (DOXYGEN_FOUND)
         set(DOXYGEN_WARN_AS_ERROR YES)
     endif()
 
-    doxygen_add_docs(${PROJECT_NAME}_doc
+    doxygen_add_docs(${PROJECT_NAME}-doc
         ALL
         ${PROJECT_SOURCE_DIR}/src
         COMMENT "Generate HiveMind documentation")

@@ -1,0 +1,39 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-noetic:
+    runs-on: ubuntu-20.04
+    container:
+      image: swarmus/embedded
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: |
+          mkdir build
+          cd build
+          cmake -DENABLE_ERROR_ON_MISSING_TOOL=ON -DENABLE_WARNINGS_AS_ERROR=ON -DENABLE_WARNINGS=ON -DENABLE_CLANG_TIDY_CHECK=ON -DENABLE_TESTS=ON ..
+
+      # Tests, check-format and doc are run on native build
+      - name: tests
+        run: |
+          cd build
+          ctest -V
+
+      - name: check-format
+        run: |
+          cd build
+          make propolis-check-format
+
+      # Verifies that the doc is built
+      - name: doc
+        run: |
+          cd build
+          make propolis-doc
+
