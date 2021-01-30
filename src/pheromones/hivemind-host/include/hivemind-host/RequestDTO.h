@@ -11,15 +11,43 @@ class RequestDTO {
 
     RequestDTO(uint32_t id, const FunctionCallRequestDTO& request);
 
+    /**
+     *@brief gets the id of the request
+     *
+     *@return the id of the request
+     */
     uint32_t getId() const;
 
+    /**
+     *@brief gets the request currently stored
+     *
+     *@return a reference to the stored request
+     */
     const std::variant<std::monostate, FunctionCallRequestDTO>& getRequest() const;
 
+    /**
+     *@brief set id of the request
+
+     *@param [in] id new id of the request
+     */
     void setId(uint32_t id);
 
+    /**
+     *@brief set the request type
+
+     *@param [in] request the type of request to set
+     */
     void setRequest(const std::variant<std::monostate, FunctionCallRequestDTO>& request);
 
-    bool serialize(Request&) const;
+    /**
+     *@brief serialize a Request for nanopb, sets the fields properly before using
+     *pb_encode
+     *
+     *@param [out] request the request to serialize
+     *
+     *@return a boolean, true if successfull (fields were recognized) false if not
+     */
+    bool serialize(Request& request) const;
 
   private:
     uint32_t m_id;
