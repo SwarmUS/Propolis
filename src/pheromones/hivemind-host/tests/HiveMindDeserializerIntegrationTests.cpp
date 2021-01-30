@@ -33,14 +33,14 @@ TEST_F(HiveMindDeserializerIntegrationFixture, HiveMindDeserializer_integration_
 
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
-    const RequestDTO* request = std::get_if<RequestDTO>(&message->m_message);
+    const RequestDTO* request = std::get_if<RequestDTO>(&message->getMessage());
     const FunctionCallRequestDTO* funRequest =
-        std::get_if<FunctionCallRequestDTO>(&request->m_request);
+        std::get_if<FunctionCallRequestDTO>(&request->getRequest());
 
     EXPECT_TRUE(message != NULL);
     EXPECT_TRUE(request != NULL);
     EXPECT_TRUE(funRequest != NULL);
-    EXPECT_STREQ(funRequest->m_functionName, m_functionName.c_str());
+    EXPECT_STREQ(funRequest->getFunctionName(), m_functionName.c_str());
 }
 
 TEST_F(HiveMindDeserializerIntegrationFixture, HiveMindDeserializer_integration_invalidMessage) {
@@ -55,7 +55,7 @@ TEST_F(HiveMindDeserializerIntegrationFixture, HiveMindDeserializer_integration_
 
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
-    const RequestDTO* request = std::get_if<RequestDTO>(&message->m_message);
+    const RequestDTO* request = std::get_if<RequestDTO>(&message->getMessage());
 
     // The message is still valid, but it doesn't recognize the content of the message
     EXPECT_TRUE(message != NULL);

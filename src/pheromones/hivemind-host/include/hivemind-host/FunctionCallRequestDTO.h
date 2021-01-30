@@ -18,8 +18,15 @@ class FunctionCallRequestDTO {
                            const FunctionCallArgumentDTO* arguments,
                            uint16_t argumentsLength);
 
+    uint16_t getArgumentsLength() const;
+
+    const char* getFunctionName() const;
+
+    const FunctionCallArgumentDTO& getArgument(uint16_t index) const;
+
     bool serialize(FunctionCallRequest& request) const;
 
+  private:
     std::array<FunctionCallArgumentDTO, s_functionCallArgumentsMaxLenght> m_arguments;
 
     uint16_t m_argumentsLength = 0;

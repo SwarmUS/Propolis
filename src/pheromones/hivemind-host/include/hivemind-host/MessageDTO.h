@@ -16,6 +16,11 @@ class MessageDTO {
 
     const std::variant<std::monostate, RequestDTO>& getMessage() const;
 
+    uint32_t getSourceId() const;
+
+    uint32_t getDestinationId() const;
+
+  private:
     uint32_t m_sourceId;
 
     uint32_t m_destinationId;
