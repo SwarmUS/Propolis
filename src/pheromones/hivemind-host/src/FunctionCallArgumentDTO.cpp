@@ -17,6 +17,10 @@ const std::variant<std::monostate, int32_t>& FunctionCallArgumentDTO::getArgumen
     return m_argument;
 }
 
+void FunctionCallArgumentDTO::setArgument(const std::variant<std::monostate, int32_t>& arg) {
+    m_argument = arg;
+}
+
 bool FunctionCallArgumentDTO::serialize(FunctionArgument& argument) const {
     if (const int32_t* intArg = std::get_if<int32_t>(&m_argument)) {
         argument.which_argument = FunctionArgument_int_arg_tag;

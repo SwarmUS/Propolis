@@ -21,6 +21,12 @@ const std::variant<std::monostate, FunctionCallRequestDTO>& RequestDTO::getReque
 
 uint32_t RequestDTO::getId() const { return m_id; }
 
+void RequestDTO::setId(uint32_t id) { m_id = id; }
+
+void RequestDTO::setRequest(const std::variant<std::monostate, FunctionCallRequestDTO>& request) {
+    m_request = request;
+}
+
 bool RequestDTO::serialize(Request& request) const {
     request.id = (int32_t)m_id;
 

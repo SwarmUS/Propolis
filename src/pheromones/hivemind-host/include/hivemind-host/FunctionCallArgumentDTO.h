@@ -19,6 +19,8 @@ class FunctionCallArgumentDTO {
 
     const std::variant<std::monostate, int32_t>& getArgument() const;
 
+    void setArgument(const std::variant<std::monostate, int32_t>& arg);
+
     bool serialize(FunctionArgument& argument) const;
 
   private:

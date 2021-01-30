@@ -19,6 +19,14 @@ MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationiId, const Request
 
 const std::variant<std::monostate, RequestDTO>& MessageDTO::getMessage() const { return m_message; }
 
+void MessageDTO::setSourceId(uint32_t id) { m_sourceId = id; }
+
+void MessageDTO::setDestinationId(uint32_t id) { m_destinationId = id; }
+
+void MessageDTO::setMessage(const std::variant<std::monostate, RequestDTO>& message) {
+    m_message = message;
+}
+
 bool MessageDTO::serialize(Message& message) const {
     message.sourceId = m_sourceId;
     message.destinationId = m_destinationId;
