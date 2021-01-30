@@ -12,7 +12,7 @@ option(ENABLE_ERROR_ON_MISSING_TOOL "If a tools (clang-tidy, clang-format, doxyg
 option(DISABLE_EXTERNAL_WARNINGS "Disables warnings from exernal libs (gtest, freertos, etc)" ON)
 
 # Project definition
-project(pheromones CXX C)
+project(propolis CXX C)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set (CMAKE_CXX_STANDARD 17)
 
