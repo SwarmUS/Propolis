@@ -17,8 +17,6 @@ MessageDTO::MessageDTO(const Message& message) :
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationiId, const RequestDTO& request) :
     m_sourceId(sourceId), m_destinationId(destinationiId), m_message(request) {}
 
-const std::variant<std::monostate, RequestDTO>& MessageDTO::getMessage() const { return m_message; }
-
 bool MessageDTO::serialize(Message& message) const {
     message.sourceId = m_sourceId;
     message.destinationId = m_destinationId;
