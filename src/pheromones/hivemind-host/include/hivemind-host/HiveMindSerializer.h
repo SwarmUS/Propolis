@@ -1,16 +1,19 @@
 #ifndef __HIVEMINDSERIALIZER_H_
 #define __HIVEMINDSERIALIZER_H_
 
+#include "IHiveMindSerializer.h"
 #include "MessageDTO.h"
 #include <common/IProtobufStream.h>
 #include <pb_encode.h>
 #include <variant>
 
-class HiveMindSerializer {
+class HiveMindSerializer : public IHiveMindSerializer {
   public:
     HiveMindSerializer(IProtobufStream& stream);
 
-    bool serialize(const MessageDTO& message);
+    ~HiveMindSerializer() override = default;
+
+    bool serialize(const MessageDTO& message) override;
 
   private:
     IProtobufStream& m_stream;
