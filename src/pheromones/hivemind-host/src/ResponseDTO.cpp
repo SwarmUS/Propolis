@@ -1,6 +1,6 @@
 #include "ResponseDTO.h"
 
-ResponseDTO::ResponseDTO(const Response& response) : m_id((uint32_t)response.id) {
+ResponseDTO::ResponseDTO(const Response& response) : m_id(response.id) {
     switch (response.which_message) {
     case Response_function_call_tag:
         if (response.message.function_call.has_response) {
@@ -33,7 +33,7 @@ void ResponseDTO::setResponse(
 
 bool ResponseDTO::serialize(Response& response) const {
 
-    response.id = (int32_t)m_id;
+    response.id = m_id;
 
     if (const FunctionCallResponseDTO* functionResponse =
             std::get_if<FunctionCallResponseDTO>(&m_response)) {

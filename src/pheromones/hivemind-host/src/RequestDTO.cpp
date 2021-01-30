@@ -1,6 +1,6 @@
 #include "RequestDTO.h"
 
-RequestDTO::RequestDTO(const Request& request) : m_id((uint32_t)request.id) {
+RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
 
     switch (request.which_message) {
 
@@ -28,7 +28,7 @@ void RequestDTO::setRequest(const std::variant<std::monostate, FunctionCallReque
 }
 
 bool RequestDTO::serialize(Request& request) const {
-    request.id = (int32_t)m_id;
+    request.id = m_id;
 
     if (const FunctionCallRequestDTO* functionRequest =
             std::get_if<FunctionCallRequestDTO>(&m_request)) {
