@@ -15,6 +15,9 @@ class FunctionCallArgumentDTO {
 
     FunctionCallArgumentDTO(int32_t argument);
 
+    /**
+     *@brief default constructor, the argument will be initialized as a monostate (ie, no arguments)
+     */
     FunctionCallArgumentDTO();
 
     /**
