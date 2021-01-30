@@ -1,11 +1,11 @@
-#ifndef __IHIVEMINDSERIALIZER_H_
-#define __IHIVEMINDSERIALIZER_H_
+#ifndef __IHIVEMINDHOSTSERIALIZER_H_
+#define __IHIVEMINDHOSTSERIALIZER_H_
 
 #include "MessageDTO.h"
 
-class IHiveMindSerializer {
+class IHiveMindHostSerializer {
   public:
-    virtual ~IHiveMindSerializer() = default;
+    virtual ~IHiveMindHostSerializer() = default;
 
     /**
      *@brief Serializes a DTO message
@@ -14,4 +14,4 @@ class IHiveMindSerializer {
     virtual bool serialize(const MessageDTO& message) = 0;
 };
 
-#endif // __IHIVEMINDSERIALIZER_H_
+#endif // __IHIVEMINDHOSTSERIALIZER_H_

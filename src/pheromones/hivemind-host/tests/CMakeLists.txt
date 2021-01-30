@@ -8,11 +8,11 @@ set(TEST_SOURCES
     ResponseDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
   
-    HiveMindSerializerUnitTests.cpp
-    HiveMindSerializerIntegrationTests.cpp
+    HiveMindHostSerializerUnitTests.cpp
+    HiveMindHostSerializerIntegrationTests.cpp
 
-    HiveMindDeserializerUnitTests.cpp
-    HiveMindDeserializerIntegrationTests.cpp
+    HiveMindHostDeserializerUnitTests.cpp
+    HiveMindHostDeserializerIntegrationTests.cpp
 )
 
 set(TEST_HEADERS

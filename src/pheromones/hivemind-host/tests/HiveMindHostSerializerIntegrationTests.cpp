@@ -1,11 +1,11 @@
 #include "mocks/ProtobufStreamBufferInterfaceMock.h"
 #include <gtest/gtest.h>
-#include <hivemind-host/HiveMindSerializer.h>
+#include <hivemind-host/HiveMindHostSerializer.h>
 
-class HiveMindSerializerIntegrationFixture : public testing::Test {
+class HiveMindHostSerializerIntegrationFixture : public testing::Test {
   protected:
     ProtobufStreamInterfaceBufferMock m_streamInterfaceBufferMock;
-    HiveMindSerializer* m_serializer;
+    HiveMindHostSerializer* m_serializer;
     MessageDTO* m_messageDTO;
     std::string m_functionName = "Hello world";
 
@@ -16,13 +16,13 @@ class HiveMindSerializerIntegrationFixture : public testing::Test {
         RequestDTO requestDTO(1, funRequestDTO);
         m_messageDTO = new MessageDTO(1, 2, requestDTO);
 
-        m_serializer = new HiveMindSerializer(m_streamInterfaceBufferMock);
+        m_serializer = new HiveMindHostSerializer(m_streamInterfaceBufferMock);
     }
 
     void TearDown() override { delete m_serializer; }
 };
 
-TEST_F(HiveMindSerializerIntegrationFixture, HiveMindSerializer_integration_valid_message) {
+TEST_F(HiveMindHostSerializerIntegrationFixture, HiveMindSerializer_integration_valid_message) {
     // Given
 
     // Then

@@ -1,11 +1,11 @@
 #include "mocks/ProtobufStreamInterfaceMock.h"
 #include <gtest/gtest.h>
-#include <hivemind-host/HiveMindSerializer.h>
+#include <hivemind-host/HiveMindHostSerializer.h>
 
-class HiveMindSerializerFixture : public testing::Test {
+class HiveMindHostSerializerFixture : public testing::Test {
   protected:
     ProtobufStreamInterfaceMock m_streamInterfaceMock;
-    HiveMindSerializer* m_serializer;
+    HiveMindHostSerializer* m_serializer;
     Message m_message;
 
     void SetUp() override {
@@ -19,13 +19,13 @@ class HiveMindSerializerFixture : public testing::Test {
         Message message;
         messageDTO.serialize(message);
 
-        m_serializer = new HiveMindSerializer(m_streamInterfaceMock);
+        m_serializer = new HiveMindHostSerializer(m_streamInterfaceMock);
     }
 
     void TearDown() override { delete m_serializer; }
 };
 
-TEST_F(HiveMindSerializerFixture, HiveMindSerializer_serialize_validStream) {
+TEST_F(HiveMindHostSerializerFixture, HiveMindSerializer_serialize_validStream) {
     // Given
     // We dont really care about the data so we insert garbage in it
     Message message;
@@ -42,7 +42,7 @@ TEST_F(HiveMindSerializerFixture, HiveMindSerializer_serialize_validStream) {
     EXPECT_EQ(ret, true);
 }
 
-TEST_F(HiveMindSerializerFixture, HiveMindSerializer_serialize_invalidStream) {
+TEST_F(HiveMindHostSerializerFixture, HiveMindSerializer_serialize_invalidStream) {
     // Given
 
     EXPECT_CALL(m_streamInterfaceMock, send(testing::_, testing ::_))
