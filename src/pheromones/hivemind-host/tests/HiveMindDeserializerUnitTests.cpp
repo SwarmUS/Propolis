@@ -13,24 +13,10 @@ class HiveMindDeserializerFixture : public testing::Test {
     void TearDown() override { delete m_deserializer; }
 };
 
-TEST_F(HiveMindDeserializerFixture, HiveMindDeserializer_serialize_validStream) {
-    // Given
-    // We dont really care about the data so we insert garbage in it
-    EXPECT_CALL(m_streamInterfaceMock, send(testing::_, testing::_))
-        .Times(testing::AtLeast(1))
-        .WillRepeatedly(testing::Return(true));
-
-    // Then
-    std::variant<std::monostate, MessageDTO> message = m_deserializer->deserialize();
-
-    // Expect
-    EXPECT_NE(std::get_if<MessageDTO>(message), NULL);
-}
-
-TEST_F(HiveMindDeserializerFixture, HiveMindDeserializer_serialize_invalidStream) {
+TEST_F(HiveMindDeserializerFixture, HiveMindDeserializer_deserialize_invalidStream) {
     // Given
 
-    EXPECT_CALL(m_streamInterfaceMock, send(testing::_, testing ::_))
+    EXPECT_CALL(m_streamInterfaceMock, receive(testing::_, testing ::_))
         .Times(testing::AtLeast(1))
         .WillRepeatedly(testing::Return(false));
 
@@ -38,5 +24,5 @@ TEST_F(HiveMindDeserializerFixture, HiveMindDeserializer_serialize_invalidStream
     std::variant<std::monostate, MessageDTO> message = m_deserializer->deserialize();
 
     // Expect
-    EXPECT_EQ(std::get_if<MessageDTO>(message), NULL);
+    EXPECT_TRUE(std::get_if<MessageDTO>(&message) == NULL);
 }

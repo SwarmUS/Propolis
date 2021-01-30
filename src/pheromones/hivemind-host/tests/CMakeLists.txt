@@ -5,6 +5,7 @@ set(TEST_SOURCES
     HiveMindSerializerIntegrationTests.cpp
 
     HiveMindDeserializerUnitTests.cpp
+    HiveMindDeserializerIntegrationTests.cpp
 )
 
 set(TEST_HEADERS

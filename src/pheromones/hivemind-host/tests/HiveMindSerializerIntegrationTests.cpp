@@ -1,4 +1,3 @@
-
 #include "mocks/ProtobufStreamBufferInterfaceMock.h"
 #include <gtest/gtest.h>
 #include <hivemind-host/HiveMindSerializer.h>
