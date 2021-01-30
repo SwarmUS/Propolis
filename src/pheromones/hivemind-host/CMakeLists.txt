@@ -7,7 +7,10 @@ set(LIB_SOURCES
 
     src/FunctionCallArgumentDTO.cpp
     src/FunctionCallRequestDTO.cpp
+    src/FunctionCallResponseDTO.cpp
+    src/GenericResponseDTO.cpp
     src/MessageDTO.cpp
+    src/ResponseDTO.cpp
     src/RequestDTO.cpp
 )
 
@@ -19,7 +22,10 @@ set(LIB_HEADERS
 
     include/hivemind-host/FunctionCallArgumentDTO.h
     include/hivemind-host/FunctionCallRequestDTO.h
+    include/hivemind-host/FunctionCallResponseDTO.h
+    include/hivemind-host/GenericResponseDTO.h
     include/hivemind-host/MessageDTO.h
+    include/hivemind-host/ResponseDTO.h
     include/hivemind-host/RequestDTO.h
 )
 

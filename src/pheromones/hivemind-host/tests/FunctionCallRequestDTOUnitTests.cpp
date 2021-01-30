@@ -1,19 +1,6 @@
+#include "mocks/Utils.h"
 #include <gtest/gtest.h>
 #include <hivemind-host/FunctionCallRequestDTO.h>
-
-// https://stackoverflow.com/questions/440133/how-do-i-create-a-random-alpha-numeric-string-in-c
-std::string randomString(size_t length) {
-    auto randchar = []() -> char {
-        const char charset[] = "0123456789"
-                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                               "abcdefghijklmnopqrstuvwxyz";
-        const size_t max_index = (sizeof(charset) - 1);
-        return charset[(unsigned long)rand() % max_index];
-    };
-    std::string str(length, 0);
-    std::generate_n(str.begin(), length, randchar);
-    return str;
-}
 
 class FunctionCallRequestDTOFixture : public testing::Test {
   public:
@@ -40,7 +27,8 @@ TEST_F(FunctionCallRequestDTOFixture, FunctionCallRequestDTO_constructor_arrayTo
 
     // Expect
     EXPECT_STREQ(request.getFunctionName(), m_functionName.c_str());
-    EXPECT_EQ(request.getArgumentsLength(), FUNCTION_CALL_ARGUMENTS_MAX_LENGTH);
+    EXPECT_EQ(request.getArgumentsLength(),
+              FunctionCallRequestDTO::FUNCTION_CALL_ARGUMENTS_MAX_LENGTH);
 }
 
 TEST_F(FunctionCallRequestDTOFixture, FunctionCallRequestDTO_constructor_nameTooBig) {
@@ -51,7 +39,8 @@ TEST_F(FunctionCallRequestDTOFixture, FunctionCallRequestDTO_constructor_nameToo
     FunctionCallRequestDTO request(functionName.c_str(), m_array.data(), m_arraySize);
 
     // Expect
-    EXPECT_EQ(strlen(request.getFunctionName()), FUNCTION_CALL_NAME_MAX_LENGTH-1);
+    EXPECT_EQ(strlen(request.getFunctionName()),
+              FunctionCallRequestDTO::FUNCTION_CALL_NAME_MAX_LENGTH - 1);
     EXPECT_EQ(request.getArgumentsLength(), m_arraySize);
 }
 

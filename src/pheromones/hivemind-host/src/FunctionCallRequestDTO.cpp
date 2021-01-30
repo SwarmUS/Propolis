@@ -18,7 +18,8 @@ FunctionCallRequestDTO::FunctionCallRequestDTO(const char* functionName,
     setArguments(arguments, argumentsLength);
 }
 
-const std::array<FunctionCallArgumentDTO, FUNCTION_CALL_ARGUMENTS_MAX_LENGTH>&
+const std::array<FunctionCallArgumentDTO,
+                 FunctionCallRequestDTO::FUNCTION_CALL_ARGUMENTS_MAX_LENGTH>&
 FunctionCallRequestDTO::getArguments() const {
     return m_arguments;
 }
@@ -35,7 +36,7 @@ uint16_t FunctionCallRequestDTO::setArguments(const FunctionCallArgumentDTO* arg
                                               uint16_t argumentsLength) {
     m_argumentsLength = argumentsLength < FUNCTION_CALL_ARGUMENTS_MAX_LENGTH
                             ? argumentsLength
-                            : FUNCTION_CALL_NAME_MAX_LENGTH;
+                            : FUNCTION_CALL_ARGUMENTS_MAX_LENGTH;
 
     for (uint16_t i = 0; i < m_argumentsLength; i++) {
         m_arguments[i] = arguments[i];
