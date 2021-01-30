@@ -3,6 +3,7 @@ set(TEST_NAME test-propolis-hivemind-host)
 set(TEST_SOURCES
     FunctionCallArgumentDTOUnitTests.cpp
     FunctionCallRequestDTOUnitTests.cpp
+    FunctionCallResponseDTOUnitTests.cpp
     RequestDTOUnitTests.cpp
     ResponseDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
