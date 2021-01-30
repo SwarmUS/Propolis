@@ -3,6 +3,8 @@ set(TEST_NAME test-propolis-hivemind-host)
 set(TEST_SOURCES
     HiveMindSerializerUnitTests.cpp
     HiveMindSerializerIntegrationTests.cpp
+
+    HiveMindDeserializerUnitTests.cpp
 )
 
 set(TEST_HEADERS
