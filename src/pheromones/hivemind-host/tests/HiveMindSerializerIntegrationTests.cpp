@@ -8,11 +8,12 @@ class HiveMindSerializerIntegrationFixture : public testing::Test {
     ProtobufStreamInterfaceBufferMock m_streamInterfaceBufferMock;
     HiveMindSerializer* m_serializer;
     MessageDTO* m_messageDTO;
-    const char* m_functionName = "Hello world";
+    std::string m_functionName = "Hello world";
 
     void SetUp() override {
 
-        FunctionCallRequestDTO funRequestDTO(m_functionName, (FunctionCallArgumentDTO*)NULL, 0);
+        FunctionCallRequestDTO funRequestDTO(m_functionName.c_str(), (FunctionCallArgumentDTO*)NULL,
+                                             0);
         RequestDTO requestDTO(1, funRequestDTO);
         m_messageDTO = new MessageDTO(1, 2, requestDTO);
 
@@ -30,11 +31,11 @@ TEST_F(HiveMindSerializerIntegrationFixture, HiveMindSerializer_integration_vali
 
     // Expect
     Message messageReceived;
-    bool retDecode = pb_decode_ex(&m_streamInterfaceBufferMock.m_istream, Message_fields, &messageReceived, PB_ENCODE_DELIMITED);
-
-    const char* test = m_functionName;
+    bool retDecode = pb_decode_ex(&m_streamInterfaceBufferMock.m_istream, Message_fields,
+                                  &messageReceived, PB_DECODE_DELIMITED);
 
     EXPECT_EQ(ret, true);
     EXPECT_EQ(retDecode, true);
-    EXPECT_STREQ(messageReceived.message.request.message.function_call.function_name, test);
+    EXPECT_STREQ(messageReceived.message.request.message.function_call.function_name,
+                 m_functionName.c_str());
 }

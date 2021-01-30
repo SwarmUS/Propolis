@@ -10,7 +10,8 @@ std::variant<std::monostate, MessageDTO> HiveMindDeserializer::deserialize() {
 
     pb_istream_t inputStream{HiveMindDeserializer::streamCallback, this, SIZE_MAX, 0};
 
-    bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
+    bool status = pb_decode_ex(&inputStream, Message_fields, &msg_receive, PB_DECODE_DELIMITED);
+
     if (status) {
         return MessageDTO(msg_receive);
     }
