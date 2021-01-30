@@ -12,7 +12,6 @@ std::variant<std::monostate, MessageDTO> HiveMindDeserializer::deserialize() {
 
     bool status = pb_decode(&inputStream, Message_fields, &msg_receive);
     if (status) {
-
         return MessageDTO(msg_receive);
     }
 

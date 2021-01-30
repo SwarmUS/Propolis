@@ -9,7 +9,7 @@ bool HiveMindSerializer::serialize(const MessageDTO& message) {
 
     pb_ostream_t outputStream{HiveMindSerializer::streamCallback, this, SIZE_MAX, 0, 0};
 
-    bool status = pb_encode(&outputStream, Message_fields, &msg_send);
+    bool status = pb_encode_ex(&outputStream, Message_fields, &msg_send, PB_ENCODE_DELIMITED);
     return status;
 }
 

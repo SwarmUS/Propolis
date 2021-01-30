@@ -14,8 +14,8 @@ class FunctionCallRequestDTO {
   public:
     FunctionCallRequestDTO(const FunctionCallRequest& request);
 
-    FunctionCallRequestDTO(char* functionName,
-                           FunctionCallArgumentDTO* arguments,
+    FunctionCallRequestDTO(const char* functionName,
+                           const FunctionCallArgumentDTO* arguments,
                            uint16_t argumentsLength);
 
     uint16_t getArgumentsLength() const;

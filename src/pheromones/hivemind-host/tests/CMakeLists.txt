@@ -1,11 +1,13 @@
 set(TEST_NAME test-propolis-hivemind-host)
  
 set(TEST_SOURCES
-
+    HiveMindSerializerUnitTests.cpp
+    HiveMindSerializerIntegrationTests.cpp
 )
 
 set(TEST_HEADERS
-
+    mocks/ProtobufStreamInterfaceMock.h
+    mocks/ProtobufStreamBufferInterfaceMock.h
 )
 
 add_executable(${TEST_NAME} ${TEST_SOURCES} ${TEST_HEADERS})

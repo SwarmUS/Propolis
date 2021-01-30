@@ -11,15 +11,15 @@ FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& reques
     }
 }
 
-FunctionCallRequestDTO::FunctionCallRequestDTO(char* functionName,
-                                               FunctionCallArgumentDTO* arguments,
+FunctionCallRequestDTO::FunctionCallRequestDTO(const char* functionName,
+                                               const FunctionCallArgumentDTO* arguments,
                                                uint16_t argumentsLength) {
 
     strncpy(m_functionName, functionName, s_functionNameMaxLength);
-    m_argumentsLength = argumentsLength ? argumentsLength < s_functionCallArgumentsMaxLenght
+    m_argumentsLength = argumentsLength < s_functionCallArgumentsMaxLenght ? argumentsLength 
                                         : s_functionNameMaxLength;
 
-    for (uint16_t i = 0; m_argumentsLength; i++) {
+    for (uint16_t i = 0; i < m_argumentsLength; i++) {
         m_arguments[i] = arguments[i];
     }
 }
