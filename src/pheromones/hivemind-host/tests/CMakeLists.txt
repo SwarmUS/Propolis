@@ -4,6 +4,7 @@ set(TEST_SOURCES
     FunctionCallArgumentDTOUnitTests.cpp
     FunctionCallRequestDTOUnitTests.cpp
     RequestDTOUnitTests.cpp
+    ResponseDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
   
     HiveMindSerializerUnitTests.cpp
