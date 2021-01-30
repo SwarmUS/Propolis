@@ -4,8 +4,7 @@
 FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& request) :
     m_argumentsLength(request.arguments_count) {
 
-    strncpy(m_functionName, request.function_name, FUNCTION_CALL_NAME_MAX_LENGTH);
-
+    setFunctionName(request.function_name);
     for (uint16_t i = 0; i < request.arguments_count; i++) {
         m_arguments[i] = FunctionCallArgumentDTO(request.arguments[i]);
     }
@@ -29,7 +28,7 @@ uint16_t FunctionCallRequestDTO::getArgumentsLength() const { return m_arguments
 const char* FunctionCallRequestDTO::getFunctionName() const { return m_functionName; }
 
 void FunctionCallRequestDTO::setFunctionName(const char* functionName) {
-    strncpy(m_functionName, functionName, FUNCTION_CALL_NAME_MAX_LENGTH);
+    snprintf(m_functionName, FUNCTION_CALL_NAME_MAX_LENGTH, "%s", functionName);
 }
 
 uint16_t FunctionCallRequestDTO::setArguments(const FunctionCallArgumentDTO* arguments,
@@ -47,7 +46,7 @@ uint16_t FunctionCallRequestDTO::setArguments(const FunctionCallArgumentDTO* arg
 
 bool FunctionCallRequestDTO::serialize(FunctionCallRequest& request) const {
     request.arguments_count = m_argumentsLength;
-    strncpy(request.function_name, m_functionName, FUNCTION_CALL_NAME_MAX_LENGTH);
+    snprintf(request.function_name, FUNCTION_CALL_NAME_MAX_LENGTH, "%s", m_functionName);
 
     for (uint16_t i = 0; i < m_argumentsLength; i++) {
 

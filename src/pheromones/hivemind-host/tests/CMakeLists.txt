@@ -1,6 +1,11 @@
 set(TEST_NAME test-propolis-hivemind-host)
  
 set(TEST_SOURCES
+    FunctionCallArgumentDTOUnitTests.cpp
+    FunctionCallRequestDTOUnitTests.cpp
+    RequestDTOUnitTests.cpp
+    MessageDTOUnitTests.cpp
+  
     HiveMindSerializerUnitTests.cpp
     HiveMindSerializerIntegrationTests.cpp
 
