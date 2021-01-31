@@ -1,0 +1,14 @@
+path_classifiers:
+  docs:
+    - README.md
+    - LICENSE
+  test:
+    - "*/tests/*.cpp" # tests are in MODULE/tests
+
+extraction:
+  cpp:
+    prepare:
+      packages:
+        # Pheromones deps
+        - protobuf-compiler
+        - python3-protobuf
