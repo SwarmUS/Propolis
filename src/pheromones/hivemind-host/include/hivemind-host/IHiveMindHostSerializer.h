@@ -3,6 +3,10 @@
 
 #include "MessageDTO.h"
 
+/**
+ *@brief Manages the serialization of messages between the  host and the hivemind. This is one of
+ *the entry point for the hivemind-host library
+ **/
 class IHiveMindHostSerializer {
   public:
     virtual ~IHiveMindHostSerializer() = default;

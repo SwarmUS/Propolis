@@ -55,7 +55,7 @@ TEST_F(FunctionCallRequestDTOFixture, FunctionCallRequestDTO_serialize_valid) {
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.arguments_count, m_arraySize);
     EXPECT_EQ(req.arguments[0].which_argument, FunctionArgument_int_arg_tag);
-    EXPECT_EQ(req.arguments[0].argument.int_arg, std::get<int32_t>(m_array[0].getArgument()));
+    EXPECT_EQ(req.arguments[0].argument.int_arg, std::get<int64_t>(m_array[0].getArgument()));
     EXPECT_STREQ(req.function_name, m_functionName.c_str());
 }
 

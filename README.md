@@ -11,7 +11,7 @@ Note that you will need some requirements since we use protobuf and nanopb
 * The python libraries for protobuf to generate the required files
 
 Nanopb itself will be fetch at generation to allow compilation on embedded targets.
-On ubuntu 20.04 you can download these requirements using `apt install protobug-compiler python3-protobuf`
+On Ubuntu 20.04 you can download these requirements using `apt install protobuf-compiler python3-protobuf`
 
 ### Libraries
 
@@ -19,7 +19,7 @@ On ubuntu 20.04 you can download these requirements using `apt install protobug-
 A shared code for pheromones sub libraries
 
 #### Hivemind-host
-A library used for communication between the Hivemind and it's host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The array of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
+A library used for communication between the Hivemind and its host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
 
 
 ## Building
