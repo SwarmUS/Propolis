@@ -39,7 +39,6 @@ endif()
 include(clang-tools/clang-tidy)
 include(clang-tools/clang-format)
 include(doc/doxygen)
-include(pheromones/common)
 
 # Testing
 if(ENABLE_TESTS)

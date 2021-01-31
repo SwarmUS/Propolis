@@ -1,5 +1,5 @@
 #include "FunctionCallRequestDTO.h"
-#include <cstring>
+#include <cstdio>
 
 FunctionCallRequestDTO::FunctionCallRequestDTO(const FunctionCallRequest& request) :
     m_argumentsLength(request.arguments_count) {
