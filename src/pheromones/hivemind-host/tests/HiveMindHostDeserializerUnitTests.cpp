@@ -21,7 +21,7 @@ TEST_F(HiveMindHostDeserializerFixture, HiveMindDeserializer_deserialize_invalid
         .WillRepeatedly(testing::Return(false));
 
     // Then
-    std::variant<std::monostate, MessageDTO> message = m_deserializer->deserialize();
+    std::variant<std::monostate, MessageDTO> message = m_deserializer->deserializeFromStream();
 
     // Expect
     EXPECT_TRUE(std::get_if<MessageDTO>(&message) == NULL);

@@ -29,7 +29,7 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture, HiveMindDeserializer_integrat
                  PB_ENCODE_DELIMITED);
 
     // Then
-    auto messageReceived = m_deserializer->deserialize();
+    auto messageReceived = m_deserializer->deserializeFromStream();
 
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
@@ -52,7 +52,7 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture,
                  PB_ENCODE_DELIMITED);
 
     // Then
-    auto messageReceived = m_deserializer->deserialize();
+    auto messageReceived = m_deserializer->deserializeFromStream();
 
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
@@ -71,7 +71,7 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture,
         pb_istream_from_buffer(m_streamInterfaceBufferMock.m_array.data(), 0);
 
     // Then
-    auto messageReceived = m_deserializer->deserialize();
+    auto messageReceived = m_deserializer->deserializeFromStream();
 
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);

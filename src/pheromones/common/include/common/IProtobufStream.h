@@ -5,7 +5,7 @@
 
 /**
  *@brief An interface to manage the stream of data used to encode/decode.
- *Used in the other pheromones libraries. This is the user job to implement this interface. The
+ *Used in the other pheromones libraries. It is the user's job to implement this interface. The
  *other classes uses this interface to get the data to deserialize and send the data to deserialize
  **/
 class IProtobufStream {

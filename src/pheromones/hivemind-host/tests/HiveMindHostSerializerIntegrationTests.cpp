@@ -26,7 +26,7 @@ TEST_F(HiveMindHostSerializerIntegrationFixture, HiveMindSerializer_integration_
     // Given
 
     // Then
-    bool ret = m_serializer->serialize(*m_messageDTO);
+    bool ret = m_serializer->serializeToStream(*m_messageDTO);
 
     // Expect
     Message messageReceived;

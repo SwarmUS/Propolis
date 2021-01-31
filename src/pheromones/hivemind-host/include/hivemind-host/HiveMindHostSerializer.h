@@ -13,7 +13,7 @@ class HiveMindHostSerializer : public IHiveMindHostSerializer {
 
     ~HiveMindHostSerializer() override = default;
 
-    bool serialize(const MessageDTO& message) override;
+    bool serializeToStream(const MessageDTO& message) override;
 
   private:
     IProtobufStream& m_stream;

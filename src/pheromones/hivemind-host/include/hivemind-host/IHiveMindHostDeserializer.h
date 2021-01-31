@@ -12,7 +12,7 @@ class IHiveMindHostDeserializer {
   public:
     virtual ~IHiveMindHostDeserializer() = default;
 
-    virtual std::variant<std::monostate, MessageDTO> deserialize() = 0;
+    virtual std::variant<std::monostate, MessageDTO> deserializeFromStream() = 0;
 };
 
 #endif // __IHIVEMINDHOSTDESERIALIZER_H_

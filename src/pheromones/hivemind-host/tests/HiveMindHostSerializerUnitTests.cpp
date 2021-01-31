@@ -36,7 +36,7 @@ TEST_F(HiveMindHostSerializerFixture, HiveMindSerializer_serialize_validStream) 
         .WillRepeatedly(testing::Return(true));
 
     // Then
-    bool ret = m_serializer->serialize(messageDTO);
+    bool ret = m_serializer->serializeToStream(messageDTO);
 
     // Expect
     EXPECT_EQ(ret, true);
@@ -50,7 +50,7 @@ TEST_F(HiveMindHostSerializerFixture, HiveMindSerializer_serialize_invalidStream
         .WillRepeatedly(testing::Return(false));
 
     // Then
-    bool ret = m_serializer->serialize(m_message);
+    bool ret = m_serializer->serializeToStream(m_message);
 
     // Expect
     EXPECT_EQ(ret, false);

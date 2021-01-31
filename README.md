@@ -1,5 +1,5 @@
 # Propolis
-Contains common C/C++ libraries used in multiple SwarmUS projects. The libraries does not use heap and thus can be used in embedded development.
+Contains common C/C++ libraries used in multiple SwarmUS projects. The libraries does not use the heap and thus can be used in embedded development.
 
 ## Pheromones
 A wrapper over nanopb for serialization and deserialization of messages
@@ -20,7 +20,6 @@ A shared code for pheromones sub libraries
 
 #### Hivemind-host
 A library used for communication between the Hivemind and its host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
-
 
 ## Building
 

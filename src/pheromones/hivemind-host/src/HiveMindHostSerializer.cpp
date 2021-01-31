@@ -3,7 +3,7 @@
 
 HiveMindHostSerializer::HiveMindHostSerializer(IProtobufStream& stream) : m_stream(stream) {}
 
-bool HiveMindHostSerializer::serialize(const MessageDTO& message) {
+bool HiveMindHostSerializer::serializeToStream(const MessageDTO& message) {
 
     Message msg_send;
     message.serialize(msg_send);

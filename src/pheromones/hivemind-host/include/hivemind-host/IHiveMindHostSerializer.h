@@ -12,10 +12,10 @@ class IHiveMindHostSerializer {
     virtual ~IHiveMindHostSerializer() = default;
 
     /**
-     *@brief Serializes a DTO message
+     *@brief Serializes a DTO message to a data stream
      *
      *@return true if the operation was successful, false if not*/
-    virtual bool serialize(const MessageDTO& message) = 0;
+    virtual bool serializeToStream(const MessageDTO& message) = 0;
 };
 
 #endif // __IHIVEMINDHOSTSERIALIZER_H_
