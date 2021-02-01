@@ -26,14 +26,8 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_MAX_DOT_GRAPH_DEPTH 0)
     set(DOXYGEN_DOT_TRANSPARENT YES)
     set(DOXYGEN_EXCLUDE_PATTERNS
-        "*/tests/*"
-        "*/hal/*/Core/*")
+        "*/tests/*")
 
-    if (${COMPILE_STM32_F429ZI})
-        LIST(APPEND DOXYGEN_EXCLUDE_PATTERNS "*/posix/*")
-    else()
-        LIST(APPEND DOXYGEN_EXCLUDE_PATTERNS "*/stm32/*")
-    endif()
 
     if(ENABLE_WARNINGS_AS_ERROR )
         set(DOXYGEN_WARN_AS_ERROR YES)

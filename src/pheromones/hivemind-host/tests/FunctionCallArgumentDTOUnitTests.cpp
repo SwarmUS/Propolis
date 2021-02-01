@@ -34,13 +34,14 @@ TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_invalid
 TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_validIntArgument) {
     // Given
     FunctionArgument argument;
+    constexpr uint64_t arg = 42;
 
     // Then
-    m_argument.setArgument(42);
+    m_argument.setArgument(arg);
     bool ret = m_argument.serialize(argument);
 
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(argument.which_argument, FunctionArgument_int_arg_tag);
-    EXPECT_EQ(argument.argument.int_arg, 42);
+    EXPECT_EQ(argument.argument.int_arg, arg);
 }
