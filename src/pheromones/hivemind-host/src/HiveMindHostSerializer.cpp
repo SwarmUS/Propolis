@@ -5,18 +5,18 @@ HiveMindHostSerializer::HiveMindHostSerializer(IProtobufStream& stream) : m_stre
 
 bool HiveMindHostSerializer::serializeToStream(const MessageDTO& message) {
 
-    Message msg_send;
-    message.serialize(msg_send);
+    Message msgSend;
+    message.serialize(msgSend);
 
     pb_ostream_t outputStream{HiveMindHostSerializer::streamCallback, this, SIZE_MAX, 0, 0};
 
-    return pb_encode_ex(&outputStream, Message_fields, &msg_send, PB_ENCODE_DELIMITED);
+    return pb_encode_ex(&outputStream, Message_fields, &msgSend, PB_ENCODE_DELIMITED);
 }
 
 bool HiveMindHostSerializer::streamCallback(pb_ostream_t* stream,
                                             const pb_byte_t* buf,
                                             size_t count) {
 
-    HiveMindHostSerializer* _this = (HiveMindHostSerializer*)stream->state;
-    return _this->m_stream.send(buf, count);
+    HiveMindHostSerializer* serializer = (HiveMindHostSerializer*)stream->state;
+    return serializer->m_stream.send(buf, count);
 }
