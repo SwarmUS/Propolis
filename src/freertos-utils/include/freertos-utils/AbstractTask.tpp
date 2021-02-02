@@ -1,5 +1,5 @@
-#include "freertos-utils/AbstractTask.h"
-#include <task.h>
+#ifndef ABSTRACTTASK_TPP
+#define ABSTRACTTASK_TPP
 
 template <unsigned int stackSize>
 AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) {
@@ -29,6 +29,8 @@ TaskHandle_t AbstractTask<stackSize>::getTaskHandle() const {
 
 template <unsigned int stackSize>
 void AbstractTask<stackSize>::wrapper(void* params) {
-    auto* task = static_cast<AbstractTask*>(params);
+    AbstractTask* task = static_cast<AbstractTask*>(params);
     task->task();
 }
+
+#endif // ABSTRACTTASK_TPP

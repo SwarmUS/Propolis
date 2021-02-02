@@ -10,6 +10,9 @@ set(TEST_HEADERS
 
 add_executable(${TEST_NAME} ${TEST_SOURCES} ${TEST_HEADERS})
 
+# Freertos to tests the lib
+add_subdirectory(freertos-posix)
+
 target_link_libraries(${TEST_NAME}
     PUBLIC
         gtest
@@ -22,6 +25,3 @@ target_link_libraries(${TEST_NAME}
 
 add_test(NAME ${TEST_NAME}
          COMMAND ${TEST_NAME})
-
-# Freertos to tests the lib
-add_subdirectory(freertos-posix)

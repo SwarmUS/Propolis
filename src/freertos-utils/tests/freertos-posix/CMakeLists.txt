@@ -22,7 +22,7 @@ find_package(FreeRTOS COMPONENTS POSIX REQUIRED)
 
 
 target_include_directories(${LIB_NAME}
-    PUBLIC
+    SYSTEM PUBLIC
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 
        # Allows freertos to build properly
@@ -33,7 +33,7 @@ target_include_directories(${LIB_NAME}
 )
 
 target_link_libraries(${LIB_NAME}
-    PUBLIC    
+    PRIVATE    
         Threads::Threads
         FreeRTOS::POSIX
 

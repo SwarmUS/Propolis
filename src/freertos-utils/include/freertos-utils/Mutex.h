@@ -2,8 +2,9 @@
 #define __MUTEX_H_
 
 #include <FreeRTOS.h>
+#include <FreeRTOSConfig.h>
 #include <cstdint>
-#include <task.h>
+#include <semphr.h>
 
 class Mutex {
   public:
@@ -12,9 +13,9 @@ class Mutex {
     // should we release the semaphore&&
     ~Mutex() = default;
 
-    void lock();
+    bool lock();
 
-    void unlock();
+    bool unlock();
 
   protected:
     SemaphoreHandle_t m_mutex;

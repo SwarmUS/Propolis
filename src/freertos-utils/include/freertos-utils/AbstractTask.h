@@ -19,10 +19,12 @@ class AbstractTask {
     static void wrapper(void* params);
 
     const char* m_taskName;
-    std::array<uint8_t*, stackSize> m_stackArray;
+    std::array<StackType_t, stackSize> m_stackArray;
     StaticTask_t m_taskBuffer;
     UBaseType_t m_priority;
     TaskHandle_t m_taskHandle;
 };
+
+#include "AbstractTask.tpp"
 
 #endif // ABSTRACTTASK_H

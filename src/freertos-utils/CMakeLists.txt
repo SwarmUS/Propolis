@@ -2,11 +2,15 @@ set(LIB_NAME "swarmus-propolis-freertos-utils")
 set(LIB_ALIAS "SwarmUS::Propolis::FreeRTOS::Utils")
 
 set(LIB_SOURCES
-    src/AbstractTask.cpp
+    src/LockGuard.cpp
+    src/Mutex.cpp
 )
 
 set(LIB_HEADERS
+    include/freertos-utils/AbstractTask.tpp
     include/freertos-utils/AbstractTask.h
+    include/freertos-utils/LockGuard.h
+    include/freertos-utils/Mutex.h
 )
 
 add_library(${LIB_NAME} INTERFACE)
