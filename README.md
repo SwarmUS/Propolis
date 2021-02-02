@@ -21,6 +21,12 @@ A shared code for pheromones sub libraries
 #### Hivemind-host
 A library used for communication between the Hivemind and its host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
 
+## FreeRTOS
+A couple libraries to ease development using FreeRTOS
+
+### Static-utils
+Library to manage freertos objects without using heap allocations
+
 ## Building
 
 ``` sh

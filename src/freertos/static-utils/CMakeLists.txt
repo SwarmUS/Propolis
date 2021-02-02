@@ -1,5 +1,5 @@
-set(LIB_NAME "swarmus-propolis-freertos-utils")
-set(LIB_ALIAS "SwarmUS::Propolis::FreeRTOS::Utils")
+set(LIB_NAME "swarmus-propolis-freertos-static-utils")
+set(LIB_ALIAS "SwarmUS::Propolis::FreeRTOS::Static::Utils")
 
 set(LIB_SOURCES
     src/LockGuard.cpp

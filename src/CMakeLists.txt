@@ -1,3 +1,3 @@
 # Adds libraries
 add_subdirectory(pheromones)
-add_subdirectory(freertos-utils)
+add_subdirectory(freertos)

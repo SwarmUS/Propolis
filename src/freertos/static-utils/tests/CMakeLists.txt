@@ -1,4 +1,4 @@
-set(TEST_NAME test-propolis-freertos-utils)
+set(TEST_NAME test-propolis-freertos-static-utils)
  
 set(TEST_SOURCES
     MutexUnitTests.cpp
@@ -20,7 +20,7 @@ target_link_libraries(${TEST_NAME}
         gmock
 
         SwarmUS::Propolis::Tests::FreeRTOS
-        SwarmUS::Propolis::FreeRTOS::Utils
+        SwarmUS::Propolis::FreeRTOS::Static::Utils
 )
 
 add_test(NAME ${TEST_NAME}

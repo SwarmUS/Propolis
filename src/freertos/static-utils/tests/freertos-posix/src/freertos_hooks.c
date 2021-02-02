@@ -1,9 +1,8 @@
 #include "FreeRTOSConfig.h"
 #include <FreeRTOS.h>
 #include <stdio.h>
-#include <time.h>
 #include <task.h>
-
+#include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -92,7 +91,6 @@ void vApplicationGetTimerTaskMemory(StaticTask_t** ppxTimerTaskTCBBuffer,
     *pulTimerTaskStackSize = configTIMER_TASK_STACK_DEPTH;
 }
 #endif /* configSUPPORT_STATIC_ALLOCATION == 1 && configUSE_TIMERS == 1 */
-
 
 #ifdef __cplusplus
 }
