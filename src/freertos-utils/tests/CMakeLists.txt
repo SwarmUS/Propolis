@@ -1,7 +1,7 @@
 set(TEST_NAME test-propolis-freertos-utils)
  
 set(TEST_SOURCES
-    AbstractTaskUnitTests.cpp
+    MutexUnitTests.cpp
 )
 
 set(TEST_HEADERS
