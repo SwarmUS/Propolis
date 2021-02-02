@@ -6,15 +6,30 @@
 #include <cstdint>
 #include <semphr.h>
 
+/**
+ *@brief A class to manage mutual exclusion for guarding resources using FreeRTOS static memory
+ *allocation*/
 class Mutex {
   public:
+    /**
+     *@brief Creates a Mutex instance
+     *
+     *@param maxWaitTime max time to wait when locking
+     **/
     Mutex(uint32_t maxWaitTime);
 
-    // should we release the semaphore&&
     ~Mutex() = default;
 
+    /**
+     *@brief Locks the mutex, waits the maxWaitTime if the resouce is already locked
+     *
+     *@return true if the operation was successful, false on timeout */
     bool lock();
 
+    /**
+     *@brief Unlocks the mutex, it releases the shared resource
+     *
+     *@return true if the operation was successful, false if not*/
     bool unlock();
 
   protected:

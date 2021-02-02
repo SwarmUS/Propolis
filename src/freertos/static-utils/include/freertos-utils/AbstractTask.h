@@ -5,17 +5,34 @@
 #include <array>
 #include <task.h>
 
+/**
+ *@brief An abstract class for creating FreeRTOS task that uses the stack instead of the heap.
+ *To use, create a class that inherit the AbtractTask and write your task logic in an overload of
+ *the task member function and start the task, the template argument is the size of the stack for
+ *the task*/
 template <unsigned int stackSize>
 class AbstractTask {
   public:
     AbstractTask(const char* taskName, UBaseType_t priority);
-    virtual ~AbstractTask();
-    void start();
-    TaskHandle_t getTaskHandle() const;
 
-    virtual void task() = 0;
+    virtual ~AbstractTask();
+
+    /**
+     *@brief Starts the task, i.e. executes the task method in another FreeRTOS task without
+     *blocking the current thread execution
+     **/
+    void start();
+
+    /**
+     *@brief Get the task handle
+     *
+     *@return A reference to the TaskHandle_t
+     */
+    TaskHandle_t& getTaskHandle() const;
 
   protected:
+    virtual void task() = 0;
+
     static void wrapper(void* params);
 
     const char* m_taskName;

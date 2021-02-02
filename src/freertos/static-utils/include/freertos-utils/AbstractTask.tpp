@@ -23,7 +23,7 @@ void AbstractTask<stackSize>::start() {
 }
 
 template <unsigned int stackSize>
-TaskHandle_t AbstractTask<stackSize>::getTaskHandle() const {
+TaskHandle_t& AbstractTask<stackSize>::getTaskHandle() const {
     return m_taskHandle;
 }
 
