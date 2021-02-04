@@ -28,7 +28,7 @@ class AbstractTask {
      *
      *@return A reference to the TaskHandle_t
      */
-    TaskHandle_t& getTaskHandle() ;
+    TaskHandle_t& getTaskHandle();
 
   protected:
     virtual void task() = 0;
