@@ -20,8 +20,11 @@ class AbstractTask {
     /**
      *@brief Starts the task, i.e. executes the task method in another FreeRTOS task without
      *blocking the current thread execution
+     *
+     *@return true if the operation was successfull, false if not (i.e. if the task was started
+     *multiple times)
      **/
-    void start();
+    bool start();
 
     /**
      *@brief Get the task handle
@@ -40,6 +43,7 @@ class AbstractTask {
     StaticTask_t m_taskBuffer;
     UBaseType_t m_priority;
     TaskHandle_t m_taskHandle;
+    bool m_taskStarted = false;
 };
 
 #include "AbstractTask.tpp"
