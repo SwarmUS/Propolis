@@ -15,8 +15,8 @@ class BaseTask : public AbstractTask<stackSize> {
 
   protected:
     void task() override;
-    TaskFunction_t taskFunction;
-    void* taskContext;
+    TaskFunction_t m_taskFunction;
+    void* m_taskContext;
 };
 
 #include "BaseTask.tpp"
