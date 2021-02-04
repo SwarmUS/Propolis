@@ -5,7 +5,7 @@
 
 /**
  *@brief A base task compatible with freertos TaskFunction_t and passing a context to the function
-*/
+ */
 template <unsigned int stackSize>
 class BaseTask : public AbstractTask<stackSize> {
   public:
