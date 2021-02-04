@@ -18,10 +18,10 @@ AbstractTask<stackSize>::~AbstractTask() {
 
 template <unsigned int stackSize>
 bool AbstractTask<stackSize>::start() {
-    if (!m_taskStarted) {
+    if (!m_taskRunning) {
         m_taskHandle = xTaskCreateStatic(wrapper, m_taskName, stackSize, this, m_priority,
                                          m_stackArray.data(), &m_taskBuffer);
-        m_taskStarted = true;
+        m_taskRunning = true;
         return true;
     }
     return false;
@@ -36,6 +36,7 @@ template <unsigned int stackSize>
 void AbstractTask<stackSize>::wrapper(void* params) {
     AbstractTask* task = static_cast<AbstractTask*>(params);
     task->task();
+    task->m_taskRunning = false;
 }
 
 #endif // ABSTRACTTASK_TPP

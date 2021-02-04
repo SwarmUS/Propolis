@@ -43,7 +43,7 @@ class AbstractTask {
     StaticTask_t m_taskBuffer;
     UBaseType_t m_priority;
     TaskHandle_t m_taskHandle;
-    bool m_taskStarted = false;
+    bool m_taskRunning = false;
 };
 
 #include "AbstractTask.tpp"
