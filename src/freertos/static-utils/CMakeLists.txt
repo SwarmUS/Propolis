@@ -9,6 +9,7 @@ set(LIB_SOURCES
 set(LIB_HEADERS
     include/freertos-utils/AbstractTask.tpp
     include/freertos-utils/AbstractTask.h
+    include/freertos-utils/BaseTask.h
     include/freertos-utils/LockGuard.h
     include/freertos-utils/Mutex.h
 )

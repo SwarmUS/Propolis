@@ -1,3 +1,5 @@
+#include <freertos-utils/AbstractTask.h>
+#include <freertos-utils/BaseTask.h>
 #include <freertos-utils/Mutex.h>
 #include <gtest/gtest.h>
 

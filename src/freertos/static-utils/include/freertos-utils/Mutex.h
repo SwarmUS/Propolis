@@ -14,7 +14,7 @@ class Mutex {
     /**
      *@brief Creates a Mutex instance
      *
-     *@param maxWaitTime max time to wait when locking
+     *@param maxWaitTime max time to wait in ticks when trying to lock
      **/
     Mutex(uint32_t maxWaitTime);
 
