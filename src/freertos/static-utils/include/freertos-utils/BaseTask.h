@@ -18,4 +18,7 @@ class BaseTask : public AbstractTask<stackSize> {
     TaskFunction_t taskFunction;
     void* taskContext;
 };
+
+#include "BaseTask.tpp"
+
 #endif // __BASETASK_H_
