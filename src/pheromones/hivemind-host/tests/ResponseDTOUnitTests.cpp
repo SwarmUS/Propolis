@@ -3,12 +3,12 @@
 
 class ResponseDTOFixture : public testing::Test {
   public:
-    static constexpr uint32_t m_id = 42;
+    static constexpr uint32_t gc_id = 42;
     ResponseDTO* m_response;
 
     void SetUp() override {
         m_response =
-            new ResponseDTO(m_id, FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, ""));
+            new ResponseDTO(gc_id, FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, ""));
     }
 
     void TearDown() override { delete m_response; }
@@ -23,7 +23,7 @@ TEST_F(ResponseDTOFixture, ResponseDTO_serialize_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(resp.id, m_id);
+    EXPECT_EQ(resp.id, gc_id);
     EXPECT_EQ(resp.which_message, Response_function_call_tag);
 }
 

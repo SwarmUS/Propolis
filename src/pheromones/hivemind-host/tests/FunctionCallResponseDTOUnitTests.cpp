@@ -3,7 +3,6 @@
 
 class FunctionCallResponseDTOFixture : public testing::Test {
   public:
-    static constexpr uint32_t m_id = 42;
     FunctionCallResponseDTO* m_response;
 
     void SetUp() override {

@@ -51,7 +51,7 @@ bool FunctionCallRequestDTO::serialize(FunctionCallRequest& request) const {
 
     for (uint16_t i = 0; i < m_argumentsLength; i++) {
 
-        if (m_arguments[i].serialize(request.arguments[i]) != true) {
+        if (!m_arguments[i].serialize(request.arguments[i])) {
             return false;
         }
     }

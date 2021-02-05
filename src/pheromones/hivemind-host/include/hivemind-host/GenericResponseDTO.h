@@ -58,7 +58,7 @@ class GenericResponseDTO {
 
     static GenericResponseStatusDTO statusToDTO(GenericResponseStatus status);
 
-    static GenericResponseStatus DTOToStatus(GenericResponseStatusDTO status);
+    static GenericResponseStatus dtoToStatus(GenericResponseStatusDTO status);
 
     char m_details[DETAILS_MAX_LENGTH];
 };

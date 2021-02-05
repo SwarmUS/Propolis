@@ -25,7 +25,7 @@ bool GenericResponseDTO::serialize(GenericResponse& response) const {
     }
 
     snprintf(response.details, DETAILS_MAX_LENGTH, "%s", m_details);
-    response.status = DTOToStatus(m_status);
+    response.status = dtoToStatus(m_status);
     return true;
 }
 
@@ -42,7 +42,7 @@ GenericResponseStatusDTO GenericResponseDTO::statusToDTO(GenericResponseStatus s
     }
 }
 
-GenericResponseStatus GenericResponseDTO::DTOToStatus(GenericResponseStatusDTO status) {
+GenericResponseStatus GenericResponseDTO::dtoToStatus(GenericResponseStatusDTO status) {
     switch (status) {
 
     case GenericResponseStatusDTO::Ok:
