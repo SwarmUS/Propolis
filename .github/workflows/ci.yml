@@ -30,11 +30,11 @@ jobs:
       - name: check-format
         run: |
           cd build
-          make propolis-check-format
+          make check-format
 
       # Verifies that the doc is built
       - name: doc
         run: |
           cd build
-          make propolis-doc
+          make doc
 

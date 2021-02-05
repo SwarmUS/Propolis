@@ -3,7 +3,7 @@ find_package(Doxygen)
 if (DOXYGEN_FOUND)
 
     # Set doxygen settings here
-    set(DOXYGEN_PROJECT_NAME HiveMind)
+    set(DOXYGEN_PROJECT_NAME Propolis)
     set(DOXYGEN_OUTPUT_DIRECTORY doc)
     set(DOXYGEN_COLLABORATION_GRAPH YES)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -33,7 +33,7 @@ if (DOXYGEN_FOUND)
         set(DOXYGEN_WARN_AS_ERROR YES)
     endif()
 
-    doxygen_add_docs(${PROJECT_NAME}-doc
+    doxygen_add_docs(doc
         ALL
         ${PROJECT_SOURCE_DIR}/src
         COMMENT "Generate HiveMind documentation")
