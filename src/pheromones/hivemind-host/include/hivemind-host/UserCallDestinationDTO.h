@@ -4,7 +4,7 @@
 #include <user-call.pb.h>
 
 /**@brief The destination of a user call once it reached a robot ID, distinguishes the differents
- * consumers of those calls */
+ * consumers of those messages*/
 enum class UserCallDestinationDTO { UNKNOWN, HOST, BUZZ };
 
 /**
