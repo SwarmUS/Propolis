@@ -1,17 +1,18 @@
-set(LIB_NAME "swarmus-propolis-c-common")
-set(LIB_ALIAS "SwarmUS::Propolis::C::Common")
+set(LIB_NAME "swarmus-propolis-cpp-common")
+set(LIB_ALIAS "SwarmUS::Propolis::Cpp::Common")
 
 
 set(LIB_SOURCES
-    src/circular_buff.c
 )
 
 set(LIB_HEADERS
-    include/c-common/circular_buff.h
+    include/cpp-common/CircularQueue.h
+    include/cpp-common/CircularQueue.tpp
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
 add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
+set_target_properties(${LIB_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 target_include_directories(${LIB_NAME}
     PUBLIC
@@ -19,7 +20,6 @@ target_include_directories(${LIB_NAME}
         $<INSTALL_INTERFACE:include>
     PRIVATE
         src
-        include/c-common
 )
 
 if(ENABLE_TESTS)
