@@ -13,7 +13,8 @@ class HiveMindHostSerializerFixture : public testing::Test {
         std::string functionName = "Hello world";
         FunctionCallRequestDTO funRequestDTO(functionName.c_str(), (FunctionCallArgumentDTO*)NULL,
                                              0);
-        RequestDTO requestDTO(1, funRequestDTO);
+        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, funRequestDTO);
+        RequestDTO requestDTO(1, ureq);
         MessageDTO messageDTO(1, 2, requestDTO);
 
         Message message;

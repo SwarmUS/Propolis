@@ -13,7 +13,7 @@ function(pheromones_fetch_populate)
         ${PROJECT_NAME}_pheromones
 
         GIT_REPOSITORY https://github.com/SwarmUS/Pheromones
-        GIT_TAG        a556cd4
+        GIT_TAG        feat/SWARINFO-196_adjust-fields
         GIT_PROGRESS   TRUE
     )
 

@@ -13,7 +13,8 @@ class HiveMindHostSerializerIntegrationFixture : public testing::Test {
 
         FunctionCallRequestDTO funRequestDTO(m_functionName.c_str(), (FunctionCallArgumentDTO*)NULL,
                                              0);
-        RequestDTO requestDTO(1, funRequestDTO);
+        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, funRequestDTO);
+        RequestDTO requestDTO(1, ureq);
         m_messageDTO = new MessageDTO(1, 2, requestDTO);
 
         m_serializer = new HiveMindHostSerializer(m_streamInterfaceBufferMock);
@@ -35,6 +36,7 @@ TEST_F(HiveMindHostSerializerIntegrationFixture, HiveMindSerializer_integration_
 
     EXPECT_EQ(ret, true);
     EXPECT_EQ(retDecode, true);
-    EXPECT_STREQ(messageReceived.message.request.message.function_call.function_name,
-                 m_functionName.c_str());
+    EXPECT_STREQ(
+        messageReceived.message.request.message.user_call.request.functionCall.function_name,
+        m_functionName.c_str());
 }

@@ -7,7 +7,9 @@ class RequestDTOFixture : public testing::Test {
     RequestDTO* m_request;
 
     void SetUp() override {
-        m_request = new RequestDTO(gc_id, FunctionCallRequestDTO(NULL, NULL, 0));
+        m_request =
+            new RequestDTO(gc_id, UserCallRequestDTO(UserCallDestinationDTO::BUZZ,
+                                                     FunctionCallRequestDTO(NULL, NULL, 0)));
     }
 
     void TearDown() override { delete m_request; }
@@ -23,7 +25,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_function_call_tag);
+    EXPECT_EQ(req.which_message, Request_user_call_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_invalid) {

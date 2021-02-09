@@ -7,7 +7,7 @@ class FunctionCallRequestDTOFixture : public testing::Test {
     FunctionCallRequestDTO* m_request;
 
     static constexpr uint16_t gc_arraySize = 1;
-    static constexpr uint16_t gc_argumentValue = 42;
+    static constexpr int64_t gc_argumentValue = 42;
     std::string m_functionName = "hello_world";
     std::array<FunctionCallArgumentDTO, 1> m_array = {{gc_argumentValue}};
 

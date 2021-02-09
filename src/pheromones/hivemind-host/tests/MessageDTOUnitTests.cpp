@@ -9,8 +9,9 @@ class MessageDTOFixture : public testing::Test {
 
     void SetUp() override {
         // Inserting garbage
-        FunctionCallRequestDTO req(NULL, NULL, 0);
-        RequestDTO reqDTO = RequestDTO(1, req);
+        FunctionCallRequestDTO freq(NULL, NULL, 0);
+        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, freq);
+        RequestDTO reqDTO = RequestDTO(1, ureq);
         m_message = new MessageDTO(gc_sourceId, gc_destinationId, reqDTO);
     }
 

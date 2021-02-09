@@ -10,7 +10,7 @@ class FunctionCallResponseDTO {
 
     FunctionCallResponseDTO(GenericResponseStatusDTO status, const char* message);
 
-    FunctionCallResponseDTO(const GenericResponse& response);
+    FunctionCallResponseDTO(const FunctionCallResponse& response);
 
     /**
      *@brief gets the generic response
