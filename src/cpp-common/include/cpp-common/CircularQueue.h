@@ -1,33 +1,32 @@
 #ifndef __CIRCULAR_QUEUE_H_
 #define __CIRCULAR_QUEUE_H_
 
-#include <cstdint>
-#include <optional>
+#include "ICircularQueue.h"
 
 template <typename T>
-class CircularQueue {
+class CircularQueue : public ICircularQueue<T> {
   public:
     CircularQueue<T>(T* data, uint16_t size);
 
-    ~CircularQueue<T>() = default;
+    ~CircularQueue<T>() override = default;
 
-    bool push(T item);
+    bool push(T item) override;
 
-    std::optional<T> get();
+    std::optional<T> get() override;
 
-    const std::optional<std::reference_wrapper<const T>> peek() const;
+    const std::optional<std::reference_wrapper<const T>> peek() const override;
 
-    void pop();
+    void pop() override;
 
-    void clear();
+    void clear() override;
 
-    bool isFull() const;
+    bool isFull() const override;
 
-    bool isEmpty() const;
+    bool isEmpty() const override;
 
-    uint16_t getLength() const;
+    uint16_t getLength() const override;
 
-    uint16_t getFreeSize() const;
+    uint16_t getFreeSize() const override;
 
   private:
     T* m_data;
