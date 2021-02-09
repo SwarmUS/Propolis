@@ -15,7 +15,7 @@ class IHiveMindHostDeserializer {
     /**
      *@brief Deserializes a DTO message from a data stream
      *
-     *@return true if the operation was successful, false if not*/
+     *@return a MessageDTO if the operation was successful, a monostate if not*/
     virtual std::variant<std::monostate, MessageDTO> deserializeFromStream() = 0;
 };
 
