@@ -21,11 +21,15 @@ A shared code for pheromones sub libraries
 #### Hivemind-host
 A library used for communication between the Hivemind and its host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
 
+Note that we are using std::variant, if you use this library on an embedded target, avoid std::visit because of it's code and cpu cycle overhead.
 ## FreeRTOS
 A couple libraries to ease development using FreeRTOS
 
 ### Static-utils
 Library to manage freertos objects without using heap allocations
+
+## C-common
+A library for common C utilities used in low level code (e.g. drivers and such). Can be used in embedded development without issues.
 
 ## Building
 
