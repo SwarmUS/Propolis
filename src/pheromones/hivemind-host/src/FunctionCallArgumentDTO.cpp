@@ -35,5 +35,11 @@ bool FunctionCallArgumentDTO::serialize(FunctionArgument& argument) const {
         return true;
     }
 
+    if (const float* floatArg = std::get_if<float>(&m_argument)) {
+        argument.which_argument = FunctionArgument_float_arg_tag;
+        argument.argument.float_arg = *floatArg;
+        return true;
+    }
+
     return false;
 }
