@@ -45,3 +45,18 @@ TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_validIn
     EXPECT_EQ(argument.which_argument, FunctionArgument_int_arg_tag);
     EXPECT_EQ(argument.argument.int_arg, arg);
 }
+
+TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_validFloatArgument) {
+    // Given
+    FunctionArgument argument;
+    constexpr float arg = 3.14;
+
+    // Then
+    m_argument.setArgument(arg);
+    bool ret = m_argument.serialize(argument);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(argument.which_argument, FunctionArgument_float_arg_tag);
+    EXPECT_EQ(argument.argument.float_arg, arg);
+}
