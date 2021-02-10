@@ -24,9 +24,17 @@ MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const RequestD
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const ResponseDTO& response) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(response) {}
 
+<<<<<<< Updated upstream
 const std::variant<std::monostate, RequestDTO, ResponseDTO>& MessageDTO::getMessage() const {
     return m_message;
 }
+=======
+uint32_t MessageDTO::getSourceId() const { return m_sourceId; }
+
+uint32_t MessageDTO::getDestinationId() const { return m_destinationId; }
+
+const std::variant<std::monostate, RequestDTO>& MessageDTO::getMessage() const { return m_message; }
+>>>>>>> Stashed changes
 
 void MessageDTO::setSourceId(uint32_t id) { m_sourceId = id; }
 
