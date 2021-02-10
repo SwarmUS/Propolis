@@ -8,33 +8,19 @@ CircularQueue<T>::CircularQueue(T* data, uint16_t size) :
     m_data(data), m_size(size), m_readPos(0), m_writePos(0), m_isFull(false) {}
 
 template <typename T>
-bool CircularQueue<T>::push(T item) {
-    if (isFull()) {
-        return false;
-    }
-    m_data[m_writePos++] = item;
-
-    if (m_writePos >= m_size) {
-        m_writePos = 0;
-    }
-
-    if (m_writePos == m_readPos) {
-        m_isFull = true;
-    }
-
-    return true;
+CircularQueue<T>::~CircularQueue() {
+    clear();
 }
 
 template <typename T>
-std::optional<T> CircularQueue<T>::get() {
-    if (getLength() == 0) {
-        return {};
+bool CircularQueue<T>::push(const T& item) {
+    if (isFull()) {
+        return false;
     }
 
-    T item = m_data[m_readPos];
-    pop();
-
-    return item;
+    new (m_data[m_writePos]) T(std::forward<T>(item));
+    m_writePos++;
+    return advance;
 }
 
 template <typename T>
@@ -52,6 +38,7 @@ void CircularQueue<T>::pop() {
         return;
     }
 
+    m_data[m_readPos].~T();
     m_readPos++;
 
     if (m_readPos >= m_size) {
@@ -95,6 +82,30 @@ uint16_t CircularQueue<T>::getFreeSize() const {
     }
 
     return m_size - getLength();
+}
+
+template <typename T>
+std::optional<std::reference_wrapper<T>> CircularQueue<T>::getNextAllocation() {
+    return m_data[m_writePos];
+}
+
+template <typename T>
+bool CircularQueue<T>::advance() {
+    if (isFull()) {
+        return false;
+    }
+
+    m_writePos++;
+
+    if (m_writePos >= m_size) {
+        m_writePos = 0;
+    }
+
+    if (m_writePos == m_readPos) {
+        m_isFull = true;
+    }
+
+    return true;
 }
 
 #endif //__CIRCULAR_QUEUE_TPP_

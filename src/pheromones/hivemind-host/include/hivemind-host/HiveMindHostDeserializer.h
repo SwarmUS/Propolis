@@ -11,7 +11,7 @@ class HiveMindHostDeserializer : public IHiveMindHostDeserializer {
 
     ~HiveMindHostDeserializer() override = default;
 
-    std::variant<std::monostate, MessageDTO> deserializeFromStream() override;
+    bool deserializeFromStream(MessageDTO& message) override;
 
   private:
     IProtobufStream& m_stream;

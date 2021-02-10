@@ -30,16 +30,16 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture, HiveMindDeserializer_integrat
                  PB_ENCODE_DELIMITED);
 
     // Then
-    auto messageReceived = m_deserializer->deserializeFromStream();
+    MessageDTO message;
+    bool messageReceived = m_deserializer->deserializeFromStream(message);
 
     // Expect
-    const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
-    const RequestDTO* request = std::get_if<RequestDTO>(&message->getMessage());
+    const RequestDTO* request = std::get_if<RequestDTO>(&message.getMessage());
     const UserCallRequestDTO* uRequest = std::get_if<UserCallRequestDTO>(&request->getRequest());
     const FunctionCallRequestDTO* fRequest =
         std::get_if<FunctionCallRequestDTO>(&uRequest->getRequest());
 
-    EXPECT_TRUE(message != NULL);
+    EXPECT_TRUE(messageReceived);
     EXPECT_TRUE(request != NULL);
     EXPECT_TRUE(uRequest != NULL);
     EXPECT_TRUE(fRequest != NULL);
@@ -55,14 +55,13 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture,
                  PB_ENCODE_DELIMITED);
 
     // Then
-    auto messageReceived = m_deserializer->deserializeFromStream();
+    MessageDTO message;
+    bool messageReceived = m_deserializer->deserializeFromStream(message);
 
     // Expect
-    const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
-    const RequestDTO* request = std::get_if<RequestDTO>(&message->getMessage());
-
-    // The message is still valid, but it doesn't recognize the content of the message
-    EXPECT_TRUE(message != NULL);
+    const RequestDTO* request = std::get_if<RequestDTO>(&message.getMessage());
+    // The message will still be valid, only the sub message won't
+    EXPECT_TRUE(messageReceived);
     EXPECT_TRUE(request == NULL);
 }
 
@@ -74,11 +73,9 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture,
         pb_istream_from_buffer(m_streamInterfaceBufferMock.m_array.data(), 0);
 
     // Then
-    auto messageReceived = m_deserializer->deserializeFromStream();
+    MessageDTO message;
+    auto messageReceived = m_deserializer->deserializeFromStream(message);
 
     // Expect
-    const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
-
-    // The message is still valid, but it doesn't recognize the content of the message
-    EXPECT_TRUE(message == NULL);
+    EXPECT_FALSE(messageReceived);
 }

@@ -9,6 +9,8 @@
 
 class MessageDTO {
   public:
+    MessageDTO() = default;
+
     MessageDTO(const Message& message);
 
     MessageDTO(uint32_t m_sourceId, uint32_t destinationId, const RequestDTO& request);

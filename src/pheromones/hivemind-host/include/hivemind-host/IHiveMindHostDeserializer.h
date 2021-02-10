@@ -13,10 +13,14 @@ class IHiveMindHostDeserializer {
     virtual ~IHiveMindHostDeserializer() = default;
 
     /**
-     *@brief Deserializes a DTO message from a data stream
+     *@brief Deserializes a DTO message from a data stream, you need to provide the memory where the
+     *response will be written
      *
-     *@return a MessageDTO if the operation was successful, a monostate if not*/
-    virtual std::variant<std::monostate, MessageDTO> deserializeFromStream() = 0;
+     *@param [out] message where the deserialized message will be written
+     *
+     *@return bool if the deserialization is success full, false if not. Discard the message if
+     *false*/
+    virtual bool deserializeFromStream(MessageDTO& message) = 0;
 };
 
 #endif // __IHIVEMINDHOSTDESERIALIZER_H_
