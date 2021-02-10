@@ -143,8 +143,11 @@ TEST_F(CircularQueueFixture, CircularQueue_clear_data_destructorCalled) {
     // Then
     bool destructorCalled1 = false;
     bool destructorCalled2 = false;
-    m_circularQueue->push({42, &destructorCalled1});
-    m_circularQueue->push({43, &destructorCalled2});
+    BasicDestructor obj1(42, &destructorCalled1);
+    BasicDestructor obj2(43, &destructorCalled2);
+
+    m_circularQueue->push(obj1);
+    m_circularQueue->push(obj2);
 
     m_circularQueue->clear();
 

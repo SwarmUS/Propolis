@@ -14,17 +14,17 @@ CircularQueue<T>::~CircularQueue() {
 
 template <typename T>
 bool CircularQueue<T>::push(const T& item) {
-    if (isFull()) {
+    if (CircularQueue<T>::isFull()) {
         return false;
     }
 
     new (&m_data[m_writePos]) T(item);
-    return advance();
+    return CircularQueue<T>::advance();
 }
 
 template <typename T>
 const std::optional<std::reference_wrapper<const T>> CircularQueue<T>::peek() const {
-    if (getLength() == 0) {
+    if (CircularQueue<T>::getLength() == 0) {
         return {};
     }
 
@@ -33,7 +33,7 @@ const std::optional<std::reference_wrapper<const T>> CircularQueue<T>::peek() co
 
 template <typename T>
 void CircularQueue<T>::pop() {
-    if (getLength() == 0) {
+    if (CircularQueue<T>::getLength() == 0) {
         return;
     }
 
@@ -48,9 +48,9 @@ void CircularQueue<T>::pop() {
 
 template <typename T>
 void CircularQueue<T>::clear() {
-    m_readPos = 0;
-    m_writePos = 0;
-    m_isFull = false;
+    while (!CircularQueue<T>::isEmpty()) {
+        CircularQueue<T>::pop();
+    }
 }
 
 template <typename T>
@@ -60,12 +60,12 @@ bool CircularQueue<T>::isFull() const {
 
 template <typename T>
 bool CircularQueue<T>::isEmpty() const {
-    return (m_readPos == m_writePos) && !isFull();
+    return (m_readPos == m_writePos) && !CircularQueue<T>::isFull();
 }
 
 template <typename T>
 uint16_t CircularQueue<T>::getLength() const {
-    if (isFull()) {
+    if (CircularQueue<T>::isFull()) {
         return m_size;
     }
     if (m_readPos > m_writePos) {
@@ -76,16 +76,16 @@ uint16_t CircularQueue<T>::getLength() const {
 
 template <typename T>
 uint16_t CircularQueue<T>::getFreeSize() const {
-    if (isFull()) {
+    if (CircularQueue<T>::isFull()) {
         return 0;
     }
 
-    return m_size - getLength();
+    return m_size - CircularQueue<T>::getLength();
 }
 
 template <typename T>
 std::optional<std::reference_wrapper<T>> CircularQueue<T>::getNextAllocation() {
-    if (isFull()) {
+    if (CircularQueue<T>::isFull()) {
         return {};
     }
 
@@ -94,7 +94,7 @@ std::optional<std::reference_wrapper<T>> CircularQueue<T>::getNextAllocation() {
 
 template <typename T>
 bool CircularQueue<T>::advance() {
-    if (isFull()) {
+    if (CircularQueue<T>::isFull()) {
         return false;
     }
 

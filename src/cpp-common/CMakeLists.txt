@@ -6,8 +6,10 @@ set(LIB_SOURCES
 )
 
 set(LIB_HEADERS
+    include/cpp-common/ICircularQueue.h
     include/cpp-common/CircularQueue.h
     include/cpp-common/CircularQueue.tpp
+    include/cpp-common/CircularQueueStack.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

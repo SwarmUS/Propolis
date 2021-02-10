@@ -2,6 +2,7 @@ set(TEST_NAME test-cpp-common)
  
 set(TEST_SOURCES
     CircularQueueUnitTests.cpp
+    CircularQueueStackUnitTests.cpp
 )
 
 set(TEST_HEADERS
