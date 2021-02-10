@@ -2,6 +2,7 @@
 #define __MESSAGEDTO_H_
 
 #include "RequestDTO.h"
+#include "ResponseDTO.h"
 #include <cstdint>
 #include <message.pb.h>
 #include <variant>
@@ -10,7 +11,9 @@ class MessageDTO {
   public:
     MessageDTO(const Message& message);
 
-    MessageDTO(uint32_t m_sourceId, uint32_t m_destinationiId, const RequestDTO& request);
+    MessageDTO(uint32_t m_sourceId, uint32_t destinationId, const RequestDTO& request);
+
+    MessageDTO(uint32_t m_sourceId, uint32_t destinationId, const ResponseDTO& response);
 
     /**
      *@brief gets the source id
@@ -31,7 +34,7 @@ class MessageDTO {
      *
      *@return a reference to the stored message
      */
-    const std::variant<std::monostate, RequestDTO>& getMessage() const;
+    const std::variant<std::monostate, RequestDTO, ResponseDTO>& getMessage() const;
 
     /**
      *@brief set the source id
@@ -52,7 +55,7 @@ class MessageDTO {
 
      *@param [in] message the type of message to set
      */
-    void setMessage(const std::variant<std::monostate, RequestDTO>& message);
+    void setMessage(const std::variant<std::monostate, RequestDTO, ResponseDTO>& message);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
@@ -69,7 +72,7 @@ class MessageDTO {
 
     uint32_t m_destinationId;
 
-    std::variant<std::monostate, RequestDTO> m_message;
+    std::variant<std::monostate, RequestDTO, ResponseDTO> m_message;
 };
 
 #endif // __MESSAGEDTO_H_

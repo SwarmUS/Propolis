@@ -18,7 +18,7 @@ class MessageDTOFixture : public testing::Test {
     void TearDown() override { delete m_message; }
 };
 
-TEST_F(MessageDTOFixture, MessageDTO_serialize_valid) {
+TEST_F(MessageDTOFixture, MessageDTO_serialize_request_valid) {
     // Given
     Message msg;
 
@@ -30,6 +30,25 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_valid) {
     EXPECT_EQ(msg.sourceId, gc_sourceId);
     EXPECT_EQ(msg.destinationId, gc_destinationId);
     EXPECT_EQ(msg.which_message, Message_request_tag);
+}
+
+TEST_F(MessageDTOFixture, MessageDTO_serialize_response_valid) {
+    // Given
+    Message msg;
+
+    // Then
+    FunctionCallResponseDTO fResponse(GenericResponseStatusDTO::Ok, NULL);
+    UserCallResponseDTO uResponse(UserCallDestinationDTO::BUZZ, fResponse);
+    ResponseDTO response(1, uResponse);
+    m_message->setMessage(response);
+
+    bool ret = m_message->serialize(msg);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.sourceId, gc_sourceId);
+    EXPECT_EQ(msg.destinationId, gc_destinationId);
+    EXPECT_EQ(msg.which_message, Message_response_tag);
 }
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_invalid) {
