@@ -9,6 +9,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = RequestDTO(message.message.request);
         break;
 
+    case Message_response_tag:
+        m_message = ResponseDTO(message.message.response);
+        break;
+
     default:
         m_message = std::monostate();
     }
