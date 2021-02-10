@@ -3,8 +3,8 @@
 FunctionCallResponseDTO::FunctionCallResponseDTO(const GenericResponseDTO& response) :
     m_response(response.getStatus(), response.getDetails()) {}
 
-FunctionCallResponseDTO::FunctionCallResponseDTO(const GenericResponse& response) :
-    m_response(response) {}
+FunctionCallResponseDTO::FunctionCallResponseDTO(const FunctionCallResponse& response) :
+    m_response(response.response) {}
 
 FunctionCallResponseDTO::FunctionCallResponseDTO(GenericResponseStatusDTO status,
                                                  const char* message) :

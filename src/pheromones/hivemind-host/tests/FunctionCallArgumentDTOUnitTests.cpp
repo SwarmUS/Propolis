@@ -34,7 +34,7 @@ TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_invalid
 TEST_F(FunctionCallArgumentDTOFixture, FunctionCallArgumentDTO_serialize_validIntArgument) {
     // Given
     FunctionArgument argument;
-    constexpr uint64_t arg = 42;
+    constexpr int64_t arg = 42;
 
     // Then
     m_argument.setArgument(arg);

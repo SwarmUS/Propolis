@@ -13,7 +13,8 @@ class HiveMindHostDeserializerIntegrationFixture : public testing::Test {
 
         FunctionCallRequestDTO funRequestDTO(m_functionName.c_str(), (FunctionCallArgumentDTO*)NULL,
                                              0);
-        RequestDTO requestDTO(1, funRequestDTO);
+        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, funRequestDTO);
+        RequestDTO requestDTO(1, ureq);
         MessageDTO messageDTO(1, 2, requestDTO);
         messageDTO.serialize(m_message);
 
@@ -34,13 +35,15 @@ TEST_F(HiveMindHostDeserializerIntegrationFixture, HiveMindDeserializer_integrat
     // Expect
     const MessageDTO* message = std::get_if<MessageDTO>(&messageReceived);
     const RequestDTO* request = std::get_if<RequestDTO>(&message->getMessage());
-    const FunctionCallRequestDTO* funRequest =
-        std::get_if<FunctionCallRequestDTO>(&request->getRequest());
+    const UserCallRequestDTO* uRequest = std::get_if<UserCallRequestDTO>(&request->getRequest());
+    const FunctionCallRequestDTO* fRequest =
+        std::get_if<FunctionCallRequestDTO>(&uRequest->getRequest());
 
     EXPECT_TRUE(message != NULL);
     EXPECT_TRUE(request != NULL);
-    EXPECT_TRUE(funRequest != NULL);
-    EXPECT_STREQ(funRequest->getFunctionName(), m_functionName.c_str());
+    EXPECT_TRUE(uRequest != NULL);
+    EXPECT_TRUE(fRequest != NULL);
+    EXPECT_STREQ(fRequest->getFunctionName(), m_functionName.c_str());
 }
 
 TEST_F(HiveMindHostDeserializerIntegrationFixture,

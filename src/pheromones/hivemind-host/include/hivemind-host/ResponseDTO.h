@@ -1,7 +1,7 @@
 #ifndef __RESPONSEDTO_H_
 #define __RESPONSEDTO_H_
 
-#include "FunctionCallResponseDTO.h"
+#include "UserCallResponseDTO.h"
 #include <message.pb.h>
 #include <variant>
 
@@ -9,7 +9,7 @@ class ResponseDTO {
   public:
     ResponseDTO(const Response& response);
 
-    ResponseDTO(uint32_t id, const FunctionCallResponseDTO& response);
+    ResponseDTO(uint32_t id, const UserCallResponseDTO& response);
 
     /**
      *@brief gets the id of the response
@@ -23,7 +23,7 @@ class ResponseDTO {
      *
      *@return a variant of the stored resposne
      */
-    const std::variant<std::monostate, FunctionCallResponseDTO>& getResponse() const;
+    const std::variant<std::monostate, UserCallResponseDTO>& getResponse() const;
 
     /**
      *@brief sets the id of the response
@@ -37,7 +37,7 @@ class ResponseDTO {
      *
      *@param [in] response the new  inner response
      */
-    void setResponse(const std::variant<std::monostate, FunctionCallResponseDTO>& response);
+    void setResponse(const std::variant<std::monostate, UserCallResponseDTO>& response);
 
     /**
      *@brief serialize a Response for nanopb, sets the fields properly before using
@@ -52,7 +52,7 @@ class ResponseDTO {
   private:
     uint32_t m_id;
 
-    std::variant<std::monostate, FunctionCallResponseDTO> m_response;
+    std::variant<std::monostate, UserCallResponseDTO> m_response;
 };
 
 #endif // __RESPONSEDTO_H_
