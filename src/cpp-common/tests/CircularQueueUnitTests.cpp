@@ -4,16 +4,37 @@
 
 static const uint8_t gc_size = 8;
 
+class BasicDestructor {
+  public:
+    BasicDestructor(int value = 0, bool* destructorCalled = NULL) :
+        m_destructorCalled(destructorCalled), m_value(value) {}
+
+    ~BasicDestructor() {
+        if (m_destructorCalled != NULL) {
+            *m_destructorCalled = true;
+        }
+    }
+
+    bool operator==(const BasicDestructor& rhs) const { return m_value == rhs.m_value; }
+
+    bool* m_destructorCalled;
+    int m_value;
+};
+
+bool operator==(const BasicDestructor& lhs, const BasicDestructor& rhs) {
+    return lhs.m_value == rhs.m_value;
+}
+bool operator==(const BasicDestructor& lhs, const int rhs) { return lhs.m_value == rhs; }
+
 class CircularQueueFixture : public testing::Test {
 
   public:
-    uint8_t m_data[gc_size + 1];
+    std::array<BasicDestructor, gc_size + 1> m_data;
 
-    CircularQueue<uint8_t>* m_circularQueue;
+    CircularQueue<BasicDestructor>* m_circularQueue;
 
     void SetUp() override {
-        memset(m_data, 0, gc_size + 1);
-        m_circularQueue = new CircularQueue<uint8_t>(m_data, gc_size);
+        m_circularQueue = new CircularQueue<BasicDestructor>(m_data.data(), gc_size);
     }
 
     void TearDown() override { delete m_circularQueue; }
@@ -79,35 +100,17 @@ TEST_F(CircularQueueFixture, CircularQueue_pop_withData) {
     EXPECT_EQ(m_circularQueue->getLength(), gc_size - 1);
 }
 
-TEST_F(CircularQueueFixture, CircularQueue_get_empty) {
+TEST_F(CircularQueueFixture, CircularQueue_pop_withData_destructorCalled) {
     // Given
 
     // Then
-    std::optional<uint8_t> ret = m_circularQueue->get();
+    bool destructorCalled = false;
+    m_circularQueue->push({42, &destructorCalled});
+    m_circularQueue->pop();
 
     // Expect
-    EXPECT_FALSE(ret.operator bool());
     EXPECT_EQ(m_circularQueue->getLength(), 0);
-}
-
-TEST_F(CircularQueueFixture, CircularQueue_get_withData) {
-    // Given
-
-    // Then
-
-    for (uint8_t i = 0; i < gc_size; i++) {
-        m_circularQueue->push(i + 42);
-    }
-
-    std::optional<uint8_t> ret = m_circularQueue->get();
-
-    // Expect
-    EXPECT_EQ(m_circularQueue->getLength(), 7);
-    EXPECT_TRUE(ret.operator bool());
-    EXPECT_EQ(ret.value(), 42);
-
-    m_circularQueue->get();
-    EXPECT_EQ(m_circularQueue->getLength(), 6);
+    EXPECT_TRUE(destructorCalled);
 }
 
 TEST_F(CircularQueueFixture, CircularQueue_clear_noData) {
@@ -132,6 +135,23 @@ TEST_F(CircularQueueFixture, CircularQueue_clear_data) {
 
     // Expect
     EXPECT_EQ(m_circularQueue->getLength(), 0);
+}
+
+TEST_F(CircularQueueFixture, CircularQueue_clear_data_destructorCalled) {
+    // Given
+
+    // Then
+    bool destructorCalled1 = false;
+    bool destructorCalled2 = false;
+    m_circularQueue->push({42, &destructorCalled1});
+    m_circularQueue->push({43, &destructorCalled2});
+
+    m_circularQueue->clear();
+
+    // Expect
+    EXPECT_EQ(m_circularQueue->getLength(), 0);
+    EXPECT_TRUE(destructorCalled1);
+    EXPECT_TRUE(destructorCalled2);
 }
 
 TEST_F(CircularQueueFixture, CircularQueue_peek_noData) {
@@ -316,4 +336,58 @@ TEST_F(CircularQueueFixture, CircularQueue_getFreeSize_full) {
 
     // Expect
     EXPECT_EQ(ret, 0);
+}
+
+TEST_F(CircularQueueFixture, CircularQueue_getNextAllocation_empty) {
+    // Given
+
+    // Then
+
+    auto ret = m_circularQueue->getNextAllocation();
+
+    // Expect
+    EXPECT_TRUE(ret.operator bool());
+    EXPECT_EQ(ret.value(), 0);
+
+    // Verify that we get the reference and it changes it in the buffer
+    ret.value().get().m_value = 42;
+    EXPECT_EQ(m_data[0], 42);
+}
+
+TEST_F(CircularQueueFixture, CircularQueue_getNextAllocation_full) {
+    // Given
+
+    // Then
+
+    for (uint8_t i = 0; i < gc_size; i++) {
+        m_circularQueue->push(i);
+    }
+    auto ret = m_circularQueue->getNextAllocation();
+
+    // Expect
+    EXPECT_FALSE(ret.operator bool());
+}
+
+TEST_F(CircularQueueFixture, CircularQueue_advance_empty) {
+    // Given
+
+    // Then
+
+    bool ret = m_circularQueue->advance();
+
+    // Expect
+    EXPECT_TRUE(ret);
+}
+
+TEST_F(CircularQueueFixture, CircularQueue_advance_full) {
+    // Given
+
+    // Then
+    for (uint8_t i = 0; i < gc_size; i++) {
+        m_circularQueue->push(i);
+    }
+    bool ret = m_circularQueue->advance();
+
+    // Expect
+    EXPECT_FALSE(ret);
 }

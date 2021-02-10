@@ -9,7 +9,7 @@ CircularQueue<T>::CircularQueue(T* data, uint16_t size) :
 
 template <typename T>
 CircularQueue<T>::~CircularQueue() {
-    clear();
+    CircularQueue::clear();
 }
 
 template <typename T>
@@ -18,9 +18,8 @@ bool CircularQueue<T>::push(const T& item) {
         return false;
     }
 
-    new (m_data[m_writePos]) T(std::forward<T>(item));
-    m_writePos++;
-    return advance;
+    new (&m_data[m_writePos]) T(item);
+    return advance();
 }
 
 template <typename T>
@@ -86,7 +85,11 @@ uint16_t CircularQueue<T>::getFreeSize() const {
 
 template <typename T>
 std::optional<std::reference_wrapper<T>> CircularQueue<T>::getNextAllocation() {
-    return m_data[m_writePos];
+    if (isFull()) {
+        return {};
+    }
+
+    return m_data[m_readPos];
 }
 
 template <typename T>
