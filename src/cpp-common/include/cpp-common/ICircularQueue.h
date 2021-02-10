@@ -2,6 +2,7 @@
 #define __ICIRCULARQUEUE_H_
 
 #include <cstdint>
+#include <functional>
 #include <optional>
 
 /**
