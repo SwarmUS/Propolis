@@ -18,7 +18,7 @@ UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
     }
 }
 
-UserCallDestinationDTO UserCallRequestDTO::getDestination() const { return m_destination; }
+UserCallDestinationDTO UserCallResponseDTO::getDestination() const { return m_destination; }
 
 const std::variant<std::monostate, FunctionCallResponseDTO>& UserCallResponseDTO::getResponse()
     const {
