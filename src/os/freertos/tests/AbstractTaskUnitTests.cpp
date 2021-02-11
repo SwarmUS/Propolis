@@ -1,4 +1,4 @@
-#include <freertos-utils/AbstractTask.h>
+#include <AbstractTask.h>
 #include <gtest/gtest.h>
 
 class AbstractTaskTest : public AbstractTask<256> {

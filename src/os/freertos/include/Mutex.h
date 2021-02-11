@@ -1,15 +1,16 @@
 #ifndef __MUTEX_H_
 #define __MUTEX_H_
 
+#include "IMutex.h"
 #include <FreeRTOS.h>
 #include <FreeRTOSConfig.h>
 #include <cstdint>
 #include <semphr.h>
 
 /**
- *@brief A class to manage mutual exclusion for guarding resources using FreeRTOS static memory
- *allocation*/
-class Mutex {
+ * @brief Create a mutex on the stack
+ */
+class Mutex : public IMutex {
   public:
     /**
      *@brief Creates a Mutex instance
@@ -20,16 +21,8 @@ class Mutex {
 
     ~Mutex() = default;
 
-    /**
-     *@brief Locks the mutex, waits the maxWaitTime if the resouce is already locked
-     *
-     *@return true if the operation was successful, false on timeout */
     bool lock();
 
-    /**
-     *@brief Unlocks the mutex, it releases the shared resource
-     *
-     *@return true if the operation was successful, false if not*/
     bool unlock();
 
   protected:

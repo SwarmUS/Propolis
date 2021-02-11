@@ -1,4 +1,4 @@
-#include <freertos-utils/Mutex.h>
+#include <Mutex.h>
 #include <gtest/gtest.h>
 
 class MutexUnitTests : public testing::Test {

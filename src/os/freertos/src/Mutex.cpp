@@ -1,4 +1,4 @@
-#include "freertos-utils/Mutex.h"
+#include "Mutex.h"
 
 Mutex::Mutex(uint32_t maxWaitTime) : m_maxWaitTime(maxWaitTime) {
     m_mutex = xSemaphoreCreateMutexStatic(&m_mutexStaticMemory);
