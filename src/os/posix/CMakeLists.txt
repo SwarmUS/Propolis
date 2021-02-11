@@ -34,8 +34,3 @@ target_include_directories(${LIB_NAME}
        $<INSTALL_INTERFACE:include>
 
 )
-
-target_link_libraries(${LIB_NAME}
-    INTERFACE
-        SwarmUS::Propolis::OS
-    )

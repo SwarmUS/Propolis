@@ -3,20 +3,12 @@
 
 #include <errno.h>
 #include <stdint.h>
+#include <thread>
+#
 #include <time.h>
 
 namespace Task {
-    inline void delay(int ms) {
-        struct timespec ts;
-        int res;
-
-        ts.tv_sec = ms / 1000;
-        ts.tv_nsec = (ms % 1000) * 1000000;
-
-        do {
-            res = nanosleep(&ts, &ts);
-        } while (res && errno == EINTR);
-    }
+    inline void delay(int ms) { std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
 
     inline void startScheduler() {
         while (true) {

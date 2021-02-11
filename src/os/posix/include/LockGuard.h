@@ -14,12 +14,12 @@ class LockGuard {
      *
      *@param mutex a reference to the mutex used to lock/unlock
      */
-    LockGuard(Mutex& mutex);
+    LockGuard(IMutex& mutex);
 
     ~LockGuard();
 
   private:
-    Mutex& m_mutex;
+    IMutex& m_mutex;
 };
 
 #endif // __LOCKGUARD_H_

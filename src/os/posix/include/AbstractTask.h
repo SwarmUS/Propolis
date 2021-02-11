@@ -7,7 +7,7 @@
 #include <thread>
 
 template <unsigned int stackSize>
-class AbstractTask : IAbstractTask {
+class AbstractTask : public IAbstractTask {
   public:
     AbstractTask(const char* taskName, UBaseType_t priority);
 

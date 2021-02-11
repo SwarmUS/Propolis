@@ -4,8 +4,7 @@
 #include <mutex>
 
 /**
- *@brief A class to manage mutual exclusion for guarding resources (uses static allocation for
- *FreeRTOS)*/
+ *@brief A class to manage mutual exclusion for guarding resources*/
 class IMutex {
   public:
     virtual ~IMutex() = default;

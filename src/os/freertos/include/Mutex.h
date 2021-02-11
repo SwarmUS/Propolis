@@ -7,7 +7,10 @@
 #include <cstdint>
 #include <semphr.h>
 
-class Mutex : IMutex {
+/**
+ * @brief Create a mutex on the stack
+ */
+class Mutex : public IMutex {
   public:
     /**
      *@brief Creates a Mutex instance

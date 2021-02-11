@@ -2,10 +2,9 @@
 #define IABSTRACTTASK_H
 
 /**
- *@brief An abstract class for creating an OS dependent task that uses the stack instead of the heap
- *(on FreeRTOS). To use, create a class that inherit the AbstractTask and write your task logic in
- *an overload of the task member function and start the task, the template argument is the size of
- *the stack for the task*/
+ *@brief An abstract class for creating an OS dependent task To use, create a class that inherit the
+ *AbstractTask and write your task logic in an overload of the task member function and start the
+ *task, the template argument is the size of the stack for the task*/
 class IAbstractTask {
   public:
     virtual ~IAbstractTask() = default;

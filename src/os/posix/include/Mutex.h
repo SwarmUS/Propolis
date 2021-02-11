@@ -4,7 +4,7 @@
 #include "IMutex.h"
 #include <mutex>
 
-class Mutex : IMutex {
+class Mutex : public IMutex {
   public:
     /**
      *@brief Creates a Mutex instance

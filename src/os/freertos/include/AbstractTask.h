@@ -6,8 +6,11 @@
 #include <array>
 #include <task.h>
 
+/**
+ * @brief Creates a FreeRTOS task on the stack
+ */
 template <unsigned int stackSize>
-class AbstractTask : IAbstractTask {
+class AbstractTask : public IAbstractTask {
   public:
     AbstractTask(const char* taskName, UBaseType_t priority);
 
