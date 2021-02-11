@@ -2,6 +2,7 @@
 #define ABSTRACTTASK_H
 
 #include <thread>
+#include "Macros.h"
 
 /**
  *@brief An abstract class for creating FreeRTOS task that uses the stack instead of the heap.

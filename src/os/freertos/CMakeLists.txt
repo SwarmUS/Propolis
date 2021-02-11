@@ -25,7 +25,7 @@ target_sources(${LIB_NAME} INTERFACE ${LIB_HEADERS} ${LIB_SOURCES})
 target_include_directories(${LIB_NAME}
     INTERFACE
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-       $<INSTALL_INTERFACE:include/os>
+       $<INSTALL_INTERFACE:include>
 )
 
 if(ENABLE_TESTS)
