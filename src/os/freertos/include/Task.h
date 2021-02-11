@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 namespace Task {
-    inline void delay(int ms) { vTaskDelay(ms); }
+    inline void delay(TickType_t ms) { vTaskDelay(ms); }
 
     inline void startScheduler() { vTaskStartScheduler(); }
 } // namespace Task
