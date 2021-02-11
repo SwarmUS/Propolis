@@ -12,7 +12,7 @@ class UserCallResponseDTO {
                         const FunctionCallResponseDTO& response);
 
     UserCallResponseDTO(const UserCallResponse& response);
-    
+
     /**
      *@brief get the destination
      *
