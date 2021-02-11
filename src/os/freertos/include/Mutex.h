@@ -1,13 +1,13 @@
 #ifndef __MUTEX_H_
 #define __MUTEX_H_
 
+#include "IMutex.h"
 #include <FreeRTOS.h>
 #include <FreeRTOSConfig.h>
 #include <cstdint>
 #include <semphr.h>
-#include "IMutex.h"
 
-class Mutex: IMutex {
+class Mutex : IMutex {
   public:
     /**
      *@brief Creates a Mutex instance

@@ -1,10 +1,10 @@
 #ifndef __MUTEX_H_
 #define __MUTEX_H_
 
-#include <mutex>
 #include "IMutex.h"
+#include <mutex>
 
-class Mutex: IMutex {
+class Mutex : IMutex {
   public:
     /**
      *@brief Creates a Mutex instance
