@@ -4,16 +4,9 @@
 #include <mutex>
 
 /**
- *@brief A class to manage mutual exclusion for guarding resources using FreeRTOS static memory
- *allocation*/
+ *@brief A class to manage mutual exclusion for guarding resources (uses static allocation for FreeRTOS)*/
 class IMutex {
   public:
-    /**
-     *@brief Creates a Mutex instance
-     *
-     *@param maxWaitTime max time to wait in ticks when trying to lock
-     **/
-
     virtual ~IMutex() = default;
 
     /**

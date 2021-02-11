@@ -17,6 +17,12 @@ namespace Task {
             res = nanosleep(&ts, &ts);
         } while (res && errno == EINTR);
     }
+
+    inline void startScheduler() {
+        while (true) {
+            delay(1000);
+        }
+    }
 } // namespace Task
 
 #endif //__TASK_H__

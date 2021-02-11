@@ -25,8 +25,17 @@ add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
 
 target_sources(${LIB_NAME} INTERFACE ${LIB_HEADERS} ${LIB_SOURCES})
 
+get_target_property(OS_INTERFACE_INCLUDES SwarmUS::Propolis::OS INTERFACE_INCLUDE_DIRECTORIES)
+
 target_include_directories(${LIB_NAME}
     INTERFACE
+        ${OS_INTERFACE_INCLUDES}
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
        $<INSTALL_INTERFACE:include>
+
 )
+
+target_link_libraries(${LIB_NAME}
+    INTERFACE
+        SwarmUS::Propolis::OS
+    )

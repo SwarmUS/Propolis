@@ -28,11 +28,6 @@ bool AbstractTask<stackSize>::start() {
 }
 
 template <unsigned int stackSize>
-TaskHandle_t& AbstractTask<stackSize>::getTaskHandle() {
-    return m_taskHandle;
-}
-
-template <unsigned int stackSize>
 void AbstractTask<stackSize>::wrapper(void* params) {
     AbstractTask* task = static_cast<AbstractTask*>(params);
     task->task();

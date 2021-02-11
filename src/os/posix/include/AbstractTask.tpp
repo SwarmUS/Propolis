@@ -3,14 +3,13 @@
 
 template <unsigned int stackSize>
 AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) {
-    m_taskName = taskName;
-    m_priority = priority;
-    m_taskHandle = NULL;
+    (void)taskName;
+    (void)priority;
 }
 
 template <unsigned int stackSize>
 AbstractTask<stackSize>::~AbstractTask() {
-    // TODO Implement
+    m_thread.join();
 }
 
 template <unsigned int stackSize>
@@ -21,11 +20,6 @@ bool AbstractTask<stackSize>::start() {
         return true;
     }
     return false;
-}
-
-template <unsigned int stackSize>
-TaskHandle_t& AbstractTask<stackSize>::getTaskHandle() {
-    return m_taskHandle;
 }
 
 template <unsigned int stackSize>

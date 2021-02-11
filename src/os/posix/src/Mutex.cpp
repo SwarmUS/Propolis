@@ -1,6 +1,6 @@
 #include "Mutex.h"
 
-Mutex::Mutex(uint32_t maxWaitTime) : m_maxWaitTime(maxWaitTime) {}
+Mutex::Mutex(uint32_t maxWaitTime)  {(void)maxWaitTime;}
 
 bool Mutex::lock() { m_mutex.lock(); }
 
