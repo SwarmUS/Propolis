@@ -21,7 +21,7 @@ target_link_libraries(${TEST_NAME}
         gmock
 
         SwarmUS::Propolis::Tests::FreeRTOS
-        SwarmUS::Propolis::FreeRTOS::Static::Utils
+        SwarmUS::Propolis::OS::FreeRTOS
 )
 
 add_test(NAME ${TEST_NAME}
