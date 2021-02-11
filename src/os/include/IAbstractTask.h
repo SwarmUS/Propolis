@@ -1,7 +1,6 @@
 #ifndef IABSTRACTTASK_H
 #define IABSTRACTTASK_H
 
-
 /**
  *@brief An abstract class for creating FreeRTOS task that uses the stack instead of the heap.
  *To use, create a class that inherit the AbtractTask and write your task logic in an overload of
@@ -27,6 +26,5 @@ class IAbstractTask {
      */
     virtual TaskHandle_t& getTaskHandle() = 0;
 };
-
 
 #endif // IABSTRACTTASK_H

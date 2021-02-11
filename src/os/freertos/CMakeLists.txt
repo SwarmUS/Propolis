@@ -15,6 +15,8 @@ set(LIB_HEADERS
 
     include/LockGuard.h
     include/Mutex.h
+
+    include/Task.h
 )
 
 add_library(${LIB_NAME} INTERFACE)

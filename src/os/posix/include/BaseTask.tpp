@@ -1,7 +1,7 @@
 #ifndef __BASETASK_TPP_
 #define __BASETASK_TPP_
 
-#include "freertos-utils/BaseTask.h"
+#include "BaseTask.h"
 
 template <unsigned int stackSize>
 BaseTask<stackSize>::BaseTask(const char* taskName,

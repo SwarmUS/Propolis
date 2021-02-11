@@ -1,14 +1,16 @@
 #ifndef ABSTRACTTASK_H
 #define ABSTRACTTASK_H
 
-#include <thread>
 #include "Macros.h"
+#include <stdint.h>
+#include <thread>
 
 /**
  *@brief An abstract class for creating FreeRTOS task that uses the stack instead of the heap.
  *To use, create a class that inherit the AbtractTask and write your task logic in an overload of
  *the task member function and start the task, the template argument is the size of the stack for
  *the task*/
+template <unsigned int stackSize>
 class AbstractTask {
   public:
     AbstractTask(const char* taskName, UBaseType_t priority);
