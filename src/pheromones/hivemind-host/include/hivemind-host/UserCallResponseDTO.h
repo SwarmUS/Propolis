@@ -14,6 +14,13 @@ class UserCallResponseDTO {
     UserCallResponseDTO(const UserCallResponse& response);
 
     /**
+     *@brief get the destination
+     *
+     *@return the destination of the message
+     **/
+    UserCallDestinationDTO getDestination() const;
+
+    /**
      *@brief gets the generic response
      *
      *@return a reference to the response response

@@ -1,4 +1,4 @@
-#include "c-common/circular_buff.h"
+#include "circular_buff.h"
 #include <stdbool.h>
 #include <stddef.h>
 

@@ -4,7 +4,7 @@
 
 HiveMindHostDeserializer::HiveMindHostDeserializer(IProtobufStream& stream) : m_stream(stream) {}
 
-std::variant<std::monostate, MessageDTO> HiveMindHostDeserializer::deserializeFromStream() {
+bool HiveMindHostDeserializer::deserializeFromStream(MessageDTO& message) {
     Message msgReceive = Message_init_default;
 
     pb_istream_t inputStream{HiveMindHostDeserializer::streamCallback, this, SIZE_MAX, 0};
@@ -12,10 +12,10 @@ std::variant<std::monostate, MessageDTO> HiveMindHostDeserializer::deserializeFr
     bool status = pb_decode_ex(&inputStream, Message_fields, &msgReceive, PB_DECODE_DELIMITED);
 
     if (status) {
-        return MessageDTO(msgReceive);
+        message = MessageDTO(msgReceive);
     }
 
-    return std::monostate();
+    return status;
 }
 
 bool HiveMindHostDeserializer::streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count) {
