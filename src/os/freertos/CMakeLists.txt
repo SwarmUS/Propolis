@@ -1,5 +1,5 @@
-set(LIB_NAME "swarmus-propolis-freertos-static-utils")
-set(LIB_ALIAS "SwarmUS::Propolis::FreeRTOS::Static::Utils")
+set(LIB_NAME "swarmus-propolis-os-freertos")
+set(LIB_ALIAS "SwarmUS::Propolis::OS::FreeRTOS")
 
 set(LIB_SOURCES
     src/LockGuard.cpp
@@ -7,14 +7,14 @@ set(LIB_SOURCES
 )
 
 set(LIB_HEADERS
-    include/freertos-utils/AbstractTask.tpp
-    include/freertos-utils/AbstractTask.h
+    include/AbstractTask.tpp
+    include/AbstractTask.h
 
-    include/freertos-utils/BaseTask.h
-    include/freertos-utils/BaseTask.tpp
+    include/BaseTask.h
+    include/BaseTask.tpp
 
-    include/freertos-utils/LockGuard.h
-    include/freertos-utils/Mutex.h
+    include/LockGuard.h
+    include/Mutex.h
 )
 
 add_library(${LIB_NAME} INTERFACE)
@@ -26,7 +26,6 @@ target_include_directories(${LIB_NAME}
     INTERFACE
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
        $<INSTALL_INTERFACE:include>
-       freertos-utils
 )
 
 if(ENABLE_TESTS)

@@ -1,4 +1,4 @@
-#include "freertos-utils/LockGuard.h"
+#include "LockGuard.h"
 
 LockGuard::LockGuard(Mutex& mutex) : m_mutex(mutex) {
     while (!m_mutex.lock()) {
