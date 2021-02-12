@@ -19,7 +19,7 @@ static uint8_t sht75_crc_table[] = {
     5,   52,  103, 86,  120, 73,  26,  43,  188, 141, 222, 239, 130, 179, 224, 209, 70,  119, 36,
     21,  59,  10,  89,  104, 255, 206, 157, 172};
 
-uint32_t calculateCRC32(const void* data, uint32_t length) {
+uint32_t calculateCRC32_software(const void* data, uint32_t length) {
     uint32_t crc32 = CRC32_START;
     const uint32_t* ptr = (const uint32_t*)data;
     uint32_t numElements = length / sizeof(uint32_t);
@@ -33,7 +33,7 @@ uint32_t calculateCRC32(const void* data, uint32_t length) {
 }
 
 // Source: https://github.com/lammertb/libcrc/blob/master/src/crc8.c
-uint8_t calculateCRC8(const void* data, uint32_t length) {
+uint8_t calculateCRC8_software(const void* data, uint32_t length) {
     uint8_t crc = CRC8_START;
     const uint8_t* ptr = (const uint8_t*)data;
 
