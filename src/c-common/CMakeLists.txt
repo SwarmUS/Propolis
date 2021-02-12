@@ -4,10 +4,12 @@ set(LIB_ALIAS "SwarmUS::Propolis::C::Common")
 
 set(LIB_SOURCES
     src/circular_buff.c
+    src/software_crc.c
 )
 
 set(LIB_HEADERS
     include/c-common/circular_buff.h
+    include/c-common/software_crc.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
