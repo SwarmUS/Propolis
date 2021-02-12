@@ -23,7 +23,7 @@ uint32_t calculateCRC32(const void* data, uint32_t length) {
     uint32_t crc32 = CRC32_START;
     const uint32_t* ptr = (const uint32_t*)data;
     uint32_t numElements = length / sizeof(uint32_t);
-    if(data) {
+    if (data) {
         while (numElements--) {
             crc32 = Crc32Fast(crc32, *ptr++);
         }
