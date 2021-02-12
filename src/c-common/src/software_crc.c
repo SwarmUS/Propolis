@@ -3,7 +3,7 @@
 #define CRC8_START 0x0D
 #define CRC32_START 0xFFFFFFFF
 static uint32_t Crc32Fast(uint32_t crc, uint32_t data);
-static uint8_t sht75_crc_table[] = {
+static uint8_t g_sht75_crc_table[] = {
     0,   49,  98,  83,  196, 245, 166, 151, 185, 136, 219, 234, 125, 76,  31,  46,  67,  114, 33,
     16,  135, 182, 229, 212, 250, 203, 152, 169, 62,  15,  92,  109, 134, 183, 228, 213, 66,  115,
     32,  17,  63,  14,  93,  108, 251, 202, 153, 168, 197, 244, 167, 150, 1,   48,  99,  82,  124,
@@ -40,7 +40,7 @@ uint8_t calculateCRC8_software(const void* data, uint32_t length) {
     if (ptr) {
         for (uint32_t a = 0; a < length; a++) {
 
-            crc = sht75_crc_table[(*ptr++) ^ crc];
+            crc = g_sht75_crc_table[(*ptr++) ^ crc];
         }
     }
 
@@ -49,24 +49,24 @@ uint8_t calculateCRC8_software(const void* data, uint32_t length) {
 
 // source: https://community.st.com/s/question/0D50X0000AIeYIb/stm32f4-crc32-algorithm-headache
 uint32_t Crc32Fast(uint32_t crc, uint32_t data) {
-    static const uint32_t CrcTable[16] = {// Nibble lookup table for 0x04C11DB7 polynomial
-                                          0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9,
-                                          0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005,
-                                          0x2608EDB8, 0x22C9F00F, 0x2F8AD6D6, 0x2B4BCB61,
-                                          0x350C9B64, 0x31CD86D3, 0x3C8EA00A, 0x384FBDBD};
+    static const uint32_t s_crcTable[16] = {// Nibble lookup table for 0x04C11DB7 polynomial
+                                            0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9,
+                                            0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005,
+                                            0x2608EDB8, 0x22C9F00F, 0x2F8AD6D6, 0x2B4BCB61,
+                                            0x350C9B64, 0x31CD86D3, 0x3C8EA00A, 0x384FBDBD};
 
     crc = crc ^ data; // Apply all 32-bits
 
     // Process 32-bits, 4 at a time, or 8 rounds
 
-    crc = (crc << 4) ^ CrcTable[crc >> 28]; // Assumes 32-bit reg, masking index to 4-bits
-    crc = (crc << 4) ^ CrcTable[crc >> 28]; //  0x04C11DB7 Polynomial used in STM32
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
-    crc = (crc << 4) ^ CrcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28]; // Assumes 32-bit reg, masking index to 4-bits
+    crc = (crc << 4) ^ s_crcTable[crc >> 28]; //  0x04C11DB7 Polynomial used in STM32
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
+    crc = (crc << 4) ^ s_crcTable[crc >> 28];
 
     return (crc);
 }

@@ -12,7 +12,9 @@ TEST_F(CRCTestsFixture, TestCRC8_ShortBuffer) {
     uint8_t buff[] = {0, 3, 4};
     EXPECT_EQ(calculateCRC8_software(buff, sizeof(buff)), 212);
 }
-TEST_F(CRCTestsFixture, TestCRC8_NullBuffer) { EXPECT_EQ(calculateCRC8_software(nullptr, 1), 0X0D); }
+TEST_F(CRCTestsFixture, TestCRC8_NullBuffer) {
+    EXPECT_EQ(calculateCRC8_software(nullptr, 1), 0X0D);
+}
 
 TEST_F(CRCTestsFixture, TestCRC32_SingleValue) {
     uint32_t val = 0x11223344;
@@ -25,4 +27,6 @@ TEST_F(CRCTestsFixture, TestCRC32_ShortBuffer) {
     EXPECT_EQ(res, 0x955AE3FD);
 }
 
-TEST_F(CRCTestsFixture, TestCRC32_NullBuffer) { EXPECT_EQ(calculateCRC32_software(nullptr, 4), 0XFFFFFFFF); }
+TEST_F(CRCTestsFixture, TestCRC32_NullBuffer) {
+    EXPECT_EQ(calculateCRC32_software(nullptr, 4), 0XFFFFFFFF);
+}
