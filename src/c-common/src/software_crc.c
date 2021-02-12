@@ -23,9 +23,12 @@ uint32_t calculateCRC32(const void* data, uint32_t length) {
     uint32_t crc32 = CRC32_START;
     const uint32_t* ptr = (const uint32_t*)data;
     uint32_t numElements = length / sizeof(uint32_t);
-    while (numElements--) {
-        crc32 = Crc32Fast(crc32, *ptr++);
+    if(data) {
+        while (numElements--) {
+            crc32 = Crc32Fast(crc32, *ptr++);
+        }
     }
+
     return crc32;
 }
 
@@ -34,7 +37,7 @@ uint8_t calculateCRC8(const void* data, uint32_t length) {
     uint8_t crc = CRC8_START;
     const uint8_t* ptr = (const uint8_t*)data;
 
-    if (data) {
+    if (ptr) {
         for (uint32_t a = 0; a < length; a++) {
 
             crc = sht75_crc_table[(*ptr++) ^ crc];
