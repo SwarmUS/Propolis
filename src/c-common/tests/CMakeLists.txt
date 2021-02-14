@@ -2,6 +2,7 @@ set(TEST_NAME test-c-common)
  
 set(TEST_SOURCES
     CircularBuffTests.cpp
+    CRCTests.cpp
 )
 
 set(TEST_HEADERS
