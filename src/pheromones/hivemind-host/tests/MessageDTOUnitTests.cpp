@@ -10,7 +10,7 @@ class MessageDTOFixture : public testing::Test {
     void SetUp() override {
         // Inserting garbage
         FunctionCallRequestDTO freq(NULL, NULL, 0);
-        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, freq);
+        UserCallRequestDTO ureq(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ, freq);
         RequestDTO reqDTO = RequestDTO(1, ureq);
         m_message = new MessageDTO(gc_sourceId, gc_destinationId, reqDTO);
     }
@@ -38,7 +38,7 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_response_valid) {
 
     // Then
     FunctionCallResponseDTO fResponse(GenericResponseStatusDTO::Ok, NULL);
-    UserCallResponseDTO uResponse(UserCallDestinationDTO::BUZZ, fResponse);
+    UserCallResponseDTO uResponse(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ, fResponse);
     ResponseDTO response(1, uResponse);
     m_message->setMessage(response);
 

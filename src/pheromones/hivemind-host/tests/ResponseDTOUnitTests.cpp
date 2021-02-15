@@ -8,7 +8,7 @@ class ResponseDTOFixture : public testing::Test {
 
     void SetUp() override {
         m_response = new ResponseDTO(
-            gc_id, UserCallResponseDTO(UserCallDestinationDTO::BUZZ,
+            gc_id, UserCallResponseDTO(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ,
                                        FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, "")));
     }
 

@@ -1,9 +1,7 @@
 #include "UserCallRequestDTO.h"
-#include "UserCallDestinationDTO.h"
 
 UserCallRequestDTO::UserCallRequestDTO(const UserCallRequest& request) :
-
-    m_destination(destinationToDTO(request.destination)) {
+    m_source(targetToDTO(request.source)), m_destination(targetToDTO(request.destination)) {
 
     switch (request.which_request) {
 
@@ -15,17 +13,22 @@ UserCallRequestDTO::UserCallRequestDTO(const UserCallRequest& request) :
     }
 }
 
-UserCallRequestDTO::UserCallRequestDTO(UserCallDestinationDTO destination,
+UserCallRequestDTO::UserCallRequestDTO(UserCallTargetDTO source,
+                                       UserCallTargetDTO destination,
                                        const FunctionCallRequestDTO& request) :
-    m_destination(destination), m_request(request) {}
+    m_source(source), m_destination(destination), m_request(request) {}
 
-UserCallDestinationDTO UserCallRequestDTO::getDestination() const { return m_destination; }
+UserCallTargetDTO UserCallRequestDTO::getSource() const { return m_source; }
+
+UserCallTargetDTO UserCallRequestDTO::getDestination() const { return m_destination; }
 
 const std::variant<std::monostate, FunctionCallRequestDTO>& UserCallRequestDTO::getRequest() const {
     return m_request;
 }
 
-void UserCallRequestDTO::setDestination(UserCallDestinationDTO destination) {
+void UserCallRequestDTO::setSource(UserCallTargetDTO source) { m_source = source; }
+
+void UserCallRequestDTO::setDestination(UserCallTargetDTO destination) {
     m_destination = destination;
 }
 
@@ -36,7 +39,8 @@ void UserCallRequestDTO::setRequest(
 
 bool UserCallRequestDTO::serialize(UserCallRequest& request) const {
 
-    request.destination = dtoToDestination(m_destination);
+    request.source = dtoToTarget(m_source);
+    request.destination = dtoToTarget(m_destination);
 
     if (const FunctionCallRequestDTO* functionRequest =
             std::get_if<FunctionCallRequestDTO>(&m_request)) {

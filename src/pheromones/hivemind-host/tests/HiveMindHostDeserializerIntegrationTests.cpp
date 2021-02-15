@@ -13,7 +13,7 @@ class HiveMindHostDeserializerIntegrationFixture : public testing::Test {
 
         FunctionCallRequestDTO funRequestDTO(m_functionName.c_str(), (FunctionCallArgumentDTO*)NULL,
                                              0);
-        UserCallRequestDTO ureq(UserCallDestinationDTO::BUZZ, funRequestDTO);
+        UserCallRequestDTO ureq(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ, funRequestDTO);
         RequestDTO requestDTO(1, ureq);
         MessageDTO messageDTO(1, 2, requestDTO);
         messageDTO.serialize(m_message);

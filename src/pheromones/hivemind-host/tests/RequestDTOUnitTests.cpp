@@ -7,9 +7,9 @@ class RequestDTOFixture : public testing::Test {
     RequestDTO* m_request;
 
     void SetUp() override {
-        m_request =
-            new RequestDTO(gc_id, UserCallRequestDTO(UserCallDestinationDTO::BUZZ,
-                                                     FunctionCallRequestDTO(NULL, NULL, 0)));
+        m_request = new RequestDTO(
+            gc_id, UserCallRequestDTO(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ,
+                                      FunctionCallRequestDTO(NULL, NULL, 0)));
     }
 
     void TearDown() override { delete m_request; }

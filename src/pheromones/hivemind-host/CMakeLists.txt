@@ -14,7 +14,7 @@ set(LIB_SOURCES
     src/RequestDTO.cpp
     src/UserCallRequestDTO.cpp
     src/UserCallResponseDTO.cpp
-    src/UserCallDestinationDTO.cpp
+    src/UserCallTargetDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -31,7 +31,7 @@ set(LIB_HEADERS
     include/hivemind-host/ResponseDTO.h
     include/hivemind-host/RequestDTO.h
     include/hivemind-host/UserCallRequestDTO.h
-    include/hivemind-host/UserCallDestinationDTO.h
+    include/hivemind-host/UserCallTargetDTO.h
     include/hivemind-host/UserCallResponseDTO.h
 )
 
