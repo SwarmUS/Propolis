@@ -2,13 +2,14 @@
 #define __USERCALLRESPONSEDTO_H_
 
 #include "FunctionCallResponseDTO.h"
-#include "UserCallDestinationDTO.h"
+#include "UserCallTargetDTO.h"
 #include <user-call.pb.h>
 #include <variant>
 
 class UserCallResponseDTO {
   public:
-    UserCallResponseDTO(UserCallDestinationDTO destination,
+    UserCallResponseDTO(UserCallTargetDTO source,
+                        UserCallTargetDTO destination,
                         const FunctionCallResponseDTO& response);
 
     UserCallResponseDTO(const UserCallResponse& response);
@@ -18,7 +19,14 @@ class UserCallResponseDTO {
      *
      *@return the destination of the message
      **/
-    UserCallDestinationDTO getDestination() const;
+    UserCallTargetDTO getDestination() const;
+
+    /**
+     *@brief get the source
+     *
+     *@return the source of the message
+     **/
+    UserCallTargetDTO getSource() const;
 
     /**
      *@brief gets the generic response
@@ -26,6 +34,20 @@ class UserCallResponseDTO {
      *@return a reference to the response response
      */
     const std::variant<std::monostate, FunctionCallResponseDTO>& getResponse() const;
+
+    /**
+     *@brief set the source
+     *
+     *@param [in] source the source to set
+     **/
+    void setSource(UserCallTargetDTO source);
+
+    /**
+     *@brief set the destination
+     *
+     *@param [in] destination the destination to set
+     **/
+    void setDestination(UserCallTargetDTO destination);
 
     /**
      *@brief sets the generic response
@@ -45,7 +67,8 @@ class UserCallResponseDTO {
     bool serialize(UserCallResponse& response) const;
 
   private:
-    UserCallDestinationDTO m_destination = UserCallDestinationDTO::UNKNOWN;
+    UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
+    UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
 
     std::variant<std::monostate, FunctionCallResponseDTO> m_response;
 };

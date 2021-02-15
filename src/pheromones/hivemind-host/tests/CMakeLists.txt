@@ -9,7 +9,7 @@ set(TEST_SOURCES
     MessageDTOUnitTests.cpp
     UserCallRequestDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
-    UserCallDestinationDTOUnitTests.cpp
+    UserCallTargetDTOUnitTests.cpp
   
     HiveMindHostSerializerUnitTests.cpp
     HiveMindHostSerializerIntegrationTests.cpp

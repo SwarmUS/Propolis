@@ -1,11 +1,12 @@
 #include "UserCallResponseDTO.h"
 
-UserCallResponseDTO::UserCallResponseDTO(UserCallDestinationDTO destination,
+UserCallResponseDTO::UserCallResponseDTO(UserCallTargetDTO source,
+                                         UserCallTargetDTO destination,
                                          const FunctionCallResponseDTO& response) :
-    m_destination(destination), m_response(response) {}
+    m_source(source), m_destination(destination), m_response(response) {}
 
 UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
-    m_destination(destinationToDTO(response.destination)) {
+    m_source(targetToDTO(response.source)), m_destination(targetToDTO(response.destination)) {
 
     switch (response.which_response) {
 
@@ -18,7 +19,9 @@ UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
     }
 }
 
-UserCallDestinationDTO UserCallResponseDTO::getDestination() const { return m_destination; }
+UserCallTargetDTO UserCallResponseDTO::getSource() const { return m_source; }
+
+UserCallTargetDTO UserCallResponseDTO::getDestination() const { return m_destination; }
 
 const std::variant<std::monostate, FunctionCallResponseDTO>& UserCallResponseDTO::getResponse()
     const {
@@ -31,7 +34,8 @@ void UserCallResponseDTO::setResponse(
 }
 
 bool UserCallResponseDTO::serialize(UserCallResponse& response) const {
-    response.destination = dtoToDestination(m_destination);
+    response.source = dtoToTarget(m_source);
+    response.destination = dtoToTarget(m_destination);
 
     if (const FunctionCallResponseDTO* responseDTO =
             std::get_if<FunctionCallResponseDTO>(&m_response)) {

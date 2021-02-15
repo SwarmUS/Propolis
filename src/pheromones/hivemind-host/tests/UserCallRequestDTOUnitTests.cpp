@@ -3,11 +3,12 @@
 
 class UserCallRequestDTOFixture : public testing::Test {
   public:
-    static constexpr UserCallDestinationDTO gc_dest = UserCallDestinationDTO::BUZZ;
+    static constexpr UserCallTargetDTO gc_src = UserCallTargetDTO::BUZZ;
+    static constexpr UserCallTargetDTO gc_dest = UserCallTargetDTO::BUZZ;
     UserCallRequestDTO* m_request;
 
     void SetUp() override {
-        m_request = new UserCallRequestDTO(gc_dest, FunctionCallRequestDTO(NULL, NULL, 0));
+        m_request = new UserCallRequestDTO(gc_src, gc_dest, FunctionCallRequestDTO(NULL, NULL, 0));
     }
 
     void TearDown() override { delete m_request; }
@@ -22,7 +23,8 @@ TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(req.destination, dtoToDestination(gc_dest));
+    EXPECT_EQ(req.source, dtoToTarget(gc_src));
+    EXPECT_EQ(req.destination, dtoToTarget(gc_dest));
     EXPECT_EQ(req.which_request, UserCallRequest_functionCall_tag);
 }
 

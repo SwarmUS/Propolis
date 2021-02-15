@@ -2,7 +2,7 @@
 #define __USERCALLDTO_H_
 
 #include "FunctionCallRequestDTO.h"
-#include "UserCallDestinationDTO.h"
+#include "UserCallTargetDTO.h"
 #include <optional>
 #include <user-call.pb.h>
 
@@ -10,14 +10,23 @@ class UserCallRequestDTO {
   public:
     UserCallRequestDTO(const UserCallRequest& request);
 
-    UserCallRequestDTO(UserCallDestinationDTO destination, const FunctionCallRequestDTO& request);
+    UserCallRequestDTO(UserCallTargetDTO source,
+                       UserCallTargetDTO destination,
+                       const FunctionCallRequestDTO& request);
 
     /**
      *@brief get the destination
      *
      *@return the destination of the message
      **/
-    UserCallDestinationDTO getDestination() const;
+    UserCallTargetDTO getDestination() const;
+
+    /**
+     *@brief get the source
+     *
+     *@return the source of the message
+     **/
+    UserCallTargetDTO getSource() const;
 
     /**
      *@brief get the stored request
@@ -27,11 +36,18 @@ class UserCallRequestDTO {
     const std::variant<std::monostate, FunctionCallRequestDTO>& getRequest() const;
 
     /**
+     *@brief set the source
+     *
+     *@param [in] source the source to set
+     **/
+    void setSource(UserCallTargetDTO source);
+
+    /**
      *@brief set the destination
      *
      *@param [in] destination the destination to set
      **/
-    void setDestination(UserCallDestinationDTO destination);
+    void setDestination(UserCallTargetDTO destination);
 
     /**
      *@brief set the request
@@ -51,7 +67,8 @@ class UserCallRequestDTO {
     bool serialize(UserCallRequest& request) const;
 
   private:
-    UserCallDestinationDTO m_destination = UserCallDestinationDTO::UNKNOWN;
+    UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
+    UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
 
     std::variant<std::monostate, FunctionCallRequestDTO> m_request;
 };
