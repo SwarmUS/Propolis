@@ -28,6 +28,12 @@ const std::variant<std::monostate, FunctionCallResponseDTO>& UserCallResponseDTO
     return m_response;
 }
 
+void UserCallResponseDTO::setSource(UserCallTargetDTO source) { m_source = source; }
+
+void UserCallResponseDTO::setDestination(UserCallTargetDTO destination) {
+    m_destination = destination;
+}
+
 void UserCallResponseDTO::setResponse(
     const std::variant<std::monostate, FunctionCallResponseDTO>& response) {
     m_response = response;
