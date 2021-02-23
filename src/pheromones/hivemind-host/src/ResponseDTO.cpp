@@ -37,14 +37,13 @@ bool ResponseDTO::serialize(Response& response) const {
 
     response.id = m_id;
 
-    if (const GenericResponseDTO* genericResponse = std::get_if<GenericResponseDTO>(&m_response)) {
+    if (const auto* genericResponse = std::get_if<GenericResponseDTO>(&m_response)) {
 
         response.which_message = Response_generic_tag;
         return genericResponse->serialize(response.message.generic);
     }
 
-    if (const UserCallResponseDTO* functionResponse =
-            std::get_if<UserCallResponseDTO>(&m_response)) {
+    if (const auto* functionResponse = std::get_if<UserCallResponseDTO>(&m_response)) {
 
         response.which_message = Response_user_call_tag;
         return functionResponse->serialize(response.message.user_call);

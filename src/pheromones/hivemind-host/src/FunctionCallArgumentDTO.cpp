@@ -29,13 +29,13 @@ void FunctionCallArgumentDTO::setArgument(const std::variant<std::monostate, int
 }
 
 bool FunctionCallArgumentDTO::serialize(FunctionArgument& argument) const {
-    if (const int64_t* intArg = std::get_if<int64_t>(&m_argument)) {
+    if (const auto* intArg = std::get_if<int64_t>(&m_argument)) {
         argument.which_argument = FunctionArgument_int_arg_tag;
         argument.argument.int_arg = *intArg;
         return true;
     }
 
-    if (const float* floatArg = std::get_if<float>(&m_argument)) {
+    if (const auto* floatArg = std::get_if<float>(&m_argument)) {
         argument.which_argument = FunctionArgument_float_arg_tag;
         argument.argument.float_arg = *floatArg;
         return true;
