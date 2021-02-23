@@ -3,7 +3,7 @@
 
 #include "FunctionCallResponseDTO.h"
 #include "UserCallTargetDTO.h"
-#include <user-call.pb.h>
+#include <message.pb.h>
 #include <variant>
 
 class UserCallResponseDTO {

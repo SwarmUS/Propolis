@@ -2,7 +2,7 @@
 #define __FUNCTIONCALLARGUMENTDTO_H_
 
 #include <cstdint>
-#include <function-call.pb.h>
+#include <message.pb.h>
 #include <variant>
 
 /**

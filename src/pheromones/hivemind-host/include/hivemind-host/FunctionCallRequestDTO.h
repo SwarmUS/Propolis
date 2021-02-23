@@ -3,7 +3,7 @@
 
 #include "FunctionCallArgumentDTO.h"
 #include <array>
-#include <function-call.pb.h>
+#include <message.pb.h>
 #include <optional>
 
 class FunctionCallRequestDTO {

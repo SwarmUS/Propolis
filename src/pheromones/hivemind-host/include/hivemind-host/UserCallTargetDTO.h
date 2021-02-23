@@ -1,7 +1,7 @@
 #ifndef __USERCALLDESTINATION_H_
 #define __USERCALLDESTINATION_H_
 
-#include <user-call.pb.h>
+#include <message.pb.h>
 
 /**@brief The target of a user call once it reached a robot ID, distinguishes the differents
  * consumers of those messages*/

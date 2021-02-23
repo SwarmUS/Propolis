@@ -11,6 +11,8 @@ class ResponseDTO {
 
     ResponseDTO(uint32_t id, const UserCallResponseDTO& response);
 
+    ResponseDTO(uint32_t id, const GenericResponseDTO& response);
+
     /**
      *@brief gets the id of the response
      *
@@ -23,7 +25,8 @@ class ResponseDTO {
      *
      *@return a variant of the stored resposne
      */
-    const std::variant<std::monostate, UserCallResponseDTO>& getResponse() const;
+    const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& getResponse()
+        const;
 
     /**
      *@brief sets the id of the response
@@ -37,7 +40,8 @@ class ResponseDTO {
      *
      *@param [in] response the new  inner response
      */
-    void setResponse(const std::variant<std::monostate, UserCallResponseDTO>& response);
+    void setResponse(
+        const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& response);
 
     /**
      *@brief serialize a Response for nanopb, sets the fields properly before using
@@ -52,7 +56,7 @@ class ResponseDTO {
   private:
     uint32_t m_id;
 
-    std::variant<std::monostate, UserCallResponseDTO> m_response;
+    std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO> m_response;
 };
 
 #endif // __RESPONSEDTO_H_

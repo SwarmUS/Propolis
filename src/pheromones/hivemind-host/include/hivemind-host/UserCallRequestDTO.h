@@ -4,7 +4,7 @@
 #include "FunctionCallRequestDTO.h"
 #include "UserCallTargetDTO.h"
 #include <optional>
-#include <user-call.pb.h>
+#include <message.pb.h>
 
 class UserCallRequestDTO {
   public:
