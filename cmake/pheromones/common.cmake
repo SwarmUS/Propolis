@@ -13,7 +13,7 @@ function(pheromones_fetch_populate)
         ${PROJECT_NAME}_pheromones
 
         GIT_REPOSITORY https://github.com/SwarmUS/Pheromones
-        GIT_TAG        af68c8f 
+        GIT_TAG        916d428
         GIT_PROGRESS   TRUE
     )
 
@@ -31,9 +31,7 @@ function(pheromones_fetch_populate)
     # Removing warnings
     if (DISABLE_EXTERNAL_WARNINGS) 
         set(LIB_LIST
-          example
           protobuf-nanopb-static
-          swarmus-pheromones-example
           swarmus-pheromones-hivemind-host)
 
         foreach(LIB ${LIB_LIST})
