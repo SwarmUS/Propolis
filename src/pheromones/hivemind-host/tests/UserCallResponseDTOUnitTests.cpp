@@ -8,16 +8,30 @@ class UserCallResponseDTOFixture : public testing::Test {
     UserCallResponseDTO* m_response;
 
     void SetUp() override {
-        m_response = new UserCallResponseDTO(
-            gc_src, gc_dest, FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, ""));
+        m_response = new UserCallResponseDTO(gc_src, gc_dest,
+                                             GenericResponseDTO(GenericResponseStatusDTO::Ok, ""));
     }
 
     void TearDown() override { delete m_response; }
 };
 
-TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_valid) {
+TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_Generic_valid) {
     // Given
     UserCallResponse resp;
+
+    // Then
+    bool ret = m_response->serialize(resp);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(resp.destination, dtoToTarget(gc_dest));
+    EXPECT_EQ(resp.which_response, UserCallResponse_generic_tag);
+}
+
+TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_Funtioncall_valid) {
+    // Given
+    UserCallResponse resp;
+    m_response->setResponse(FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, ""));
 
     // Then
     bool ret = m_response->serialize(resp);

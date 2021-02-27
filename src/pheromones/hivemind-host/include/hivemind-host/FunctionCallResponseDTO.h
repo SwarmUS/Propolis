@@ -2,7 +2,7 @@
 #define __FUNCTIONCALLRESPONSEDTO_H_
 
 #include "GenericResponseDTO.h"
-#include <function-call.pb.h>
+#include <message.pb.h>
 
 class FunctionCallResponseDTO {
   public:

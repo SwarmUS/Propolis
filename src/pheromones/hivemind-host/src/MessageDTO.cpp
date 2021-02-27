@@ -44,12 +44,12 @@ bool MessageDTO::serialize(Message& message) const {
     message.sourceId = m_sourceId;
     message.destinationId = m_destinationId;
 
-    if (const RequestDTO* request = std::get_if<RequestDTO>(&m_message)) {
+    if (const auto* request = std::get_if<RequestDTO>(&m_message)) {
         message.which_message = Message_request_tag;
         return request->serialize(message.message.request);
     }
 
-    if (const ResponseDTO* response = std::get_if<ResponseDTO>(&m_message)) {
+    if (const auto* response = std::get_if<ResponseDTO>(&m_message)) {
         message.which_message = Message_response_tag;
         return response->serialize(message.message.response);
     }

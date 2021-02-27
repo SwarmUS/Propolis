@@ -3,8 +3,8 @@
 
 #include "FunctionCallRequestDTO.h"
 #include "UserCallTargetDTO.h"
+#include <message.pb.h>
 #include <optional>
-#include <user-call.pb.h>
 
 class UserCallRequestDTO {
   public:

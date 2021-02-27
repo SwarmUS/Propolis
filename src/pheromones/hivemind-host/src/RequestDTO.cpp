@@ -30,7 +30,7 @@ void RequestDTO::setRequest(const std::variant<std::monostate, UserCallRequestDT
 bool RequestDTO::serialize(Request& request) const {
     request.id = m_id;
 
-    if (const UserCallRequestDTO* userRequest = std::get_if<UserCallRequestDTO>(&m_request)) {
+    if (const auto* userRequest = std::get_if<UserCallRequestDTO>(&m_request)) {
 
         request.which_message = Request_user_call_tag;
         return userRequest->serialize(request.message.user_call);

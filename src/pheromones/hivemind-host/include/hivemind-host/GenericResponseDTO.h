@@ -1,7 +1,7 @@
 #ifndef __GENERICRESPONSEDTO_H_
 #define __GENERICRESPONSEDTO_H_
 
-#include <generic.pb.h>
+#include <message.pb.h>
 
 enum class GenericResponseStatusDTO { Unknown, Ok, BadRequest, Error };
 

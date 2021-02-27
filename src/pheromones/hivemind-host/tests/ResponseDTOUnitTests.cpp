@@ -7,17 +7,31 @@ class ResponseDTOFixture : public testing::Test {
     ResponseDTO* m_response;
 
     void SetUp() override {
-        m_response = new ResponseDTO(
-            gc_id, UserCallResponseDTO(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ,
-                                       FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, "")));
+        m_response = new ResponseDTO(gc_id, GenericResponseDTO(GenericResponseStatusDTO::Ok, ""));
     }
 
     void TearDown() override { delete m_response; }
 };
 
-TEST_F(ResponseDTOFixture, ResponseDTO_serialize_valid) {
+TEST_F(ResponseDTOFixture, ResponseDTO_serialize_Generic_valid) {
     // Given
     Response resp;
+
+    // Then
+    bool ret = m_response->serialize(resp);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(resp.id, gc_id);
+    EXPECT_EQ(resp.which_message, Response_generic_tag);
+}
+
+TEST_F(ResponseDTOFixture, ResponseDTO_serialize_UserCall_valid) {
+    // Given
+    Response resp;
+    m_response->setResponse(
+        UserCallResponseDTO(UserCallTargetDTO::BUZZ, UserCallTargetDTO::BUZZ,
+                            FunctionCallResponseDTO(GenericResponseStatusDTO::Ok, "")));
 
     // Then
     bool ret = m_response->serialize(resp);
@@ -31,9 +45,9 @@ TEST_F(ResponseDTOFixture, ResponseDTO_serialize_valid) {
 TEST_F(ResponseDTOFixture, ResponseDTO_serialize_invalid) {
     // Given
     Response resp;
+    m_response->setResponse(std::monostate());
 
     // Then
-    m_response->setResponse(std::monostate());
     bool ret = m_response->serialize(resp);
 
     // Expect

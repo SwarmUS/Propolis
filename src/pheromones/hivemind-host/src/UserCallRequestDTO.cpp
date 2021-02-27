@@ -42,8 +42,7 @@ bool UserCallRequestDTO::serialize(UserCallRequest& request) const {
     request.source = dtoToTarget(m_source);
     request.destination = dtoToTarget(m_destination);
 
-    if (const FunctionCallRequestDTO* functionRequest =
-            std::get_if<FunctionCallRequestDTO>(&m_request)) {
+    if (const auto* functionRequest = std::get_if<FunctionCallRequestDTO>(&m_request)) {
 
         request.which_request = UserCallRequest_functionCall_tag;
         return functionRequest->serialize(request.request.functionCall);

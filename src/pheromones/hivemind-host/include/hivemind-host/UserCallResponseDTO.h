@@ -3,7 +3,7 @@
 
 #include "FunctionCallResponseDTO.h"
 #include "UserCallTargetDTO.h"
-#include <user-call.pb.h>
+#include <message.pb.h>
 #include <variant>
 
 class UserCallResponseDTO {
@@ -11,6 +11,10 @@ class UserCallResponseDTO {
     UserCallResponseDTO(UserCallTargetDTO source,
                         UserCallTargetDTO destination,
                         const FunctionCallResponseDTO& response);
+
+    UserCallResponseDTO(UserCallTargetDTO source,
+                        UserCallTargetDTO destination,
+                        const GenericResponseDTO& response);
 
     UserCallResponseDTO(const UserCallResponse& response);
 
@@ -33,7 +37,8 @@ class UserCallResponseDTO {
      *
      *@return a reference to the response response
      */
-    const std::variant<std::monostate, FunctionCallResponseDTO>& getResponse() const;
+    const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>& getResponse()
+        const;
 
     /**
      *@brief set the source
@@ -54,7 +59,8 @@ class UserCallResponseDTO {
      *
      *@param [in] response the response to set
      */
-    void setResponse(const std::variant<std::monostate, FunctionCallResponseDTO>& response);
+    void setResponse(
+        const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>& response);
 
     /**
      *@brief serialize a UserCallResponse for nanopb, sets the fields properly before using
@@ -70,7 +76,7 @@ class UserCallResponseDTO {
     UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
     UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
 
-    std::variant<std::monostate, FunctionCallResponseDTO> m_response;
+    std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO> m_response;
 };
 
 #endif // __USERCALLRESPONSEDTO_H_
