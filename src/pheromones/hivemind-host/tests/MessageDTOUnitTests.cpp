@@ -51,6 +51,22 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_response_valid) {
     EXPECT_EQ(msg.which_message, Message_response_tag);
 }
 
+TEST_F(MessageDTOFixture, MessageDTO_serialize_greeting_valid) {
+    // Given
+    GreetingDTO greeting;
+    Message msg;
+    m_message->setMessage(greeting);
+
+    // Then
+    bool ret = m_message->serialize(msg);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.sourceId, gc_sourceId);
+    EXPECT_EQ(msg.destinationId, gc_destinationId);
+    EXPECT_EQ(msg.which_message, Message_greeting_tag);
+}
+
 TEST_F(MessageDTOFixture, MessageDTO_serialize_invalid) {
     // Given
     Message msg;

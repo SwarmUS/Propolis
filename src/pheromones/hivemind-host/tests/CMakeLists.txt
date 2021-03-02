@@ -6,6 +6,7 @@ set(TEST_SOURCES
     FunctionCallResponseDTOUnitTests.cpp
     RequestDTOUnitTests.cpp
     ResponseDTOUnitTests.cpp
+    GreetingDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
     UserCallRequestDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
