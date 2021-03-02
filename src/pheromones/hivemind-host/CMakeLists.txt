@@ -13,6 +13,10 @@ set(LIB_SOURCES
     src/MessageDTO.cpp
     src/ResponseDTO.cpp
     src/RequestDTO.cpp
+    src/IdRequestDTO.cpp
+    src/IdResponseDTO.cpp
+    src/HiveMindApiRequestDTO.cpp
+    src/HiveMindApiResponseDTO.cpp
     src/UserCallRequestDTO.cpp
     src/UserCallResponseDTO.cpp
     src/UserCallTargetDTO.cpp
@@ -32,6 +36,10 @@ set(LIB_HEADERS
     include/hivemind-host/MessageDTO.h
     include/hivemind-host/ResponseDTO.h
     include/hivemind-host/RequestDTO.h
+    include/hivemind-host/IdRequestDTO.h
+    include/hivemind-host/IdRequestDTO.h
+    include/hivemind-host/HiveMindApiResponseDTO.h
+    include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/UserCallRequestDTO.h
     include/hivemind-host/UserCallTargetDTO.h
     include/hivemind-host/UserCallResponseDTO.h

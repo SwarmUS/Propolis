@@ -13,6 +13,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = ResponseDTO(message.message.response);
         break;
 
+    case Message_greeting_tag:
+        m_message = GreetingDTO(message.message.greeting);
+        break;
+
     default:
         m_message = std::monostate();
     }

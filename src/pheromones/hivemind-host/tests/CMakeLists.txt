@@ -9,6 +9,10 @@ set(TEST_SOURCES
     GreetingDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
     UserCallRequestDTOUnitTests.cpp
+    IdRequestDTOUnitTests.cpp
+    IdResponseDTOUnitTests.cpp
+    HiveMindApiRequestDTOUnitTests.cpp
+    HiveMindApiResponseDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
     UserCallTargetDTOUnitTests.cpp
   

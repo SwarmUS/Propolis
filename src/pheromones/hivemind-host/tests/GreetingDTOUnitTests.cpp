@@ -6,12 +6,12 @@ class GreetingDTOFixture : public testing::Test {
     static constexpr uint32_t gc_id = 42;
     GreetingDTO* m_greeting;
 
-    void SetUp() override { m_greeting = new GreetingDTO(); }
+    void SetUp() override { m_greeting = new GreetingDTO(gc_id); }
 
     void TearDown() override { delete m_greeting; }
 };
 
-TEST_F(GreetingDTOFixture, ResponseDTO_serialize_Generic_valid) {
+TEST_F(GreetingDTOFixture, GreetingDTO_serialize_valid) {
     // Given
     Greeting greeting;
 
@@ -20,4 +20,5 @@ TEST_F(GreetingDTOFixture, ResponseDTO_serialize_Generic_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
+    EXPECT_EQ(greeting.id, gc_id);
 }

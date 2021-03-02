@@ -53,7 +53,7 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_response_valid) {
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_greeting_valid) {
     // Given
-    GreetingDTO greeting;
+    GreetingDTO greeting(gc_sourceId);
     Message msg;
     m_message->setMessage(greeting);
 
