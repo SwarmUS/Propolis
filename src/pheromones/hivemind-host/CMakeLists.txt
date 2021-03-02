@@ -9,6 +9,7 @@ set(LIB_SOURCES
     src/FunctionCallRequestDTO.cpp
     src/FunctionCallResponseDTO.cpp
     src/GenericResponseDTO.cpp
+    src/GreetingDTO.cpp
     src/MessageDTO.cpp
     src/ResponseDTO.cpp
     src/RequestDTO.cpp
@@ -27,6 +28,7 @@ set(LIB_HEADERS
     include/hivemind-host/FunctionCallRequestDTO.h
     include/hivemind-host/FunctionCallResponseDTO.h
     include/hivemind-host/GenericResponseDTO.h
+    include/hivemind-host/GreetingDTO.h
     include/hivemind-host/MessageDTO.h
     include/hivemind-host/ResponseDTO.h
     include/hivemind-host/RequestDTO.h
