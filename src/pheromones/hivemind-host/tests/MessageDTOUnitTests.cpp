@@ -27,8 +27,8 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_request_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.sourceId, gc_sourceId);
-    EXPECT_EQ(msg.destinationId, gc_destinationId);
+    EXPECT_EQ(msg.source_id, gc_sourceId);
+    EXPECT_EQ(msg.destination_id, gc_destinationId);
     EXPECT_EQ(msg.which_message, Message_request_tag);
 }
 
@@ -46,8 +46,8 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_response_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.sourceId, gc_sourceId);
-    EXPECT_EQ(msg.destinationId, gc_destinationId);
+    EXPECT_EQ(msg.source_id, gc_sourceId);
+    EXPECT_EQ(msg.destination_id, gc_destinationId);
     EXPECT_EQ(msg.which_message, Message_response_tag);
 }
 
@@ -62,8 +62,8 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_greeting_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.sourceId, gc_sourceId);
-    EXPECT_EQ(msg.destinationId, gc_destinationId);
+    EXPECT_EQ(msg.source_id, gc_sourceId);
+    EXPECT_EQ(msg.destination_id, gc_destinationId);
     EXPECT_EQ(msg.which_message, Message_greeting_tag);
 }
 

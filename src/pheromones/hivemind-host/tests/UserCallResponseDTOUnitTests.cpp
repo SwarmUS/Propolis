@@ -39,7 +39,7 @@ TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_Funtioncall_val
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(resp.destination, dtoToTarget(gc_dest));
-    EXPECT_EQ(resp.which_response, UserCallResponse_functionCall_tag);
+    EXPECT_EQ(resp.which_response, UserCallResponse_function_call_tag);
 }
 
 TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_invalid) {

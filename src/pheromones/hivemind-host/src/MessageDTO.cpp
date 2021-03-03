@@ -1,7 +1,7 @@
 #include "MessageDTO.h"
 
 MessageDTO::MessageDTO(const Message& message) :
-    m_sourceId(message.sourceId), m_destinationId(message.destinationId) {
+    m_sourceId(message.source_id), m_destinationId(message.destination_id) {
 
     switch (message.which_message) {
 
@@ -50,8 +50,8 @@ void MessageDTO::setMessage(
 }
 
 bool MessageDTO::serialize(Message& message) const {
-    message.sourceId = m_sourceId;
-    message.destinationId = m_destinationId;
+    message.source_id = m_sourceId;
+    message.destination_id = m_destinationId;
 
     if (const auto* request = std::get_if<RequestDTO>(&m_message)) {
         message.which_message = Message_request_tag;

@@ -5,8 +5,8 @@ UserCallRequestDTO::UserCallRequestDTO(const UserCallRequest& request) :
 
     switch (request.which_request) {
 
-    case UserCallRequest_functionCall_tag:
-        m_request = FunctionCallRequestDTO(request.request.functionCall);
+    case UserCallRequest_function_call_tag:
+        m_request = FunctionCallRequestDTO(request.request.function_call);
         break;
     default:
         m_request = std::monostate();
@@ -44,8 +44,8 @@ bool UserCallRequestDTO::serialize(UserCallRequest& request) const {
 
     if (const auto* functionRequest = std::get_if<FunctionCallRequestDTO>(&m_request)) {
 
-        request.which_request = UserCallRequest_functionCall_tag;
-        return functionRequest->serialize(request.request.functionCall);
+        request.which_request = UserCallRequest_function_call_tag;
+        return functionRequest->serialize(request.request.function_call);
     }
 
     return false;

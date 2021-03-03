@@ -25,7 +25,7 @@ TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_valid) {
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.source, dtoToTarget(gc_src));
     EXPECT_EQ(req.destination, dtoToTarget(gc_dest));
-    EXPECT_EQ(req.which_request, UserCallRequest_functionCall_tag);
+    EXPECT_EQ(req.which_request, UserCallRequest_function_call_tag);
 }
 
 TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_invalid) {

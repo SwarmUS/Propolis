@@ -25,7 +25,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_user_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_userCall_tag);
+    EXPECT_EQ(req.which_message, Request_user_call_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
@@ -39,7 +39,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_hiveApi_tag);
+    EXPECT_EQ(req.which_message, Request_hive_api_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_swarm_valid) {
@@ -53,7 +53,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_swarm_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_swarm_tag);
+    EXPECT_EQ(req.which_message, Request_swarm_api_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_invalid) {

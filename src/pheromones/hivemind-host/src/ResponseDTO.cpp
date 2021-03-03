@@ -5,14 +5,14 @@ ResponseDTO::ResponseDTO(const Response& response) : m_id(response.id) {
     case Response_generic_tag:
         m_response = GenericResponseDTO(response.message.generic);
         break;
-    case Response_userCall_tag:
-        m_response = UserCallResponseDTO(response.message.userCall);
+    case Response_user_call_tag:
+        m_response = UserCallResponseDTO(response.message.user_call);
         break;
-    case Response_hiveApi_tag:
-        m_response = HiveMindApiResponse(response.message.hiveApi);
+    case Response_hive_api_tag:
+        m_response = HiveMindApiResponse(response.message.hive_api);
         break;
-    case Response_swarm_tag:
-        m_response = SwarmApiResponse(response.message.swarm);
+    case Response_swarm_api_tag:
+        m_response = SwarmApiResponse(response.message.swarm_api);
         break;
     default:
         m_response = std::monostate();
@@ -55,16 +55,16 @@ bool ResponseDTO::serialize(Response& response) const {
         return genericResponse->serialize(response.message.generic);
     }
     if (const auto* userResponse = std::get_if<UserCallResponseDTO>(&m_response)) {
-        response.which_message = Response_userCall_tag;
-        return userResponse->serialize(response.message.userCall);
+        response.which_message = Response_user_call_tag;
+        return userResponse->serialize(response.message.user_call);
     }
     if (const auto* hiveResponse = std::get_if<HiveMindApiResponseDTO>(&m_response)) {
-        response.which_message = Response_hiveApi_tag;
-        return hiveResponse->serialize(response.message.hiveApi);
+        response.which_message = Response_hive_api_tag;
+        return hiveResponse->serialize(response.message.hive_api);
     }
     if (const auto* swarmResponse = std::get_if<SwarmApiResponseDTO>(&m_response)) {
-        response.which_message = Response_swarm_tag;
-        return swarmResponse->serialize(response.message.swarm);
+        response.which_message = Response_swarm_api_tag;
+        return swarmResponse->serialize(response.message.swarm_api);
     }
 
     return false;
