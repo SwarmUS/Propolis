@@ -5,8 +5,14 @@ ResponseDTO::ResponseDTO(const Response& response) : m_id(response.id) {
     case Response_generic_tag:
         m_response = GenericResponseDTO(response.message.generic);
         break;
-    case Response_user_call_tag:
-        m_response = UserCallResponseDTO(response.message.user_call);
+    case Response_userCall_tag:
+        m_response = UserCallResponseDTO(response.message.userCall);
+        break;
+    case Response_hiveApi_tag:
+        m_response = HiveMindApiResponse(response.message.hiveApi);
+        break;
+    case Response_swarm_tag:
+        m_response = SwarmApiResponse(response.message.swarm);
         break;
     default:
         m_response = std::monostate();
@@ -21,15 +27,22 @@ ResponseDTO::ResponseDTO(uint32_t id, const UserCallResponseDTO& response) :
 
 uint32_t ResponseDTO::getId() const { return m_id; }
 
-const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& ResponseDTO::
-    getResponse() const {
+const std::variant<std::monostate,
+                   GenericResponseDTO,
+                   UserCallResponseDTO,
+                   HiveMindApiResponseDTO,
+                   SwarmApiResponseDTO>&
+ResponseDTO::getResponse() const {
     return m_response;
 }
 
 void ResponseDTO::setId(uint32_t id) { m_id = id; }
 
-void ResponseDTO::setResponse(
-    const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& response) {
+void ResponseDTO::setResponse(const std::variant<std::monostate,
+                                                 GenericResponseDTO,
+                                                 UserCallResponseDTO,
+                                                 HiveMindApiResponseDTO,
+                                                 SwarmApiResponseDTO>& response) {
     m_response = response;
 }
 
@@ -38,15 +51,20 @@ bool ResponseDTO::serialize(Response& response) const {
     response.id = m_id;
 
     if (const auto* genericResponse = std::get_if<GenericResponseDTO>(&m_response)) {
-
         response.which_message = Response_generic_tag;
         return genericResponse->serialize(response.message.generic);
     }
-
-    if (const auto* functionResponse = std::get_if<UserCallResponseDTO>(&m_response)) {
-
-        response.which_message = Response_user_call_tag;
-        return functionResponse->serialize(response.message.user_call);
+    if (const auto* userResponse = std::get_if<UserCallResponseDTO>(&m_response)) {
+        response.which_message = Response_userCall_tag;
+        return userResponse->serialize(response.message.userCall);
+    }
+    if (const auto* hiveResponse = std::get_if<HiveMindApiResponseDTO>(&m_response)) {
+        response.which_message = Response_hiveApi_tag;
+        return hiveResponse->serialize(response.message.hiveApi);
+    }
+    if (const auto* swarmResponse = std::get_if<SwarmApiResponseDTO>(&m_response)) {
+        response.which_message = Response_swarm_tag;
+        return swarmResponse->serialize(response.message.swarm);
     }
 
     return false;

@@ -1,5 +1,5 @@
-#ifndef __HIVEMINDAPIREQUESTDTO_H_
-#define __HIVEMINDAPIREQUESTDTO_H_
+#ifndef __SWARMAPIREQUESTDTO_H_
+#define __SWARMAPIREQUESTDTO_H_
 
 #include "IdRequestDTO.h"
 #include <message.pb.h>
@@ -32,4 +32,4 @@ class SwarmApiRequestDTO {
     std::variant<std::monostate, IdRequestDTO> m_request;
 };
 
-#endif // __HIVEMINDAPIREQUESTDTO_H_
+#endif // __SWARMAPIREQUESTDTO_H_

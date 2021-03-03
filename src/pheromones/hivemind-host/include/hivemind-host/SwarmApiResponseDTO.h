@@ -1,5 +1,5 @@
-#ifndef __HIVEMINDAPIRESPONSEDTO_H_
-#define __HIVEMINDAPIRESPONSEDTO_H_
+#ifndef __SWARMAPIRESPONSEDTO_H_
+#define __SWARMAPIRESPONSEDTO_H_
 
 #include "IdResponseDTO.h"
 #include <message.pb.h>
@@ -32,4 +32,4 @@ class SwarmApiResponseDTO {
     std::variant<std::monostate, IdResponseDTO> m_response;
 };
 
-#endif // __HIVEMINDAPIRESPONSEDTO_H_
+#endif // __SWARMAPIRESPONSEDTO_H_

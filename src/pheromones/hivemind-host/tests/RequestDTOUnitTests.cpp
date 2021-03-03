@@ -15,7 +15,7 @@ class RequestDTOFixture : public testing::Test {
     void TearDown() override { delete m_request; }
 };
 
-TEST_F(RequestDTOFixture, RequestDTO_serialize_valid) {
+TEST_F(RequestDTOFixture, RequestDTO_serialize_user_valid) {
     // Given
     Request req;
 
@@ -25,7 +25,35 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_user_call_tag);
+    EXPECT_EQ(req.which_message, Request_userCall_tag);
+}
+
+TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
+    // Given
+    Request req;
+    m_request->setRequest(HiveMindApiRequestDTO(IdRequestDTO()));
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.id, gc_id);
+    EXPECT_EQ(req.which_message, Request_hiveApi_tag);
+}
+
+TEST_F(RequestDTOFixture, RequestDTO_serialize_swarm_valid) {
+    // Given
+    Request req;
+    m_request->setRequest(SwarmApiRequestDTO(IdRequestDTO()));
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.id, gc_id);
+    EXPECT_EQ(req.which_message, Request_swarm_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_invalid) {

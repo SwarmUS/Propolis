@@ -1,6 +1,8 @@
 #ifndef __RESPONSEDTO_H_
 #define __RESPONSEDTO_H_
 
+#include "HiveMindApiResponseDTO.h"
+#include "SwarmApiResponseDTO.h"
 #include "UserCallResponseDTO.h"
 #include <message.pb.h>
 #include <variant>
@@ -25,8 +27,12 @@ class ResponseDTO {
      *
      *@return a variant of the stored resposne
      */
-    const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& getResponse()
-        const;
+    const std::variant<std::monostate,
+                       GenericResponseDTO,
+                       UserCallResponseDTO,
+                       HiveMindApiResponseDTO,
+                       SwarmApiResponseDTO>&
+    getResponse() const;
 
     /**
      *@brief sets the id of the response
@@ -40,8 +46,11 @@ class ResponseDTO {
      *
      *@param [in] response the new  inner response
      */
-    void setResponse(
-        const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO>& response);
+    void setResponse(const std::variant<std::monostate,
+                                        GenericResponseDTO,
+                                        UserCallResponseDTO,
+                                        HiveMindApiResponseDTO,
+                                        SwarmApiResponseDTO>& response);
 
     /**
      *@brief serialize a Response for nanopb, sets the fields properly before using
@@ -56,7 +65,12 @@ class ResponseDTO {
   private:
     uint32_t m_id;
 
-    std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO> m_response;
+    std::variant<std::monostate,
+                 GenericResponseDTO,
+                 UserCallResponseDTO,
+                 HiveMindApiResponseDTO,
+                 SwarmApiResponseDTO>
+        m_response;
 };
 
 #endif // __RESPONSEDTO_H_
