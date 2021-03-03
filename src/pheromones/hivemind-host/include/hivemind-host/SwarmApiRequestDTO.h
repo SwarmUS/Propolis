@@ -5,11 +5,11 @@
 #include <message.pb.h>
 #include <variant>
 
-class HiveMindApiRequestDTO {
+class SwarmApiRequestDTO {
   public:
-    HiveMindApiRequestDTO(const HiveMindApiRequest& request);
+    SwarmApiRequestDTO(const SwarmApiRequest& request);
 
-    HiveMindApiRequestDTO(const IdRequestDTO& request);
+    SwarmApiRequestDTO(const IdRequestDTO& request);
 
     /**
      *@brief get the stored request
@@ -22,11 +22,11 @@ class HiveMindApiRequestDTO {
     void setRequest(const std::variant<std::monostate, IdRequestDTO>& request);
 
     /**
-     *@brief serialize a HiveMindApiRequest for nanopb, sets the fields properly before using
+     *@brief serialize a SwarmApiRequest for nanopb, sets the fields properly before using
      *pb_encode
      *@param [out] request the request to serialize
      *@return a boolean, true if successfull (fields were recognized) false if not */
-    bool serialize(HiveMindApiRequest& request) const;
+    bool serialize(SwarmApiRequest& request) const;
 
   private:
     std::variant<std::monostate, IdRequestDTO> m_request;

@@ -5,21 +5,27 @@ set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
     src/HiveMindHostSerializer.cpp
 
-    src/FunctionCallArgumentDTO.cpp
-    src/FunctionCallRequestDTO.cpp
-    src/FunctionCallResponseDTO.cpp
-    src/GenericResponseDTO.cpp
-    src/GreetingDTO.cpp
     src/MessageDTO.cpp
     src/ResponseDTO.cpp
     src/RequestDTO.cpp
+    src/GenericResponseDTO.cpp
+    src/GreetingDTO.cpp
+
     src/IdRequestDTO.cpp
     src/IdResponseDTO.cpp
-    src/HiveMindApiRequestDTO.cpp
-    src/HiveMindApiResponseDTO.cpp
+
+    src/FunctionCallArgumentDTO.cpp
+    src/FunctionCallRequestDTO.cpp
+    src/FunctionCallResponseDTO.cpp
     src/UserCallRequestDTO.cpp
     src/UserCallResponseDTO.cpp
     src/UserCallTargetDTO.cpp
+
+
+    src/HiveMindApiRequestDTO.cpp
+    src/HiveMindApiResponseDTO.cpp
+    src/SwarmApiRequestDTO.cpp
+    src/SwarmApiResponseDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -38,11 +44,14 @@ set(LIB_HEADERS
     include/hivemind-host/RequestDTO.h
     include/hivemind-host/IdRequestDTO.h
     include/hivemind-host/IdRequestDTO.h
-    include/hivemind-host/HiveMindApiResponseDTO.h
-    include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/UserCallRequestDTO.h
     include/hivemind-host/UserCallTargetDTO.h
     include/hivemind-host/UserCallResponseDTO.h
+
+    include/hivemind-host/HiveMindApiResponseDTO.h
+    include/hivemind-host/HiveMindApiRequestDTO.h
+    include/hivemind-host/SwarmApiResponseDTO.h
+    include/hivemind-host/SwarmApiRequestDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

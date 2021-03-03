@@ -5,11 +5,11 @@
 #include <message.pb.h>
 #include <variant>
 
-class HiveMindApiResponseDTO {
+class SwarmApiResponseDTO {
   public:
-    HiveMindApiResponseDTO(const HiveMindApiResponse& response);
+    SwarmApiResponseDTO(const SwarmApiResponse& response);
 
-    HiveMindApiResponseDTO(const IdResponseDTO& response);
+    SwarmApiResponseDTO(const IdResponseDTO& response);
 
     /**
      *@brief get the stored response
@@ -22,11 +22,11 @@ class HiveMindApiResponseDTO {
     void setResponse(const std::variant<std::monostate, IdResponseDTO>& response);
 
     /**
-     *@brief serialize a HiveMindApiResponse for nanopb, sets the fields properly before using
+     *@brief serialize a SwarmApiResponse for nanopb, sets the fields properly before using
      *pb_encode
      *@param [out] response the response to serialize
      *@return a boolean, true if successfull (fields were recognized) false if not */
-    bool serialize(HiveMindApiResponse& response) const;
+    bool serialize(SwarmApiResponse& response) const;
 
   private:
     std::variant<std::monostate, IdResponseDTO> m_response;

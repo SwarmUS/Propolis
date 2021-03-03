@@ -11,8 +11,6 @@ set(TEST_SOURCES
     UserCallRequestDTOUnitTests.cpp
     IdRequestDTOUnitTests.cpp
     IdResponseDTOUnitTests.cpp
-    HiveMindApiRequestDTOUnitTests.cpp
-    HiveMindApiResponseDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
     UserCallTargetDTOUnitTests.cpp
   
@@ -21,6 +19,11 @@ set(TEST_SOURCES
 
     HiveMindHostDeserializerUnitTests.cpp
     HiveMindHostDeserializerIntegrationTests.cpp
+
+    HiveMindApiRequestDTOUnitTests.cpp
+    HiveMindApiResponseDTOUnitTests.cpp
+    SwarmApiRequestDTOUnitTests.cpp
+    SwarmApiResponseDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS
