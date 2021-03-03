@@ -25,6 +25,12 @@ ResponseDTO::ResponseDTO(uint32_t id, const GenericResponseDTO& response) :
 ResponseDTO::ResponseDTO(uint32_t id, const UserCallResponseDTO& response) :
     m_id(id), m_response(response) {}
 
+ResponseDTO::ResponseDTO(uint32_t id, const HiveMindApiResponseDTO& response) :
+    m_id(id), m_response(response) {}
+
+ResponseDTO::ResponseDTO(uint32_t id, const SwarmApiResponseDTO& response) :
+    m_id(id), m_response(response) {}
+
 uint32_t ResponseDTO::getId() const { return m_id; }
 
 const std::variant<std::monostate,

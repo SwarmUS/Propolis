@@ -15,6 +15,10 @@ class ResponseDTO {
 
     ResponseDTO(uint32_t id, const GenericResponseDTO& response);
 
+    ResponseDTO(uint32_t id, const HiveMindApiResponseDTO& response);
+
+    ResponseDTO(uint32_t id, const SwarmApiResponseDTO& response);
+
     /**
      *@brief gets the id of the response
      *
