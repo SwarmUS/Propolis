@@ -10,22 +10,12 @@ class HiveMindApiRequestDTO {
   public:
     HiveMindApiRequestDTO(const HiveMindApiRequest& request);
 
-    HiveMindApiRequestDTO(UserCallTargetDTO source, const IdRequestDTO& request);
-
-    /**
-     *@brief get the source
-     *@return the source of the message */
-    UserCallTargetDTO getSource() const;
+    HiveMindApiRequestDTO(const IdRequestDTO& request);
 
     /**
      *@brief get the stored request
      *@return the stored request */
     const std::variant<std::monostate, IdRequestDTO>& getRequest() const;
-
-    /**
-     *@brief set the source
-     *@param [in] source the source to set */
-    void setSource(UserCallTargetDTO source);
 
     /**
      *@brief set the request
@@ -40,8 +30,6 @@ class HiveMindApiRequestDTO {
     bool serialize(HiveMindApiRequest& request) const;
 
   private:
-    UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
-
     std::variant<std::monostate, IdRequestDTO> m_request;
 };
 

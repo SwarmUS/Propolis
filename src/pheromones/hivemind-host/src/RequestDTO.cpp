@@ -4,7 +4,7 @@ RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
 
     switch (request.which_message) {
 
-    case Response_user_call_tag:
+    case Request_user_call_tag:
         m_request = UserCallRequestDTO(request.message.user_call);
         break;
     default:

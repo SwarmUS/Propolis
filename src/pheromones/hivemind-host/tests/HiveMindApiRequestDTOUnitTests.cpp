@@ -3,10 +3,9 @@
 
 class HiveMindApiRequestDTOFixture : public testing::Test {
   public:
-    static constexpr UserCallTargetDTO gc_src = UserCallTargetDTO::BUZZ;
     HiveMindApiRequestDTO* m_request;
 
-    void SetUp() override { m_request = new HiveMindApiRequestDTO(gc_src, IdRequestDTO()); }
+    void SetUp() override { m_request = new HiveMindApiRequestDTO(IdRequestDTO()); }
 
     void TearDown() override { delete m_request; }
 };
@@ -20,7 +19,6 @@ TEST_F(HiveMindApiRequestDTOFixture, HiveMindApiRequestDTO_serialize_id_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(req.source, dtoToTarget(gc_src));
     EXPECT_EQ(req.which_request, HiveMindApiRequest_id_tag);
 }
 

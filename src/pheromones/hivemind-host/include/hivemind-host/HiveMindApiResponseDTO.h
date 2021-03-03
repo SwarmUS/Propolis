@@ -10,22 +10,12 @@ class HiveMindApiResponseDTO {
   public:
     HiveMindApiResponseDTO(const HiveMindApiResponse& response);
 
-    HiveMindApiResponseDTO(UserCallTargetDTO destination, const IdResponseDTO& response);
-
-    /**
-     *@brief get the destination
-     *@return the destination of the message */
-    UserCallTargetDTO getDestination() const;
+    HiveMindApiResponseDTO(const IdResponseDTO& response);
 
     /**
      *@brief get the stored response
      *@return the stored response */
     const std::variant<std::monostate, IdResponseDTO>& getResponse() const;
-
-    /**
-     *@brief set the destination
-     *@param [in] destination the destination to set */
-    void setDestination(UserCallTargetDTO destination);
 
     /**
      *@brief set the response
@@ -40,8 +30,6 @@ class HiveMindApiResponseDTO {
     bool serialize(HiveMindApiResponse& response) const;
 
   private:
-    UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
-
     std::variant<std::monostate, IdResponseDTO> m_response;
 };
 

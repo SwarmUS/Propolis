@@ -3,13 +3,10 @@
 
 class HiveMindApiResponseDTOFixture : public testing::Test {
   public:
-    static constexpr UserCallTargetDTO gc_dest = UserCallTargetDTO::BUZZ;
     static constexpr uint32_t gc_id = 42;
     HiveMindApiResponseDTO* m_response;
 
-    void SetUp() override {
-        m_response = new HiveMindApiResponseDTO(gc_dest, IdResponseDTO(gc_id));
-    }
+    void SetUp() override { m_response = new HiveMindApiResponseDTO(IdResponseDTO(gc_id)); }
 
     void TearDown() override { delete m_response; }
 };
@@ -23,7 +20,6 @@ TEST_F(HiveMindApiResponseDTOFixture, HiveMindApiResponseDTO_serialize_id_valid)
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(resp.destination, dtoToTarget(gc_dest));
     EXPECT_EQ(resp.which_response, HiveMindApiResponse_id_tag);
 }
 
