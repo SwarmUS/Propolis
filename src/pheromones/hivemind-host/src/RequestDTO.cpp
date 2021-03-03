@@ -15,7 +15,11 @@ RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
 RequestDTO::RequestDTO(uint32_t id, const UserCallRequestDTO& request) :
     m_id(id), m_request(request) {}
 
-const std::variant<std::monostate, UserCallRequestDTO>& RequestDTO::getRequest() const {
+RequestDTO::RequestDTO(uint32_t id, const HiveMindApiRequestDTO& request) :
+    m_id(id), m_request(request) {}
+
+const std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO>& RequestDTO::
+    getRequest() const {
     return m_request;
 }
 
@@ -23,7 +27,8 @@ uint32_t RequestDTO::getId() const { return m_id; }
 
 void RequestDTO::setId(uint32_t id) { m_id = id; }
 
-void RequestDTO::setRequest(const std::variant<std::monostate, UserCallRequestDTO>& request) {
+void RequestDTO::setRequest(
+    const std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO>& request) {
     m_request = request;
 }
 
