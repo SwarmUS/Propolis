@@ -1,8 +1,8 @@
 #ifndef __GENERICRESPONSEDTO_H_
 #define __GENERICRESPONSEDTO_H_
 
-#include <message.pb.h>
 #include "hivemind-host/PheromonesSettings.h"
+#include <message.pb.h>
 
 enum class GenericResponseStatusDTO { Unknown, Ok, BadRequest, Error };
 
