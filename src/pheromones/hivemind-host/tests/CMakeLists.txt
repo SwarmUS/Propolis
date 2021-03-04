@@ -6,8 +6,11 @@ set(TEST_SOURCES
     FunctionCallResponseDTOUnitTests.cpp
     RequestDTOUnitTests.cpp
     ResponseDTOUnitTests.cpp
+    GreetingDTOUnitTests.cpp
     MessageDTOUnitTests.cpp
     UserCallRequestDTOUnitTests.cpp
+    IdRequestDTOUnitTests.cpp
+    IdResponseDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
     UserCallTargetDTOUnitTests.cpp
   
@@ -16,6 +19,11 @@ set(TEST_SOURCES
 
     HiveMindHostDeserializerUnitTests.cpp
     HiveMindHostDeserializerIntegrationTests.cpp
+
+    HiveMindApiRequestDTOUnitTests.cpp
+    HiveMindApiResponseDTOUnitTests.cpp
+    SwarmApiRequestDTOUnitTests.cpp
+    SwarmApiResponseDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS

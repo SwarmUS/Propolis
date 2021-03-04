@@ -37,6 +37,6 @@ TEST_F(HiveMindHostSerializerIntegrationFixture, HiveMindSerializer_integration_
     EXPECT_EQ(ret, true);
     EXPECT_EQ(retDecode, true);
     EXPECT_STREQ(
-        messageReceived.message.request.message.user_call.request.functionCall.function_name,
+        messageReceived.message.request.message.user_call.request.function_call.function_name,
         m_functionName.c_str());
 }

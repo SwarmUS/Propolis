@@ -19,8 +19,8 @@ UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
         m_response = GenericResponseDTO(response.response.generic);
         break;
 
-    case UserCallResponse_functionCall_tag:
-        m_response = FunctionCallResponse(response.response.functionCall);
+    case UserCallResponse_function_call_tag:
+        m_response = FunctionCallResponse(response.response.function_call);
         break;
 
     default:
@@ -57,8 +57,8 @@ bool UserCallResponseDTO::serialize(UserCallResponse& response) const {
         return responseDTO->serialize(response.response.generic);
     }
     if (const auto* responseDTO = std::get_if<FunctionCallResponseDTO>(&m_response)) {
-        response.which_response = UserCallResponse_functionCall_tag;
-        return responseDTO->serialize(response.response.functionCall);
+        response.which_response = UserCallResponse_function_call_tag;
+        return responseDTO->serialize(response.response.function_call);
     }
 
     return false;

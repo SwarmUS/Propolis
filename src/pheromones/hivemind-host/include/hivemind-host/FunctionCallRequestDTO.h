@@ -2,6 +2,7 @@
 #define __FUNCTIONCALLREQUESTDTO_H_
 
 #include "FunctionCallArgumentDTO.h"
+#include "hivemind-host/PheromonesSettings.h"
 #include <array>
 #include <message.pb.h>
 #include <optional>
@@ -9,9 +10,9 @@
 class FunctionCallRequestDTO {
 
   public:
-    static constexpr uint8_t FUNCTION_CALL_ARGUMENTS_MAX_LENGTH = 16;
+    static constexpr uint8_t FUNCTION_CALL_ARGUMENTS_MAX_LENGTH = FUNCTION_CALL_ARGUMENT_COUNT;
 
-    static constexpr uint8_t FUNCTION_CALL_NAME_MAX_LENGTH = 32;
+    static constexpr uint8_t FUNCTION_CALL_NAME_MAX_LENGTH = FUNCTION_CALL_NAME_SIZE;
 
     FunctionCallRequestDTO(const FunctionCallRequest& request);
 
