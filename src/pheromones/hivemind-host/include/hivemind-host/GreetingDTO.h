@@ -14,7 +14,7 @@ class GreetingDTO {
     /**
      *@brief gets the id
      *@return the id */
-    uint32_t getId() const;
+    uint16_t getId() const;
 
     /**
      *@brief set the id

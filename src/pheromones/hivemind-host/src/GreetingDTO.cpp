@@ -4,7 +4,7 @@ GreetingDTO::GreetingDTO(const Greeting& greeting) : m_id(greeting.id) {}
 
 GreetingDTO::GreetingDTO(uint32_t id) : m_id(id) {}
 
-uint32_t GreetingDTO::getId() const { return m_id; }
+uint16_t GreetingDTO::getId() const { return m_id; }
 
 void GreetingDTO::setId(uint32_t id) { m_id = id; }
 
