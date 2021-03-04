@@ -9,17 +9,17 @@ class IdResponseDTO {
   public:
     IdResponseDTO(const IdResponse& resp);
 
-    IdResponseDTO(uint32_t id);
+    IdResponseDTO(uint16_t id);
 
     /**
      *@brief gets the id
      *@return the id */
-    uint32_t getId() const;
+    uint16_t getId() const;
 
     /**
      *@brief set the id
      *@param [in] id the id to set */
-    void setId(uint32_t id);
+    void setId(uint16_t id);
 
     /**
      *@brief serialize a IdResponse for nanopb, sets the fields properly before using
@@ -29,7 +29,7 @@ class IdResponseDTO {
     bool serialize(IdResponse& resp) const;
 
   private:
-    uint32_t m_id;
+    uint16_t m_id;
 };
 
 #endif // __IDRESPONSEDTO_H_

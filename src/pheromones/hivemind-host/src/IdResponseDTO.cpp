@@ -2,13 +2,13 @@
 
 IdResponseDTO::IdResponseDTO(const IdResponse& resp) : m_id(resp.id) {}
 
-IdResponseDTO::IdResponseDTO(uint32_t id) : m_id(id) {}
+IdResponseDTO::IdResponseDTO(uint16_t id) : m_id(id) {}
 
-uint32_t IdResponseDTO::getId() const { return m_id; }
+uint16_t IdResponseDTO::getId() const { return m_id; }
 
-void IdResponseDTO::setId(uint32_t id) { m_id = id; }
+void IdResponseDTO::setId(uint16_t id) { m_id = id; }
 
 bool IdResponseDTO::serialize(IdResponse& resp) const {
-    resp.id = m_id;
+    resp.id = (uint16_t)m_id;
     return true;
 }
