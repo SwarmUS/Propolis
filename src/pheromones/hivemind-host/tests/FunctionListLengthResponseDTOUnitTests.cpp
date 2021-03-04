@@ -20,5 +20,5 @@ TEST_F(FunctionListLengthResponseDTOFixture, FunctionListLengthResponseDTO_seria
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(fListResp.function_arrray_length, m_length);
+    EXPECT_EQ(fListResp.function_array_length, m_length);
 }
