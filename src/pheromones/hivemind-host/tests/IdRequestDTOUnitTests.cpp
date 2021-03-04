@@ -3,11 +3,11 @@
 
 class IdRequestDTOFixture : public testing::Test {
   public:
-    IdRequestDTO* m_idResquest;
+    IdRequestDTO* m_idRequest;
 
-    void SetUp() override { m_idResquest = new IdRequestDTO(); }
+    void SetUp() override { m_idRequest = new IdRequestDTO(); }
 
-    void TearDown() override { delete m_idResquest; }
+    void TearDown() override { delete m_idRequest; }
 };
 
 TEST_F(IdRequestDTOFixture, IdRequestDTO_serialize_valid) {
@@ -15,7 +15,7 @@ TEST_F(IdRequestDTOFixture, IdRequestDTO_serialize_valid) {
     IdRequest idReq;
 
     // Then
-    bool ret = m_idResquest->serialize(idReq);
+    bool ret = m_idRequest->serialize(idReq);
 
     // Expect
     EXPECT_TRUE(ret);
