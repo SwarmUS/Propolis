@@ -2,12 +2,13 @@
 #define __GENERICRESPONSEDTO_H_
 
 #include <message.pb.h>
+#include "hivemind-host/PheromonesSettings.h"
 
 enum class GenericResponseStatusDTO { Unknown, Ok, BadRequest, Error };
 
 class GenericResponseDTO {
   public:
-    static constexpr uint16_t DETAILS_MAX_LENGTH = 32;
+    static constexpr uint16_t DETAILS_MAX_LENGTH = GENERIC_RESPONSE_DETAILS_SIZE;
 
     GenericResponseDTO(const GenericResponse& response);
 
