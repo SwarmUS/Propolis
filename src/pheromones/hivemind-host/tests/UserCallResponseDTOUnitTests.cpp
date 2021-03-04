@@ -42,6 +42,35 @@ TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_Funtioncall_val
     EXPECT_EQ(resp.which_response, UserCallResponse_function_call_tag);
 }
 
+TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_functionList_valid) {
+    // Given
+    UserCallResponse resp;
+    m_response->setResponse(FunctionListLengthResponseDTO(1));
+
+    // Then
+    bool ret = m_response->serialize(resp);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(resp.destination, dtoToTarget(gc_dest));
+    EXPECT_EQ(resp.which_response, UserCallResponse_function_list_length_tag);
+}
+
+TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_functionDescription_valid) {
+    // Given
+    UserCallResponse resp;
+    m_response->setResponse(
+        FunctionDescriptionResponseDTO(GenericResponseDTO(GenericResponseStatusDTO::Ok, "")));
+
+    // Then
+    bool ret = m_response->serialize(resp);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(resp.destination, dtoToTarget(gc_dest));
+    EXPECT_EQ(resp.which_response, UserCallResponse_function_description_tag);
+}
+
 TEST_F(UserCallResponseDTOFixture, UserCallResponseDTO_serialize_invalid) {
     // Given
     UserCallResponse resp;

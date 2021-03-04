@@ -2,12 +2,23 @@
 
 UserCallResponseDTO::UserCallResponseDTO(UserCallTargetDTO source,
                                          UserCallTargetDTO destination,
+                                         const GenericResponseDTO& response) :
+    m_source(source), m_destination(destination), m_response(response) {}
+
+UserCallResponseDTO::UserCallResponseDTO(UserCallTargetDTO source,
+                                         UserCallTargetDTO destination,
                                          const FunctionCallResponseDTO& response) :
     m_source(source), m_destination(destination), m_response(response) {}
 
 UserCallResponseDTO::UserCallResponseDTO(UserCallTargetDTO source,
                                          UserCallTargetDTO destination,
-                                         const GenericResponseDTO& response) :
+                                         const FunctionListLengthResponseDTO& response) :
+
+    m_source(source), m_destination(destination), m_response(response) {}
+
+UserCallResponseDTO::UserCallResponseDTO(UserCallTargetDTO source,
+                                         UserCallTargetDTO destination,
+                                         const FunctionDescriptionResponseDTO& response) :
     m_source(source), m_destination(destination), m_response(response) {}
 
 UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
@@ -32,7 +43,11 @@ UserCallTargetDTO UserCallResponseDTO::getSource() const { return m_source; }
 
 UserCallTargetDTO UserCallResponseDTO::getDestination() const { return m_destination; }
 
-const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>&
+const std::variant<std::monostate,
+                   GenericResponseDTO,
+                   FunctionCallResponseDTO,
+                   FunctionListLengthResponseDTO,
+                   FunctionDescriptionResponseDTO>&
 UserCallResponseDTO::getResponse() const {
     return m_response;
 }
@@ -44,7 +59,11 @@ void UserCallResponseDTO::setDestination(UserCallTargetDTO destination) {
 }
 
 void UserCallResponseDTO::setResponse(
-    const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>& response) {
+    const std::variant<std::monostate,
+                       GenericResponseDTO,
+                       FunctionCallResponseDTO,
+                       FunctionListLengthResponseDTO,
+                       FunctionDescriptionResponseDTO>& response) {
     m_response = response;
 }
 
@@ -59,6 +78,14 @@ bool UserCallResponseDTO::serialize(UserCallResponse& response) const {
     if (const auto* responseDTO = std::get_if<FunctionCallResponseDTO>(&m_response)) {
         response.which_response = UserCallResponse_function_call_tag;
         return responseDTO->serialize(response.response.function_call);
+    }
+    if (const auto* responseDTO = std::get_if<FunctionListLengthResponseDTO>(&m_response)) {
+        response.which_response = UserCallResponse_function_list_length_tag;
+        return responseDTO->serialize(response.response.function_list_length);
+    }
+    if (const auto* responseDTO = std::get_if<FunctionDescriptionResponseDTO>(&m_response)) {
+        response.which_response = UserCallResponse_function_description_tag;
+        return responseDTO->serialize(response.response.function_description);
     }
 
     return false;
