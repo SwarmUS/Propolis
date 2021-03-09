@@ -14,7 +14,7 @@ class UserCallRequestDTOFixture : public testing::Test {
     void TearDown() override { delete m_request; }
 };
 
-TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_valid) {
+TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_functionCall_valid) {
     // Given
     UserCallRequest req;
 
@@ -26,6 +26,36 @@ TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_valid) {
     EXPECT_EQ(req.source, dtoToTarget(gc_src));
     EXPECT_EQ(req.destination, dtoToTarget(gc_dest));
     EXPECT_EQ(req.which_request, UserCallRequest_function_call_tag);
+}
+
+TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_functionListLength_valid) {
+    // Given
+    UserCallRequest req;
+    m_request->setRequest(FunctionListLengthRequestDTO());
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.source, dtoToTarget(gc_src));
+    EXPECT_EQ(req.destination, dtoToTarget(gc_dest));
+    EXPECT_EQ(req.which_request, UserCallRequest_function_list_length_tag);
+}
+
+TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_functionDescription_valid) {
+    // Given
+    UserCallRequest req;
+    m_request->setRequest(FunctionDescriptionRequestDTO(42));
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.source, dtoToTarget(gc_src));
+    EXPECT_EQ(req.destination, dtoToTarget(gc_dest));
+    EXPECT_EQ(req.which_request, UserCallRequest_function_description_tag);
 }
 
 TEST_F(UserCallRequestDTOFixture, UserCallRequestDTO_serialize_invalid) {

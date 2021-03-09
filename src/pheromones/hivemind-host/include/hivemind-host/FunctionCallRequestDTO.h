@@ -10,9 +10,9 @@
 class FunctionCallRequestDTO {
 
   public:
-    static constexpr uint8_t FUNCTION_CALL_ARGUMENTS_MAX_LENGTH = FUNCTION_CALL_ARGUMENT_COUNT;
+    static constexpr uint8_t FUNCTION_CALL_ARGUMENTS_MAX_LENGTH = FUNCTION_ARGUMENT_COUNT;
 
-    static constexpr uint8_t FUNCTION_CALL_NAME_MAX_LENGTH = FUNCTION_CALL_NAME_SIZE;
+    static constexpr uint8_t FUNCTION_CALL_NAME_MAX_LENGTH = FUNCTION_NAME_SIZE;
 
     FunctionCallRequestDTO(const FunctionCallRequest& request);
 

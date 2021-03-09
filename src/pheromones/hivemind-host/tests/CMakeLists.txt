@@ -1,9 +1,20 @@
 set(TEST_NAME test-propolis-hivemind-host)
  
 set(TEST_SOURCES
+    mocks/Utils.cpp
+
     FunctionCallArgumentDTOUnitTests.cpp
     FunctionCallRequestDTOUnitTests.cpp
     FunctionCallResponseDTOUnitTests.cpp
+
+    FunctionListLengthRequestDTOUnitTests.cpp
+    FunctionListLengthResponseDTOUnitTests.cpp
+    FunctionDescriptionDTOUnitTests.cpp
+    FunctionDescriptionArgumentDTOUnitTests.cpp
+    FunctionDescriptionArgumentTypeDTOUnitTests.cpp
+    FunctionDescriptionRequestDTOUnitTests.cpp
+    FunctionDescriptionResponseDTOUnitTests.cpp
+
     RequestDTOUnitTests.cpp
     ResponseDTOUnitTests.cpp
     GreetingDTOUnitTests.cpp
@@ -27,6 +38,7 @@ set(TEST_SOURCES
 )
 
 set(TEST_HEADERS
+    mocks/Utils.h
     mocks/ProtobufStreamInterfaceMock.h
     mocks/ProtobufStreamBufferInterfaceMock.h
 )

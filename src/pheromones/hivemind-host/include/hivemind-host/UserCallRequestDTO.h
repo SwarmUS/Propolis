@@ -2,6 +2,8 @@
 #define __USERCALLDTO_H_
 
 #include "FunctionCallRequestDTO.h"
+#include "FunctionDescriptionRequestDTO.h"
+#include "FunctionListLengthRequestDTO.h"
 #include "UserCallTargetDTO.h"
 #include <message.pb.h>
 #include <optional>
@@ -13,6 +15,14 @@ class UserCallRequestDTO {
     UserCallRequestDTO(UserCallTargetDTO source,
                        UserCallTargetDTO destination,
                        const FunctionCallRequestDTO& request);
+
+    UserCallRequestDTO(UserCallTargetDTO source,
+                       UserCallTargetDTO destination,
+                       const FunctionListLengthRequestDTO& request);
+
+    UserCallRequestDTO(UserCallTargetDTO source,
+                       UserCallTargetDTO destination,
+                       const FunctionDescriptionRequestDTO& request);
 
     /**
      *@brief get the destination
@@ -33,7 +43,11 @@ class UserCallRequestDTO {
      *
      *@return the stored request
      **/
-    const std::variant<std::monostate, FunctionCallRequestDTO>& getRequest() const;
+    const std::variant<std::monostate,
+                       FunctionCallRequestDTO,
+                       FunctionListLengthRequestDTO,
+                       FunctionDescriptionRequestDTO>&
+    getRequest() const;
 
     /**
      *@brief set the source
@@ -54,7 +68,10 @@ class UserCallRequestDTO {
      *
      *@param [in] request to set
      **/
-    void setRequest(const std::variant<std::monostate, FunctionCallRequestDTO>& request);
+    void setRequest(const std::variant<std::monostate,
+                                       FunctionCallRequestDTO,
+                                       FunctionListLengthRequestDTO,
+                                       FunctionDescriptionRequestDTO>& request);
 
     /**
      *@brief serialize a UserCallRequest for nanopb, sets the fields properly before using
@@ -70,7 +87,11 @@ class UserCallRequestDTO {
     UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
     UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
 
-    std::variant<std::monostate, FunctionCallRequestDTO> m_request;
+    std::variant<std::monostate,
+                 FunctionCallRequestDTO,
+                 FunctionListLengthRequestDTO,
+                 FunctionDescriptionRequestDTO>
+        m_request;
 };
 
 #endif // __USERCALLDTO_H_

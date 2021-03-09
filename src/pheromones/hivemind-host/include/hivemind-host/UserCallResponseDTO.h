@@ -2,6 +2,8 @@
 #define __USERCALLRESPONSEDTO_H_
 
 #include "FunctionCallResponseDTO.h"
+#include "FunctionDescriptionResponseDTO.h"
+#include "FunctionListLengthResponseDTO.h"
 #include "UserCallTargetDTO.h"
 #include <message.pb.h>
 #include <variant>
@@ -10,64 +12,71 @@ class UserCallResponseDTO {
   public:
     UserCallResponseDTO(UserCallTargetDTO source,
                         UserCallTargetDTO destination,
+                        const GenericResponseDTO& response);
+
+    UserCallResponseDTO(UserCallTargetDTO source,
+                        UserCallTargetDTO destination,
                         const FunctionCallResponseDTO& response);
 
     UserCallResponseDTO(UserCallTargetDTO source,
                         UserCallTargetDTO destination,
-                        const GenericResponseDTO& response);
+                        const FunctionListLengthResponseDTO& response);
+
+    UserCallResponseDTO(UserCallTargetDTO source,
+                        UserCallTargetDTO destination,
+                        const FunctionDescriptionResponseDTO& response);
 
     UserCallResponseDTO(const UserCallResponse& response);
 
     /**
      *@brief get the destination
-     *
      *@return the destination of the message
      **/
     UserCallTargetDTO getDestination() const;
 
     /**
      *@brief get the source
-     *
      *@return the source of the message
      **/
     UserCallTargetDTO getSource() const;
 
     /**
      *@brief gets the generic response
-     *
      *@return a reference to the response response
      */
-    const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>& getResponse()
-        const;
+    const std::variant<std::monostate,
+                       GenericResponseDTO,
+                       FunctionCallResponseDTO,
+                       FunctionListLengthResponseDTO,
+                       FunctionDescriptionResponseDTO>&
+    getResponse() const;
 
     /**
      *@brief set the source
-     *
      *@param [in] source the source to set
      **/
     void setSource(UserCallTargetDTO source);
 
     /**
      *@brief set the destination
-     *
      *@param [in] destination the destination to set
      **/
     void setDestination(UserCallTargetDTO destination);
 
     /**
      *@brief sets the generic response
-     *
      *@param [in] response the response to set
      */
-    void setResponse(
-        const std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO>& response);
+    void setResponse(const std::variant<std::monostate,
+                                        GenericResponseDTO,
+                                        FunctionCallResponseDTO,
+                                        FunctionListLengthResponseDTO,
+                                        FunctionDescriptionResponseDTO>& response);
 
     /**
      *@brief serialize a UserCallResponse for nanopb, sets the fields properly before using
      *pb_encode
-     *
      *@param [out] response the response to serialize
-     *
      *@return a boolean, true if successfull (fields were recognized) false if not
      */
     bool serialize(UserCallResponse& response) const;
@@ -76,7 +85,12 @@ class UserCallResponseDTO {
     UserCallTargetDTO m_source = UserCallTargetDTO::UNKNOWN;
     UserCallTargetDTO m_destination = UserCallTargetDTO::UNKNOWN;
 
-    std::variant<std::monostate, GenericResponseDTO, FunctionCallResponseDTO> m_response;
+    std::variant<std::monostate,
+                 GenericResponseDTO,
+                 FunctionCallResponseDTO,
+                 FunctionListLengthResponseDTO,
+                 FunctionDescriptionResponseDTO>
+        m_response;
 };
 
 #endif // __USERCALLRESPONSEDTO_H_

@@ -21,10 +21,18 @@ set(LIB_SOURCES
     src/FunctionCallArgumentDTO.cpp
     src/FunctionCallRequestDTO.cpp
     src/FunctionCallResponseDTO.cpp
+
+    src/FunctionListLengthRequestDTO.cpp
+    src/FunctionListLengthResponseDTO.cpp
+    src/FunctionDescriptionDTO.cpp
+    src/FunctionDescriptionArgumentDTO.cpp
+    src/FunctionDescriptionArgumentTypeDTO.cpp
+    src/FunctionDescriptionRequestDTO.cpp
+    src/FunctionDescriptionResponseDTO.cpp
+
     src/UserCallRequestDTO.cpp
     src/UserCallResponseDTO.cpp
     src/UserCallTargetDTO.cpp
-
 
     src/HiveMindApiRequestDTO.cpp
     src/HiveMindApiResponseDTO.cpp
@@ -41,6 +49,15 @@ set(LIB_HEADERS
     include/hivemind-host/FunctionCallArgumentDTO.h
     include/hivemind-host/FunctionCallRequestDTO.h
     include/hivemind-host/FunctionCallResponseDTO.h
+
+    include/hivemind-host/FunctionListLengthRequestDTO.h
+    include/hivemind-host/FunctionListLengthResponseDTO.h
+    include/hivemind-host/FunctionDescriptionDTO.h
+    include/hivemind-host/FunctionDescriptionArgumentDTO.h
+    include/hivemind-host/FunctionDescriptionArgumentTypeDTO.h
+    include/hivemind-host/FunctionDescriptionRequestDTO.h
+    include/hivemind-host/FunctionDescriptionResponseDTO.h
+
     include/hivemind-host/GenericResponseDTO.h
     include/hivemind-host/GreetingDTO.h
     include/hivemind-host/MessageDTO.h
