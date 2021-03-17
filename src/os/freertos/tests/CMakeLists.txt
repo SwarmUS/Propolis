@@ -22,6 +22,7 @@ target_link_libraries(${TEST_NAME}
 
         SwarmUS::Propolis::Tests::FreeRTOS
         SwarmUS::Propolis::OS::FreeRTOS
+        SwarmUS::Propolis::OS::Common
 )
 
 add_test(NAME ${TEST_NAME}

@@ -1,7 +1,7 @@
 #ifndef __LOCKGUARD_H_
 #define __LOCKGUARD_H_
 
-#include "Mutex.h"
+#include "IMutex.h"
 
 /**
  *@brief A class to guard mutex in the current scope, similar to std::lock_guard, locks the resource
