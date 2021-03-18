@@ -10,9 +10,6 @@ RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
     case Request_hive_api_tag:
         m_request = HiveMindApiRequest(request.message.hive_api);
         break;
-    case Request_swarm_api_tag:
-        m_request = SwarmApiRequest(request.message.swarm_api);
-        break;
     default:
         m_request = std::monostate();
     }
@@ -24,10 +21,8 @@ RequestDTO::RequestDTO(uint32_t id, const UserCallRequestDTO& request) :
 RequestDTO::RequestDTO(uint32_t id, const HiveMindApiRequestDTO& request) :
     m_id(id), m_request(request) {}
 
-RequestDTO::RequestDTO(uint32_t id, const SwarmApiRequestDTO& request) :
-    m_id(id), m_request(request) {}
 
-const std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO, SwarmApiRequestDTO>&
+const std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO>&
 RequestDTO::getRequest() const {
     return m_request;
 }
@@ -38,8 +33,7 @@ void RequestDTO::setId(uint32_t id) { m_id = id; }
 
 void RequestDTO::setRequest(const std::variant<std::monostate,
                                                UserCallRequestDTO,
-                                               HiveMindApiRequestDTO,
-                                               SwarmApiRequestDTO>& request) {
+                                               HiveMindApiRequestDTO>& request)  {
     m_request = request;
 }
 
@@ -54,11 +48,6 @@ bool RequestDTO::serialize(Request& request) const {
     if (const auto* hiveRequest = std::get_if<HiveMindApiRequestDTO>(&m_request)) {
         request.which_message = Request_hive_api_tag;
         return hiveRequest->serialize(request.message.hive_api);
-    }
-
-    if (const auto* swarmRequest = std::get_if<SwarmApiRequestDTO>(&m_request)) {
-        request.which_message = Request_swarm_api_tag;
-        return swarmRequest->serialize(request.message.swarm_api);
     }
 
     return false;

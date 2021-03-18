@@ -11,9 +11,6 @@ ResponseDTO::ResponseDTO(const Response& response) : m_id(response.id) {
     case Response_hive_api_tag:
         m_response = HiveMindApiResponse(response.message.hive_api);
         break;
-    case Response_swarm_api_tag:
-        m_response = SwarmApiResponse(response.message.swarm_api);
-        break;
     default:
         m_response = std::monostate();
     }
@@ -28,16 +25,12 @@ ResponseDTO::ResponseDTO(uint32_t id, const UserCallResponseDTO& response) :
 ResponseDTO::ResponseDTO(uint32_t id, const HiveMindApiResponseDTO& response) :
     m_id(id), m_response(response) {}
 
-ResponseDTO::ResponseDTO(uint32_t id, const SwarmApiResponseDTO& response) :
-    m_id(id), m_response(response) {}
-
 uint32_t ResponseDTO::getId() const { return m_id; }
 
 const std::variant<std::monostate,
                    GenericResponseDTO,
                    UserCallResponseDTO,
-                   HiveMindApiResponseDTO,
-                   SwarmApiResponseDTO>&
+                   HiveMindApiResponseDTO>&
 ResponseDTO::getResponse() const {
     return m_response;
 }
@@ -47,8 +40,7 @@ void ResponseDTO::setId(uint32_t id) { m_id = id; }
 void ResponseDTO::setResponse(const std::variant<std::monostate,
                                                  GenericResponseDTO,
                                                  UserCallResponseDTO,
-                                                 HiveMindApiResponseDTO,
-                                                 SwarmApiResponseDTO>& response) {
+                                                 HiveMindApiResponseDTO>& response) {
     m_response = response;
 }
 
@@ -67,10 +59,6 @@ bool ResponseDTO::serialize(Response& response) const {
     if (const auto* hiveResponse = std::get_if<HiveMindApiResponseDTO>(&m_response)) {
         response.which_message = Response_hive_api_tag;
         return hiveResponse->serialize(response.message.hive_api);
-    }
-    if (const auto* swarmResponse = std::get_if<SwarmApiResponseDTO>(&m_response)) {
-        response.which_message = Response_swarm_api_tag;
-        return swarmResponse->serialize(response.message.swarm_api);
     }
 
     return false;

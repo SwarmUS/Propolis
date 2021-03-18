@@ -35,8 +35,9 @@ set(TEST_SOURCES
 
     HiveMindApiRequestDTOUnitTests.cpp
     HiveMindApiResponseDTOUnitTests.cpp
-    SwarmApiRequestDTOUnitTests.cpp
-    SwarmApiResponseDTOUnitTests.cpp
+
+    IpRequestDTOUnitTests.cpp
+    NetworkApiDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS

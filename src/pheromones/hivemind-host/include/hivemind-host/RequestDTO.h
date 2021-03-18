@@ -2,7 +2,6 @@
 #define __REQUESTDTO_H_
 
 #include "HiveMindApiRequestDTO.h"
-#include "SwarmApiRequestDTO.h"
 #include "UserCallRequestDTO.h"
 #include <message.pb.h>
 
@@ -14,8 +13,6 @@ class RequestDTO {
     RequestDTO(uint32_t id, const UserCallRequestDTO& request);
 
     RequestDTO(uint32_t id, const HiveMindApiRequestDTO& request);
-
-    RequestDTO(uint32_t id, const SwarmApiRequestDTO& request);
 
     /**
      *@brief gets the id of the request
@@ -30,7 +27,7 @@ class RequestDTO {
      *@return a reference to the stored request
      */
     const std::
-        variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO, SwarmApiRequestDTO>&
+        variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO>&
         getRequest() const;
 
     /**
@@ -47,8 +44,7 @@ class RequestDTO {
      */
     void setRequest(const std::variant<std::monostate,
                                        UserCallRequestDTO,
-                                       HiveMindApiRequestDTO,
-                                       SwarmApiRequestDTO>& request);
+                                       HiveMindApiRequestDTO>& request);
 
     /**
      *@brief serialize a Request for nanopb, sets the fields properly before using
@@ -63,7 +59,7 @@ class RequestDTO {
   private:
     uint32_t m_id;
 
-    std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO, SwarmApiRequestDTO>
+    std::variant<std::monostate, UserCallRequestDTO, HiveMindApiRequestDTO>
         m_request;
 };
 
