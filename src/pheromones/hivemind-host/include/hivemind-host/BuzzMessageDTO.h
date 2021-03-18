@@ -9,25 +9,25 @@ class BuzzMessageDTO {
   public:
     static constexpr uint16_t PAYLOAD_MAX_SIZE = BUZZ_PAYLOAD_SIZE;
 
-    BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLenght);
+    BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLength);
 
     BuzzMessageDTO(const BuzzMessage& msg);
 
     /**
      *@brief get the payload length
      *@return the length of the payload*/
-    uint16_t getPayloadLength();
+    uint16_t getPayloadLength() const;
 
     /**
      *@brief get the payload array
      *@return a ref to the payload array*/
-    const std::array<uint8_t, PAYLOAD_MAX_SIZE>& getPayload();
+    const std::array<uint8_t, PAYLOAD_MAX_SIZE>& getPayload() const;
 
     /**
      *@brief set the payload
      *@param [in] payload a pointer to the payload to set
      *@param [in] payloadLength the length of the provided payload*/
-    void setPayload(const uint8_t* payload, uint16_t payloadLenght);
+    void setPayload(const uint8_t* payload, uint16_t payloadLength);
 
     /**
      *@brief serialize a BuzzMessage for nanopb, sets the fields properly before using

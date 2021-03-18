@@ -1,17 +1,21 @@
 #include "BuzzMessageDTO.h"
 
-BuzzMessageDTO::BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLenght) {
-    setPayload(payload, payloadLenght);
+BuzzMessageDTO::BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLength) {
+    setPayload(payload, payloadLength);
 }
 
 BuzzMessageDTO::BuzzMessageDTO(const BuzzMessage& msg) {
     setPayload(msg.payload.bytes, msg.payload.size);
 }
 
-uint16_t BuzzMessageDTO::getPayloadLength() { return m_payloadLength; }
+uint16_t BuzzMessageDTO::getPayloadLength() const { return m_payloadLength; }
 
-void BuzzMessageDTO::setPayload(const uint8_t* payload, uint16_t payloadLenght) {
-    m_payloadLength = payloadLenght < PAYLOAD_MAX_SIZE ? payloadLenght : PAYLOAD_MAX_SIZE;
+const std::array<uint8_t, BuzzMessageDTO::PAYLOAD_MAX_SIZE>& BuzzMessageDTO::getPayload() const {
+    return m_payload;
+}
+
+void BuzzMessageDTO::setPayload(const uint8_t* payload, uint16_t payloadLength) {
+    m_payloadLength = payloadLength < PAYLOAD_MAX_SIZE ? payloadLength : PAYLOAD_MAX_SIZE;
     for (uint16_t i = 0; i < m_payloadLength; i++) {
         m_payload[i] = payload[i];
     }
