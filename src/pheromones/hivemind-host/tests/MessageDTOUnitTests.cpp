@@ -67,6 +67,22 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_greeting_valid) {
     EXPECT_EQ(msg.which_message, Message_greeting_tag);
 }
 
+TEST_F(MessageDTOFixture, MessageDTO_serialize_buzz_valid) {
+    // Given
+    BuzzMessageDTO buzzMsg(NULL, 0);
+    Message msg;
+    m_message->setMessage(buzzMsg);
+
+    // Then
+    bool ret = m_message->serialize(msg);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.source_id, gc_sourceId);
+    EXPECT_EQ(msg.destination_id, gc_destinationId);
+    EXPECT_EQ(msg.which_message, Message_buzz_tag);
+}
+
 TEST_F(MessageDTOFixture, MessageDTO_serialize_invalid) {
     // Given
     Message msg;
