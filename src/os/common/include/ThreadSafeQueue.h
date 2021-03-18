@@ -4,12 +4,14 @@
 #include <LockGuard.h>
 #include <cpp-common/ICircularQueue.h>
 
+class Mutex;
+
 /**
  *@brief A queue that is thread safe */
 template <typename T>
 class ThreadSafeQueue : public ICircularQueue<T> {
   public:
-    ThreadSafeQueue(ICircularQueue<T>& queue) : m_queue(queue) {}
+    ThreadSafeQueue(ICircularQueue<T>& queue, IMutex& mutex) : m_queue(queue), m_mutex(mutex) {}
 
     ~ThreadSafeQueue() override = default;
 
