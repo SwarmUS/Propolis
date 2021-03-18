@@ -21,3 +21,4 @@ target_include_directories(${LIB_NAME}
 
 add_subdirectory(freertos)
 add_subdirectory(posix)
+add_subdirectory(common)

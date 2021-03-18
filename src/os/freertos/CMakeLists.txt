@@ -2,7 +2,6 @@ set(LIB_NAME "swarmus-propolis-os-freertos")
 set(LIB_ALIAS "SwarmUS::Propolis::OS::FreeRTOS")
 
 set(LIB_SOURCES
-    src/LockGuard.cpp
     src/Mutex.cpp
 )
 
@@ -13,7 +12,6 @@ set(LIB_HEADERS
     include/BaseTask.h
     include/BaseTask.tpp
 
-    include/LockGuard.h
     include/Mutex.h
 
     include/Task.h
