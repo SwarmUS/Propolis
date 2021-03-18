@@ -4,8 +4,6 @@
 #include <LockGuard.h>
 #include <cpp-common/ICircularQueue.h>
 
-class Mutex;
-
 /**
  *@brief A queue that is thread safe */
 template <typename T>
