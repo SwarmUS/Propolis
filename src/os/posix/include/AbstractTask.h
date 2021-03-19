@@ -2,7 +2,7 @@
 #define ABSTRACTTASK_H
 
 #include "IAbstractTask.h"
-#include "Macros.h"
+#include "OSMacros.h"
 #include <stdint.h>
 #include <thread>
 
@@ -14,6 +14,8 @@ class AbstractTask : public IAbstractTask {
     virtual ~AbstractTask();
 
     bool start() override;
+
+    TaskHandle_t getTaskHandle() override;
 
   protected:
     virtual void task() = 0;

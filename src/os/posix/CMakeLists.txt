@@ -14,7 +14,7 @@ set(LIB_HEADERS
 
     include/Mutex.h
 
-    include/Macros.h
+    include/OSMacros.h
     include/Task.h
 )
 

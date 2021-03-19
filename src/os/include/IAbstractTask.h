@@ -1,6 +1,8 @@
 #ifndef IABSTRACTTASK_H
 #define IABSTRACTTASK_H
 
+#include <OSMacros.h>
+
 /**
  *@brief An abstract class for creating an OS dependent task To use, create a class that inherit the
  *AbstractTask and write your task logic in an overload of the task member function and start the
@@ -17,6 +19,12 @@ class IAbstractTask {
      *multiple times)
      **/
     virtual bool start() = 0;
+
+    /**
+     * @brief Returns a handle on the running task
+     * @return The task handle
+     */
+    virtual TaskHandle_t getTaskHandle() = 0;
 };
 
 #endif // IABSTRACTTASK_H
