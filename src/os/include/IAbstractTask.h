@@ -1,7 +1,7 @@
 #ifndef IABSTRACTTASK_H
 #define IABSTRACTTASK_H
 
-#include <Macros.h>
+#include <OSMacros.h>
 
 /**
  *@brief An abstract class for creating an OS dependent task To use, create a class that inherit the

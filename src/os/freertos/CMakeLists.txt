@@ -15,7 +15,7 @@ set(LIB_HEADERS
     include/Mutex.h
 
     include/Task.h
-    include/Macros.h
+    include/OSMacros.h
 )
 
 add_library(${LIB_NAME} INTERFACE)

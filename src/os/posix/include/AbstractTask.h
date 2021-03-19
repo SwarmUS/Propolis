@@ -2,7 +2,7 @@
 #define ABSTRACTTASK_H
 
 #include "IAbstractTask.h"
-#include "Macros.h"
+#include "OSMacros.h"
 #include <stdint.h>
 #include <thread>
 
