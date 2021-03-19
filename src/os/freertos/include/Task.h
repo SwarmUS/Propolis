@@ -3,6 +3,8 @@
 
 #include "task.h"
 #include <stdint.h>
+#include "FreeRTOS.h"
+#include "task.h"
 
 namespace Task {
     inline void delay(TickType_t ms) { vTaskDelay(ms); }
