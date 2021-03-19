@@ -24,6 +24,16 @@ class BuzzMessageDTO {
     const std::array<uint8_t, PAYLOAD_MAX_SIZE>& getPayload() const;
 
     /**
+     *@brief get the raw payload, not const. Can be used to write on it, call setRawPayloadLength
+     *@return the raw value of the payload */
+    std::array<uint8_t, PAYLOAD_MAX_SIZE>& getRawPayload();
+
+    /**
+     *@brief set the payload length after a write with the raw payload
+     *@return true if the length is smaller than the max length, false otherwise*/
+    bool setRawPayloadLength(uint16_t payloadLength);
+
+    /**
      *@brief set the payload
      *@param [in] payload a pointer to the payload to set
      *@param [in] payloadLength the length of the provided payload*/
