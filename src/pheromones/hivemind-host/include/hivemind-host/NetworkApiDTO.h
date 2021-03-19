@@ -1,20 +1,20 @@
 #ifndef PROPOLIS_NETWORKAPIDTO_H
 #define PROPOLIS_NETWORKAPIDTO_H
 
-#include "IpRequestDTO.h"
+#include "IpDiscoveryDTO.h"
 #include <message.pb.h>
 #include <variant>
 
 /**
  * @brief Typedef to reuse for each possible type of the DTO
  */
-using NetworkApiDTOType = std::variant<std::monostate, IPRequestDTO>;
+using NetworkApiDTOType = std::variant<std::monostate, IPDiscoveryDTO>;
 
 class NetworkApiDTO {
   public:
     NetworkApiDTO(const NetworkAPI& networkApi);
 
-    NetworkApiDTO(const IPRequestDTO& ipRequest);
+    NetworkApiDTO(const IPDiscoveryDTO& ipRequest);
 
     /**
     *@brief default constructor, the network api call will be initialized as a monostate (ie, no ip)

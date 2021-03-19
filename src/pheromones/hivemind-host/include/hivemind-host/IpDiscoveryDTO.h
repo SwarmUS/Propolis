@@ -1,5 +1,5 @@
-#ifndef PROPOLIS_IPREQUESTDTO_H
-#define PROPOLIS_IPREQUESTDTO_H
+#ifndef PROPOLIS_IPDISCOVERYDTO_H
+#define PROPOLIS_IPDISCOVERYDTO_H
 
 #include <cstdint>
 #include <message.pb.h>
@@ -8,17 +8,17 @@
 /**
  * @brief Class to represent an IP request
  */
-class IPRequestDTO {
+class IPDiscoveryDTO {
 
   public:
-    IPRequestDTO(const IPRequest& ipRequest);
+    IPDiscoveryDTO(const IPDiscovery & ipDiscovery);
 
-    IPRequestDTO(uint32_t ipAddress);
+    IPDiscoveryDTO(uint32_t ipAddress);
 
     /**
     *@brief default constructor, the ip will be initialized as a monostate (ie, no ip)
     */
-    IPRequestDTO();
+    IPDiscoveryDTO();
 
     /**
      *@brief get the current stored ip address
@@ -41,11 +41,11 @@ class IPRequestDTO {
      *
      *@return a boolean, true if successfull (fields were recognized) false if not
      */
-    bool serialize(IPRequest& ipRequest) const;
+    bool serialize(IPDiscovery& ipDiscovery) const;
 
   private:
     std::variant<std::monostate, uint32_t> m_ip;
 };
 
 
-#endif // PROPOLIS_IPREQUESTDTO_H
+#endif // PROPOLIS_IPDISCOVERYDTO_H

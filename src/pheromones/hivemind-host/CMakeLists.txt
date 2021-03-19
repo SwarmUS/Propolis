@@ -39,7 +39,7 @@ set(LIB_SOURCES
     src/HiveMindApiRequestDTO.cpp
     src/HiveMindApiResponseDTO.cpp
 
-    src/IpRequestDTO.cpp
+        src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
         )
 
@@ -77,7 +77,7 @@ set(LIB_HEADERS
     include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/HiveMindApiRequestDTO.h
 
-    include/hivemind-host/IpRequestDTO.h
+        include/hivemind-host/IpDiscoveryDTO.h
     include/hivemind-host/NetworkApiDTO.h
         )
 

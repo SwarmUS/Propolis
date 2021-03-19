@@ -5,7 +5,7 @@ class NetworkApiDTOFixture : public testing::Test {
   public:
     NetworkApiDTO* m_networkApiCall;
 
-    void SetUp() override {m_networkApiCall = new NetworkApiDTO(IPRequestDTO(1));}
+    void SetUp() override {m_networkApiCall = new NetworkApiDTO(IPDiscoveryDTO(1));}
 
     void TearDown() override { delete m_networkApiCall; }
 };

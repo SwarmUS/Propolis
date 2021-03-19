@@ -36,7 +36,7 @@ set(TEST_SOURCES
     HiveMindApiRequestDTOUnitTests.cpp
     HiveMindApiResponseDTOUnitTests.cpp
 
-    IpRequestDTOUnitTests.cpp
+        IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
 )
 
