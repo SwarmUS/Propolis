@@ -20,6 +20,10 @@ class IAbstractTask {
      **/
     virtual bool start() = 0;
 
+    /**
+     * @brief Returns a handle on the running task
+     * @return The task handle
+     */
     virtual TaskHandle_t getTaskHandle() = 0;
 };
 
