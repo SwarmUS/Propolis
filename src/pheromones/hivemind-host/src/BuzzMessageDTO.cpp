@@ -21,7 +21,9 @@ void BuzzMessageDTO::setPayload(const uint8_t* payload, uint16_t payloadLength) 
     }
 }
 
-std::array<uint8_t, PAYLOAD_MAX_SIZE>& BuzzMessageDTO::getRawPayload() { return m_payload; }
+std::array<uint8_t, BuzzMessageDTO::PAYLOAD_MAX_SIZE>& BuzzMessageDTO::getRawPayload() {
+    return m_payload;
+}
 
 bool BuzzMessageDTO::setRawPayloadLength(uint16_t payloadLength) {
     m_payloadLength = payloadLength < PAYLOAD_MAX_SIZE ? payloadLength : PAYLOAD_MAX_SIZE;
