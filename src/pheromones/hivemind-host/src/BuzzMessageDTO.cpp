@@ -15,8 +15,8 @@ const std::array<uint8_t, BuzzMessageDTO::PAYLOAD_MAX_SIZE>& BuzzMessageDTO::get
 }
 
 void BuzzMessageDTO::setPayload(const uint8_t* payload, uint16_t payloadLength) {
-    m_payloadLength = payloadLength < PAYLOAD_MAX_SIZE ? payloadLength : PAYLOAD_MAX_SIZE;
-    memcpy(m_payload, payload, payloadLength);
+    m_payloadLength = payloadLength < m_payload.size() ? payloadLength : m_payload.size();
+    memcpy(m_payload.data(), payload, payloadLength);
 }
 
 std::array<uint8_t, BuzzMessageDTO::PAYLOAD_MAX_SIZE>& BuzzMessageDTO::getRawPayload() {
@@ -24,13 +24,13 @@ std::array<uint8_t, BuzzMessageDTO::PAYLOAD_MAX_SIZE>& BuzzMessageDTO::getRawPay
 }
 
 bool BuzzMessageDTO::setRawPayloadLength(uint16_t payloadLength) {
-    m_payloadLength = payloadLength < PAYLOAD_MAX_SIZE ? payloadLength : PAYLOAD_MAX_SIZE;
+    m_payloadLength = payloadLength < m_payload.size() ? payloadLength : m_payload.size();
     return m_payloadLength == payloadLength;
 }
 
 bool BuzzMessageDTO::serialize(BuzzMessage& msg) const {
     msg.payload.size = m_payloadLength;
-    memcpy(msg.payload.bytes, m_payload, m_payloadLength);
+    memcpy(msg.payload.bytes, m_payload.data(), m_payloadLength);
 
     return true;
 }
