@@ -12,8 +12,8 @@ NetworkApiDTO::NetworkApiDTO(const NetworkAPI& networkApi) {
     }
 }
 
-NetworkApiDTO::NetworkApiDTO(const IPDiscoveryDTO& ipRequest) {
-    m_apiCall = ipRequest;
+NetworkApiDTO::NetworkApiDTO(const IPDiscoveryDTO& ipDiscovery) {
+    m_apiCall = ipDiscovery;
 }
 
 const NetworkApiDTOType & NetworkApiDTO::getApiCall() const {
@@ -24,7 +24,7 @@ void NetworkApiDTO::setAPICall(const NetworkApiDTOType& apiCall) {
     m_apiCall = apiCall;
 }
 
-bool NetworkApiDTO::serialize(NetworkAPI& networkApiCall) {
+bool NetworkApiDTO::serialize(NetworkAPI& networkApiCall) const {
     if (const auto* ipRequest = std::get_if<IPDiscoveryDTO>(&m_apiCall)) {
         networkApiCall.which_call = NetworkAPI_ipRequest_tag;
         return ipRequest->serialize(networkApiCall.call.ipRequest);

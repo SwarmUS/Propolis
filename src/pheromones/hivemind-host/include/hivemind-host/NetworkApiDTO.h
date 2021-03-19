@@ -14,7 +14,7 @@ class NetworkApiDTO {
   public:
     NetworkApiDTO(const NetworkAPI& networkApi);
 
-    NetworkApiDTO(const IPDiscoveryDTO& ipRequest);
+    NetworkApiDTO(const IPDiscoveryDTO& ipDiscovery);
 
     /**
     *@brief default constructor, the network api call will be initialized as a monostate (ie, no ip)
@@ -37,7 +37,7 @@ class NetworkApiDTO {
     *pb_encode
     *@param [out] request the NetworkAPI call to serialize
     *@return a boolean, true if successfull (fields were recognized) false if not */
-    bool serialize(NetworkAPI& networkApiCall);
+    bool serialize(NetworkAPI& networkApiCall) const;
 
   private:
     NetworkApiDTOType m_apiCall;

@@ -38,11 +38,14 @@ MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const Greeting
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const BuzzMessageDTO& msg) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(msg) {}
 
+MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const NetworkApiDTO& networkAPI) :
+    m_sourceId(sourceId), m_destinationId(destinationId), m_message(networkAPI) {}
+
 uint32_t MessageDTO::getSourceId() const { return m_sourceId; }
 
 uint32_t MessageDTO::getDestinationId() const { return m_destinationId; }
 
-const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO>&
+const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
 MessageDTO::getMessage() const {
     return m_message;
 }
@@ -52,7 +55,7 @@ void MessageDTO::setSourceId(uint32_t id) { m_sourceId = id; }
 void MessageDTO::setDestinationId(uint32_t id) { m_destinationId = id; }
 
 void MessageDTO::setMessage(
-    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO>&
+    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
         message) {
     m_message = message;
 }
@@ -79,6 +82,11 @@ bool MessageDTO::serialize(Message& message) const {
     if (const auto* buzzMsg = std::get_if<BuzzMessageDTO>(&m_message)) {
         message.which_message = Message_buzz_tag;
         return buzzMsg->serialize(message.message.buzz);
+    }
+
+    if (const auto* networkAPI = std::get_if<NetworkApiDTO>(&m_message)) {
+        message.which_message = Message_network_tag;
+        return networkAPI->serialize(message.message.network);
     }
 
     return false;
