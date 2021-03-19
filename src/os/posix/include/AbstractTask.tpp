@@ -30,7 +30,7 @@ void AbstractTask<stackSize>::wrapper(void* params) {
 }
 
 template <unsigned int stackSize>
-TaskHandle_t AbstractTask<stackSize>::getTaskHandle(){
+TaskHandle_t AbstractTask<stackSize>::getTaskHandle() {
     return 0;
 }
 
