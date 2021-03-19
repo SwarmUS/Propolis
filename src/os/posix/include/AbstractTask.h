@@ -15,6 +15,8 @@ class AbstractTask : public IAbstractTask {
 
     bool start() override;
 
+    TaskHandle_t getTaskHandle() override;
+
   protected:
     virtual void task() = 0;
 

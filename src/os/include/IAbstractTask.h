@@ -17,6 +17,8 @@ class IAbstractTask {
      *multiple times)
      **/
     virtual bool start() = 0;
+
+    virtual TaskHandle_t getTaskHandle() = 0;
 };
 
 #endif // IABSTRACTTASK_H
