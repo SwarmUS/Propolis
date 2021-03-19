@@ -1,6 +1,7 @@
 #ifndef __MESSAGEDTO_H_
 #define __MESSAGEDTO_H_
 
+#include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
@@ -20,57 +21,46 @@ class MessageDTO {
 
     MessageDTO(uint32_t sourceId, uint32_t destinationId, const GreetingDTO& greeting);
 
+    MessageDTO(uint32_t sourceId, uint32_t destinationId, const BuzzMessageDTO& msg);
+
     /**
      *@brief gets the source id
-     *
-     *@return the source id
-     */
+     *@return the source id */
     uint32_t getSourceId() const;
 
     /**
      *@brief gets the destination id
-     *
-     *@return the destination id
-     */
+     *@return the destination id */
     uint32_t getDestinationId() const;
 
     /**
      *@brief gets the message currently stored
-     *
-     *@return a reference to the stored message
-     */
-    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO>& getMessage() const;
+     *@return a reference to the stored message */
+    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO>&
+    getMessage() const;
 
     /**
      *@brief set the source id
-
-     *@param [in] id the new id
-     */
+     *@param [in] id the new id */
     void setSourceId(uint32_t id);
 
     /**
      *@brief set the destination id
-
-     *@param [in] id the new id
-     */
+     *@param [in] id the new id */
     void setDestinationId(uint32_t id);
 
     /**
      *@brief set the message type
-
-     *@param [in] message the type of message to set
-     */
+     *@param [in] message the type of message to set */
     void setMessage(
-        const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO>& message);
+        const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO>&
+            message);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
      *pb_encode
-     *
      *@param [out] message the message to serialize
-     *
-     *@return a boolean, true if successfull (fields were recognized) false if not
-     */
+     *@return a boolean, true if successfull (fields were recognized) false if not */
     bool serialize(Message& message) const;
 
   private:
@@ -78,7 +68,7 @@ class MessageDTO {
 
     uint32_t m_destinationId;
 
-    std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO> m_message;
+    std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO> m_message;
 };
 
 #endif // __MESSAGEDTO_H_

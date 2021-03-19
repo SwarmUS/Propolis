@@ -15,6 +15,8 @@ set(LIB_SOURCES
     src/GenericResponseDTO.cpp
     src/GreetingDTO.cpp
 
+    src/BuzzMessageDTO.cpp
+
     src/IdRequestDTO.cpp
     src/IdResponseDTO.cpp
 
@@ -49,6 +51,8 @@ set(LIB_HEADERS
     include/hivemind-host/FunctionCallArgumentDTO.h
     include/hivemind-host/FunctionCallRequestDTO.h
     include/hivemind-host/FunctionCallResponseDTO.h
+
+    include/hivemind-host/BuzzMessageDTO.h
 
     include/hivemind-host/FunctionListLengthRequestDTO.h
     include/hivemind-host/FunctionListLengthResponseDTO.h

@@ -24,6 +24,8 @@ set(TEST_SOURCES
     IdResponseDTOUnitTests.cpp
     UserCallResponseDTOUnitTests.cpp
     UserCallTargetDTOUnitTests.cpp
+    
+    BuzzMessageDTOUnitTests.cpp
   
     HiveMindHostSerializerUnitTests.cpp
     HiveMindHostSerializerIntegrationTests.cpp
