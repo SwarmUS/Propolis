@@ -32,6 +32,6 @@ void AbstractTask<stackSize>::wrapper(void* params) {
 template <unsigned int stackSize>
 TaskHandle_t AbstractTask<stackSize>::getTaskHandle(){
     return 0;
-};
+}
 
 #endif // ABSTRACTTASK_TPP
