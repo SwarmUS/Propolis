@@ -10,7 +10,7 @@ set(LIB_HEADERS
     include/cpp-common/CircularQueue.h
     include/cpp-common/CircularQueue.tpp
     include/cpp-common/CircularQueueStack.h
-)
+    include/cpp-common/CppUtils.h)
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
 add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
