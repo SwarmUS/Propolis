@@ -2,6 +2,7 @@
 #define __TASK_H__
 
 #include <stdint.h>
+#include "task.h"
 
 namespace Task {
     inline void delay(TickType_t ms) { vTaskDelay(ms); }
