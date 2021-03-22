@@ -1,4 +1,5 @@
 #include "FunctionDescriptionDTO.h"
+#include <cstdio>
 
 FunctionDescriptionDTO::FunctionDescriptionDTO(const FunctionDescription& desc) :
     m_argumentsLength(desc.arguments_description_count) {
