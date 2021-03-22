@@ -1,7 +1,6 @@
 #ifndef __TASK_H__
 #define __TASK_H__
 
-#include "task.h"
 #include <stdint.h>
 #include "FreeRTOS.h"
 #include "task.h"
