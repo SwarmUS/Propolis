@@ -4,7 +4,6 @@
 #include <errno.h>
 #include <stdint.h>
 #include <thread>
-#
 #include <time.h>
 
 namespace Task {
