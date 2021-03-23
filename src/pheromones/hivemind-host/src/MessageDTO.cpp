@@ -21,6 +21,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = BuzzMessage(message.message.buzz);
         break;
 
+    case Message_network_tag:
+        m_message = NetworkApiDTO(message.message.network);
+        break;
+
     default:
         m_message = std::monostate();
     }
