@@ -29,7 +29,7 @@ class IPDiscoveryDTO {
     /**
      *@brief set the stored ip address
      *
-     *@param [in] arg the value to set
+     *@param [in] ip the value to set
      */
     void setIP(const std::variant<std::monostate, uint32_t>& ip);
 
@@ -37,7 +37,7 @@ class IPDiscoveryDTO {
      *@brief serialize a IpRequest for nanopb, sets the fields properly before using
      *pb_encode
      *
-     *@param [out] argument the Ip request to serialize
+     *@param [out] ipDiscovery the Ip request to serialize
      *
      *@return a boolean, true if successfull (fields were recognized) false if not
      */

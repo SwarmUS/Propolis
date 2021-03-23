@@ -20,9 +20,9 @@ void IPDiscoveryDTO::setIP(const std::variant<std::monostate, uint32_t>& ip) {
     m_ip = ip;
 }
 
-bool IPDiscoveryDTO::serialize(IPDiscovery & ipRequest) const {
+bool IPDiscoveryDTO::serialize(IPDiscovery & ipDiscovery) const {
     if (const auto* ip = std::get_if<uint32_t>(&m_ip)) {
-        ipRequest.ip = *ip;
+        ipDiscovery.ip = *ip;
         return true;
     }
 

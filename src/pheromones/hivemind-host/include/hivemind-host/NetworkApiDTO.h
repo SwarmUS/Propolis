@@ -35,7 +35,7 @@ class NetworkApiDTO {
     /**
     *@brief serialize a NetworkAPI for nanopb, sets the fields properly before using
     *pb_encode
-    *@param [out] request the NetworkAPI call to serialize
+    *@param [out] networkApiCall the NetworkAPI call to serialize
     *@return a boolean, true if successfull (fields were recognized) false if not */
     bool serialize(NetworkAPI& networkApiCall) const;
 
