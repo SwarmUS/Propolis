@@ -39,9 +39,9 @@ set(LIB_SOURCES
     src/HiveMindApiRequestDTO.cpp
     src/HiveMindApiResponseDTO.cpp
 
-        src/IpDiscoveryDTO.cpp
+    src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
-        )
+)
 
 set(LIB_HEADERS
     include/hivemind-host/HiveMindHostDeserializer.h
@@ -77,9 +77,9 @@ set(LIB_HEADERS
     include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/HiveMindApiRequestDTO.h
 
-        include/hivemind-host/IpDiscoveryDTO.h
+    include/hivemind-host/IpDiscoveryDTO.h
     include/hivemind-host/NetworkApiDTO.h
-        )
+)
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
 add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
