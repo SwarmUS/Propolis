@@ -19,7 +19,7 @@ TEST_F(NetworkApiDTOFixture, NetworkApiDTO_serialize_succes) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(apiCall.which_call, NetworkAPI_ipRequest_tag);
+    EXPECT_EQ(apiCall.which_call, NetworkAPI_ipDiscovery_tag);
 }
 
 

@@ -4,8 +4,8 @@ NetworkApiDTO::NetworkApiDTO() { m_apiCall = std::monostate();}
 
 NetworkApiDTO::NetworkApiDTO(const NetworkAPI& networkApi) {
     switch (networkApi.which_call) {
-    case NetworkAPI_ipRequest_tag:
-        m_apiCall = IPDiscoveryDTO(networkApi.call.ipRequest);
+    case NetworkAPI_ipDiscovery_tag:
+        m_apiCall = IPDiscoveryDTO(networkApi.call.ipDiscovery);
         break;
     default:
         m_apiCall = std::monostate();
@@ -26,8 +26,8 @@ void NetworkApiDTO::setAPICall(const NetworkApiDTOType& apiCall) {
 
 bool NetworkApiDTO::serialize(NetworkAPI& networkApiCall) const {
     if (const auto* ipRequest = std::get_if<IPDiscoveryDTO>(&m_apiCall)) {
-        networkApiCall.which_call = NetworkAPI_ipRequest_tag;
-        return ipRequest->serialize(networkApiCall.call.ipRequest);
+        networkApiCall.which_call = NetworkAPI_ipDiscovery_tag;
+        return ipRequest->serialize(networkApiCall.call.ipDiscovery);
     }
     return false;
 }
