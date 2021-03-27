@@ -9,14 +9,14 @@
 
 class HiveMindHostSerializer : public IHiveMindHostSerializer {
   public:
-    HiveMindHostSerializer(IProtobufStream& stream);
+    HiveMindHostSerializer(IProtobufOutputStream& stream);
 
     ~HiveMindHostSerializer() override = default;
 
     bool serializeToStream(const MessageDTO& message) override;
 
   private:
-    IProtobufStream& m_stream;
+    IProtobufOutputStream& m_stream;
 
     static bool streamCallback(pb_ostream_t* stream, const pb_byte_t* buf, size_t count);
 };

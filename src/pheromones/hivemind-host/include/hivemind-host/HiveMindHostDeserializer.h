@@ -7,14 +7,14 @@
 
 class HiveMindHostDeserializer : public IHiveMindHostDeserializer {
   public:
-    HiveMindHostDeserializer(IProtobufStream& stream);
+    HiveMindHostDeserializer(IProtobufInputStream& stream);
 
     ~HiveMindHostDeserializer() override = default;
 
     bool deserializeFromStream(MessageDTO& message) override;
 
   private:
-    IProtobufStream& m_stream;
+    IProtobufInputStream& m_stream;
 
     static bool streamCallback(pb_istream_t* stream, pb_byte_t* buf, size_t count);
 };
