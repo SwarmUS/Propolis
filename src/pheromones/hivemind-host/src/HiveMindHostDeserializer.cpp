@@ -2,7 +2,8 @@
 #include <message.pb.h>
 #include <pb_decode.h>
 
-HiveMindHostDeserializer::HiveMindHostDeserializer(IProtobufInputStream& stream) : m_stream(stream) {}
+HiveMindHostDeserializer::HiveMindHostDeserializer(IProtobufInputStream& stream) :
+    m_stream(stream) {}
 
 bool HiveMindHostDeserializer::deserializeFromStream(MessageDTO& message) {
     Message msgReceive = Message_init_default;
