@@ -21,6 +21,12 @@ class IAbstractTask {
     virtual bool start() = 0;
 
     /**
+     *@brief check if the task is currently running
+     *
+     *@return true if the task is running, false if not */
+    virtual bool isRunning() = 0;
+
+    /**
      * @brief Returns a handle on the running task
      * @return The task handle
      */
