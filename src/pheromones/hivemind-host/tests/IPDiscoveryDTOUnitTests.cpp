@@ -20,15 +20,3 @@ TEST_F(IPDiscoveryDTOFixture, IpDiscovery_serialize_valid) {
     // Expect
     EXPECT_TRUE(ret);
 }
-
-TEST_F(IPDiscoveryDTOFixture, IpDiscovery_serialize_failure) {
-    // Given
-    IPDiscovery ipDiscovery;
-
-    // Then
-    m_ipRequest->setIP(std::monostate());
-    bool ret = m_ipRequest->serialize(ipDiscovery);
-
-    // Expect
-    EXPECT_FALSE(ret);
-}
