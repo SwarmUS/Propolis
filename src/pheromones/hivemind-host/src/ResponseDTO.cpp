@@ -27,10 +27,7 @@ ResponseDTO::ResponseDTO(uint32_t id, const HiveMindApiResponseDTO& response) :
 
 uint32_t ResponseDTO::getId() const { return m_id; }
 
-const std::variant<std::monostate,
-                   GenericResponseDTO,
-                   UserCallResponseDTO,
-                   HiveMindApiResponseDTO>&
+const std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO, HiveMindApiResponseDTO>&
 ResponseDTO::getResponse() const {
     return m_response;
 }

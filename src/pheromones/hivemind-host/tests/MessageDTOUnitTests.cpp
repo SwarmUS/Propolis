@@ -83,7 +83,6 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_buzz_valid) {
     EXPECT_EQ(msg.which_message, Message_buzz_tag);
 }
 
-
 TEST_F(MessageDTOFixture, MessageDTO_serialize_networkAPI_valid) {
     // Given
     NetworkApiDTO networkApiDto(IPDiscoveryDTO(1));

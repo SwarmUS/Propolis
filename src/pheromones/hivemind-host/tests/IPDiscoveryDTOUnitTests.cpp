@@ -5,7 +5,7 @@ class IPDiscoveryDTOFixture : public testing::Test {
   public:
     IPDiscoveryDTO* m_ipRequest;
 
-    void SetUp() override {m_ipRequest = new IPDiscoveryDTO(1); }
+    void SetUp() override { m_ipRequest = new IPDiscoveryDTO(1); }
 
     void TearDown() override { delete m_ipRequest; }
 };
@@ -20,7 +20,6 @@ TEST_F(IPDiscoveryDTOFixture, IpDiscovery_serialize_valid) {
     // Expect
     EXPECT_TRUE(ret);
 }
-
 
 TEST_F(IPDiscoveryDTOFixture, IpDiscovery_serialize_failure) {
     // Given

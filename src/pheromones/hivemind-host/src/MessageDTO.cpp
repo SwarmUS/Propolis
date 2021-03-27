@@ -49,8 +49,9 @@ uint32_t MessageDTO::getSourceId() const { return m_sourceId; }
 
 uint32_t MessageDTO::getDestinationId() const { return m_destinationId; }
 
-const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
-MessageDTO::getMessage() const {
+const std::
+    variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
+    MessageDTO::getMessage() const {
     return m_message;
 }
 
@@ -58,9 +59,12 @@ void MessageDTO::setSourceId(uint32_t id) { m_sourceId = id; }
 
 void MessageDTO::setDestinationId(uint32_t id) { m_destinationId = id; }
 
-void MessageDTO::setMessage(
-    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
-        message) {
+void MessageDTO::setMessage(const std::variant<std::monostate,
+                                               RequestDTO,
+                                               ResponseDTO,
+                                               GreetingDTO,
+                                               BuzzMessageDTO,
+                                               NetworkApiDTO>& message) {
     m_message = message;
 }
 

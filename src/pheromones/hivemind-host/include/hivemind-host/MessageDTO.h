@@ -3,9 +3,9 @@
 
 #include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
+#include "NetworkApiDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
-#include "NetworkApiDTO.h"
 #include <cstdint>
 #include <message.pb.h>
 #include <variant>
@@ -39,7 +39,12 @@ class MessageDTO {
     /**
      *@brief gets the message currently stored
      *@return a reference to the stored message */
-    const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
+    const std::variant<std::monostate,
+                       RequestDTO,
+                       ResponseDTO,
+                       GreetingDTO,
+                       BuzzMessageDTO,
+                       NetworkApiDTO>&
     getMessage() const;
 
     /**
@@ -55,9 +60,12 @@ class MessageDTO {
     /**
      *@brief set the message type
      *@param [in] message the type of message to set */
-    void setMessage(
-        const std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
-            message);
+    void setMessage(const std::variant<std::monostate,
+                                       RequestDTO,
+                                       ResponseDTO,
+                                       GreetingDTO,
+                                       BuzzMessageDTO,
+                                       NetworkApiDTO>& message);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
@@ -71,7 +79,9 @@ class MessageDTO {
 
     uint32_t m_destinationId;
 
-    std::variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO> m_message;
+    std::
+        variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>
+            m_message;
 };
 
 #endif // __MESSAGEDTO_H_

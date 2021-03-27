@@ -17,8 +17,9 @@ class NetworkApiDTO {
     NetworkApiDTO(const IPDiscoveryDTO& ipDiscovery);
 
     /**
-    *@brief default constructor, the network api call will be initialized as a monostate (ie, no ip)
-    */
+     *@brief default constructor, the network api call will be initialized as a monostate (ie, no
+     *ip)
+     */
     NetworkApiDTO();
 
     /**
@@ -30,18 +31,17 @@ class NetworkApiDTO {
     /**
      *@brief set the API call
      */
-     void setAPICall(const NetworkApiDTOType& apiCall);
+    void setAPICall(const NetworkApiDTOType& apiCall);
 
     /**
-    *@brief serialize a NetworkAPI for nanopb, sets the fields properly before using
-    *pb_encode
-    *@param [out] networkApiCall the NetworkAPI call to serialize
-    *@return a boolean, true if successfull (fields were recognized) false if not */
+     *@brief serialize a NetworkAPI for nanopb, sets the fields properly before using
+     *pb_encode
+     *@param [out] networkApiCall the NetworkAPI call to serialize
+     *@return a boolean, true if successfull (fields were recognized) false if not */
     bool serialize(NetworkAPI& networkApiCall) const;
 
   private:
     NetworkApiDTOType m_apiCall;
 };
-
 
 #endif // PROPOLIS_NETWORKAPIDTO_H

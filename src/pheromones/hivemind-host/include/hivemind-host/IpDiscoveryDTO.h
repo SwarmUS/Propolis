@@ -11,13 +11,13 @@
 class IPDiscoveryDTO {
 
   public:
-    IPDiscoveryDTO(const IPDiscovery & ipDiscovery);
+    IPDiscoveryDTO(const IPDiscovery& ipDiscovery);
 
     IPDiscoveryDTO(uint32_t ipAddress);
 
     /**
-    *@brief default constructor, the ip will be initialized as a monostate (ie, no ip)
-    */
+     *@brief default constructor, the ip will be initialized as a monostate (ie, no ip)
+     */
     IPDiscoveryDTO();
 
     /**
@@ -46,6 +46,5 @@ class IPDiscoveryDTO {
   private:
     std::variant<std::monostate, uint32_t> m_ip;
 };
-
 
 #endif // PROPOLIS_IPDISCOVERYDTO_H
