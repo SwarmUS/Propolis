@@ -29,12 +29,7 @@ bool HiveMindHostAccumulatorSerializer::streamCallback(pb_ostream_t* stream,
     if (serializer->m_messageLength + count >= g_maxBufferSize) {
         return false;
     }
-
-    uint32_t index = 0;
-    if (serializer->m_messageLength != 0) {
-        index = serializer->m_messageLength - 1;
-    }
-    std::memcpy(&serializer->m_data[index], buf, count);
+    std::memcpy(&serializer->m_data[serializer->m_messageLength], buf, count);
     serializer->m_messageLength += count;
     return true;
 }

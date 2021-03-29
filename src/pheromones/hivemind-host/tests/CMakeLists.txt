@@ -28,9 +28,12 @@ set(TEST_SOURCES
     BuzzMessageDTOUnitTests.cpp
   
     HiveMindHostSerializerUnitTests.cpp
+    HiveMindHostAccumulatorSerializerUnitTests.cpp
     HiveMindHostSerializerIntegrationTests.cpp
+    HiveMindHostAccumulatorSerializerIntegrationTests.cpp
 
     HiveMindHostDeserializerUnitTests.cpp
+
     HiveMindHostDeserializerIntegrationTests.cpp
 
     HiveMindApiRequestDTOUnitTests.cpp
