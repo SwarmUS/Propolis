@@ -42,20 +42,6 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
     EXPECT_EQ(req.which_message, Request_hive_api_tag);
 }
 
-TEST_F(RequestDTOFixture, RequestDTO_serialize_swarm_valid) {
-    // Given
-    Request req;
-    m_request->setRequest(SwarmApiRequestDTO(IdRequestDTO()));
-
-    // Then
-    bool ret = m_request->serialize(req);
-
-    // Expect
-    EXPECT_TRUE(ret);
-    EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_swarm_api_tag);
-}
-
 TEST_F(RequestDTOFixture, RequestDTO_serialize_invalid) {
     // Given
     Request req;

@@ -38,8 +38,9 @@ set(LIB_SOURCES
 
     src/HiveMindApiRequestDTO.cpp
     src/HiveMindApiResponseDTO.cpp
-    src/SwarmApiRequestDTO.cpp
-    src/SwarmApiResponseDTO.cpp
+
+    src/IpDiscoveryDTO.cpp
+    src/NetworkApiDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -75,8 +76,9 @@ set(LIB_HEADERS
 
     include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/HiveMindApiRequestDTO.h
-    include/hivemind-host/SwarmApiResponseDTO.h
-    include/hivemind-host/SwarmApiRequestDTO.h
+
+    include/hivemind-host/IpDiscoveryDTO.h
+    include/hivemind-host/NetworkApiDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

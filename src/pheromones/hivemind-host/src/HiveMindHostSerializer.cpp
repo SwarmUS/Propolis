@@ -1,7 +1,7 @@
 #include "HiveMindHostSerializer.h"
 #include <pb_encode.h>
 
-HiveMindHostSerializer::HiveMindHostSerializer(IProtobufStream& stream) : m_stream(stream) {}
+HiveMindHostSerializer::HiveMindHostSerializer(IProtobufOutputStream& stream) : m_stream(stream) {}
 
 bool HiveMindHostSerializer::serializeToStream(const MessageDTO& message) {
 
