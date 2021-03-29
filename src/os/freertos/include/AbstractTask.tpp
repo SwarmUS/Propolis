@@ -28,6 +28,11 @@ bool AbstractTask<stackSize>::start() {
 }
 
 template <unsigned int stackSize>
+bool AbstractTask<stackSize>::isRunning() {
+    return m_taskRunning;
+}
+
+template <unsigned int stackSize>
 void AbstractTask<stackSize>::wrapper(void* params) {
     AbstractTask* task = static_cast<AbstractTask*>(params);
     task->task();
