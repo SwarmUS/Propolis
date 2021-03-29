@@ -23,7 +23,8 @@ class HiveMindHostAccumulatorSerializerIntegrationFixture : public testing::Test
     void TearDown() override { delete m_serializer; }
 };
 
-TEST_F(HiveMindHostAccumulatorSerializerIntegrationFixture, HiveMindSerializer_integration_valid_message) {
+TEST_F(HiveMindHostAccumulatorSerializerIntegrationFixture,
+       HiveMindSerializer_integration_valid_message) {
     // Given
 
     // Then
