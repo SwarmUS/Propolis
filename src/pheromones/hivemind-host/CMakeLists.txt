@@ -8,6 +8,7 @@ configure_file(include/hivemind-host/PheromonesSettings.in.h include/hivemind-ho
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
     src/HiveMindHostSerializer.cpp
+    src/HiveMindHostAccumulatorSerializer.cpp
 
     src/MessageDTO.cpp
     src/ResponseDTO.cpp
@@ -48,6 +49,7 @@ set(LIB_HEADERS
     include/hivemind-host/IHiveMindHostDeserializer.h
     include/hivemind-host/HiveMindHostSerializer.h
     include/hivemind-host/IHiveMindHostSerializer.h
+    include/hivemind-host/HiveMindHostAccumulatorSerializer.h
 
     include/hivemind-host/FunctionCallArgumentDTO.h
     include/hivemind-host/FunctionCallRequestDTO.h
