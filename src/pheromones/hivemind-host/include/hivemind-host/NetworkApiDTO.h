@@ -17,12 +17,6 @@ class NetworkApiDTO {
     NetworkApiDTO(const IPDiscoveryDTO& ipDiscovery);
 
     /**
-     *@brief default constructor, the network api call will be initialized as a monostate (ie, no
-     *ip)
-     */
-    NetworkApiDTO();
-
-    /**
      *@brief get the API call stored
      *@return the stored API call
      */

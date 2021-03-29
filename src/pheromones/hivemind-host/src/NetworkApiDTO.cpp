@@ -1,7 +1,5 @@
 #include "NetworkApiDTO.h"
 
-NetworkApiDTO::NetworkApiDTO() { m_apiCall = std::monostate(); }
-
 NetworkApiDTO::NetworkApiDTO(const NetworkAPI& networkApi) {
     switch (networkApi.which_call) {
     case NetworkAPI_ipDiscovery_tag:
