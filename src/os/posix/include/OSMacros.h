@@ -5,7 +5,7 @@
 #include <thread>
 
 typedef unsigned long UBaseType_t;
-typedef std::thread TaskHandle_t;
+typedef std::thread& TaskHandle_t;
 typedef void (*TaskFunction_t)(void*);
 
 #define configMINIMAL_STACK_SIZE 1
