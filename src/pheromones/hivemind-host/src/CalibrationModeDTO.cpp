@@ -1,6 +1,6 @@
 #include "CalibrationModeDTO.h"
 
-CalibrationModeDTO targetToDTO(CalibrationMode mode) {
+CalibrationModeDTO calibrationModeToDTO(CalibrationMode mode) {
     switch (mode) {
 
     case CalibrationMode_INITIATOR:
@@ -19,7 +19,7 @@ CalibrationModeDTO targetToDTO(CalibrationMode mode) {
  *
  *@return the nanopb equivalent
  **/
-CalibrationMode dtoToTarget(CalibrationModeDTO mode) {
+CalibrationMode dtoToCalibrationMode(CalibrationModeDTO mode) {
     switch (mode) {
 
     case CalibrationModeDTO::INITIATOR:

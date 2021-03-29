@@ -43,6 +43,7 @@ set(TEST_SOURCES
     NetworkApiDTOUnitTests.cpp
 
     CalibrationModeDTOUnitTests.cpp
+    StartCalibrationDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS

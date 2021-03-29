@@ -9,37 +9,37 @@ class CalibrationModeDTOFixture : public testing::Test {
 };
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_dtoToTarget_initiator) {
-    auto ret = dtoToTarget(CalibrationModeDTO::INITIATOR);
+    auto ret = dtoToCalibrationMode(CalibrationModeDTO::INITIATOR);
 
     EXPECT_EQ(ret, CalibrationMode_INITIATOR);
 }
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_dtoToTarget_responder) {
-    auto ret = dtoToTarget(CalibrationModeDTO::RESPONDER);
+    auto ret = dtoToCalibrationMode(CalibrationModeDTO::RESPONDER);
 
     EXPECT_EQ(ret, CalibrationMode_RESPONDER);
 }
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_dtoToTarget_unsuporter) {
-    auto ret = dtoToTarget(CalibrationModeDTO::UNSUPORTED);
+    auto ret = dtoToCalibrationMode(CalibrationModeDTO::UNSUPORTED);
 
     EXPECT_EQ(ret, CalibrationMode_UNSUPORTED);
 }
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_targetToDto_initiator) {
-    auto ret = targetToDTO(CalibrationMode_INITIATOR);
+    auto ret = calibrationModeToDTO(CalibrationMode_INITIATOR);
 
     EXPECT_EQ(ret, CalibrationModeDTO::INITIATOR);
 }
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_targetToDto_responder) {
-    auto ret = targetToDTO(CalibrationMode_RESPONDER);
+    auto ret = calibrationModeToDTO(CalibrationMode_RESPONDER);
 
     EXPECT_EQ(ret, CalibrationModeDTO::RESPONDER);
 }
 
 TEST_F(CalibrationModeDTOFixture, CalibrationModeDTO_targetToDto_unsuporter) {
-    auto ret = targetToDTO(CalibrationMode_UNSUPORTED);
+    auto ret = calibrationModeToDTO(CalibrationMode_UNSUPORTED);
 
     EXPECT_EQ(ret, CalibrationModeDTO::UNSUPORTED);
 }

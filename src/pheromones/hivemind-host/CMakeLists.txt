@@ -44,6 +44,7 @@ set(LIB_SOURCES
     src/NetworkApiDTO.cpp
 
     src/CalibrationModeDTO.cpp
+    src/StartCalibrationDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -85,6 +86,7 @@ set(LIB_HEADERS
     include/hivemind-host/NetworkApiDTO.h
 
     include/hivemind-host/CalibrationModeDTO.h
+    include/hivemind-host/StartCalibrationDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
