@@ -17,6 +17,10 @@ AbstractTask<stackSize>::~AbstractTask() {
 template <unsigned int stackSize>
 bool AbstractTask<stackSize>::start() {
     if (!m_taskRunning) {
+        if(m_thread.joinable()){
+            m_thread.join();
+        }
+
         m_thread = std::thread(wrapper, this);
         m_taskRunning = true;
         return true;
