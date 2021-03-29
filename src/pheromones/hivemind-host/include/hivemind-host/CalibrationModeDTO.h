@@ -3,20 +3,20 @@
 
 #include <message.pb.h>
 
-enum class CalibrationModeDTO {INITIATOR, RESPONDER};
+enum class CalibrationModeDTO {UNSUPORTED, INITIATOR, RESPONDER};
 
 /**
  *@brief get the equivalent of a nanobp calibration mode to a dto
  *
  *@return the dto equivalent
  **/
-CalibrationModeDTO targetToDTO(UserCallTarget mode);
+CalibrationModeDTO targetToDTO(CalibrationMode mode);
 
 /**
  *@brief get the equivalent of a dto calibration mode to a nanopb one
  *
  *@return the nanopb equivalent
  **/
-UserCallTarget dtoToTarget(CalibrationModeDTO mode);
+CalibrationMode dtoToTarget(CalibrationModeDTO mode);
 
 #endif //__CALIBRATIONMODEDTO_H__

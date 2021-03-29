@@ -41,6 +41,8 @@ set(TEST_SOURCES
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
+
+    CalibrationModeDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS

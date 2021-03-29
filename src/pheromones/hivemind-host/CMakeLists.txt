@@ -42,6 +42,8 @@ set(LIB_SOURCES
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
+
+    src/CalibrationModeDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -78,6 +80,7 @@ set(LIB_HEADERS
 
     include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/HiveMindApiRequestDTO.h
+
     include/hivemind-host/IpDiscoveryDTO.h
     include/hivemind-host/NetworkApiDTO.h
 
