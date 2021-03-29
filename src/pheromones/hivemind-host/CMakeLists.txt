@@ -78,9 +78,10 @@ set(LIB_HEADERS
 
     include/hivemind-host/HiveMindApiResponseDTO.h
     include/hivemind-host/HiveMindApiRequestDTO.h
-
     include/hivemind-host/IpDiscoveryDTO.h
     include/hivemind-host/NetworkApiDTO.h
+
+    include/hivemind-host/CalibrationModeDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
