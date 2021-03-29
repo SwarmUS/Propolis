@@ -9,7 +9,9 @@ AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority
 
 template <unsigned int stackSize>
 AbstractTask<stackSize>::~AbstractTask() {
-    m_thread.join();
+    if (m_taskRunning) {
+        m_thread.join();
+    }
 }
 
 template <unsigned int stackSize>
