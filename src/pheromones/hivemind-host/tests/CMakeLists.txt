@@ -44,6 +44,8 @@ set(TEST_SOURCES
 
     CalibrationModeDTOUnitTests.cpp
     StartCalibrationDTOUnitTests.cpp
+    StopCalibrationDTOUnitTests.cpp
+    SetCalibrationDistanceDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS
