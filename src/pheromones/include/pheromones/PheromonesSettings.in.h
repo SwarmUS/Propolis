@@ -10,5 +10,7 @@
 
 #define BUZZ_PAYLOAD_SIZE (@BUZZ_PAYLOAD_SIZE@)
 
+#define BYTES_PAYLOAD_SIZE (@BYTES_PAYLOAD_SIZE@)
+
 // clang-format on
 #endif // __PHEROMONESSETTINGS_IN_H_
