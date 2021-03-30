@@ -46,7 +46,7 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_setCalibDist
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_invalid) {
     CalibrationMessage msg;
-    msg.which_call = -1;
+    msg.which_call = PB_SIZE_MAX;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
     auto ret = dto.getCall();
@@ -90,7 +90,7 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_setCalibDistan
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_invalid) {
     CalibrationMessage msgIn;
     CalibrationMessage msgOut;
-    msgIn.which_call = -1;
+    msgIn.which_call = PB_SIZE_MAX;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msgIn);
     auto ret = dto.serialize(msgOut);

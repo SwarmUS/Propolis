@@ -10,7 +10,7 @@ class InterlocAPIFixture : public testing::Test {
 
 TEST_F(InterlocAPIFixture, InterlocAPIDTO_deserialize_calibrationCall) {
     InterlocAPI msg;
-    CalibrationMessage call;
+    CalibrationMessage call{};
     msg.which_message = InterlocAPI_calibration_tag;
     msg.message.calibration = call;
     auto dto = InterlocAPIDTO(msg);
@@ -22,7 +22,7 @@ TEST_F(InterlocAPIFixture, InterlocAPIDTO_deserialize_calibrationCall) {
 
 TEST_F(InterlocAPIFixture, InterlocAPIDTO_deserialize_invalidCall) {
     InterlocAPI msg;
-    msg.which_message = -1;
+    msg.which_message = PB_SIZE_MAX;
     auto dto = InterlocAPIDTO(msg);
 
     auto ret = dto.getAPICall();
@@ -44,7 +44,7 @@ TEST_F(InterlocAPIFixture, InterlocAPIDTO_serialize_calibrationCall) {
 TEST_F(InterlocAPIFixture, InterlocAPIDTO_serialize_invalidCall) {
     InterlocAPI msgIn;
     InterlocAPI msgOut;
-    msgIn.which_message = -1;
+    msgIn.which_message = PB_SIZE_MAX;
     auto dto = InterlocAPIDTO(msgIn);
 
     auto ret = dto.serialize(msgOut);

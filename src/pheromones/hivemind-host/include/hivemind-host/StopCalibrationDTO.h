@@ -8,7 +8,7 @@
  */
 class StopCalibrationDTO {
   public:
-    StopCalibrationDTO(const StopCalibration& message){};
+    StopCalibrationDTO(const StopCalibration& message) { (void)message; };
     StopCalibrationDTO() = default;
 
     /**
@@ -16,7 +16,10 @@ class StopCalibrationDTO {
      * @param message [out] message to serialize to
      * @return true if successful, false otherwise
      */
-    bool serialize(StopCalibration& message) const { return true; };
+    bool serialize(StopCalibration& message) const {
+        (void)message;
+        return true;
+    };
 };
 
 #endif //__STOPCALIBRATIONDTO_H__
