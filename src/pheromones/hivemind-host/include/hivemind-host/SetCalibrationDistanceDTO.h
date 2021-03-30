@@ -13,13 +13,13 @@ class SetCalibrationDistanceDTO {
 
     /**
      * @brief Returns the distance in the message
-     * @return The distance
+     * @return The distance in meters
      */
     float getDistance() const;
 
     /**
      * @brief Sets the distance in the message
-     * @param distance Distance
+     * @param distance Distance in meters
      */
     void setDistance(float distance);
 

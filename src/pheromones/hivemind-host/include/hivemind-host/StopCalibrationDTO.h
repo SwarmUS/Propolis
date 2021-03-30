@@ -9,6 +9,7 @@
 class StopCalibrationDTO {
   public:
     StopCalibrationDTO(const StopCalibration& message){};
+    StopCalibrationDTO() = default;
 
     /**
      * @brief Serializes to a protobuf stream

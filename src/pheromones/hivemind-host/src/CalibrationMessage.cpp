@@ -1,1 +1,55 @@
 #include "CalibrationMessageDTO.h"
+
+CalibrationMessageDTO::CalibrationMessageDTO(const Calibration& message) {
+    switch (message.which_call) {
+    case Calibration_startCalib_tag:
+        m_call = StartCalibrationDTO(message.call.startCalib);
+        break;
+
+    case Calibration_stopCalib_tag:
+        m_call = StopCalibrationDTO(message.call.stopCalib);
+        break;
+
+    case Calibration_setDistance_tag:
+        m_call = SetCalibrationDistanceDTO(message.call.setDistance);
+        break;
+
+    default:
+        m_call = std::monostate();
+    }
+}
+
+CalibrationMessageDTO::CalibrationMessageDTO(const StartCalibrationDTO& call) : m_call(call) {}
+CalibrationMessageDTO::CalibrationMessageDTO(const StopCalibrationDTO& call) : m_call(call) {}
+CalibrationMessageDTO::CalibrationMessageDTO(const SetCalibrationDistanceDTO& call) :
+    m_call(call) {}
+
+const std::
+    variant<std::monostate, StartCalibrationDTO, StopCalibrationDTO, SetCalibrationDistanceDTO>&
+    CalibrationMessageDTO::getCall() const {
+    return m_call;
+}
+void CalibrationMessageDTO::setCall(const std::variant<std::monostate,
+                                                       StartCalibrationDTO,
+                                                       StopCalibrationDTO,
+                                                       SetCalibrationDistanceDTO>& call) {
+    m_call = call;
+}
+
+bool CalibrationMessageDTO::serialize(Calibration& message) const {
+
+    if (const auto* startCalib = std::get_if<StartCalibrationDTO>(&m_call)) {
+        message.which_call = Calibration_startCalib_tag;
+        return startCalib->serialize(message.call.startCalib);
+    }
+    if (const auto* stopCalib = std::get_if<StopCalibrationDTO>(&m_call)) {
+        message.which_call = Calibration_stopCalib_tag;
+        return stopCalib->serialize(message.call.stopCalib);
+    }
+    if (const auto* setDistance = std::get_if<SetCalibrationDistanceDTO>(&m_call)) {
+        message.which_call = Calibration_setDistance_tag;
+        return setDistance->serialize(message.call.setDistance);
+    }
+
+    return false;
+}
