@@ -42,7 +42,13 @@ set(LIB_SOURCES
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
-)
+
+    src/CalibrationModeDTO.cpp
+    src/StartCalibrationDTO.cpp
+    src/SetCalibrationDistanceDTO.cpp
+    src/CalibrationMessage.cpp
+    src/InterlocAPIDTO.cpp
+    )
 
 set(LIB_HEADERS
     include/hivemind-host/HiveMindHostDeserializer.h
@@ -81,6 +87,13 @@ set(LIB_HEADERS
 
     include/hivemind-host/IpDiscoveryDTO.h
     include/hivemind-host/NetworkApiDTO.h
+
+    include/hivemind-host/CalibrationModeDTO.h
+    include/hivemind-host/StartCalibrationDTO.h
+    include/hivemind-host/StopCalibrationDTO.h
+    include/hivemind-host/SetCalibrationDistanceDTO.h
+    include/hivemind-host/CalibrationMessageDTO.h
+    include/hivemind-host/InterlocAPIDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
