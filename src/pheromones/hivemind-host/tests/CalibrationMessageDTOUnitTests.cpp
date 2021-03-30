@@ -10,7 +10,7 @@ class CalibrationMessageFixture : public testing::Test {
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_startCalib) {
     CalibrationMessage msg;
-    StartCalibration call;
+    StartCalibration call{};
     msg.which_call = CalibrationMessage_startCalib_tag;
     msg.call.startCalib = call;
 
@@ -22,7 +22,7 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_startCalib) 
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_stopCalib) {
     CalibrationMessage msg;
-    StopCalibration call;
+    StopCalibration call{};
     msg.which_call = CalibrationMessage_stopCalib_tag;
     msg.call.stopCalib = call;
 
@@ -34,7 +34,7 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_stopCalib) {
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_setCalibDistance) {
     CalibrationMessage msg;
-    SetCalibrationDistance call;
+    SetCalibrationDistance call{};
     msg.which_call = CalibrationMessage_setDistance_tag;
     msg.call.setDistance = call;
 
