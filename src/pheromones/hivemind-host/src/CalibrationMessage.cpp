@@ -1,16 +1,16 @@
 #include "CalibrationMessageDTO.h"
 
-CalibrationMessageDTO::CalibrationMessageDTO(const Calibration& message) {
+CalibrationMessageDTO::CalibrationMessageDTO(const CalibrationMessage& message) {
     switch (message.which_call) {
-    case Calibration_startCalib_tag:
+    case CalibrationMessage_startCalib_tag:
         m_call = StartCalibrationDTO(message.call.startCalib);
         break;
 
-    case Calibration_stopCalib_tag:
+    case CalibrationMessage_stopCalib_tag:
         m_call = StopCalibrationDTO(message.call.stopCalib);
         break;
 
-    case Calibration_setDistance_tag:
+    case CalibrationMessage_setDistance_tag:
         m_call = SetCalibrationDistanceDTO(message.call.setDistance);
         break;
 
@@ -36,18 +36,18 @@ void CalibrationMessageDTO::setCall(const std::variant<std::monostate,
     m_call = call;
 }
 
-bool CalibrationMessageDTO::serialize(Calibration& message) const {
+bool CalibrationMessageDTO::serialize(CalibrationMessage& message) const {
 
     if (const auto* startCalib = std::get_if<StartCalibrationDTO>(&m_call)) {
-        message.which_call = Calibration_startCalib_tag;
+        message.which_call = CalibrationMessage_startCalib_tag;
         return startCalib->serialize(message.call.startCalib);
     }
     if (const auto* stopCalib = std::get_if<StopCalibrationDTO>(&m_call)) {
-        message.which_call = Calibration_stopCalib_tag;
+        message.which_call = CalibrationMessage_stopCalib_tag;
         return stopCalib->serialize(message.call.stopCalib);
     }
     if (const auto* setDistance = std::get_if<SetCalibrationDistanceDTO>(&m_call)) {
-        message.which_call = Calibration_setDistance_tag;
+        message.which_call = CalibrationMessage_setDistance_tag;
         return setDistance->serialize(message.call.setDistance);
     }
 

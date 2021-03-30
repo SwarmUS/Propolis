@@ -9,9 +9,9 @@ class CalibrationMessageFixture : public testing::Test {
 };
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_startCalib) {
-    Calibration msg;
+    CalibrationMessage msg;
     StartCalibration call;
-    msg.which_call = Calibration_startCalib_tag;
+    msg.which_call = CalibrationMessage_startCalib_tag;
     msg.call.startCalib = call;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
@@ -21,9 +21,9 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_startCalib) 
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_stopCalib) {
-    Calibration msg;
+    CalibrationMessage msg;
     StopCalibration call;
-    msg.which_call = Calibration_stopCalib_tag;
+    msg.which_call = CalibrationMessage_stopCalib_tag;
     msg.call.stopCalib = call;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
@@ -33,9 +33,9 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_stopCalib) {
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_setCalibDistance) {
-    Calibration msg;
+    CalibrationMessage msg;
     SetCalibrationDistance call;
-    msg.which_call = Calibration_setDistance_tag;
+    msg.which_call = CalibrationMessage_setDistance_tag;
     msg.call.setDistance = call;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
@@ -45,7 +45,7 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_setCalibDist
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_invalid) {
-    Calibration msg;
+    CalibrationMessage msg;
     msg.which_call = -1;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
@@ -56,40 +56,40 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_invalid) {
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_startCalib) {
     auto call = StartCalibrationDTO(CalibrationModeDTO::UNSUPORTED);
-    Calibration msg;
+    CalibrationMessage msg;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(call);
     auto ret = dto.serialize(msg);
 
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.which_call, Calibration_startCalib_tag);
+    EXPECT_EQ(msg.which_call, CalibrationMessage_startCalib_tag);
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_stopCalib) {
     auto call = StopCalibrationDTO();
-    Calibration msg;
+    CalibrationMessage msg;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(call);
     auto ret = dto.serialize(msg);
 
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.which_call, Calibration_stopCalib_tag);
+    EXPECT_EQ(msg.which_call, CalibrationMessage_stopCalib_tag);
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_setCalibDistance) {
     auto call = SetCalibrationDistanceDTO(42.42);
-    Calibration msg;
+    CalibrationMessage msg;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(call);
     auto ret = dto.serialize(msg);
 
     EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.which_call, Calibration_setDistance_tag);
+    EXPECT_EQ(msg.which_call, CalibrationMessage_setDistance_tag);
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_invalid) {
-    Calibration msgIn;
-    Calibration msgOut;
+    CalibrationMessage msgIn;
+    CalibrationMessage msgOut;
     msgIn.which_call = -1;
 
     CalibrationMessageDTO dto = CalibrationMessageDTO(msgIn);

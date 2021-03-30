@@ -10,7 +10,7 @@ class InterlocAPIFixture : public testing::Test {
 
 TEST_F(InterlocAPIFixture, InterlocAPIDTO_deserialize_calibrationCall) {
     InterlocAPI msg;
-    Calibration call;
+    CalibrationMessage call;
     msg.which_message = InterlocAPI_calibration_tag;
     msg.message.calibration = call;
     auto dto = InterlocAPIDTO(msg);

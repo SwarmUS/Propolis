@@ -8,7 +8,7 @@
 
 class CalibrationMessageDTO {
   public:
-    CalibrationMessageDTO(const Calibration& message);
+    CalibrationMessageDTO(const CalibrationMessage& message);
 
     CalibrationMessageDTO(const StartCalibrationDTO& call);
     CalibrationMessageDTO(const StopCalibrationDTO& call);
@@ -36,7 +36,7 @@ class CalibrationMessageDTO {
      * @param message [out] The message to serialize to
      * @return True if successful, false otherwise
      */
-    bool serialize(Calibration& message) const;
+    bool serialize(CalibrationMessage& message) const;
 
   private:
     std::variant<std::monostate, StartCalibrationDTO, StopCalibrationDTO, SetCalibrationDistanceDTO>
