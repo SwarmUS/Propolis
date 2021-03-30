@@ -15,13 +15,12 @@ On Ubuntu 20.04 you can download these requirements using `apt install protobuf-
 
 ### Libraries
 
-#### Common
-A shared code for pheromones sub libraries
+#### Pheromones
 
-#### Hivemind-host
-A library used for communication between the Hivemind and its host. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
+A library used for communication between the Hivemind clients. Note that as of now, there is some restrictions since the library does not use heap. Notably the length of the strings are maximum 32 characters, including the NULL terminating character. The arrays of arguments for a function call have a maximum of 16 arguments. The library does a lot of copies as of now, but it will be fixed eventually.
 
 Note that we are using std::variant, if you use this library on an embedded target, avoid std::visit because of it's code and cpu cycle overhead.
+
 ## FreeRTOS
 A couple libraries to ease development using FreeRTOS
 
