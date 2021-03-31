@@ -60,16 +60,13 @@ TEST_F(HashMapTestFixture, test_insert_collision) {
 
 TEST_F(HashMapTestFixture, test_updating_inserted_value) {
     HashMap<uint8_t, std::string, 3> hashMap;
-    std::pair<uint8_t, std::string> pair1(1, "test1"); // 1 % 3 = 1
-    ASSERT_TRUE(hashMap.insert(pair1));
+    std::pair<uint8_t, std::string> pair(1, "test1");
+    ASSERT_TRUE(hashMap.insert(pair));
 
 
-    /*ASSERT_TRUE(hashMap.at(pair1.first).has_value());
-    hashMap.at(pair1.first).value()
-
-    std::
-    hashMap.at(pair1.first)
-    ASSERT_TRUE(val.value() == pair1.second);*/
+    ASSERT_TRUE(hashMap.at(pair.first).has_value());
+    hashMap.at(pair.first).value().get().clear();
+    ASSERT_TRUE( hashMap.at(pair.first).value().get().empty());
 
 }
 
