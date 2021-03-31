@@ -3,8 +3,8 @@
 
 #include "IHashMap.h"
 #include <array>
-#include <type_traits>
 #include <tuple>
+#include <type_traits>
 
 // TODO: Implement quadratic jumping instead of linear
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -30,8 +30,9 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
 
   private:
     // Using aligned storage for placement new usage when inserting
-    typename std::aligned_storage<sizeof(std::tuple<bool,Key, MappedType>),
-                                  alignof(std::tuple<bool,Key, MappedType>)>::type m_storage[maxSize];
+    typename std::aligned_storage<sizeof(std::tuple<bool, Key, MappedType>),
+                                  alignof(std::tuple<bool, Key, MappedType>)>::type
+        m_storage[maxSize];
 
     // Hashing function of the Key
     static uint16_t hash(Key key);

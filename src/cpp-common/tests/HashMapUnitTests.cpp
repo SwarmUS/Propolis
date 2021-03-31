@@ -48,7 +48,6 @@ TEST_F(HashMapTestFixture, test_insert_and_get_const) {
     ASSERT_TRUE(val.value().get() == pair.second);
 }
 
-
 TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair1(1, "test1");

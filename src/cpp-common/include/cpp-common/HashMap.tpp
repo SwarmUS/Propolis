@@ -7,15 +7,11 @@
 #include <new>
 #include <string>
 
-enum TupleIndices {
-    USED_FLAG_INDEX = 0,
-    KEY_INDEX,
-    VALUE_INDEX
-};
+enum TupleIndices { USED_FLAG_INDEX = 0, KEY_INDEX, VALUE_INDEX };
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::HashMap() : m_usedSpaces(0) {
-    for (size_t i = 0; i <maxSize;i++) {
+    for (size_t i = 0; i < maxSize; i++) {
         auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[i]);
         std::get<USED_FLAG_INDEX>(tuple) = false;
     }
@@ -38,8 +34,9 @@ bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>&
         if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
             return false;
         }
-        if (std::get<USED_FLAG_INDEX>(tuple)  == false) {
-            new (&m_storage[index]) std::tuple<bool, Key, MappedType>(true,item.first, item.second);
+        if (std::get<USED_FLAG_INDEX>(tuple) == false) {
+            new (&m_storage[index])
+                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
             m_usedSpaces++;
             return true;
         }
@@ -62,7 +59,8 @@ bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>&
         auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
         // Try to overwrite first
         if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
-            new (&m_storage[index]) std::tuple<bool, Key, MappedType>(true,item.first, item.second);
+            new (&m_storage[index])
+                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
             return true;
         }
         index++;
@@ -145,7 +143,8 @@ std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType,
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
-        const auto& tuple = reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        const auto& tuple =
+            reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
         if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
             return std::get<VALUE_INDEX>(tuple);
         }
