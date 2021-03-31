@@ -52,7 +52,11 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair1(1, "test1");
     ASSERT_TRUE(hashMap.insert(pair1));
+
     ASSERT_FALSE(hashMap.insert(pair1));
+    ASSERT_EQ(hashMap.getUsedSpace(), 1);
+
+    ASSERT_TRUE(hashMap.upsert(pair1));
     ASSERT_EQ(hashMap.getUsedSpace(), 1);
 }
 

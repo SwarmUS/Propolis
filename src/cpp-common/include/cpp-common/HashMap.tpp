@@ -18,6 +18,9 @@ HashMap<Key, MappedType, maxSize>::~HashMap() {
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>& item) {
+    if (isFull()) {
+        return false;
+    }
     bool loopedOnce = false;
     uint16_t index = hash(item.first);
     do {
@@ -43,6 +46,28 @@ bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>&
         }
     } while (index < maxSize);
     return false;
+}
+
+template <typename Key, typename MappedType, uint16_t maxSize>
+bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>& item) {
+    bool loopedOnce = false;
+    uint16_t index = hash(item.first);
+    do {
+        if (m_usedSpacesFlag[index] &&
+            reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]).first ==
+                item.first) {
+            new (&m_storage[index]) std::pair<Key, MappedType>(item);
+            return true;
+        }
+        index++;
+        // Only loop across array once
+        if (!loopedOnce && index == maxSize) {
+            loopedOnce = true;
+            index = 0;
+        }
+    } while (index < maxSize);
+    // Failed to update, trying insert
+    return insert(item);
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>

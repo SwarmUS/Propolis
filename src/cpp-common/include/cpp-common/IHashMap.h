@@ -23,6 +23,12 @@ class IHashMap {
     virtual bool insert(const std::pair<Key, MappedType>& item) = 0;
 
     /**
+     * @brief Update or insert an item into the hash map
+     * @return true if successfull, false if the map was full
+     */
+    virtual bool upsert(const std::pair<Key, MappedType>& item) = 0;
+
+    /**
      * @brief Obtain the copy of an item from the hash map based on a Key
      * @param [in] key The key to get the item to get
      * @param [out] item The reference to the item to store the value wanted

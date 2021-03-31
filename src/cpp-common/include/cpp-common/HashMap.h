@@ -13,6 +13,7 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
     ~HashMap() override;
 
     bool insert(const std::pair<Key, MappedType>& item) override;
+    bool upsert(const std::pair<Key, MappedType>& item) override;
     bool get(Key key, MappedType& item) const override;
     std::optional<std::reference_wrapper<MappedType>> at(Key key) override;
     std::optional<std::reference_wrapper<const MappedType>> at(Key key) const override;
