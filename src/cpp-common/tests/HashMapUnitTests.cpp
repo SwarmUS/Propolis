@@ -60,6 +60,32 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     ASSERT_EQ(hashMap.getUsedSpace(), 1);
 }
 
+
+TEST_F(HashMapTestFixture, test_insert_duplicate_key_edge_case) {
+    HashMap<uint8_t, std::string, 3> hashMap;
+    // Fill map
+    std::pair<uint8_t, std::string> pair1(1, "test1"); // 1 % 3 = 1
+    ASSERT_TRUE(hashMap.insert(pair1));
+
+    std::pair<uint8_t, std::string> pair2(2, "test1"); // 2 % 3 = 2
+    ASSERT_TRUE(hashMap.insert(pair2));
+
+    std::pair<uint8_t, std::string> pair3(4, "test1"); // 4 % 3 = 1 -> collision, will go to index 0
+    ASSERT_TRUE(hashMap.insert(pair3));
+
+    // Remove entry at index 2
+    ASSERT_TRUE(hashMap.remove(pair2.first)); // index 2 now free
+
+    pair1.second = "update value";
+    ASSERT_FALSE(hashMap.insert(pair1)); // Insert should fail since key already present
+    ASSERT_TRUE(hashMap.upsert(pair1)); // Upsert should succeed
+    ASSERT_EQ(hashMap.getUsedSpace(), 2); // Should only be using 2 spaces
+
+    auto val = hashMap.at(pair1.first);
+    ASSERT_TRUE(val.has_value());
+    ASSERT_EQ(val.value().get(), pair1.second);
+}
+
 TEST_F(HashMapTestFixture, test_insert_collision) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair1(1, "test1"); // 1 % 3 = 1
