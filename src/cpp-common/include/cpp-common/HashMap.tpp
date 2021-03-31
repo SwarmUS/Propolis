@@ -142,7 +142,20 @@ std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSi
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
     Key key) const {
-    (void) key;
+    uint16_t index = hash(key);
+    bool loopedOnce = false;
+    do {
+        const auto& tuple = reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
+            return std::get<VALUE_INDEX>(tuple);
+        }
+        index++;
+        // Only loop across array once
+        if (!loopedOnce && index == maxSize) {
+            index = 0;
+            loopedOnce = true;
+        }
+    } while (index < maxSize);
     return {};
 }
 
