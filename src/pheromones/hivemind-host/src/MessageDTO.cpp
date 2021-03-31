@@ -25,6 +25,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = NetworkApiDTO(message.message.network);
         break;
 
+    case Message_interloc_tag:
+        m_message = InterlocAPIDTO(message.message.interloc);
+        break;
+
     default:
         m_message = std::monostate();
     }
