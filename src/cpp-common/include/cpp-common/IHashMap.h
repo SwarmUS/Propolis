@@ -22,7 +22,7 @@ class IHashMap {
      * @param [out] item The reference to the item to store the value wanted
      * @return true if succesfull, false if no item found based on Key
      */
-    virtual bool get(Key k, MappedType& item) const = 0;
+    virtual bool get(Key key, MappedType& item) const = 0;
 
     /**
      * @brief Obtain the copy of an item from the hash map based on a Key

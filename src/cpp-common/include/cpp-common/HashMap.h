@@ -11,7 +11,7 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
     ~HashMap() override;
 
     bool insert(const std::pair<Key, MappedType>& item) override;
-    bool get(Key k, MappedType& item) const override;
+    bool get(Key key, MappedType& item) const override;
     std::optional<MappedType> at(Key key) const override;
     bool remove(Key key) override;
     void clear() override;
