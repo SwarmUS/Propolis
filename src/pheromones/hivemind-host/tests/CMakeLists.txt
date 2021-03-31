@@ -48,6 +48,7 @@ set(TEST_SOURCES
     SetCalibrationDistanceDTOUnitTests.cpp
     CalibrationMessageDTOUnitTests.cpp
     InterloAPIDTOUnitTests.cpp
+    CalibrationEndedDTOUnitTests.cpp
 )
 
 set(TEST_HEADERS

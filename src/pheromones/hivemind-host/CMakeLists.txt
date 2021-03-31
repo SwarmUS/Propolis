@@ -46,8 +46,9 @@ set(LIB_SOURCES
     src/CalibrationModeDTO.cpp
     src/StartCalibrationDTO.cpp
     src/SetCalibrationDistanceDTO.cpp
-    src/CalibrationMessage.cpp
+        src/CalibrationMessageDTO.cpp
     src/InterlocAPIDTO.cpp
+    src/CalibrationEndedDTO.cpp
     )
 
 set(LIB_HEADERS
@@ -94,6 +95,7 @@ set(LIB_HEADERS
     include/hivemind-host/SetCalibrationDistanceDTO.h
     include/hivemind-host/CalibrationMessageDTO.h
     include/hivemind-host/InterlocAPIDTO.h
+    include/hivemind-host/CalibrationEndedDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

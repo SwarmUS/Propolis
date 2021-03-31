@@ -44,6 +44,18 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_setCalibDist
     EXPECT_TRUE(std::holds_alternative<SetCalibrationDistanceDTO>(ret));
 }
 
+TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_calibEnded) {
+    CalibrationMessage msg;
+    CalibrationEnded call{};
+    msg.which_call = CalibrationMessage_calibEnded_tag;
+    msg.call.calibEnded = call;
+
+    CalibrationMessageDTO dto = CalibrationMessageDTO(msg);
+    auto ret = dto.getCall();
+
+    EXPECT_TRUE(std::holds_alternative<CalibrationEndedDTO>(ret));
+}
+
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_deserialize_invalid) {
     CalibrationMessage msg;
     msg.which_call = PB_SIZE_MAX;
@@ -85,6 +97,17 @@ TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_setCalibDistan
 
     EXPECT_TRUE(ret);
     EXPECT_EQ(msg.which_call, CalibrationMessage_setDistance_tag);
+}
+
+TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_calibEnded) {
+    auto call = CalibrationEndedDTO();
+    CalibrationMessage msg;
+
+    CalibrationMessageDTO dto = CalibrationMessageDTO(call);
+    auto ret = dto.serialize(msg);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.which_call, CalibrationMessage_calibEnded_tag);
 }
 
 TEST_F(CalibrationMessageFixture, CalibrationMessageDTO_serialize_invalid) {

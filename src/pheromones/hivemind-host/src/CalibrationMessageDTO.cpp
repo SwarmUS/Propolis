@@ -14,6 +14,10 @@ CalibrationMessageDTO::CalibrationMessageDTO(const CalibrationMessage& message) 
         m_call = SetCalibrationDistanceDTO(message.call.setDistance);
         break;
 
+    case CalibrationMessage_calibEnded_tag:
+        m_call = CalibrationEndedDTO(message.call.calibEnded);
+        break;
+
     default:
         m_call = std::monostate();
     }
@@ -23,16 +27,21 @@ CalibrationMessageDTO::CalibrationMessageDTO(const StartCalibrationDTO& call) : 
 CalibrationMessageDTO::CalibrationMessageDTO(const StopCalibrationDTO& call) : m_call(call) {}
 CalibrationMessageDTO::CalibrationMessageDTO(const SetCalibrationDistanceDTO& call) :
     m_call(call) {}
+CalibrationMessageDTO::CalibrationMessageDTO(const CalibrationEndedDTO& call) : m_call(call) {}
 
-const std::
-    variant<std::monostate, StartCalibrationDTO, StopCalibrationDTO, SetCalibrationDistanceDTO>&
-    CalibrationMessageDTO::getCall() const {
+const std::variant<std::monostate,
+                   StartCalibrationDTO,
+                   StopCalibrationDTO,
+                   SetCalibrationDistanceDTO,
+                   CalibrationEndedDTO>&
+CalibrationMessageDTO::getCall() const {
     return m_call;
 }
 void CalibrationMessageDTO::setCall(const std::variant<std::monostate,
                                                        StartCalibrationDTO,
                                                        StopCalibrationDTO,
-                                                       SetCalibrationDistanceDTO>& call) {
+                                                       SetCalibrationDistanceDTO,
+                                                       CalibrationEndedDTO>& call) {
     m_call = call;
 }
 
@@ -49,6 +58,10 @@ bool CalibrationMessageDTO::serialize(CalibrationMessage& message) const {
     if (const auto* setDistance = std::get_if<SetCalibrationDistanceDTO>(&m_call)) {
         message.which_call = CalibrationMessage_setDistance_tag;
         return setDistance->serialize(message.call.setDistance);
+    }
+    if (const auto* calibEnded = std::get_if<CalibrationEndedDTO>(&m_call)) {
+        message.which_call = CalibrationMessage_calibEnded_tag;
+        return calibEnded->serialize(message.call.calibEnded);
     }
 
     return false;
