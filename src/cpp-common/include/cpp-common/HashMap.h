@@ -4,22 +4,29 @@
 #include "IHashMap.h"
 #include <type_traits>
 
-template <typename key, typename type, uint16_t maxSize>
-class HashMap : public IHashMap<key,type,maxSize> {
+template <typename Key, typename MappedType, uint16_t maxSize>
+class HashMap : public IHashMap<Key,MappedType,maxSize> {
   public:
     HashMap();
     ~HashMap() override;
 
-    bool insert(const std::pair<key,type>& item) override;
-    bool get(key k, type& item) override;
+    bool insert(const std::pair<Key,MappedType>& item) override;
+    bool get(Key k, MappedType& item) const override;
+    const std::optional<std::reference_wrapper<const MappedType>> at(Key key) const override;
+    bool remove(Key key) override;
     void clear() override;
     bool isFull() const override;
     bool isEmpty() const override;
     uint16_t getMaxSize() const override;
 
-  protected:
+  private:
     // Using aligned storage for placement new usage when inserting
-    std::aligned_storage< sizeof(type), alignof(type)> m_storage[maxSize];
+    typename std::aligned_storage< sizeof(std::pair<Key,MappedType>), alignof(std::pair<Key,MappedType>)>::type m_storage[maxSize];
+    bool m_usedSpacesFlag[maxSize];
+
+    // Hashing function of the Key
+    static uint16_t hash(Key k);
+    uint16_t m_usedSpaces;
 
 };
 

@@ -4,23 +4,40 @@
 
 #include <cstdint>
 #include <utility>
+#include <optional>
 
-template <typename key, typename type, uint16_t maxSize>
+template <typename Key, typename MappedType, uint16_t maxSize>
 class IHashMap {
   public:
-    ~IHashMap<key,type,maxSize>() = default;
+    virtual ~IHashMap<Key, MappedType ,maxSize>() = default;
 
     /**
      * @brief Insert an item into the hash map
-     * @return true if succesfull, false if the map was full
+     * @return true if successfull, false if the map was full or key already present in map
      */
-     virtual bool insert(const std::pair<key,type>& item) = 0;
+     virtual bool insert(const std::pair<Key,MappedType>& item) = 0;
 
     /**
-    * @brief Return an item from the hash map based on a key
-    * @return true if succesfull, false if no item found based on key
+    * @brief Obtain the copy of an item from the hash map based on a Key
+    * @param [in] key The key to get the item to get
+    * @param [out] item The reference to the item to store the value wanted
+    * @return true if succesfull, false if no item found based on Key
     */
-     virtual bool get(key k, type& item) = 0;
+     virtual bool get(Key k, MappedType& item) const = 0;
+
+     /**
+      * @brief Obtain the copy of an item from the hash map based on a Key
+      * @param key The key to get the item to get
+      * @return A reference to the mapped type if key was found in map, otherwise an empty optional
+      */
+     virtual const std::optional<std::reference_wrapper<const MappedType>> at(Key key) const = 0;
+
+     /**
+      * @brief Remove an item from the map based on its key
+      * @param key The key to the item to remove
+      * @return True if an item with desired was found and removed from the map, false otherwise
+      */
+     virtual bool remove(Key key) = 0;
 
      /**
       * @brief Clears all items in the map
