@@ -6,7 +6,7 @@
 #include <tuple>
 #include <type_traits>
 
-// TODO: Implement quadratic jumping instead of linear
+// TODO: Implement quadratic jumping instead of linear and inject memory
 template <typename Key, typename MappedType, uint16_t maxSize>
 class HashMap : public IHashMap<Key, MappedType, maxSize> {
   public:
