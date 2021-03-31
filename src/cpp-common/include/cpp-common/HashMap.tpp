@@ -9,11 +9,11 @@
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::HashMap() : m_usedSpaces(0) {
-   m_usedSpacesFlag.fill(false);
+    m_usedSpacesFlag.fill(false);
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::~HashMap() {
-     clear();
+    clear();
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -55,6 +55,7 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
             if (pair.first == key) {
                 pair.second.~MappedType();
                 m_usedSpacesFlag[index] = false;
+                m_usedSpaces--;
                 return true;
             }
         }
@@ -103,7 +104,7 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
     return false;
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<std::reference_wrapper<MappedType>>  HashMap<Key, MappedType, maxSize>::at(Key key) {
+std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSize>::at(Key key) {
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
@@ -125,7 +126,8 @@ std::optional<std::reference_wrapper<MappedType>>  HashMap<Key, MappedType, maxS
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<std::reference_wrapper<const MappedType>>  HashMap<Key, MappedType, maxSize>::at(Key key) const  {
+std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
+    Key key) const {
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
@@ -149,6 +151,16 @@ std::optional<std::reference_wrapper<const MappedType>>  HashMap<Key, MappedType
 template <typename Key, typename MappedType, uint16_t maxSize>
 uint16_t HashMap<Key, MappedType, maxSize>::getMaxSize() const {
     return maxSize;
+}
+
+template <typename Key, typename MappedType, uint16_t maxSize>
+uint16_t HashMap<Key, MappedType, maxSize>::getFreeSpace() const {
+    return maxSize - m_usedSpaces;
+}
+
+template <typename Key, typename MappedType, uint16_t maxSize>
+uint16_t HashMap<Key, MappedType, maxSize>::getUsedSpace() const {
+    return m_usedSpaces;
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>

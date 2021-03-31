@@ -17,6 +17,8 @@ TEST_F(HashMapTestFixture, test_insert) {
     ASSERT_TRUE(hashMap.insert(pair));
 
     ASSERT_FALSE(hashMap.isEmpty());
+    ASSERT_EQ(hashMap.getUsedSpace(), 1);
+    ASSERT_EQ(hashMap.getFreeSpace(), 2);
 }
 
 TEST_F(HashMapTestFixture, test_insert_and_get) {
@@ -31,9 +33,8 @@ TEST_F(HashMapTestFixture, test_insert_and_get) {
 
     ASSERT_TRUE(hashMap.at(pair.first).has_value());
     auto val = hashMap.at(pair.first);
-    ASSERT_TRUE( val.value().get() == pair.second);
+    ASSERT_TRUE(val.value().get() == pair.second);
 }
-
 
 TEST_F(HashMapTestFixture, test_insert_and_get_const) {
     HashMap<uint8_t, std::string, 3> hashMap;
@@ -43,8 +44,8 @@ TEST_F(HashMapTestFixture, test_insert_and_get_const) {
 
     const HashMap<uint8_t, std::string, 3>& constHashMap = hashMap;
     auto val = constHashMap.at(pair.first);
-    ASSERT_TRUE( val.has_value());
-    ASSERT_TRUE( val.value().get() == pair.second);
+    ASSERT_TRUE(val.has_value());
+    ASSERT_TRUE(val.value().get() == pair.second);
 }
 
 TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
@@ -52,8 +53,8 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     std::pair<uint8_t, std::string> pair1(1, "test1");
     ASSERT_TRUE(hashMap.insert(pair1));
     ASSERT_FALSE(hashMap.insert(pair1));
+    ASSERT_EQ(hashMap.getUsedSpace(), 1);
 }
-
 
 TEST_F(HashMapTestFixture, test_insert_collision) {
     HashMap<uint8_t, std::string, 3> hashMap;
@@ -67,20 +68,16 @@ TEST_F(HashMapTestFixture, test_insert_collision) {
 
     ASSERT_TRUE(val.has_value());
     ASSERT_TRUE(val.value().get() == pair2.second);
-
 }
-
 
 TEST_F(HashMapTestFixture, test_updating_inserted_value) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair(1, "test1");
     ASSERT_TRUE(hashMap.insert(pair));
 
-
     ASSERT_TRUE(hashMap.at(pair.first).has_value());
     hashMap.at(pair.first).value().get().clear();
-    ASSERT_TRUE( hashMap.at(pair.first).value().get().empty());
-
+    ASSERT_TRUE(hashMap.at(pair.first).value().get().empty());
 }
 
 TEST_F(HashMapTestFixture, test_insert_and_remove) {
@@ -92,7 +89,6 @@ TEST_F(HashMapTestFixture, test_insert_and_remove) {
 
     auto val = hashMap.at(pair1.first);
     val.has_value();
-
 }
 
 TEST_F(HashMapTestFixture, test_insert_full) {

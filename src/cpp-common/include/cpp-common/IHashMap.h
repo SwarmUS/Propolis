@@ -33,14 +33,16 @@ class IHashMap {
     /**
      * @brief Obtain a reference of an item from the hash map based on a Key
      * @param key The key to get the item to get
-     * @return A an optional reference to the mapped type if key was found in map, otherwise an empty optional
+     * @return A an optional reference to the mapped type if key was found in map, otherwise an
+     * empty optional
      */
     virtual std::optional<std::reference_wrapper<MappedType>> at(Key key) = 0;
 
     /**
      * @brief Obtain a const reference of an item from the hash map based on a Key
      * @param key The key to get the item to get
-     * @return A an optional const reference to the mapped type if key was found in map, otherwise an empty optional
+     * @return A an optional const reference to the mapped type if key was found in map, otherwise
+     * an empty optional
      */
     virtual std::optional<std::reference_wrapper<const MappedType>> at(Key key) const = 0;
 
@@ -73,6 +75,9 @@ class IHashMap {
      * @return the maximum number of items in the map
      */
     virtual uint16_t getMaxSize() const = 0;
+
+    virtual uint16_t getUsedSpace() const = 0;
+    virtual uint16_t getFreeSpace() const = 0;
 };
 
 #endif // PROPOLIS_IHASHMAP_H
