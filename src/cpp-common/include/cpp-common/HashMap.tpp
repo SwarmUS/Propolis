@@ -7,14 +7,17 @@
 #include <new>
 #include <string>
 
-#define USED_FLAG_INDEX (0)
-#define KEY_INDEX       (1)
-#define VALUE_INDEX     (2)
+enum TupleIndices {
+    USED_FLAG_INDEX = 0,
+    KEY_INDEX,
+    VALUE_INDEX
+};
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::HashMap() : m_usedSpaces(0) {
-    for (int i; i <maxSize;i++) {
-        std::get<USED_FLAG_INDEX>(m_storage[i]) = false;
+    for (size_t i = 0; i <maxSize;i++) {
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[i]);
+        std::get<USED_FLAG_INDEX>(tuple) = false;
     }
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -30,18 +33,15 @@ bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>&
     bool loopedOnce = false;
     uint16_t index = hash(item.first);
     do {
-        if (std::get<USED_FLAG_INDEX>(m_storage[index])  == false) {
-            new (&m_storage[index]) std::pair<Key, MappedType>(item);
-            m_usedSpaces++;
-            std::get<USED_FLAG_INDEX>(m_storage[index]) = true;
-            return true;
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        // Insert forbids overwriting
+        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
+            return false;
         }
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) == true) {
-            // If a key is already present in the map, do not overwrite its value
-            if (std::get<KEY_INDEX>(reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index])) ==
-                item.first) {
-                return false;
-            }
+        if (std::get<USED_FLAG_INDEX>(tuple)  == false) {
+            new (&m_storage[index]) std::tuple<bool, Key, MappedType>(true,item.first, item.second);
+            m_usedSpaces++;
+            return true;
         }
 
         index++;
@@ -59,10 +59,10 @@ bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>&
     bool loopedOnce = false;
     uint16_t index = hash(item.first);
     do {
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) &&
-            std::get<KEY_INDEX>(reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index])) ==
-                item.first) {
-            new (&m_storage[index]) std::pair<Key, MappedType>(item);
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        // Try to overwrite first
+        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
+            new (&m_storage[index]) std::tuple<bool, Key, MappedType>(true,item.first, item.second);
             return true;
         }
         index++;
@@ -72,7 +72,7 @@ bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>&
             index = 0;
         }
     } while (index < maxSize);
-    // Failed to update, trying insert
+    // If cannot overwrite, try to insert
     return insert(item);
 }
 
@@ -81,11 +81,10 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) == true &&
-            std::get<KEY_INDEX>(reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index])) == key) {
-            reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index])
-                .second.~MappedType();
-            std::get<USED_FLAG_INDEX>(m_storage[index]) = false;
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
+            std::get<VALUE_INDEX>(tuple).~MappedType();
+            std::get<USED_FLAG_INDEX>(tuple) = false;
             m_usedSpaces--;
             return true;
         }
@@ -103,9 +102,10 @@ template <typename Key, typename MappedType, uint16_t maxSize>
 void HashMap<Key, MappedType, maxSize>::clear() {
     for (size_t i = 0; i < maxSize; i++) {
         // Could forego calling constructor since using placement new
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) == true) {
-            reinterpret_cast<std::pair<Key, MappedType>*>(&m_storage[i])->second.~MappedType();
-            std::get<USED_FLAG_INDEX>(m_storage[index]) = false;
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[i]);
+        if (std::get<USED_FLAG_INDEX>(tuple)) {
+            std::get<VALUE_INDEX>(tuple).~MappedType();
+            std::get<USED_FLAG_INDEX>(tuple) = false;
         }
     }
     m_usedSpaces = 0;
@@ -113,24 +113,11 @@ void HashMap<Key, MappedType, maxSize>::clear() {
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
-    uint16_t index = hash(k);
-    bool loopedOnce = false;
-    do {
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) == true) {
-            auto& tuple = reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-            if (std::get<KEY_INDEX>(tuple) == k) {
-                // emplace on reference passed
-                new (&item) MappedType(tuple.second);
-                return true;
-            }
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
-            loopedOnce = true;
-        }
-    } while (index < maxSize);
+    const auto& obj = at(k);
+    if (obj.has_value()) {
+        item = obj.value().get();
+        return true;
+    }
     return false;
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -138,13 +125,10 @@ std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSi
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
-        if (std::get<USED_FLAG_INDEX>(m_storage[index]) == true) {
-            auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-            if (std::get<KEY_INDEX>(tuple) == key) {
-                return std::get<VALUE_INDEX>(tuple);
-            }
+        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
+        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
+            return std::get<VALUE_INDEX>(tuple);
         }
-
         index++;
         // Only loop across array once
         if (!loopedOnce && index == maxSize) {
@@ -158,8 +142,8 @@ std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSi
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
     Key key) const {
-    auto obj = const_cast<const MappedType*>(this)->at(key); // Using the const function
-    return const_cast<std::optional<std::reference_wrapper<MappedType>>>(obj);
+    (void) key;
+    return {};
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
