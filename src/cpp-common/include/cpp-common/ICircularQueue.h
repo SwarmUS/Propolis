@@ -35,7 +35,7 @@ class ICircularQueue {
     virtual void pop() = 0;
 
     /**
-     *@brief clear the queue, expensive call since it needs to call the destrucstor of all the
+     *@brief clear the queue, expensive call since it needs to call the destructor of all the
      *object
      **/
     virtual void clear() = 0;
