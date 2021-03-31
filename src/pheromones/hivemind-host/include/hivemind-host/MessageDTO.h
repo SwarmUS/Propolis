@@ -3,6 +3,7 @@
 
 #include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
+#include "InterlocAPIDTO.h"
 #include "NetworkApiDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
@@ -26,6 +27,8 @@ class MessageDTO {
 
     MessageDTO(uint32_t sourceId, uint32_t destinationId, const NetworkApiDTO& networkAPI);
 
+    MessageDTO(uint32_t sourceId, uint32_t destinationId, const InterlocAPIDTO& interlocApi);
+
     /**
      *@brief gets the source id
      *@return the source id */
@@ -44,7 +47,8 @@ class MessageDTO {
                        ResponseDTO,
                        GreetingDTO,
                        BuzzMessageDTO,
-                       NetworkApiDTO>&
+                       NetworkApiDTO,
+                       InterlocAPIDTO>&
     getMessage() const;
 
     /**
@@ -65,7 +69,8 @@ class MessageDTO {
                                        ResponseDTO,
                                        GreetingDTO,
                                        BuzzMessageDTO,
-                                       NetworkApiDTO>& message);
+                                       NetworkApiDTO,
+                                       InterlocAPIDTO>& message);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
@@ -79,9 +84,14 @@ class MessageDTO {
 
     uint32_t m_destinationId;
 
-    std::
-        variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>
-            m_message;
+    std::variant<std::monostate,
+                 RequestDTO,
+                 ResponseDTO,
+                 GreetingDTO,
+                 BuzzMessageDTO,
+                 NetworkApiDTO,
+                 InterlocAPIDTO>
+        m_message;
 };
 
 #endif // __MESSAGEDTO_H_
