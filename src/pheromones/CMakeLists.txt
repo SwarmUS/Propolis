@@ -39,6 +39,7 @@ set(LIB_SOURCES
 
     src/HiveMindHostApiRequestDTO.cpp
     src/HiveMindHostApiResponseDTO.cpp
+    src/BytesDTO.cpp
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
@@ -76,6 +77,7 @@ set(LIB_HEADERS
 
     include/pheromones/HiveMindHostApiResponseDTO.h
     include/pheromones/HiveMindHostApiRequestDTO.h
+    include/pheromones/BytesDTO.h
 
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h

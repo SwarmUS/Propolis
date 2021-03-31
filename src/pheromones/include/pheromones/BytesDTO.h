@@ -11,7 +11,11 @@ class BytesDTO {
 
     BytesDTO(const Bytes& bytes);
 
-    BytesDTO(uint32_t byteReqId, uint32_t packetNumber, uint8_t payload, uint16_t payloadLength);
+    BytesDTO(uint32_t byteReqId,
+             uint32_t packetNumber,
+             bool lastPacket,
+             uint8_t* payload,
+             uint16_t payloadLength);
 
     /**
      *@brief get the packet id, a packet id regroups multiple packet number and the receiver will
@@ -39,6 +43,8 @@ class BytesDTO {
      *@brief get the raw payload, not const. Can be used to write on it, call setRawPayloadLength
      *@return the raw value of the payload */
     std::array<uint8_t, PAYLOAD_MAX_SIZE>& getRawPayload();
+
+    uint16_t getPayloadLength() const;
 
     /**
      *@brief set the packet id
