@@ -26,7 +26,7 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
     bool m_usedSpacesFlag[maxSize];
 
     // Hashing function of the Key
-    static uint16_t hash(Key k);
+    static uint16_t hash(Key key);
     uint16_t m_usedSpaces;
 };
 

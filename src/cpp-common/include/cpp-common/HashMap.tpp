@@ -138,7 +138,7 @@ bool HashMap<Key, MappedType, maxSize>::isFull() const {
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
-uint16_t HashMap<Key, MappedType, maxSize>::hash(Key k) {
+uint16_t HashMap<Key, MappedType, maxSize>::hash(Key key) {
     return k % maxSize;
 }
 
