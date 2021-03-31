@@ -75,14 +75,13 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
-        if (m_usedSpacesFlag[index] == true) {
-            auto& pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
-            if (pair.first == key) {
-                pair.second.~MappedType();
-                m_usedSpacesFlag[index] = false;
-                m_usedSpaces--;
-                return true;
-            }
+        if (m_usedSpacesFlag[index] == true &&
+            reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]).first == key) {
+            reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index])
+                .second.~MappedType();
+            m_usedSpacesFlag[index] = false;
+            m_usedSpaces--;
+            return true;
         }
         index++;
         // Only loop across array once

@@ -60,7 +60,6 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     ASSERT_EQ(hashMap.getUsedSpace(), 1);
 }
 
-
 TEST_F(HashMapTestFixture, test_insert_duplicate_key_edge_case) {
     HashMap<uint8_t, std::string, 3> hashMap;
     // Fill map
