@@ -28,9 +28,10 @@ TEST_F(HashMapTestFixture, test_insert_and_get) {
     std::string compare;
     ASSERT_TRUE(hashMap.get(pair.first, compare));
     ASSERT_TRUE(compare == pair.second);
-    std::optional<std::string> val = hashMap.at(pair.first);
-    ASSERT_TRUE(val.has_value());
-    ASSERT_TRUE(val.value() == pair.second);
+
+    ASSERT_TRUE(hashMap.at(pair.first).has_value());
+    auto val = hashMap.at(pair.first);
+    ASSERT_TRUE( val.value().get() == pair.second);
 }
 
 TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
@@ -40,6 +41,38 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     ASSERT_FALSE(hashMap.insert(pair1));
 }
 
+
+TEST_F(HashMapTestFixture, test_insert_collision) {
+    HashMap<uint8_t, std::string, 3> hashMap;
+    std::pair<uint8_t, std::string> pair1(1, "test1"); // 1 % 3 = 1
+    ASSERT_TRUE(hashMap.insert(pair1));
+
+    std::pair<uint8_t, std::string> pair2(4, "test2"); // 4 % 3 = 1 ->collision
+    ASSERT_TRUE(hashMap.insert(pair2));
+
+    auto val = hashMap.at(pair2.first);
+
+    ASSERT_TRUE(val.has_value());
+    ASSERT_TRUE(val.value().get() == pair2.second);
+
+}
+
+
+TEST_F(HashMapTestFixture, test_updating_inserted_value) {
+    HashMap<uint8_t, std::string, 3> hashMap;
+    std::pair<uint8_t, std::string> pair1(1, "test1"); // 1 % 3 = 1
+    ASSERT_TRUE(hashMap.insert(pair1));
+
+
+    /*ASSERT_TRUE(hashMap.at(pair1.first).has_value());
+    hashMap.at(pair1.first).value()
+
+    std::
+    hashMap.at(pair1.first)
+    ASSERT_TRUE(val.value() == pair1.second);*/
+
+}
+
 TEST_F(HashMapTestFixture, test_insert_and_remove) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair1(1, "test1");
@@ -47,8 +80,9 @@ TEST_F(HashMapTestFixture, test_insert_and_remove) {
 
     ASSERT_TRUE(hashMap.remove(pair1.first));
 
-    std::optional<std::string> val = hashMap.at(pair1.first);
-    ASSERT_FALSE(val.has_value());
+    auto val = hashMap.at(pair1.first);
+    val.has_value();
+
 }
 
 TEST_F(HashMapTestFixture, test_insert_full) {

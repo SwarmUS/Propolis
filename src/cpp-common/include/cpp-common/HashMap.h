@@ -3,6 +3,7 @@
 
 #include "IHashMap.h"
 #include <type_traits>
+#include <array>
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 class HashMap : public IHashMap<Key, MappedType, maxSize> {
@@ -12,7 +13,7 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
 
     bool insert(const std::pair<Key, MappedType>& item) override;
     bool get(Key key, MappedType& item) const override;
-    std::optional<MappedType> at(Key key) const override;
+    std::optional<std::reference_wrapper<MappedType>>  at(Key key) override;
     bool remove(Key key) override;
     void clear() override;
     bool isFull() const override;
@@ -23,7 +24,7 @@ class HashMap : public IHashMap<Key, MappedType, maxSize> {
     // Using aligned storage for placement new usage when inserting
     typename std::aligned_storage<sizeof(std::pair<Key, MappedType>),
                                   alignof(std::pair<Key, MappedType>)>::type m_storage[maxSize];
-    bool m_usedSpacesFlag[maxSize];
+   std::array<bool, maxSize> m_usedSpacesFlag;
 
     // Hashing function of the Key
     static uint16_t hash(Key key);

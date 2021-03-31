@@ -9,11 +9,11 @@
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::HashMap() : m_usedSpaces(0) {
-    memset(m_usedSpacesFlag, 0, sizeof(m_usedSpacesFlag));
+   m_usedSpacesFlag.fill(false);
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
 HashMap<Key, MappedType, maxSize>::~HashMap() {
-    // clear();
+     clear();
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -51,7 +51,7 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
     bool loopedOnce = false;
     do {
         if (m_usedSpacesFlag[index] == true) {
-            auto pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
+            auto& pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
             if (pair.first == key) {
                 pair.second.~MappedType();
                 m_usedSpacesFlag[index] = false;
@@ -65,15 +65,17 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
             loopedOnce = true;
         }
     } while (index < maxSize);
-    return {};
+    return false;
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 void HashMap<Key, MappedType, maxSize>::clear() {
-    for (int i = 0; i < maxSize; i++) {
+    for (size_t i = 0; i < maxSize; i++) {
         // Could forego calling constructor since using placement new
-        reinterpret_cast<std::pair<Key, MappedType>*>(&m_storage[i])->second.~MappedType();
-        m_usedSpacesFlag[i] = false;
+        if (m_usedSpacesFlag[i] == true) {
+            reinterpret_cast<std::pair<Key, MappedType>*>(&m_storage[i])->second.~MappedType();
+            m_usedSpacesFlag[i] = false;
+        }
     }
     m_usedSpaces = 0;
 }
@@ -84,7 +86,7 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
     bool loopedOnce = false;
     do {
         if (m_usedSpacesFlag[index] == true) {
-            auto pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
+            auto& pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
             if (pair.first == k) {
                 // emplace on reference passed
                 new (&item) MappedType(pair.second);
@@ -101,12 +103,12 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
     return false;
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<MappedType> HashMap<Key, MappedType, maxSize>::at(Key key) const {
+std::optional<std::reference_wrapper<MappedType>>  HashMap<Key, MappedType, maxSize>::at(Key key) {
     uint16_t index = hash(key);
     bool loopedOnce = false;
     do {
         if (m_usedSpacesFlag[index] == true) {
-            auto pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
+            auto& pair = reinterpret_cast<std::pair<Key, MappedType>&>(m_storage[index]);
             if (pair.first == key) {
                 return pair.second;
             }
