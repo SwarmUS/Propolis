@@ -34,6 +34,19 @@ TEST_F(HashMapTestFixture, test_insert_and_get) {
     ASSERT_TRUE( val.value().get() == pair.second);
 }
 
+
+TEST_F(HashMapTestFixture, test_insert_and_get_const) {
+    HashMap<uint8_t, std::string, 3> hashMap;
+
+    std::pair<uint8_t, std::string> pair(1, "test1");
+    ASSERT_TRUE(hashMap.insert(pair));
+
+    const HashMap<uint8_t, std::string, 3>& constHashMap = hashMap;
+    auto val = constHashMap.at(pair.first);
+    ASSERT_TRUE( val.has_value());
+    ASSERT_TRUE( val.value().get() == pair.second);
+}
+
 TEST_F(HashMapTestFixture, test_insert_duplicate_key) {
     HashMap<uint8_t, std::string, 3> hashMap;
     std::pair<uint8_t, std::string> pair1(1, "test1");

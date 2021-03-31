@@ -125,6 +125,28 @@ std::optional<std::reference_wrapper<MappedType>>  HashMap<Key, MappedType, maxS
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
+std::optional<std::reference_wrapper<const MappedType>>  HashMap<Key, MappedType, maxSize>::at(Key key) const  {
+    uint16_t index = hash(key);
+    bool loopedOnce = false;
+    do {
+        if (m_usedSpacesFlag[index] == true) {
+            auto& pair = reinterpret_cast<const std::pair<Key, MappedType>&>(m_storage[index]);
+            if (pair.first == key) {
+                return pair.second;
+            }
+        }
+
+        index++;
+        // Only loop across array once
+        if (!loopedOnce && index == maxSize) {
+            index = 0;
+            loopedOnce = true;
+        }
+    } while (index < maxSize);
+    return {};
+}
+
+template <typename Key, typename MappedType, uint16_t maxSize>
 uint16_t HashMap<Key, MappedType, maxSize>::getMaxSize() const {
     return maxSize;
 }
