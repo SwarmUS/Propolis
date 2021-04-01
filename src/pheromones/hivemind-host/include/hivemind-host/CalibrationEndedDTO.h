@@ -17,7 +17,7 @@ class CalibrationEndedDTO {
      * @param message [out] message to serialize to
      * @return true if successful, false otherwise
      */
-    bool serialize(CalibrationEnded& message) const;
+    static bool serialize(CalibrationEnded& message);
 };
 
 #endif //__CALIBRATIONENDEDDTO_H__
