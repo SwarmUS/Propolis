@@ -46,7 +46,7 @@ set(LIB_SOURCES
     src/CalibrationModeDTO.cpp
     src/StartCalibrationDTO.cpp
     src/SetCalibrationDistanceDTO.cpp
-        src/CalibrationMessageDTO.cpp
+    src/CalibrationMessageDTO.cpp
     src/InterlocAPIDTO.cpp
     src/CalibrationEndedDTO.cpp
     )
