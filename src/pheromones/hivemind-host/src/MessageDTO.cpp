@@ -25,6 +25,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = NetworkApiDTO(message.message.network);
         break;
 
+    case Message_interloc_tag:
+        m_message = InterlocAPIDTO(message.message.interloc);
+        break;
+
     default:
         m_message = std::monostate();
     }
@@ -45,13 +49,23 @@ MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const BuzzMess
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const NetworkApiDTO& networkAPI) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(networkAPI) {}
 
+MessageDTO::MessageDTO(uint32_t sourceId,
+                       uint32_t destinationId,
+                       const InterlocAPIDTO& interlocApi) :
+    m_sourceId(sourceId), m_destinationId(destinationId), m_message(interlocApi) {}
+
 uint32_t MessageDTO::getSourceId() const { return m_sourceId; }
 
 uint32_t MessageDTO::getDestinationId() const { return m_destinationId; }
 
-const std::
-    variant<std::monostate, RequestDTO, ResponseDTO, GreetingDTO, BuzzMessageDTO, NetworkApiDTO>&
-    MessageDTO::getMessage() const {
+const std::variant<std::monostate,
+                   RequestDTO,
+                   ResponseDTO,
+                   GreetingDTO,
+                   BuzzMessageDTO,
+                   NetworkApiDTO,
+                   InterlocAPIDTO>&
+MessageDTO::getMessage() const {
     return m_message;
 }
 
@@ -64,7 +78,8 @@ void MessageDTO::setMessage(const std::variant<std::monostate,
                                                ResponseDTO,
                                                GreetingDTO,
                                                BuzzMessageDTO,
-                                               NetworkApiDTO>& message) {
+                                               NetworkApiDTO,
+                                               InterlocAPIDTO>& message) {
     m_message = message;
 }
 
@@ -95,6 +110,11 @@ bool MessageDTO::serialize(Message& message) const {
     if (const auto* networkAPI = std::get_if<NetworkApiDTO>(&m_message)) {
         message.which_message = Message_network_tag;
         return networkAPI->serialize(message.message.network);
+    }
+
+    if (const auto* interlocAPI = std::get_if<InterlocAPIDTO>(&m_message)) {
+        message.which_message = Message_interloc_tag;
+        return interlocAPI->serialize(message.message.interloc);
     }
 
     return false;

@@ -1,6 +1,7 @@
 #ifndef __CALIBRATIONMESSAGEDTO_H__
 #define __CALIBRATIONMESSAGEDTO_H__
 
+#include "CalibrationEndedDTO.h"
 #include "SetCalibrationDistanceDTO.h"
 #include "StartCalibrationDTO.h"
 #include "StopCalibrationDTO.h"
@@ -13,14 +14,18 @@ class CalibrationMessageDTO {
     CalibrationMessageDTO(const StartCalibrationDTO& call);
     CalibrationMessageDTO(const StopCalibrationDTO& call);
     CalibrationMessageDTO(const SetCalibrationDistanceDTO& call);
+    CalibrationMessageDTO(const CalibrationEndedDTO& call);
 
     /**
      * @brief Gets the call contained in the message
      * @return The call
      */
-    const std::
-        variant<std::monostate, StartCalibrationDTO, StopCalibrationDTO, SetCalibrationDistanceDTO>&
-        getCall() const;
+    const std::variant<std::monostate,
+                       StartCalibrationDTO,
+                       StopCalibrationDTO,
+                       SetCalibrationDistanceDTO,
+                       CalibrationEndedDTO>&
+    getCall() const;
 
     /**
      * @brief Sets the call contained in the message
@@ -29,7 +34,8 @@ class CalibrationMessageDTO {
     void setCall(const std::variant<std::monostate,
                                     StartCalibrationDTO,
                                     StopCalibrationDTO,
-                                    SetCalibrationDistanceDTO>& call);
+                                    SetCalibrationDistanceDTO,
+                                    CalibrationEndedDTO>& call);
 
     /**
      * @brief Serializes to a protobuf message
@@ -39,7 +45,11 @@ class CalibrationMessageDTO {
     bool serialize(CalibrationMessage& message) const;
 
   private:
-    std::variant<std::monostate, StartCalibrationDTO, StopCalibrationDTO, SetCalibrationDistanceDTO>
+    std::variant<std::monostate,
+                 StartCalibrationDTO,
+                 StopCalibrationDTO,
+                 SetCalibrationDistanceDTO,
+                 CalibrationEndedDTO>
         m_call;
 };
 
