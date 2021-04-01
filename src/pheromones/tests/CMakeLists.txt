@@ -36,6 +36,7 @@ set(TEST_SOURCES
 
     HiveMindHostApiRequestDTOUnitTests.cpp
     HiveMindHostApiResponseDTOUnitTests.cpp
+    BytesDTOUnitTests.cpp
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp

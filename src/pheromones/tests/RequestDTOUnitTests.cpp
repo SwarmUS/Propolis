@@ -31,7 +31,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_user_valid) {
 TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
     // Given
     Request req;
-    m_request->setRequest(HiveMindHostApiRequestDTO(HiveMindHostApiRequest {}));
+    m_request->setRequest(HiveMindHostApiRequestDTO(BytesDTO(0, 0, false, NULL, 0)));
 
     // Then
     bool ret = m_request->serialize(req);

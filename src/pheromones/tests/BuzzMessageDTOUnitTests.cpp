@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <pheromones/BuzzMessageDTO.h>
 
-class BuzMessageDTOFixture : public testing::Test {
+class BuzzMessageDTOFixture : public testing::Test {
   public:
     BuzzMessageDTO* m_msg;
 
@@ -11,7 +11,7 @@ class BuzMessageDTOFixture : public testing::Test {
     void TearDown() override { delete m_msg; }
 };
 
-TEST_F(BuzMessageDTOFixture, BuzzMessage_constructor_noOverflow) {
+TEST_F(BuzzMessageDTOFixture, BuzzMessage_constructor_noOverflow) {
     // Given
     std::string rndString = randomString(100);
 
@@ -22,7 +22,7 @@ TEST_F(BuzMessageDTOFixture, BuzzMessage_constructor_noOverflow) {
     EXPECT_EQ(msg.getPayloadLength(), BuzzMessageDTO::PAYLOAD_MAX_SIZE);
 }
 
-TEST_F(BuzMessageDTOFixture, BuzzMessage_serialize_valid) {
+TEST_F(BuzzMessageDTOFixture, BuzzMessage_serialize_valid) {
     // Given
     BuzzMessage msg;
 

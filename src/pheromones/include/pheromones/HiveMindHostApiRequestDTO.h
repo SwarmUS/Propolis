@@ -1,22 +1,24 @@
 #ifndef __HIVEMINDAPIHOSTREQUESTDTO_H_
 #define __HIVEMINDAPIHOSTREQUESTDTO_H_
 
+#include "BytesDTO.h"
 #include <message.pb.h>
 #include <variant>
 
 class HiveMindHostApiRequestDTO {
   public:
     HiveMindHostApiRequestDTO(const HiveMindHostApiRequest& request);
+    HiveMindHostApiRequestDTO(const BytesDTO& bytes);
 
     /**
      *@brief get the stored request
      *@return the stored request */
-    const std::variant<std::monostate>& getRequest() const;
+    const std::variant<std::monostate, BytesDTO>& getRequest() const;
 
     /**
      *@brief set the request
      *@param [in] request to set */
-    void setRequest(const std::variant<std::monostate>& request);
+    void setRequest(const std::variant<std::monostate, BytesDTO>& request);
 
     /**
      *@brief serialize a HiveMindHostApiRequest for nanopb, sets the fields properly before using
@@ -26,7 +28,7 @@ class HiveMindHostApiRequestDTO {
     bool serialize(HiveMindHostApiRequest& request) const;
 
   private:
-    std::variant<std::monostate> m_request;
+    std::variant<std::monostate, BytesDTO> m_request;
 };
 
 #endif // __HIVEMINDAPIHOSTREQUESTDTO_H_
