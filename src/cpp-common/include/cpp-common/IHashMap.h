@@ -2,9 +2,9 @@
 #define PROPOLIS_IHASHMAP_H
 
 #include <cstdint>
+#include <functional>
 #include <optional>
 #include <utility>
-#include <functional>
 
 /**
  * @brief A templated hash map that can store a fixed number of items
