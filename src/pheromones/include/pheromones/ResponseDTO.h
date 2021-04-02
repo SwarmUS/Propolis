@@ -28,9 +28,11 @@ class ResponseDTO {
      *
      *@return a variant of the stored resposne
      */
-    const std::
-        variant<std::monostate, GenericResponseDTO, UserCallResponseDTO, HiveMindHostApiResponseDTO>&
-        getResponse() const;
+    const std::variant<std::monostate,
+                       GenericResponseDTO,
+                       UserCallResponseDTO,
+                       HiveMindHostApiResponseDTO>&
+    getResponse() const;
 
     /**
      *@brief sets the id of the response
@@ -62,8 +64,9 @@ class ResponseDTO {
   private:
     uint32_t m_id;
 
-    std::variant<std::monostate, GenericResponseDTO, UserCallResponseDTO, HiveMindHostApiResponseDTO>
-        m_response;
+    std::
+        variant<std::monostate, GenericResponseDTO, UserCallResponseDTO, HiveMindHostApiResponseDTO>
+            m_response;
 };
 
 #endif // __RESPONSEDTO_H_

@@ -2,8 +2,8 @@
 #define __HIVEMINDHOSTDESERIALIZER_H_
 
 #include "IHiveMindHostDeserializer.h"
-#include <pheromones/IProtobufStream.h>
 #include <pb_decode.h>
+#include <pheromones/IProtobufStream.h>
 
 class HiveMindHostDeserializer : public IHiveMindHostDeserializer {
   public:

@@ -1,8 +1,8 @@
 #ifndef __PROTOBUFSTREAMINTERFACEMOCK_H_
 #define __PROTOBUFSTREAMINTERFACEMOCK_H_
 
-#include <pheromones/IProtobufStream.h>
 #include <gmock/gmock.h>
+#include <pheromones/IProtobufStream.h>
 
 class ProtobufStreamInterfaceMock : public IProtobufStream {
 

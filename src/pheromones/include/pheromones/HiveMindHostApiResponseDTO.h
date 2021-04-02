@@ -19,8 +19,7 @@ class HiveMindHostApiResponseDTO {
     /**
      *@brief set the response
      *@param [in] response to set */
-    void setResponse(
-        const std::variant<std::monostate, GenericResponseDTO>& response);
+    void setResponse(const std::variant<std::monostate, GenericResponseDTO>& response);
 
     /**
      *@brief serialize a HiveMindHostApiResponse for nanopb, sets the fields properly before using

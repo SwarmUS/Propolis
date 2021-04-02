@@ -13,9 +13,8 @@ HiveMindHostApiResponseDTO::HiveMindHostApiResponseDTO(const HiveMindHostApiResp
 HiveMindHostApiResponseDTO::HiveMindHostApiResponseDTO(const GenericResponseDTO& response) :
     m_response(response) {}
 
-
-const std::variant<std::monostate, GenericResponseDTO>& HiveMindHostApiResponseDTO::
-    getResponse() const {
+const std::variant<std::monostate, GenericResponseDTO>& HiveMindHostApiResponseDTO::getResponse()
+    const {
     return m_response;
 }
 

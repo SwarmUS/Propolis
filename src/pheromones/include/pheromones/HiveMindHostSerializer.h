@@ -3,8 +3,8 @@
 
 #include "IHiveMindHostSerializer.h"
 #include "MessageDTO.h"
-#include <pheromones/IProtobufStream.h>
 #include <pb_encode.h>
+#include <pheromones/IProtobufStream.h>
 #include <variant>
 
 class HiveMindHostSerializer : public IHiveMindHostSerializer {

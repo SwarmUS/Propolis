@@ -45,7 +45,8 @@ TEST_F(ResponseDTOFixture, ResponseDTO_serialize_UserCall_valid) {
 TEST_F(ResponseDTOFixture, ResponseDTO_serialize_HiveMindAPI_valid) {
     // Given
     Response resp;
-    m_response->setResponse(HiveMindHostApiResponseDTO(GenericResponseDTO(GenericResponseStatusDTO::Ok, "")));
+    m_response->setResponse(
+        HiveMindHostApiResponseDTO(GenericResponseDTO(GenericResponseStatusDTO::Ok, "")));
 
     // Then
     bool ret = m_response->serialize(resp);

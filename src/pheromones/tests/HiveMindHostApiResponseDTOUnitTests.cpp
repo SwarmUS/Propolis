@@ -6,7 +6,10 @@ class HiveMindHostApiResponseDTOFixture : public testing::Test {
     static constexpr uint32_t gc_id = 42;
     HiveMindHostApiResponseDTO* m_response;
 
-    void SetUp() override { m_response = new HiveMindHostApiResponseDTO(GenericResponseDTO(GenericResponseStatusDTO::Ok, "")); }
+    void SetUp() override {
+        m_response =
+            new HiveMindHostApiResponseDTO(GenericResponseDTO(GenericResponseStatusDTO::Ok, ""));
+    }
 
     void TearDown() override { delete m_response; }
 };

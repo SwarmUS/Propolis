@@ -2,10 +2,10 @@
 #define __PROTOBUFSTREAMBUFFERINTERFACEMOCK_H_
 
 #include <array>
-#include <pheromones/IProtobufStream.h>
 #include <message.pb.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
+#include <pheromones/IProtobufStream.h>
 
 class ProtobufStreamInterfaceBufferMock : public IProtobufStream {
 
