@@ -43,6 +43,13 @@ set(LIB_SOURCES
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
+
+    src/CalibrationModeDTO.cpp
+    src/StartCalibrationDTO.cpp
+    src/SetCalibrationDistanceDTO.cpp
+    src/CalibrationMessageDTO.cpp
+    src/InterlocAPIDTO.cpp
+    src/CalibrationEndedDTO.cpp
 )
 
 set(LIB_HEADERS
@@ -81,6 +88,14 @@ set(LIB_HEADERS
 
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h
+
+    include/pheromones/CalibrationModeDTO.h
+    include/pheromones/StartCalibrationDTO.h
+    include/pheromones/StopCalibrationDTO.h
+    include/pheromones/SetCalibrationDistanceDTO.h
+    include/pheromones/CalibrationMessageDTO.h
+    include/pheromones/InterlocAPIDTO.h
+    include/pheromones/CalibrationEndedDTO.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

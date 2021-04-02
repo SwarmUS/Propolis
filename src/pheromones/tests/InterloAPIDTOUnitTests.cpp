@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/InterlocAPIDTO.h>
+#include <pheromones/InterlocAPIDTO.h>
 
 class InterlocAPIFixture : public testing::Test {
   public:

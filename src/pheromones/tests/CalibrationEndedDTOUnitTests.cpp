@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/CalibrationEndedDTO.h>
+#include <pheromones/CalibrationEndedDTO.h>
 
 class CalibrationEndedFixture : public testing::Test {
   public:

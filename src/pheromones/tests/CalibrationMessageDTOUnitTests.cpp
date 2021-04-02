@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/CalibrationMessageDTO.h>
+#include <pheromones/CalibrationMessageDTO.h>
 
 class CalibrationMessageFixture : public testing::Test {
   public:

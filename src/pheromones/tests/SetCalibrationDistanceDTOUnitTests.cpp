@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/SetCalibrationDistanceDTO.h>
+#include <pheromones/SetCalibrationDistanceDTO.h>
 
 class SetCalibrationDistanceFixture : public testing::Test {
   public:

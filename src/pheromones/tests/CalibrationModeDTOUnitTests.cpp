@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/CalibrationModeDTO.h>
+#include <pheromones/CalibrationModeDTO.h>
 
 class CalibrationModeDTOFixture : public testing::Test {
   public:

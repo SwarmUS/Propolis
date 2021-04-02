@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <hivemind-host/StopCalibrationDTO.h>
+#include <pheromones/StopCalibrationDTO.h>
 
 class StopCalibrationDTOFixture : public testing::Test {
   public:
