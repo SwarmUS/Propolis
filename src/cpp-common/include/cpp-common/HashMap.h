@@ -8,7 +8,7 @@
 
 // TODO: Implement quadratic jumping instead of linear and inject memory
 template <typename Key, typename MappedType, uint16_t maxSize>
-class HashMap : public IHashMap<Key, MappedType, maxSize> {
+class HashMap : public IHashMap<Key, MappedType> {
   public:
     HashMap();
     ~HashMap() override;

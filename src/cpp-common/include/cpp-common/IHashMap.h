@@ -4,17 +4,17 @@
 #include <cstdint>
 #include <optional>
 #include <utility>
+#include <functional>
 
 /**
  * @brief A templated hash map that can store a fixed number of items
  * @tparam Key The key used to find elements in the hash map. Must be some sort of integer
  * @tparam MappedType The type to store in the map. Can be any type
- * @tparam maxSize The maximum number of items that can be stored in the map.
  */
-template <typename Key, typename MappedType, uint16_t maxSize>
+template <typename Key, typename MappedType>
 class IHashMap {
   public:
-    virtual ~IHashMap<Key, MappedType, maxSize>() = default;
+    virtual ~IHashMap<Key, MappedType>() = default;
 
     /**
      * @brief Insert an item into the hash map
