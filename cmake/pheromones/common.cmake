@@ -12,9 +12,9 @@ function(pheromones_fetch_populate)
     FetchContent_Declare(
         ${PROJECT_NAME}_pheromones
 
-        GIT_REPOSITORY https://github.com/SwarmUS/Pheromones
-        GIT_TAG        ad00e7f
-        GIT_PROGRESS   TRUE
+        GIT_REPOSITORY  https://github.com/SwarmUS/Pheromones
+        GIT_TAG         4283375
+        GIT_PROGRESS    TRUE
     )
 
     set(PHEROMONES ${PROJECT_NAME}_pheromones)
