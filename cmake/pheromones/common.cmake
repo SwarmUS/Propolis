@@ -12,9 +12,9 @@ function(pheromones_fetch_populate)
     FetchContent_Declare(
         ${PROJECT_NAME}_pheromones
 
-        GIT_REPOSITORY https://github.com/SwarmUS/Pheromones
-        GIT_TAG        48de539216a1336217f3a06ac70abdddd021dcdc
-        GIT_PROGRESS   TRUE
+        GIT_REPOSITORY  https://github.com/SwarmUS/Pheromones
+        GIT_TAG         4283375
+        GIT_PROGRESS    TRUE
     )
 
     set(PHEROMONES ${PROJECT_NAME}_pheromones)
@@ -32,7 +32,7 @@ function(pheromones_fetch_populate)
     if (DISABLE_EXTERNAL_WARNINGS) 
         set(LIB_LIST
           protobuf-nanopb-static
-          swarmus-pheromones-hivemind-host)
+          swarmus-pheromones)
 
         foreach(LIB ${LIB_LIST})
             target_compile_options(${LIB} PRIVATE -w)
@@ -40,4 +40,5 @@ function(pheromones_fetch_populate)
             set_target_properties(${LIB} PROPERTIES CXX_CLANG_TIDY "")
         endforeach()
     endif()
+
 endfunction()
