@@ -5,6 +5,7 @@
 #include <FreeRTOS.h>
 #include <array>
 #include <task.h>
+#include <atomic>
 
 /**
  * @brief Creates a FreeRTOS task on the stack
@@ -32,7 +33,7 @@ class AbstractTask : public IAbstractTask {
     StaticTask_t m_taskBuffer;
     UBaseType_t m_priority;
     TaskHandle_t m_taskHandle;
-    bool m_taskRunning = false;
+    std::atomic_bool m_taskRunning = false;
 };
 
 #include "AbstractTask.tpp"
