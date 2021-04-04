@@ -4,8 +4,8 @@
 #include "IAbstractTask.h"
 #include <FreeRTOS.h>
 #include <array>
-#include <task.h>
 #include <atomic>
+#include <task.h>
 
 /**
  * @brief Creates a FreeRTOS task on the stack
