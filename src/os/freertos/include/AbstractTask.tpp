@@ -2,11 +2,8 @@
 #define ABSTRACTTASK_TPP
 
 template <unsigned int stackSize>
-AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) {
-    m_taskName = taskName;
-    m_priority = priority;
-    m_taskBuffer = {};
-
+AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) :
+    m_taskName(taskName), m_priority(priority) m_taskBuffer({}), m_taskRunning(false) {
     m_taskHandle = xTaskCreateStatic(wrapper, m_taskName, stackSize, this, m_priority,
                                      m_stackArray.data(), &m_taskBuffer);
 }

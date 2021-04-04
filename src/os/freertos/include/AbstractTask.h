@@ -33,7 +33,7 @@ class AbstractTask : public IAbstractTask {
     StaticTask_t m_taskBuffer;
     UBaseType_t m_priority;
     TaskHandle_t m_taskHandle;
-    std::atomic_bool m_taskRunning = false;
+    std::atomic_bool m_taskRunning;
 };
 
 #include "AbstractTask.tpp"
