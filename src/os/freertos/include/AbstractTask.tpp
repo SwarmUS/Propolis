@@ -2,11 +2,10 @@
 #define ABSTRACTTASK_TPP
 
 template <unsigned int stackSize>
-AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) {
-    m_taskName = taskName;
-    m_priority = priority;
-    m_taskHandle = NULL;
-    m_taskBuffer = {};
+AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) :
+    m_taskName(taskName), m_taskBuffer({}), m_priority(priority), m_taskRunning(false) {
+    m_taskHandle = xTaskCreateStatic(wrapper, m_taskName, stackSize, this, m_priority,
+                                     m_stackArray.data(), &m_taskBuffer);
 }
 
 template <unsigned int stackSize>
@@ -19,9 +18,8 @@ AbstractTask<stackSize>::~AbstractTask() {
 template <unsigned int stackSize>
 bool AbstractTask<stackSize>::start() {
     if (!m_taskRunning) {
-        m_taskHandle = xTaskCreateStatic(wrapper, m_taskName, stackSize, this, m_priority,
-                                         m_stackArray.data(), &m_taskBuffer);
         m_taskRunning = true;
+        vTaskResume(m_taskHandle);
         return true;
     }
     return false;
@@ -35,8 +33,14 @@ bool AbstractTask<stackSize>::isRunning() {
 template <unsigned int stackSize>
 void AbstractTask<stackSize>::wrapper(void* params) {
     AbstractTask* task = static_cast<AbstractTask*>(params);
-    task->task();
-    task->m_taskRunning = false;
+
+    while (true) {
+        if (task->m_taskRunning) {
+            task->task();
+            task->m_taskRunning = false;
+        }
+        vTaskSuspend(task->m_taskHandle);
+    }
 }
 
 template <unsigned int stackSize>
