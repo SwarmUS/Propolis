@@ -8,6 +8,13 @@ UserCallRequestDTO::UserCallRequestDTO(const UserCallRequest& request) :
     case UserCallRequest_function_call_tag:
         m_request = FunctionCallRequestDTO(request.request.function_call);
         break;
+    case UserCallRequest_function_description_tag:
+        m_request = FunctionDescriptionRequestDTO(request.request.function_description);
+        break;
+    case UserCallRequest_function_list_length_tag:
+        m_request = FunctionListLengthRequestDTO(request.request.function_list_length);
+        break;
+
     default:
         m_request = std::monostate();
     }
