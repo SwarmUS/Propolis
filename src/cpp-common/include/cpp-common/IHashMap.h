@@ -82,7 +82,16 @@ class IHashMap {
      */
     virtual uint16_t getMaxSize() const = 0;
 
+    /**
+     * @brief Get the used space in the map
+     * @return the used space in the map, so the number of items
+     */
     virtual uint16_t getUsedSpace() const = 0;
+
+    /**
+     * @brief Get the free space in the map
+     * @return the free space in the map
+     */
     virtual uint16_t getFreeSpace() const = 0;
 };
 

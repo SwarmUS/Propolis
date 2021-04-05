@@ -23,77 +23,69 @@ HashMap<Key, MappedType, maxSize>::~HashMap() {
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>& item) {
-    if (isFull()) {
+    std::optional<uint16_t> idxOpt = findIdx(item.first, false);
+
+    if (!idxOpt) {
         return false;
     }
-    bool loopedOnce = false;
-    uint16_t index = hash(item.first);
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        // Insert forbids overwriting
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
-            return false;
-        }
-        if (std::get<USED_FLAG_INDEX>(tuple) == false) {
-            new (&m_storage[index])
-                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
-            m_usedSpaces++;
-            return true;
-        }
 
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            loopedOnce = true;
-            index = 0;
-        }
-    } while (index < maxSize);
-    return false;
+    uint16_t idx = idxOpt.value();
+    auto& [used, mapKey, obj] =
+        reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
+
+    if (used) {
+        return false;
+    }
+
+    m_usedSpaces++;
+    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, item.first, item.second);
+    return true;
 }
 
+// TODO: remove std pair
 template <typename Key, typename MappedType, uint16_t maxSize>
 bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>& item) {
-    bool loopedOnce = false;
-    uint16_t index = hash(item.first);
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        // Try to overwrite first
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
-            new (&m_storage[index])
-                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
-            return true;
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            loopedOnce = true;
-            index = 0;
-        }
-    } while (index < maxSize);
-    // If cannot overwrite, try to insert
-    return insert(item);
+
+    std::optional<uint16_t> idxOpt = findIdx(item.first, false);
+
+    if (!idxOpt) {
+        return false;
+    }
+
+    uint16_t idx = idxOpt.value();
+    auto& [used, mapKey, obj] =
+        reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
+
+    if (used) {
+        obj.~MappedType();
+    } else {
+        m_usedSpaces++;
+    }
+
+    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, item.first, item.second);
+    return true;
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
-    uint16_t index = hash(key);
-    bool loopedOnce = false;
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            std::get<VALUE_INDEX>(tuple).~MappedType();
-            std::get<USED_FLAG_INDEX>(tuple) = false;
-            m_usedSpaces--;
-            return true;
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
-            loopedOnce = true;
-        }
-    } while (index < maxSize);
-    return false;
+    std::optional<uint16_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
+        return {};
+    }
+
+    uint16_t idx = idxOpt.value();
+    auto& [used, mapKey, obj] =
+        reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
+
+    if (!used) {
+        return false;
+    }
+
+    obj.~MappedType();
+    used = false;
+    m_usedSpaces--;
+    return true;
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
@@ -120,41 +112,58 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSize>::at(Key key) {
-    uint16_t index = hash(key);
-    bool loopedOnce = false;
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            return std::get<VALUE_INDEX>(tuple);
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
-            loopedOnce = true;
-        }
-    } while (index < maxSize);
+    // TODO fix
+    const HashMap<Key, MappedType, maxSize>* thisConst = static_cast<const HashMap<Key, MappedType, maxSize>*>(this);
+    const auto obj = thisConst->at(key);
+    if(obj){
+        return const_cast<MappedType&>(obj.value().get());
+    }
     return {};
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
     Key key) const {
-    uint16_t index = hash(key);
+    std::optional<uint16_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
+        return {};
+    }
+
+    uint16_t idx = idxOpt.value();
+    const auto& [used, mapKey, obj] =
+        reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
+
+    // if not used is that the object does not exists;
+    if (!used) {
+        return {};
+    }
+
+    return obj;
+}
+
+template <typename Key, typename MappedType, uint16_t maxSize>
+std::optional<uint16_t> HashMap<Key, MappedType, maxSize>::findIdx(Key key, bool findEmpty) const {
+    (void) findEmpty;
+
     bool loopedOnce = false;
+    uint16_t index = hash(key);
     do {
-        const auto& tuple =
+        const auto& [used, mapKey, obj] =
             reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            return std::get<VALUE_INDEX>(tuple);
+        // If we found the key or found an empty slot
+        if ((used && mapKey == key) || (used == false)) {
+            return index;
         }
+
         index++;
         // Only loop across array once
         if (!loopedOnce && index == maxSize) {
-            index = 0;
             loopedOnce = true;
+            index = 0;
         }
     } while (index < maxSize);
+
     return {};
 }
 

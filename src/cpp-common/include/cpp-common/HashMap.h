@@ -29,13 +29,16 @@ class HashMap : public IHashMap<Key, MappedType> {
     // TODO: implement an iterator
 
   private:
+    // Return either the idx matching the key, the next free slot or nothing if there is no more
+    // space
+    std::optional<uint16_t> findIdx(Key key, bool findEmpty) const;
+    static uint16_t hash(Key key);
+
     // Using aligned storage for placement new usage when inserting
     typename std::aligned_storage<sizeof(std::tuple<bool, Key, MappedType>),
                                   alignof(std::tuple<bool, Key, MappedType>)>::type
         m_storage[maxSize];
 
-    // Hashing function of the Key
-    static uint16_t hash(Key key);
     uint16_t m_usedSpaces;
 };
 
