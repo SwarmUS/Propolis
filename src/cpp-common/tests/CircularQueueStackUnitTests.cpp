@@ -15,7 +15,7 @@ class CircularQueueStackFixture : public testing::Test {
 };
 
 // Mainly verifies that we can instanciate it and don't cause a segfault
-TEST_F(CircularQueueStackFixture, CircularQueue_clear_noData) {
+TEST_F(CircularQueueStackFixture, CircularQueue_nosegfault) {
     // Given
 
     // Then

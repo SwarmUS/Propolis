@@ -7,23 +7,22 @@
 #include <new>
 #include <string>
 
-template <typename Key, typename MappedType>
-
-HashMap<Key, MappedType>::HashMap(std::tuple<bool, Key, MappedType>* storage,
-                                  uint32_t storageSize) :
+template <typename Key, typename Value, class HashFunc>
+HashMap<Key, Value, HashFunc>::HashMap(std::tuple<bool, Key, Value>* storage,
+                                       uint32_t storageSize) :
     m_storage(storage), m_storageSize(storageSize), m_usedSpaces(0) {
     for (size_t i = 0; i < m_storageSize; i++) {
         auto& [used, mapKey, mapObj] = m_storage[i];
         used = false;
     }
 }
-template <typename Key, typename MappedType>
-HashMap<Key, MappedType>::~HashMap() {
-    HashMap<Key, MappedType>::clear();
+template <typename Key, typename Value, class HashFunc>
+HashMap<Key, Value, HashFunc>::~HashMap() {
+    HashMap<Key, Value, HashFunc>::clear();
 }
 
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::insert(const Key& key, const MappedType& obj) {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::insert(const Key& key, const Value& obj) {
     std::optional<uint32_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
@@ -38,13 +37,13 @@ bool HashMap<Key, MappedType>::insert(const Key& key, const MappedType& obj) {
     }
 
     m_usedSpaces++;
-    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, key, obj);
+    new (&m_storage[idx]) std::tuple<bool, Key, Value>(true, key, obj);
     return true;
 }
 
 // TODO: remove std pair
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::upsert(const Key& key, const MappedType& obj) {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::upsert(const Key& key, const Value& obj) {
 
     std::optional<uint32_t> idxOpt = findIdx(key, false);
 
@@ -56,17 +55,17 @@ bool HashMap<Key, MappedType>::upsert(const Key& key, const MappedType& obj) {
     auto& [used, mapKey, mapObj] = m_storage[idx];
 
     if (used) {
-        mapObj.~MappedType();
+        mapObj.~Value();
     } else {
         m_usedSpaces++;
     }
 
-    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, key, obj);
+    new (&m_storage[idx]) std::tuple<bool, Key, Value>(true, key, obj);
     return true;
 }
 
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::remove(const Key& key) {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::remove(const Key& key) {
     std::optional<uint32_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
@@ -80,27 +79,27 @@ bool HashMap<Key, MappedType>::remove(const Key& key) {
         return false;
     }
 
-    mapObj.~MappedType();
+    mapObj.~Value();
     used = false;
     m_usedSpaces--;
     return true;
 }
 
-template <typename Key, typename MappedType>
-void HashMap<Key, MappedType>::clear() {
+template <typename Key, typename Value, class HashFunc>
+void HashMap<Key, Value, HashFunc>::clear() {
     for (size_t i = 0; i < m_storageSize; i++) {
         auto& [used, mapKey, mapObj] = m_storage[i];
 
         if (used) {
-            mapObj.~MappedType();
+            mapObj.~Value();
             used = false;
         }
     }
     m_usedSpaces = 0;
 }
 
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::get(const Key& k, MappedType& item) const {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::get(const Key& k, Value& item) const {
     const auto& obj = at(k);
     if (obj.has_value()) {
         item = obj.value().get();
@@ -108,18 +107,18 @@ bool HashMap<Key, MappedType>::get(const Key& k, MappedType& item) const {
     }
     return false;
 }
-template <typename Key, typename MappedType>
-std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType>::at(const Key& key) {
-    const auto* thisConst = static_cast<const HashMap<Key, MappedType>*>(this);
+template <typename Key, typename Value, class HashFunc>
+std::optional<std::reference_wrapper<Value>> HashMap<Key, Value, HashFunc>::at(const Key& key) {
+    const auto* thisConst = static_cast<const HashMap<Key, Value, HashFunc>*>(this);
     const auto obj = thisConst->at(key);
     if (obj) {
-        return const_cast<MappedType&>(obj.value().get());
+        return const_cast<Value&>(obj.value().get());
     }
     return {};
 }
 
-template <typename Key, typename MappedType>
-std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType>::at(
+template <typename Key, typename Value, class HashFunc>
+std::optional<std::reference_wrapper<const Value>> HashMap<Key, Value, HashFunc>::at(
     const Key& key) const {
     std::optional<uint32_t> idxOpt = findIdx(key, false);
 
@@ -138,12 +137,12 @@ std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType>
     return mapObj;
 }
 
-template <typename Key, typename MappedType>
-std::optional<uint32_t> HashMap<Key, MappedType>::findIdx(Key key, bool findEmpty) const {
+template <typename Key, typename Value, class HashFunc>
+std::optional<uint32_t> HashMap<Key, Value, HashFunc>::findIdx(Key key, bool findEmpty) const {
     (void)findEmpty;
 
     bool loopedOnce = false;
-    uint32_t index = hash(key);
+    uint32_t index = m_hashFunction(key, m_storageSize);
     do {
         auto& [used, mapKey, mapObj] = m_storage[index];
         // If we found the key or found an empty slot
@@ -162,34 +161,29 @@ std::optional<uint32_t> HashMap<Key, MappedType>::findIdx(Key key, bool findEmpt
     return {};
 }
 
-template <typename Key, typename MappedType>
-uint32_t HashMap<Key, MappedType>::getMaxSize() const {
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getMaxSize() const {
     return m_storageSize;
 }
 
-template <typename Key, typename MappedType>
-uint32_t HashMap<Key, MappedType>::getFreeSpace() const {
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getFreeSpace() const {
     return m_storageSize - m_usedSpaces;
 }
 
-template <typename Key, typename MappedType>
-uint32_t HashMap<Key, MappedType>::getUsedSpace() const {
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getUsedSpace() const {
     return m_usedSpaces;
 }
 
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::isEmpty() const {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::isEmpty() const {
     return m_usedSpaces == 0;
 }
 
-template <typename Key, typename MappedType>
-bool HashMap<Key, MappedType>::isFull() const {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::isFull() const {
     return m_usedSpaces == m_storageSize;
-}
-
-template <typename Key, typename MappedType>
-uint32_t HashMap<Key, MappedType>::hash(const Key& key) const {
-    return std::hash<Key>{}(key) % m_storageSize;
 }
 
 #endif // __HASH_MAP_TPP_

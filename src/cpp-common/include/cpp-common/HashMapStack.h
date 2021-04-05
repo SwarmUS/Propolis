@@ -4,45 +4,51 @@
 #include "HashMap.h"
 #include "IHashMap.h"
 
-template <typename Key, typename MappedType, uint32_t maxSize>
-class HashMapStack : public IHashMap<Key, MappedType> {
+/**
+ *@brief Hashmap wrapper with the memory allocated on the stack */
+template <typename Key, typename Value, uint32_t MaxSize, class HashFunc = HashFunction<Value>>
+
+class HashMapStack : public IHashMap<Key, Value> {
   public:
     HashMapStack() :
-        m_map(reinterpret_cast<std::tuple<bool, Key, MappedType>>(this->m_queueData), maxSize) {}
+        m_map(reinterpret_cast<std::tuple<bool, Key, Value>*>(this->m_storage), MaxSize) {}
 
-    ~HashMapStack() override;
+    ~HashMapStack() override = default;
 
-    bool insert(const Key& key, const MappedType& obj) override { return m_map.insert(key, obj); }
+    bool insert(const Key& key, const Value& obj) override { return m_map.insert(key, obj); }
 
-    bool upsert(const Key& key, const MappedType& obj) override { return m_map.upsert(key, obj); }
+    bool upsert(const Key& key, const Value& obj) override { return m_map.upsert(key, obj); }
 
-    bool get(const Key& key, MappedType& obj) const override { return m_map.get(key, obj); }
+    bool get(const Key& key, Value& obj) const override { return m_map.get(key, obj); }
 
-    std::optional<std::reference_wrapper<MappedType>> at(const Key& key) override {
+    std::optional<std::reference_wrapper<Value>> at(const Key& key) override {
         return m_map.at(key);
     }
 
-    std::optional<std::reference_wrapper<const MappedType>> at(const Key& key) const override {
+    std::optional<std::reference_wrapper<const Value>> at(const Key& key) const override {
         return m_map.at(key);
     }
 
     bool remove(const Key& key) override { return m_map.remove(key); }
+
     void clear() override { m_map.clear(); }
 
     bool isFull() const override { return m_map.isFull(); }
 
     bool isEmpty() const override { return m_map.isEmpty(); }
+
     uint32_t getMaxSize() const override { return m_map.getMaxSize(); }
+
     uint32_t getUsedSpace() const override { return m_map.getUsedSpace(); }
+
     uint32_t getFreeSpace() const override { return m_map.getFreeSpace(); }
 
   private:
     // Using aligned storage for placement new usage when inserting
-    typename std::aligned_storage<sizeof(std::tuple<bool, Key, MappedType>),
-                                  alignof(std::tuple<bool, Key, MappedType>)>::type
+    typename std::aligned_storage<sizeof(std::tuple<bool, Key, Value>),
+                                  alignof(std::tuple<bool, Key, Value>)>::type m_storage[MaxSize];
 
-        m_storage[maxSize];
-    HashMap<Key, MappedType> m_map;
+    HashMap<Key, Value, HashFunc> m_map;
 };
 
 #endif // __HASHMAPSTACK_H_
