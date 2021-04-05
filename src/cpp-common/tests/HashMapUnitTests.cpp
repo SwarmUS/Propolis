@@ -80,7 +80,7 @@ TEST_F(HashMapTestFixture, test_insert_duplicate_key_edge_case) {
     ASSERT_TRUE(m_hashMap->upsert(pair1.first, pair1.second)); // Upsert should succeed
     ASSERT_EQ(m_hashMap->getUsedSpace(), 2); // Should only be using 2 spaces
 
-    auto val = m_hashMap->at(pair2.first);
+    auto val = m_hashMap->at(pair1.first);
     ASSERT_TRUE(val.has_value());
     ASSERT_EQ(val.value().get(), pair1.second);
 }
