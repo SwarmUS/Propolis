@@ -7,10 +7,10 @@
 #include <type_traits>
 
 // TODO: Implement quadratic jumping instead of linear and inject memory
-template <typename Key, typename MappedType, uint16_t maxSize>
+template <typename Key, typename MappedType>
 class HashMap : public IHashMap<Key, MappedType> {
   public:
-    HashMap();
+    HashMap(std::tuple<bool, Key, MappedType>* storage, uint32_t storageSize);
     ~HashMap() override;
 
     bool insert(const Key& key, const MappedType& obj) override;
@@ -22,24 +22,21 @@ class HashMap : public IHashMap<Key, MappedType> {
     void clear() override;
     bool isFull() const override;
     bool isEmpty() const override;
-    uint16_t getMaxSize() const override;
-    uint16_t getUsedSpace() const override;
-    uint16_t getFreeSpace() const override;
+    uint32_t getMaxSize() const override;
+    uint32_t getUsedSpace() const override;
+    uint32_t getFreeSpace() const override;
 
     // TODO: implement an iterator
 
   private:
     // Return either the idx matching the key, the next free slot or nothing if there is no more
     // space
-    std::optional<uint16_t> findIdx(Key key, bool findEmpty) const;
-    static uint16_t hash(Key key);
+    std::optional<uint32_t> findIdx(Key key, bool findEmpty) const;
+    uint32_t hash(const Key& key) const;
 
-    // Using aligned storage for placement new usage when inserting
-    typename std::aligned_storage<sizeof(std::tuple<bool, Key, MappedType>),
-                                  alignof(std::tuple<bool, Key, MappedType>)>::type
-        m_storage[maxSize];
-
-    uint16_t m_usedSpaces;
+    std::tuple<bool, Key, MappedType>* const m_storage;
+    const uint32_t m_storageSize;
+    uint32_t m_usedSpaces;
 };
 
 #include "HashMap.tpp"

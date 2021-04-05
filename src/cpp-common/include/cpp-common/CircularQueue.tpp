@@ -4,7 +4,7 @@
 #include "CircularQueue.h"
 
 template <typename T>
-CircularQueue<T>::CircularQueue(T* data, uint16_t size) :
+CircularQueue<T>::CircularQueue(T* data, uint32_t size) :
     m_data(data), m_size(size), m_readPos(0), m_writePos(0), m_isFull(false) {}
 
 template <typename T>
@@ -64,7 +64,7 @@ bool CircularQueue<T>::isEmpty() const {
 }
 
 template <typename T>
-uint16_t CircularQueue<T>::getLength() const {
+uint32_t CircularQueue<T>::getLength() const {
     if (CircularQueue<T>::isFull()) {
         return m_size;
     }
@@ -75,7 +75,7 @@ uint16_t CircularQueue<T>::getLength() const {
 }
 
 template <typename T>
-uint16_t CircularQueue<T>::getFreeSize() const {
+uint32_t CircularQueue<T>::getFreeSize() const {
     if (CircularQueue<T>::isFull()) {
         return 0;
     }

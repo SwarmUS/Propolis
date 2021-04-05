@@ -84,19 +84,19 @@ class IHashMap {
      * @brief Get the maximum size of the map
      * @return the maximum number of items in the map
      */
-    virtual uint16_t getMaxSize() const = 0;
+    virtual uint32_t getMaxSize() const = 0;
 
     /**
      * @brief Get the used space in the map
      * @return the used space in the map, so the number of items
      */
-    virtual uint16_t getUsedSpace() const = 0;
+    virtual uint32_t getUsedSpace() const = 0;
 
     /**
      * @brief Get the free space in the map
      * @return the free space in the map
      */
-    virtual uint16_t getFreeSpace() const = 0;
+    virtual uint32_t getFreeSpace() const = 0;
 };
 
 #endif // PROPOLIS_IHASHMAP_H

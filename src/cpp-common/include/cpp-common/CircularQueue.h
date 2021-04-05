@@ -6,7 +6,7 @@
 template <typename T>
 class CircularQueue : public ICircularQueue<T> {
   public:
-    CircularQueue<T>(T* data, uint16_t size);
+    CircularQueue<T>(T* data, uint32_t size);
 
     ~CircularQueue<T>() override;
 
@@ -22,9 +22,9 @@ class CircularQueue : public ICircularQueue<T> {
 
     bool isEmpty() const override;
 
-    uint16_t getLength() const override;
+    uint32_t getLength() const override;
 
-    uint16_t getFreeSize() const override;
+    uint32_t getFreeSize() const override;
 
     std::optional<std::reference_wrapper<T>> getNextAllocation() override;
 
@@ -33,11 +33,11 @@ class CircularQueue : public ICircularQueue<T> {
   private:
     T* m_data;
 
-    uint16_t m_size;
+    uint32_t m_size;
 
-    uint16_t m_readPos;
+    uint32_t m_readPos;
 
-    uint16_t m_writePos;
+    uint32_t m_writePos;
 
     bool m_isFull;
 };
