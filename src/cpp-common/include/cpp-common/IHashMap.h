@@ -18,15 +18,19 @@ class IHashMap {
 
     /**
      * @brief Insert an item into the hash map
+     * @param [in] key the key to store
+     * @param [in] obj the object to store
      * @return true if successfull, false if the map was full or key already present in map
      */
-    virtual bool insert(const std::pair<Key, MappedType>& item) = 0;
+    virtual bool insert(const Key& key, const MappedType& obj) = 0;
 
     /**
      * @brief Update or insert an item into the hash map
+     * @param [in] key the key to store
+     * @param [in] obj the object to store
      * @return true if successfull, false if the map was full
      */
-    virtual bool upsert(const std::pair<Key, MappedType>& item) = 0;
+    virtual bool upsert(const Key& key, const MappedType& obj) = 0;
 
     /**
      * @brief Obtain the copy of an item from the hash map based on a Key
@@ -34,7 +38,7 @@ class IHashMap {
      * @param [out] item The reference to the item to store the value wanted
      * @return true if succesfull, false if no item found based on Key
      */
-    virtual bool get(Key key, MappedType& item) const = 0;
+    virtual bool get(const Key& key, MappedType& item) const = 0;
 
     /**
      * @brief Obtain a reference of an item from the hash map based on a Key
@@ -42,7 +46,7 @@ class IHashMap {
      * @return A an optional reference to the mapped type if key was found in map, otherwise an
      * empty optional
      */
-    virtual std::optional<std::reference_wrapper<MappedType>> at(Key key) = 0;
+    virtual std::optional<std::reference_wrapper<MappedType>> at(const Key& key) = 0;
 
     /**
      * @brief Obtain a const reference of an item from the hash map based on a Key
@@ -50,14 +54,14 @@ class IHashMap {
      * @return A an optional const reference to the mapped type if key was found in map, otherwise
      * an empty optional
      */
-    virtual std::optional<std::reference_wrapper<const MappedType>> at(Key key) const = 0;
+    virtual std::optional<std::reference_wrapper<const MappedType>> at(const Key& key) const = 0;
 
     /**
      * @brief Remove an item from the map based on its key
      * @param key The key to the item to remove
      * @return True if an item with desired was found and removed from the map, false otherwise
      */
-    virtual bool remove(Key key) = 0;
+    virtual bool remove(const Key& key) = 0;
 
     /**
      * @brief Clears all items in the map

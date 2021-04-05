@@ -13,12 +13,12 @@ class HashMap : public IHashMap<Key, MappedType> {
     HashMap();
     ~HashMap() override;
 
-    bool insert(const std::pair<Key, MappedType>& item) override;
-    bool upsert(const std::pair<Key, MappedType>& item) override;
-    bool get(Key key, MappedType& item) const override;
-    std::optional<std::reference_wrapper<MappedType>> at(Key key) override;
-    std::optional<std::reference_wrapper<const MappedType>> at(Key key) const override;
-    bool remove(Key key) override;
+    bool insert(const Key& key, const MappedType& obj) override;
+    bool upsert(const Key& key, const MappedType& obj) override;
+    bool get(const Key& key, MappedType& obj) const override;
+    std::optional<std::reference_wrapper<MappedType>> at(const Key& key) override;
+    std::optional<std::reference_wrapper<const MappedType>> at(const Key& key) const override;
+    bool remove(const Key& key) override;
     void clear() override;
     bool isFull() const override;
     bool isEmpty() const override;

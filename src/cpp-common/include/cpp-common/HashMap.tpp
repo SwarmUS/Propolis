@@ -22,15 +22,15 @@ HashMap<Key, MappedType, maxSize>::~HashMap() {
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>& item) {
-    std::optional<uint16_t> idxOpt = findIdx(item.first, false);
+bool HashMap<Key, MappedType, maxSize>::insert(const Key& key, const MappedType& obj) {
+    std::optional<uint16_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
         return false;
     }
 
     uint16_t idx = idxOpt.value();
-    auto& [used, mapKey, obj] =
+    auto& [used, mapKey, mapObj] =
         reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
 
     if (used) {
@@ -38,36 +38,36 @@ bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>&
     }
 
     m_usedSpaces++;
-    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, item.first, item.second);
+    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, key, obj);
     return true;
 }
 
 // TODO: remove std pair
 template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>& item) {
+bool HashMap<Key, MappedType, maxSize>::upsert(const Key& key, const MappedType& obj) {
 
-    std::optional<uint16_t> idxOpt = findIdx(item.first, false);
+    std::optional<uint16_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
         return false;
     }
 
     uint16_t idx = idxOpt.value();
-    auto& [used, mapKey, obj] =
+    auto& [used, mapKey, mapObj] =
         reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
 
     if (used) {
-        obj.~MappedType();
+        mapObj.~MappedType();
     } else {
         m_usedSpaces++;
     }
 
-    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, item.first, item.second);
+    new (&m_storage[idx]) std::tuple<bool, Key, MappedType>(true, key, obj);
     return true;
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
+bool HashMap<Key, MappedType, maxSize>::remove(const Key& key) {
     std::optional<uint16_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
@@ -75,14 +75,14 @@ bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
     }
 
     uint16_t idx = idxOpt.value();
-    auto& [used, mapKey, obj] =
+    auto& [used, mapKey, mapObj] =
         reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[idx]);
 
     if (!used) {
         return false;
     }
 
-    obj.~MappedType();
+    mapObj.~MappedType();
     used = false;
     m_usedSpaces--;
     return true;
@@ -102,7 +102,7 @@ void HashMap<Key, MappedType, maxSize>::clear() {
 }
 
 template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
+bool HashMap<Key, MappedType, maxSize>::get(const Key& k, MappedType& item) const {
     const auto& obj = at(k);
     if (obj.has_value()) {
         item = obj.value().get();
@@ -111,11 +111,13 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
     return false;
 }
 template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSize>::at(Key key) {
+std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSize>::at(
+    const Key& key) {
     // TODO fix
-    const HashMap<Key, MappedType, maxSize>* thisConst = static_cast<const HashMap<Key, MappedType, maxSize>*>(this);
+    const HashMap<Key, MappedType, maxSize>* thisConst =
+        static_cast<const HashMap<Key, MappedType, maxSize>*>(this);
     const auto obj = thisConst->at(key);
-    if(obj){
+    if (obj) {
         return const_cast<MappedType&>(obj.value().get());
     }
     return {};
@@ -123,7 +125,7 @@ std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSi
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
-    Key key) const {
+    const Key& key) const {
     std::optional<uint16_t> idxOpt = findIdx(key, false);
 
     if (!idxOpt) {
@@ -144,7 +146,7 @@ std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType,
 
 template <typename Key, typename MappedType, uint16_t maxSize>
 std::optional<uint16_t> HashMap<Key, MappedType, maxSize>::findIdx(Key key, bool findEmpty) const {
-    (void) findEmpty;
+    (void)findEmpty;
 
     bool loopedOnce = false;
     uint16_t index = hash(key);
