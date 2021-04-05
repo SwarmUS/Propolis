@@ -5,7 +5,12 @@
 #include "IHashMap.h"
 
 /**
- *@brief Hashmap wrapper with the memory allocated on the stack */
+ * @brief A hashmap wrapper with the memory allocated on the stack
+ * @tparam Key The key used to find elements in the hash map. Must be some sort of integer
+ * @tparam Value The type to store in the map. Can be any type
+ * @tparam MaxSize The max size of the hashmap, this size will be allocated on the stack
+ * @tparam HashFunc The hash function used for the key
+ */
 template <typename Key, typename Value, uint32_t MaxSize, class HashFunc = HashFunction<Value>>
 
 class HashMapStack : public IHashMap<Key, Value> {
@@ -27,6 +32,15 @@ class HashMapStack : public IHashMap<Key, Value> {
 
     std::optional<std::reference_wrapper<const Value>> at(const Key& key) const override {
         return m_map.at(key);
+    }
+
+    bool forEach(HashMapForEachCallback<const Key&, Value&> callback, void* context) override {
+        return m_map.forEach(callback, context);
+    }
+
+    bool forEach(HashMapForEachCallback<const Key&, const Value&> callback,
+                 void* context) const override {
+        return m_map.forEach(callback, context);
     }
 
     bool remove(const Key& key) override { return m_map.remove(key); }

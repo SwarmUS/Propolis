@@ -138,6 +138,36 @@ std::optional<std::reference_wrapper<const Value>> HashMap<Key, Value, HashFunc>
 }
 
 template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::forEach(HashMapForEachCallback<const Key&, Value&> callback,
+                                            void* context) {
+    for (uint32_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+        if (used) {
+            if (!callback(mapKey, mapObj, context)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::forEach(
+    HashMapForEachCallback<const Key&, const Value&> callback, void* context) const {
+    // Cannot simply call the non const function since it's the callback arg the need to get it's
+    // constness remove
+    for (uint32_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+        if (used) {
+            if (!callback(mapKey, mapObj, context)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+template <typename Key, typename Value, class HashFunc>
 std::optional<uint32_t> HashMap<Key, Value, HashFunc>::findIdx(Key key, bool findEmpty) const {
     (void)findEmpty;
 

@@ -7,14 +7,24 @@
 #include <utility>
 
 /**
+ *@brief the callback used for a foreach call
+ *@param key the key associated with the value
+ *@param val the value
+ *@param user context
+ *@return true to continue the iteration, false to stop it. So if you need to find a particular key,
+ *you can return false once it's found*/
+template <typename Key, typename Value>
+using HashMapForEachCallback = bool (*)(const Key& key, Value& val, void* context);
+
+/**
  * @brief A templated hash map that can store a fixed number of items
  * @tparam Key The key used to find elements in the hash map. Must be some sort of integer
- * @tparam MappedType The type to store in the map. Can be any type
+ * @tparam Value The type to store in the map. Can be any type
  */
-template <typename Key, typename MappedType>
+template <typename Key, typename Value>
 class IHashMap {
   public:
-    virtual ~IHashMap<Key, MappedType>() = default;
+    virtual ~IHashMap<Key, Value>() = default;
 
     /**
      * @brief Insert an item into the hash map
@@ -22,7 +32,7 @@ class IHashMap {
      * @param [in] obj the object to store
      * @return true if successfull, false if the map was full or key already present in map
      */
-    virtual bool insert(const Key& key, const MappedType& obj) = 0;
+    virtual bool insert(const Key& key, const Value& obj) = 0;
 
     /**
      * @brief Update or insert an item into the hash map
@@ -30,7 +40,7 @@ class IHashMap {
      * @param [in] obj the object to store
      * @return true if successfull, false if the map was full
      */
-    virtual bool upsert(const Key& key, const MappedType& obj) = 0;
+    virtual bool upsert(const Key& key, const Value& obj) = 0;
 
     /**
      * @brief Obtain the copy of an item from the hash map based on a Key
@@ -38,7 +48,7 @@ class IHashMap {
      * @param [out] item The reference to the item to store the value wanted
      * @return true if succesfull, false if no item found based on Key
      */
-    virtual bool get(const Key& key, MappedType& item) const = 0;
+    virtual bool get(const Key& key, Value& item) const = 0;
 
     /**
      * @brief Obtain a reference of an item from the hash map based on a Key
@@ -46,7 +56,7 @@ class IHashMap {
      * @return A an optional reference to the mapped type if key was found in map, otherwise an
      * empty optional
      */
-    virtual std::optional<std::reference_wrapper<MappedType>> at(const Key& key) = 0;
+    virtual std::optional<std::reference_wrapper<Value>> at(const Key& key) = 0;
 
     /**
      * @brief Obtain a const reference of an item from the hash map based on a Key
@@ -54,7 +64,26 @@ class IHashMap {
      * @return A an optional const reference to the mapped type if key was found in map, otherwise
      * an empty optional
      */
-    virtual std::optional<std::reference_wrapper<const MappedType>> at(const Key& key) const = 0;
+    virtual std::optional<std::reference_wrapper<const Value>> at(const Key& key) const = 0;
+
+    /**
+     *@brief calls the call back on each element of the hashmap, the context will be passed to the
+     *callback. If the callback returns false, the iteration will stop
+     *@param callback the callback to call
+     *@param context the context to pass to the callback
+     *@return if the iteration went through the whole map, true if so, false if was aborted (i.e.
+     *callback returned false)*/
+    virtual bool forEach(HashMapForEachCallback<const Key&, Value&> callback, void* context) = 0;
+
+    /**
+     *@brief calls the call back on each element of the hashmap, the context will be passed to the
+     *callback. If the callback returns false, the iteration will stop
+     *@param callback the callback to call
+     *@param context the context to pass to the callback
+     *@return if the iteration went through the whole map, true if so, false if was aborted (i.e.
+     *callback returned false)*/
+    virtual bool forEach(HashMapForEachCallback<const Key&, const Value&> callback,
+                         void* context) const = 0;
 
     /**
      * @brief Remove an item from the map based on its key

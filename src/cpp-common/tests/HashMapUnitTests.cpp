@@ -159,3 +159,78 @@ TEST_F(HashMapTestFixture, test_insert_full_then_clear) {
     ASSERT_TRUE(m_hashMap->insert(pair3.first, pair3.second));
     ASSERT_FALSE(m_hashMap->insert(pair4.first, pair4.second));
 }
+
+TEST_F(HashMapTestFixture, test_foreach_full_iteration) {
+    std::pair<uint8_t, std::string> pair1(1, "test1");
+    std::pair<uint8_t, std::string> pair2(2, "test2");
+    std::pair<uint8_t, std::string> pair3(3, "test3");
+
+    m_hashMap->insert(pair1.first, pair1.second);
+    m_hashMap->insert(pair2.first, pair2.second);
+    m_hashMap->insert(pair3.first, pair3.second);
+
+    auto callback = [](const uint8_t& key, std::string& val, void* context) {
+        (void)key;
+        (void)val;
+        int* counter = (int*)context;
+        (*counter)++;
+        return true;
+    };
+
+    int counter = 0;
+    bool ret = m_hashMap->forEach(callback, &counter);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(counter, m_data.size());
+}
+
+// Make sure there is no stack overflow from const calling non const function
+TEST_F(HashMapTestFixture, test_foreach_full_iteration_const) {
+    std::pair<uint8_t, std::string> pair1(1, "test1");
+    std::pair<uint8_t, std::string> pair2(2, "test2");
+    std::pair<uint8_t, std::string> pair3(3, "test3");
+
+    m_hashMap->insert(pair1.first, pair1.second);
+    m_hashMap->insert(pair2.first, pair2.second);
+    m_hashMap->insert(pair3.first, pair3.second);
+
+    auto callback = [](const uint8_t& key, const std::string& val, void* context) {
+        (void)key;
+        (void)val;
+        int* counter = (int*)context;
+        (*counter)++;
+        return true;
+    };
+
+    const auto* hashMap = const_cast<const HashMap<uint8_t, std::string>*>(m_hashMap);
+
+    int counter = 0;
+    bool ret = hashMap->forEach(callback, &counter);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(counter, m_data.size());
+}
+
+TEST_F(HashMapTestFixture, test_foreach_stop_before_end) {
+    std::pair<uint8_t, std::string> pair1(1, "test1");
+    std::pair<uint8_t, std::string> pair2(2, "test2");
+    std::pair<uint8_t, std::string> pair3(3, "test3");
+
+    m_hashMap->insert(pair1.first, pair1.second);
+    m_hashMap->insert(pair2.first, pair2.second);
+    m_hashMap->insert(pair3.first, pair3.second);
+
+    auto callback = [](const uint8_t& key, std::string& val, void* context) {
+        (void)key;
+        (void)val;
+        int* counter = (int*)context;
+        (*counter)++;
+        return false;
+    };
+
+    int counter = 0;
+    bool ret = m_hashMap->forEach(callback, &counter);
+
+    EXPECT_FALSE(ret);
+    EXPECT_EQ(counter, 1);
+}
