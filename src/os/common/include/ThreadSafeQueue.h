@@ -46,13 +46,13 @@ class ThreadSafeQueue : public ICircularQueue<T> {
         return m_queue.isEmpty();
     }
 
-    uint16_t getLength() const override {
+    uint32_t getLength() const override {
         IMutex* mutableLock = const_cast<IMutex*>(&m_mutex);
         LockGuard lock(*mutableLock);
         return m_queue.getLength();
     };
 
-    uint16_t getFreeSize() const override {
+    uint32_t getFreeSize() const override {
         IMutex* mutableLock = const_cast<IMutex*>(&m_mutex);
         LockGuard lock(*mutableLock);
         return m_queue.getFreeSize();
