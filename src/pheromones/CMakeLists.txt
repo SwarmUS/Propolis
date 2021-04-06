@@ -8,6 +8,10 @@ include(DefaultPheromonesOptions.cmake) # not a module, need to specify "".cmake
 
 configure_file(include/pheromones/PheromonesSettings.in.h include/pheromones/PheromonesSettings.h)
 
+# Installation destinations
+set(PHEROMONES_LIB_INSTALL_DEST "lib/pheromones")
+set(PHEROMONES_INCLUDE_INSTALL_DEST "include/pheromones")
+
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
     src/HiveMindHostSerializer.cpp
@@ -114,10 +118,11 @@ add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
 target_include_directories(${LIB_NAME}
     PUBLIC
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-       $<INSTALL_INTERFACE:include>
+       $<INSTALL_INTERFACE:${PHEROMONES_INCLUDE_INSTALL_DEST}>
+       $<INSTALL_INTERFACE:${PHEROMONES_LIB_INSTALL_DEST}>
 
         #Include the generated files from .in
-        ${CMAKE_CURRENT_BINARY_DIR}/include
+        #${CMAKE_CURRENT_BINARY_DIR}/include
 
     PRIVATE
        include/pheromones
@@ -133,3 +138,11 @@ target_link_libraries(${LIB_NAME}
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
+
+
+
+install(TARGETS ${LIB_NAME} swarmus-pheromones EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
+install(FILES ${LIB_HEADERS} DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
+
+install(EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
