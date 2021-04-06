@@ -1,6 +1,10 @@
 set(LIB_NAME "swarmus-propolis-cpp-common")
 set(LIB_ALIAS "SwarmUS::Propolis::Cpp::Common")
 
+# Installation destinations
+set(CPP-COMMON_LIB_INSTALL_DEST "lib/pheromones")
+set(CPP-COMMON_INCLUDE_INSTALL_DEST "include/pheromones")
+
 
 set(LIB_SOURCES
 )
@@ -33,3 +37,8 @@ target_include_directories(${LIB_NAME}
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
+
+install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME} DESTINATION "${CPP-COMMON_LIB_INSTALL_DEST}")
+install(FILES ${LIB_HEADERS} DESTINATION "${CPP-COMMON_INCLUDE_INSTALL_DEST}")
+
+install(EXPORT ${LIB_NAME} DESTINATION "${CPP-COMMON_LIB_INSTALL_DEST}")
