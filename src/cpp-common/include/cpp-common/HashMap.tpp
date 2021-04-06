@@ -7,110 +7,99 @@
 #include <new>
 #include <string>
 
-enum TupleIndices { USED_FLAG_INDEX = 0, KEY_INDEX, VALUE_INDEX };
-
-template <typename Key, typename MappedType, uint16_t maxSize>
-HashMap<Key, MappedType, maxSize>::HashMap() : m_usedSpaces(0) {
-    for (size_t i = 0; i < maxSize; i++) {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[i]);
-        std::get<USED_FLAG_INDEX>(tuple) = false;
+template <typename Key, typename Value, class HashFunc>
+HashMap<Key, Value, HashFunc>::HashMap(std::tuple<bool, Key, Value>* storage,
+                                       uint32_t storageSize) :
+    m_storage(storage), m_storageSize(storageSize), m_usedSpaces(0) {
+    for (size_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+        used = false;
     }
 }
-template <typename Key, typename MappedType, uint16_t maxSize>
-HashMap<Key, MappedType, maxSize>::~HashMap() {
-    clear();
+template <typename Key, typename Value, class HashFunc>
+HashMap<Key, Value, HashFunc>::~HashMap() {
+    HashMap<Key, Value, HashFunc>::clear();
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::insert(const std::pair<Key, MappedType>& item) {
-    if (isFull()) {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::insert(const Key& key, const Value& obj) {
+    std::optional<uint32_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
         return false;
     }
-    bool loopedOnce = false;
-    uint16_t index = hash(item.first);
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        // Insert forbids overwriting
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
-            return false;
-        }
-        if (std::get<USED_FLAG_INDEX>(tuple) == false) {
-            new (&m_storage[index])
-                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
-            m_usedSpaces++;
-            return true;
-        }
 
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            loopedOnce = true;
-            index = 0;
-        }
-    } while (index < maxSize);
-    return false;
+    uint32_t idx = idxOpt.value();
+    auto& [used, mapKey, mapObj] = m_storage[idx];
+
+    if (used) {
+        return false;
+    }
+
+    m_usedSpaces++;
+    new (&m_storage[idx]) std::tuple<bool, Key, Value>(true, key, obj);
+    return true;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::upsert(const std::pair<Key, MappedType>& item) {
-    bool loopedOnce = false;
-    uint16_t index = hash(item.first);
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        // Try to overwrite first
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == item.first) {
-            new (&m_storage[index])
-                std::tuple<bool, Key, MappedType>(true, item.first, item.second);
-            return true;
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            loopedOnce = true;
-            index = 0;
-        }
-    } while (index < maxSize);
-    // If cannot overwrite, try to insert
-    return insert(item);
+// TODO: remove std pair
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::upsert(const Key& key, const Value& obj) {
+
+    std::optional<uint32_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
+        return false;
+    }
+
+    uint32_t idx = idxOpt.value();
+    auto& [used, mapKey, mapObj] = m_storage[idx];
+
+    if (used) {
+        mapObj.~Value();
+    } else {
+        m_usedSpaces++;
+    }
+
+    new (&m_storage[idx]) std::tuple<bool, Key, Value>(true, key, obj);
+    return true;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::remove(Key key) {
-    uint16_t index = hash(key);
-    bool loopedOnce = false;
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            std::get<VALUE_INDEX>(tuple).~MappedType();
-            std::get<USED_FLAG_INDEX>(tuple) = false;
-            m_usedSpaces--;
-            return true;
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
-            loopedOnce = true;
-        }
-    } while (index < maxSize);
-    return false;
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::remove(const Key& key) {
+    std::optional<uint32_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
+        return {};
+    }
+
+    uint32_t idx = idxOpt.value();
+    auto& [used, mapKey, mapObj] = m_storage[idx];
+
+    if (!used) {
+        return false;
+    }
+
+    mapObj.~Value();
+    used = false;
+    m_usedSpaces--;
+    return true;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-void HashMap<Key, MappedType, maxSize>::clear() {
-    for (size_t i = 0; i < maxSize; i++) {
-        // Could forego calling constructor since using placement new
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[i]);
-        if (std::get<USED_FLAG_INDEX>(tuple)) {
-            std::get<VALUE_INDEX>(tuple).~MappedType();
-            std::get<USED_FLAG_INDEX>(tuple) = false;
+template <typename Key, typename Value, class HashFunc>
+void HashMap<Key, Value, HashFunc>::clear() {
+    for (size_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+
+        if (used) {
+            mapObj.~Value();
+            used = false;
         }
     }
     m_usedSpaces = 0;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::get(const Key& k, Value& item) const {
     const auto& obj = at(k);
     if (obj.has_value()) {
         item = obj.value().get();
@@ -118,74 +107,113 @@ bool HashMap<Key, MappedType, maxSize>::get(Key k, MappedType& item) const {
     }
     return false;
 }
-template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<std::reference_wrapper<MappedType>> HashMap<Key, MappedType, maxSize>::at(Key key) {
-    uint16_t index = hash(key);
-    bool loopedOnce = false;
-    do {
-        auto& tuple = reinterpret_cast<std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            return std::get<VALUE_INDEX>(tuple);
-        }
-        index++;
-        // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
-            loopedOnce = true;
-        }
-    } while (index < maxSize);
+template <typename Key, typename Value, class HashFunc>
+std::optional<std::reference_wrapper<Value>> HashMap<Key, Value, HashFunc>::at(const Key& key) {
+    const auto* thisConst = static_cast<const HashMap<Key, Value, HashFunc>*>(this);
+    const auto obj = thisConst->at(key);
+    if (obj) {
+        return const_cast<Value&>(obj.value().get());
+    }
     return {};
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-std::optional<std::reference_wrapper<const MappedType>> HashMap<Key, MappedType, maxSize>::at(
-    Key key) const {
-    uint16_t index = hash(key);
-    bool loopedOnce = false;
-    do {
-        const auto& tuple =
-            reinterpret_cast<const std::tuple<bool, Key, MappedType>&>(m_storage[index]);
-        if (std::get<USED_FLAG_INDEX>(tuple) && std::get<KEY_INDEX>(tuple) == key) {
-            return std::get<VALUE_INDEX>(tuple);
+template <typename Key, typename Value, class HashFunc>
+std::optional<std::reference_wrapper<const Value>> HashMap<Key, Value, HashFunc>::at(
+    const Key& key) const {
+    std::optional<uint32_t> idxOpt = findIdx(key, false);
+
+    if (!idxOpt) {
+        return {};
+    }
+
+    uint32_t idx = idxOpt.value();
+    auto& [used, mapKey, mapObj] = m_storage[idx];
+
+    // if not used is that the object does not exists;
+    if (!used) {
+        return {};
+    }
+
+    return mapObj;
+}
+
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::forEach(HashMapForEachCallback<const Key&, Value&> callback,
+                                            void* context) {
+    for (uint32_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+        if (used) {
+            if (!callback(mapKey, mapObj, context)) {
+                return false;
+            }
         }
+    }
+    return true;
+}
+
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::forEach(
+    HashMapForEachCallback<const Key&, const Value&> callback, void* context) const {
+    // Cannot simply call the non const function since it's the callback arg the need to get it's
+    // constness remove
+    for (uint32_t i = 0; i < m_storageSize; i++) {
+        auto& [used, mapKey, mapObj] = m_storage[i];
+        if (used) {
+            if (!callback(mapKey, mapObj, context)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+template <typename Key, typename Value, class HashFunc>
+std::optional<uint32_t> HashMap<Key, Value, HashFunc>::findIdx(Key key, bool findEmpty) const {
+    (void)findEmpty;
+
+    bool loopedOnce = false;
+    uint32_t index = m_hashFunction(key, m_storageSize);
+    do {
+        auto& [used, mapKey, mapObj] = m_storage[index];
+        // If we found the key or found an empty slot
+        if ((used && mapKey == key) || (used == false)) {
+            return index;
+        }
+
         index++;
         // Only loop across array once
-        if (!loopedOnce && index == maxSize) {
-            index = 0;
+        if (!loopedOnce && index == m_storageSize) {
             loopedOnce = true;
+            index = 0;
         }
-    } while (index < maxSize);
+    } while (index < m_storageSize);
+
     return {};
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-uint16_t HashMap<Key, MappedType, maxSize>::getMaxSize() const {
-    return maxSize;
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getMaxSize() const {
+    return m_storageSize;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-uint16_t HashMap<Key, MappedType, maxSize>::getFreeSpace() const {
-    return maxSize - m_usedSpaces;
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getFreeSpace() const {
+    return m_storageSize - m_usedSpaces;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-uint16_t HashMap<Key, MappedType, maxSize>::getUsedSpace() const {
+template <typename Key, typename Value, class HashFunc>
+uint32_t HashMap<Key, Value, HashFunc>::getUsedSpace() const {
     return m_usedSpaces;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::isEmpty() const {
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::isEmpty() const {
     return m_usedSpaces == 0;
 }
 
-template <typename Key, typename MappedType, uint16_t maxSize>
-bool HashMap<Key, MappedType, maxSize>::isFull() const {
-    return m_usedSpaces == maxSize;
-}
-
-template <typename Key, typename MappedType, uint16_t maxSize>
-uint16_t HashMap<Key, MappedType, maxSize>::hash(Key key) {
-    return std::hash<Key>{}(key) % maxSize;
+template <typename Key, typename Value, class HashFunc>
+bool HashMap<Key, Value, HashFunc>::isFull() const {
+    return m_usedSpaces == m_storageSize;
 }
 
 #endif // __HASH_MAP_TPP_

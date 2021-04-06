@@ -59,14 +59,14 @@ class ICircularQueue {
      *
      *@return the number of items currently in it
      **/
-    virtual uint16_t getLength() const = 0;
+    virtual uint32_t getLength() const = 0;
 
     /**
      * @brief get the number of free slots left in the queue
      *
      * @return the number of free slots in the queue
      * */
-    virtual uint16_t getFreeSize() const = 0;
+    virtual uint32_t getFreeSize() const = 0;
 
     /**
      * @brief get the next allocation, used to write inplace

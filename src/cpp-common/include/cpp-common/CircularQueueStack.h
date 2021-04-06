@@ -3,7 +3,7 @@
 
 #include "CircularQueue.h"
 
-template <typename T, uint16_t maxSize>
+template <typename T, uint32_t maxSize>
 class CircularQueueStack : public ICircularQueue<T> {
   public:
     CircularQueueStack() : m_queue(reinterpret_cast<T*>(this->m_queueData), maxSize) {}
@@ -24,9 +24,9 @@ class CircularQueueStack : public ICircularQueue<T> {
 
     bool isEmpty() const override { return m_queue.isEmpty(); }
 
-    uint16_t getLength() const override { return m_queue.getLength(); };
+    uint32_t getLength() const override { return m_queue.getLength(); };
 
-    uint16_t getFreeSize() const override { return m_queue.getFreeSize(); }
+    uint32_t getFreeSize() const override { return m_queue.getFreeSize(); }
 
     std::optional<std::reference_wrapper<T>> getNextAllocation() override {
         return m_queue.getNextAllocation();

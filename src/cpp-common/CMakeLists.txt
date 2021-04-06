@@ -14,6 +14,8 @@ set(LIB_HEADERS
     include/cpp-common/IHashMap.h
     include/cpp-common/HashMap.h
     include/cpp-common/HashMap.tpp
+    include/cpp-common/HashFunction.h
+    include/cpp-common/HashMapStack.h
 )
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})

@@ -4,6 +4,7 @@ set(TEST_SOURCES
     CircularQueueUnitTests.cpp
     CircularQueueStackUnitTests.cpp
     HashMapUnitTests.cpp
+    HashMapStackUnitTests.cpp
 )
 
 set(TEST_HEADERS
