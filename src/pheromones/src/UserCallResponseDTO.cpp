@@ -34,6 +34,14 @@ UserCallResponseDTO::UserCallResponseDTO(const UserCallResponse& response) :
         m_response = FunctionCallResponse(response.response.function_call);
         break;
 
+    case UserCallResponse_function_list_length_tag:
+        m_response = FunctionListLengthResponseDTO(response.response.function_list_length);
+        break;
+
+    case UserCallResponse_function_description_tag:
+        m_response = FunctionDescriptionResponseDTO(response.response.function_description);
+        break;
+
     default:
         m_response = std::monostate();
     }
