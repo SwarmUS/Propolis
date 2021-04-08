@@ -18,9 +18,9 @@ HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const HiveMindHostApiReques
 
 HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const BytesDTO& bytes) : m_request(bytes) {}
 
-HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetNeighborRequest& req) :
-    m_request(req) {}
 HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetNeighborRequestDTO& req) :
+    m_request(req) {}
+HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetNeighborsListRequestDTO& req) :
     m_request(req) {}
 
 const std::variant<std::monostate, BytesDTO, GetNeighborRequestDTO, GetNeighborsListRequestDTO>&

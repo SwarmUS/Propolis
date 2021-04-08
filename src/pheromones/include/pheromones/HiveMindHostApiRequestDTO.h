@@ -11,8 +11,8 @@ class HiveMindHostApiRequestDTO {
   public:
     HiveMindHostApiRequestDTO(const HiveMindHostApiRequest& request);
     HiveMindHostApiRequestDTO(const BytesDTO& bytes);
-    HiveMindHostApiRequestDTO(const GetNeighborRequest& req);
     HiveMindHostApiRequestDTO(const GetNeighborRequestDTO& req);
+    HiveMindHostApiRequestDTO(const GetNeighborsListRequestDTO& req);
 
     /**
      *@brief get the stored request
