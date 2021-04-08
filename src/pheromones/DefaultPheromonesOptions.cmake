@@ -7,3 +7,4 @@ set_default(FUNCTION_ARGUMENT_NAME_SIZE 16)
 set_default(BUZZ_PAYLOAD_SIZE 16)
 
 set_default(BYTES_PAYLOAD_SIZE 200)
+set_default(NEIGHBORS_LIST_SIZE 50)

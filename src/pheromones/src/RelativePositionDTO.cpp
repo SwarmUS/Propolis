@@ -24,4 +24,5 @@ bool RelativePositionDTO::serialize(RelativePosition& pos) const {
     pos.distance = m_distance;
     pos.relative_orientation = m_relativeOrientation;
     pos.inLOS = m_inLOS;
+    return true;
 }

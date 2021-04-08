@@ -43,6 +43,8 @@ set(LIB_SOURCES
     src/RelativePositionDTO.cpp
     src/GetNeighborRequestDTO.cpp
     src/GetNeighborsListRequestDTO.cpp
+    src/GetNeighborResponseDTO.cpp
+    src/GetNeighborsListResponseDTO.cpp
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
@@ -91,6 +93,8 @@ set(LIB_HEADERS
     include/pheromones/RelativePositionDTO.h
     include/pheromones/GetNeighborRequestDTO.h
     include/pheromones/GetNeighborsListRequestDTO.h
+    include/pheromones/GetNeighborResponseDTO.h
+    include/pheromones/GetNeighborsListResponseDTO.h
 
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h

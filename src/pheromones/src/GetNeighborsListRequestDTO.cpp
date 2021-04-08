@@ -6,5 +6,6 @@ GetNeighborsListRequestDTO::GetNeighborsListRequestDTO(const GetNeighborsListReq
 
 bool GetNeighborsListRequestDTO::serialize(GetNeighborsListRequest& req) const {
     (void)req;
+    (void)this;
     return true;
 }

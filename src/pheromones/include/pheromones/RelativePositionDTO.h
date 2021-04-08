@@ -21,11 +21,11 @@ class RelativePositionDTO {
     float getRelativeOrientation() const;
 
     /**@brief get the distance
-     *@param the distance in meters*/
+     *@param distance the distance in meters*/
     void setDistance(float distance);
 
     /**@brief set the relative orientation
-     *@param the orientation in degrees*/
+     *@param orientation the orientation in degrees*/
     void setRelativeOrientation(float orientation);
 
     /**@brief set if the robot is in LOS

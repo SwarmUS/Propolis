@@ -39,6 +39,9 @@ set(TEST_SOURCES
     BytesDTOUnitTests.cpp
     RelativePositionDTOUnitTests.cpp
     GetNeighborRequestDTOUnitTests.cpp
+    GetNeighborsListRequestDTOUnitTests.cpp
+    GetNeighborResponseDTOUnitTests.cpp
+    GetNeighborsListResponseDTOUnitTests.cpp
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
