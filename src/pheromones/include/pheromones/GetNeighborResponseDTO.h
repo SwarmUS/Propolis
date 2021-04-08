@@ -3,11 +3,12 @@
 
 #include "NeighborPositionDTO.h"
 #include <message.pb.h>
+#include <optional>
 
 class GetNeighborResponseDTO {
   public:
     GetNeighborResponseDTO(const GetNeighborResponse resp);
-    GetNeighborResponseDTO(uint32_t neighborId, const NeighborPositionDTO& pos);
+    GetNeighborResponseDTO(uint32_t neighborId, const std::optional<NeighborPositionDTO>& pos);
 
     /**@brief get the id of the neighbor
      *@return the id of the neighbor */
@@ -15,7 +16,7 @@ class GetNeighborResponseDTO {
 
     /**@brief get the relative position
      *@return the relative position*/
-    const NeighborPositionDTO& getNeighborPosition() const;
+    const std::optional<NeighborPositionDTO>& getNeighborPosition() const;
 
     /**@brief set the id of the neighbor
      *@param id the id of the neighbor to set*/
@@ -23,7 +24,7 @@ class GetNeighborResponseDTO {
 
     /**@brief set the position of the neighbor
      *@param pos the new position of the neighbor*/
-    void setNeighborPosition(const NeighborPositionDTO& pos);
+    void setNeighborPosition(const std::optional<NeighborPositionDTO>& pos);
 
     /**
      *@brief serialize a GetNeighborResponse for nanopb, sets the fields properly before using
@@ -34,7 +35,7 @@ class GetNeighborResponseDTO {
 
   private:
     uint32_t m_neighborId;
-    NeighborPositionDTO m_pos;
+    std::optional<NeighborPositionDTO> m_pos;
 };
 
 #endif // __GETNEIGHBORRESPONSEDTO_H_
