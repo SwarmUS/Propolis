@@ -38,7 +38,7 @@ TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_constructor
 
 TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_serialize_getNeighbor_valid) {
     // Given
-    RelativePositionDTO pos(42, 24, true);
+    NeighborPositionDTO pos(42, 24, true);
     m_response->setResponse(GetNeighborResponseDTO(42, pos));
     HiveMindHostApiResponse resp;
 

@@ -40,7 +40,7 @@ set(LIB_SOURCES
     src/HiveMindHostApiRequestDTO.cpp
     src/HiveMindHostApiResponseDTO.cpp
     src/BytesDTO.cpp
-    src/RelativePositionDTO.cpp
+    src/NeighborPositionDTO.cpp
     src/GetNeighborRequestDTO.cpp
     src/GetNeighborsListRequestDTO.cpp
     src/GetNeighborResponseDTO.cpp
@@ -90,7 +90,7 @@ set(LIB_HEADERS
     include/pheromones/HiveMindHostApiResponseDTO.h
     include/pheromones/HiveMindHostApiRequestDTO.h
     include/pheromones/BytesDTO.h
-    include/pheromones/RelativePositionDTO.h
+    include/pheromones/NeighborPositionDTO.h
     include/pheromones/GetNeighborRequestDTO.h
     include/pheromones/GetNeighborsListRequestDTO.h
     include/pheromones/GetNeighborResponseDTO.h

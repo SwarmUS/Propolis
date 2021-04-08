@@ -1,23 +1,23 @@
 #include "mocks/Utils.h"
 #include <gtest/gtest.h>
-#include <pheromones/RelativePositionDTO.h>
+#include <pheromones/NeighborPositionDTO.h>
 
-class RelativePositionDTOFixture : public testing::Test {
+class NeighborPositionDTOFixture : public testing::Test {
   public:
     const float m_distance = 42;
     const uint32_t m_orientation = 24;
     const bool m_inLos = true;
 
-    RelativePositionDTO* m_pos;
+    NeighborPositionDTO* m_pos;
 
-    void SetUp() override { m_pos = new RelativePositionDTO(m_distance, m_orientation, m_inLos); }
+    void SetUp() override { m_pos = new NeighborPositionDTO(m_distance, m_orientation, m_inLos); }
 
     void TearDown() override { delete m_pos; }
 };
 
-TEST_F(RelativePositionDTOFixture, RelativePosition_serialize_valid) {
+TEST_F(NeighborPositionDTOFixture, NeighborPosition_serialize_valid) {
     // Given
-    RelativePosition pos;
+    NeighborPosition pos;
 
     // Then
     bool ret = m_pos->serialize(pos);

@@ -8,7 +8,7 @@ class GetNeighborResponseDTOFixture : public testing::Test {
     GetNeighborResponseDTO* m_resp;
 
     void SetUp() override {
-        m_resp = new GetNeighborResponseDTO(m_robotId, RelativePositionDTO(42, 24, true));
+        m_resp = new GetNeighborResponseDTO(m_robotId, NeighborPositionDTO(42, 24, true));
     }
 
     void TearDown() override { delete m_resp; }

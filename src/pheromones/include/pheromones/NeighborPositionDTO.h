@@ -1,12 +1,12 @@
-#ifndef __RELATIVEPOSITIONDTO_H_
-#define __RELATIVEPOSITIONDTO_H_
+#ifndef __NEIGHBORPOSITIONDTO_H_
+#define __NEIGHBORPOSITIONDTO_H_
 
 #include <message.pb.h>
 
-class RelativePositionDTO {
+class NeighborPositionDTO {
   public:
-    RelativePositionDTO(const RelativePosition& pos);
-    RelativePositionDTO(float distance, float relativeOrientation, bool inLOS);
+    NeighborPositionDTO(const NeighborPosition& pos);
+    NeighborPositionDTO(float distance, float relativeOrientation, bool inLOS);
 
     /**@brief get the distance
      *@return the distance in meters*/
@@ -33,11 +33,11 @@ class RelativePositionDTO {
     void setInLOS(bool inLOS);
 
     /**
-     *@brief serialize a RelativePosition for nanopb, sets the fields properly before using
+     *@brief serialize a NeighborPosition for nanopb, sets the fields properly before using
      *pb_encode
      *@param [out] pos the message to serialize
      *@return a boolean, true if successfull (fields were recognized) false if not */
-    bool serialize(RelativePosition& pos) const;
+    bool serialize(NeighborPosition& pos) const;
 
   private:
     float m_distance;
@@ -45,4 +45,4 @@ class RelativePositionDTO {
     bool m_inLOS;
 };
 
-#endif // __RELATIVEPOSITIONDTO_H_
+#endif // __NEIGHBORPOSITIONDTO_H_
