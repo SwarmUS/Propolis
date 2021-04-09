@@ -9,8 +9,8 @@ include(DefaultPheromonesOptions.cmake) # not a module, need to specify "".cmake
 configure_file(include/pheromones/PheromonesSettings.in.h include/pheromones/PheromonesSettings.h)
 
 # Installation destinations
-set(PHEROMONES_LIB_INSTALL_DEST "lib/pheromones")
-set(PHEROMONES_INCLUDE_INSTALL_DEST "include/pheromones")
+set(PHEROMONES_LIB_INSTALL_DEST "lib/swarmus-propolis-pheromones")
+set(PHEROMONES_INCLUDE_INSTALL_DEST "include/swarmus-propolis-pheromones")
 
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
@@ -140,5 +140,6 @@ endif()
 install(TARGETS ${LIB_NAME} swarmus-pheromones EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
 install(FILES ${LIB_HEADERS} DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES swarmus-propolis-pheromones-config.cmake DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
 
 install(EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
