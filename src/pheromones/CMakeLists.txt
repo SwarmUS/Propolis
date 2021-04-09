@@ -118,11 +118,9 @@ add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
 target_include_directories(${LIB_NAME}
     PUBLIC
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
        $<INSTALL_INTERFACE:${PHEROMONES_INCLUDE_INSTALL_DEST}>
        $<INSTALL_INTERFACE:${PHEROMONES_LIB_INSTALL_DEST}>
-
-        #Include the generated files from .in
-        #${CMAKE_CURRENT_BINARY_DIR}/include
 
     PRIVATE
        include/pheromones
