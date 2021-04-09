@@ -9,17 +9,17 @@ GetNeighborResponseDTO::GetNeighborResponseDTO(const GetNeighborResponse resp) :
     }
 }
 
-GetNeighborResponseDTO::GetNeighborResponseDTO(uint32_t neighborId,
+GetNeighborResponseDTO::GetNeighborResponseDTO(uint16_t neighborId,
                                                const std::optional<NeighborPositionDTO>& pos) :
     m_neighborId(neighborId), m_pos(pos) {}
 
-uint32_t GetNeighborResponseDTO::getNeighborId() const { return m_neighborId; }
+uint16_t GetNeighborResponseDTO::getNeighborId() const { return m_neighborId; }
 
 const std::optional<NeighborPositionDTO>& GetNeighborResponseDTO::getNeighborPosition() const {
     return m_pos;
 }
 
-void GetNeighborResponseDTO::setNeighborId(uint32_t id) { m_neighborId = id; }
+void GetNeighborResponseDTO::setNeighborId(uint16_t id) { m_neighborId = id; }
 
 void GetNeighborResponseDTO::setNeighborPosition(const std::optional<NeighborPositionDTO>& pos) {
     m_pos = pos;

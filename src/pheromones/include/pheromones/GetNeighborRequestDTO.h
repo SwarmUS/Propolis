@@ -6,15 +6,15 @@
 class GetNeighborRequestDTO {
   public:
     GetNeighborRequestDTO(const GetNeighborRequest& req);
-    GetNeighborRequestDTO(uint32_t neighborId);
+    GetNeighborRequestDTO(uint16_t neighborId);
 
     /**@brief get the id of the neighbor
      *@return the id of the neighbor */
-    uint32_t getNeighborId() const;
+    uint16_t getNeighborId() const;
 
     /**@brief set the id of the neighbor
      *@param id the id of the neighbor to set*/
-    void setNeighborId(uint32_t id);
+    void setNeighborId(uint16_t id);
 
     /**
      *@brief serialize a GetNeighborRequest for nanopb, sets the fields properly before using
@@ -24,7 +24,7 @@ class GetNeighborRequestDTO {
     bool serialize(GetNeighborRequest& req) const;
 
   private:
-    uint32_t m_neighborId;
+    uint16_t m_neighborId;
 };
 
 #endif // __GETNEIGHBORREQUESTDTO_H_

@@ -8,11 +8,11 @@
 class GetNeighborResponseDTO {
   public:
     GetNeighborResponseDTO(const GetNeighborResponse resp);
-    GetNeighborResponseDTO(uint32_t neighborId, const std::optional<NeighborPositionDTO>& pos);
+    GetNeighborResponseDTO(uint16_t neighborId, const std::optional<NeighborPositionDTO>& pos);
 
     /**@brief get the id of the neighbor
      *@return the id of the neighbor */
-    uint32_t getNeighborId() const;
+    uint16_t getNeighborId() const;
 
     /**@brief get the relative position
      *@return the relative position*/
@@ -20,7 +20,7 @@ class GetNeighborResponseDTO {
 
     /**@brief set the id of the neighbor
      *@param id the id of the neighbor to set*/
-    void setNeighborId(uint32_t id);
+    void setNeighborId(uint16_t id);
 
     /**@brief set the position of the neighbor
      *@param pos the new position of the neighbor*/
@@ -34,7 +34,7 @@ class GetNeighborResponseDTO {
     bool serialize(GetNeighborResponse& resp) const;
 
   private:
-    uint32_t m_neighborId;
+    uint16_t m_neighborId;
     std::optional<NeighborPositionDTO> m_pos;
 };
 
