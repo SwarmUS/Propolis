@@ -9,8 +9,8 @@ include(DefaultPheromonesOptions.cmake) # not a module, need to specify "".cmake
 configure_file(include/pheromones/PheromonesSettings.in.h include/pheromones/PheromonesSettings.h)
 
 # Installation destinations
-set(PHEROMONES_LIB_INSTALL_DEST "lib/swarmus-propolis-pheromones")
-set(PHEROMONES_INCLUDE_INSTALL_DEST "include/swarmus-propolis-pheromones")
+set(PROPOLIS-PHEROMONES_LIB_INSTALL_DEST "lib/swarmus-propolis-pheromones")
+set(PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST "include/swarmus-propolis-pheromones")
 
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
@@ -119,8 +119,8 @@ target_include_directories(${LIB_NAME}
     PUBLIC
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
-       $<INSTALL_INTERFACE:${PHEROMONES_INCLUDE_INSTALL_DEST}>
-       $<INSTALL_INTERFACE:${PHEROMONES_LIB_INSTALL_DEST}>
+       $<INSTALL_INTERFACE:${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}>
+       $<INSTALL_INTERFACE:${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}>
 
     PRIVATE
        include/pheromones
@@ -137,9 +137,9 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
 # TODO find a way to NOT have to specify swarmus-pheromones here
-install(TARGETS ${LIB_NAME} swarmus-pheromones EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
-install(FILES ${LIB_HEADERS} DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PHEROMONES_INCLUDE_INSTALL_DEST}")
-install(FILES swarmus-propolis-pheromones-config.cmake DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
+install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME} DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
+install(FILES ${LIB_HEADERS} DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES swarmus-propolis-pheromones-config.cmake DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
 
-install(EXPORT ${LIB_NAME} DESTINATION "${PHEROMONES_LIB_INSTALL_DEST}")
+install(EXPORT ${LIB_NAME} DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
