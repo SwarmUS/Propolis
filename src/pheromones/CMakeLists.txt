@@ -10,7 +10,7 @@ configure_file(include/pheromones/PheromonesSettings.in.h include/pheromones/Phe
 
 # Installation destinations
 set(PROPOLIS-PHEROMONES_LIB_INSTALL_DEST "lib/swarmus-propolis-pheromones")
-set(PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST "include/swarmus-propolis-pheromones")
+set(PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST "include/pheromones")
 
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
@@ -136,7 +136,7 @@ target_link_libraries(${LIB_NAME}
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
-# TODO find a way to NOT have to specify swarmus-pheromones here
+
 install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME} DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
 install(FILES ${LIB_HEADERS} DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")

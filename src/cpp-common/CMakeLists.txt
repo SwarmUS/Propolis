@@ -3,7 +3,7 @@ set(LIB_ALIAS "SwarmUS::Propolis::Cpp::Common")
 
 # Installation destinations
 set(CPP-COMMON_LIB_INSTALL_DEST "lib/swarmus-propolis-cpp-common")
-set(CPP-COMMON_INCLUDE_INSTALL_DEST "include/swarmus-propolis-cpp-common")
+set(CPP-COMMON_INCLUDE_INSTALL_DEST "include/cpp-common")
 
 
 set(LIB_SOURCES
