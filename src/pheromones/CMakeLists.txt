@@ -67,6 +67,9 @@ set(LIB_HEADERS
     include/pheromones/HiveMindHostSerializer.h
     include/pheromones/IHiveMindHostSerializer.h
     include/pheromones/HiveMindHostAccumulatorSerializer.h
+    include/pheromones/IProtobufStream.h
+    include/pheromones/IProtobufInputStream.h
+    include/pheromones/IProtobufOutputStream.h
 
     include/pheromones/FunctionCallArgumentDTO.h
     include/pheromones/FunctionCallRequestDTO.h
