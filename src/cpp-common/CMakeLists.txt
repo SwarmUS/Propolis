@@ -16,6 +16,7 @@ set(LIB_HEADERS
     include/cpp-common/CircularQueueStack.h
     include/cpp-common/CppUtils.h
     include/cpp-common/IHashMap.h
+    include/cpp-common/ILogger.h
     include/cpp-common/HashMap.h
     include/cpp-common/HashMap.tpp
     include/cpp-common/HashFunction.h
