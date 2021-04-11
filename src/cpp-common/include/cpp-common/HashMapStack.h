@@ -11,7 +11,7 @@
  * @tparam MaxSize The max size of the hashmap, this size will be allocated on the stack
  * @tparam HashFunc The hash function used for the key
  */
-template <typename Key, typename Value, uint32_t MaxSize, class HashFunc = HashFunction<Value>>
+template <typename Key, typename Value, uint32_t MaxSize, class HashFunc = HashFunction<Key>>
 
 class HashMapStack : public IHashMap<Key, Value> {
   public:
