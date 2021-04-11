@@ -37,6 +37,11 @@ set(TEST_SOURCES
     HiveMindHostApiRequestDTOUnitTests.cpp
     HiveMindHostApiResponseDTOUnitTests.cpp
     BytesDTOUnitTests.cpp
+    NeighborPositionDTOUnitTests.cpp
+    GetNeighborRequestDTOUnitTests.cpp
+    GetNeighborsListRequestDTOUnitTests.cpp
+    GetNeighborResponseDTOUnitTests.cpp
+    GetNeighborsListResponseDTOUnitTests.cpp
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
