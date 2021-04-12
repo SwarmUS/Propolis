@@ -8,6 +8,10 @@ include(DefaultPheromonesOptions.cmake) # not a module, need to specify "".cmake
 
 configure_file(include/pheromones/PheromonesSettings.in.h include/pheromones/PheromonesSettings.h)
 
+# Installation destinations
+set(PROPOLIS-PHEROMONES_LIB_INSTALL_DEST "lib/swarmus-propolis-pheromones")
+set(PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST "include/pheromones")
+
 set(LIB_SOURCES
     src/HiveMindHostDeserializer.cpp
     src/HiveMindHostSerializer.cpp
@@ -63,6 +67,9 @@ set(LIB_HEADERS
     include/pheromones/HiveMindHostSerializer.h
     include/pheromones/IHiveMindHostSerializer.h
     include/pheromones/HiveMindHostAccumulatorSerializer.h
+    include/pheromones/IProtobufStream.h
+    include/pheromones/IProtobufInputStream.h
+    include/pheromones/IProtobufOutputStream.h
 
     include/pheromones/FunctionCallArgumentDTO.h
     include/pheromones/FunctionCallRequestDTO.h
@@ -114,10 +121,9 @@ add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
 target_include_directories(${LIB_NAME}
     PUBLIC
        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-       $<INSTALL_INTERFACE:include>
-
-        #Include the generated files from .in
-        ${CMAKE_CURRENT_BINARY_DIR}/include
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+       $<INSTALL_INTERFACE:${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}>
+       $<INSTALL_INTERFACE:${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}>
 
     PRIVATE
        include/pheromones
@@ -133,3 +139,10 @@ target_link_libraries(${LIB_NAME}
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
+
+install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME} DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
+install(FILES ${LIB_HEADERS} DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/pheromones/PheromonesSettings.h DESTINATION "${PROPOLIS_PHEROMONES_INCLUDE_INSTALL_DEST}")
+install(FILES swarmus-propolis-pheromones-config.cmake DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")
+
+install(EXPORT ${LIB_NAME} DESTINATION "${PROPOLIS-PHEROMONES_LIB_INSTALL_DEST}")

@@ -1,6 +1,10 @@
 set(LIB_NAME "swarmus-propolis-cpp-common")
 set(LIB_ALIAS "SwarmUS::Propolis::Cpp::Common")
 
+# Installation destinations
+set(CPP-COMMON_LIB_INSTALL_DEST "lib/swarmus-propolis-cpp-common")
+set(CPP-COMMON_INCLUDE_INSTALL_DEST "include/cpp-common")
+
 
 set(LIB_SOURCES
 )
@@ -12,6 +16,7 @@ set(LIB_HEADERS
     include/cpp-common/CircularQueueStack.h
     include/cpp-common/CppUtils.h
     include/cpp-common/IHashMap.h
+    include/cpp-common/ILogger.h
     include/cpp-common/HashMap.h
     include/cpp-common/HashMap.tpp
     include/cpp-common/HashFunction.h
@@ -33,3 +38,9 @@ target_include_directories(${LIB_NAME}
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
+
+install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME} DESTINATION "${CPP-COMMON_LIB_INSTALL_DEST}")
+install(FILES ${LIB_HEADERS} DESTINATION "${CPP-COMMON_INCLUDE_INSTALL_DEST}")
+install(FILES swarmus-propolis-cpp-common-config.cmake DESTINATION "${CPP-COMMON_LIB_INSTALL_DEST}")
+
+install(EXPORT ${LIB_NAME} DESTINATION "${CPP-COMMON_LIB_INSTALL_DEST}")
