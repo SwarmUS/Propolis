@@ -12,19 +12,19 @@ class INotificationQueue : public ICircularQueue<T> {
 
     virtual bool push(const T& item) override = 0;
 
-    virtual const std::optional<std::reference_wrapper<const T>> peek() const = 0;
+    virtual const std::optional<std::reference_wrapper<const T>> peek() const override = 0;
 
     virtual void pop() override = 0;
 
     virtual void clear() override = 0;
 
-    virtual bool isFull() const = 0;
+    virtual bool isFull() const override = 0;
 
-    virtual bool isEmpty() const = 0;
+    virtual bool isEmpty() const override = 0;
 
-    virtual uint32_t getLength() const = 0;
+    virtual uint32_t getLength() const override = 0;
 
-    virtual uint32_t getFreeSize() const = 0;
+    virtual uint32_t getFreeSize() const override = 0;
 
     virtual std::optional<std::reference_wrapper<T>> getNextAllocation() override = 0;
 
