@@ -8,15 +8,15 @@
 template <typename T>
 class INotificationQueue : public ICircularQueue<T> {
   public:
-    virtual ~INotificationQueue() = default;
+    virtual ~INotificationQueue() override = default;
 
-    virtual bool push(const T& item) = 0;
+    virtual bool push(const T& item) override = 0;
 
     virtual const std::optional<std::reference_wrapper<const T>> peek() const = 0;
 
-    virtual void pop() = 0;
+    virtual void pop() override = 0;
 
-    virtual void clear() = 0;
+    virtual void clear() override = 0;
 
     virtual bool isFull() const = 0;
 
@@ -26,14 +26,14 @@ class INotificationQueue : public ICircularQueue<T> {
 
     virtual uint32_t getFreeSize() const = 0;
 
-    virtual std::optional<std::reference_wrapper<T>> getNextAllocation() = 0;
+    virtual std::optional<std::reference_wrapper<T>> getNextAllocation() override = 0;
 
-    virtual bool advance() = 0;
+    virtual bool advance() override = 0;
 
     /**@brief wait for a new value
      *@param waitTime the time to wait in ms
      *@return*/
-    virtual bool wait(uint32_t waitTime) = 0;
+    virtual bool wait(uint32_t waitTime) override = 0;
 };
 
 #endif // __INOTIFICATIONQUEUE_H_
