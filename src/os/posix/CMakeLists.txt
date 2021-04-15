@@ -35,3 +35,7 @@ target_include_directories(${LIB_NAME}
        $<INSTALL_INTERFACE:include>
 
 )
+
+if(ENABLE_TESTS)
+    add_subdirectory(tests)
+endif()
