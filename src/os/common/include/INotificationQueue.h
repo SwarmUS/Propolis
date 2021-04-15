@@ -32,8 +32,9 @@ class INotificationQueue : public ICircularQueue<T> {
 
     /**@brief wait for a new value
      *@param waitTime the time to wait in ms
-     *@return*/
-    virtual bool wait(uint32_t waitTime) override = 0;
+     *@return true if it was possible to wait, false if not (i.e. another thread is already
+     *waiting)*/
+    virtual bool wait(uint32_t waitTime) = 0;
 };
 
 #endif // __INOTIFICATIONQUEUE_H_
