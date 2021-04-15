@@ -8,10 +8,12 @@ void ConditionVariable::notify() {
     }
 }
 
-void ConditionVariable::wait(uint32_t waitTime) {
-    if (m_taskHandle != NULL) {
+bool ConditionVariable::wait(uint32_t waitTime) {
+    if (m_taskHandle == NULL) {
         m_taskHandle = xTaskGetCurrentTaskHandle();
         ulTaskNotifyTake(pdTRUE, waitTime);
         m_taskHandle = NULL;
+        return true;
     }
+    return false;
 }

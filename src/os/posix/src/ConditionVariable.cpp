@@ -1,10 +1,15 @@
 #include "ConditionVariable.h"
 #include <chrono>
 
+ConditionVariable::ConditionVariable() : m_waiting(false) {}
+
 void ConditionVariable::notify() { m_conditionVar.notify_one(); }
 
-void ConditionVariable::wait(uint32_t waitTime) {
-
+bool ConditionVariable::wait(uint32_t waitTime) {
+    if (m_waiting) {
+        return false;
+    }
+    m_waiting = true;
     std::chrono::std::unique_lock<std::mutex> lock(m_mutex);
     if (waitTime > 0) {
         auto chronoTime = std::chrono::milliseconds(waitTime);
@@ -12,4 +17,6 @@ void ConditionVariable::wait(uint32_t waitTime) {
     } else {
         m_conditionVar.wait(lock);
     }
+    m_waiting = false;
+    return true;
 }

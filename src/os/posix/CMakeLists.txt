@@ -13,7 +13,7 @@ set(LIB_HEADERS
     include/BaseTask.h
     include/BaseTask.tpp
 
-    include/ConditionVariabl.h
+    include/ConditionVariable.h
 
     include/Mutex.h
 

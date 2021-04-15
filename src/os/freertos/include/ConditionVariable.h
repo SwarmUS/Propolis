@@ -10,7 +10,7 @@ class ConditionVariable : public IConditionVariable {
     ConditionVariable();
     ~ConditionVariable() override = default;
     void notify() override;
-    void wait(uint32_t waitTime) override;
+    bool wait(uint32_t waitTime) override;
 
   private:
     TaskHandle_t m_taskHandle;

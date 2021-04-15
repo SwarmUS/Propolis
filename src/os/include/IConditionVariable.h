@@ -7,7 +7,7 @@ class IConditionVariable {
   public:
     virtual ~IConditionVariable() = default;
     virtual void notify() = 0;
-    virtual void wait(uint32_t waitTime) = 0;
+    virtual bool wait(uint32_t waitTime) = 0;
 };
 
 #endif // __ICONDITIONVARIABLE_H_
