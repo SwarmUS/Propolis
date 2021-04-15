@@ -20,7 +20,7 @@ class INotificationQueue : public ICircularQueue<T> {
 
     virtual bool isFull() const = 0;
 
-    virtual uint32_t isEmpty() const = 0;
+    virtual bool isEmpty() const = 0;
 
     virtual uint32_t getLength() const = 0;
 
