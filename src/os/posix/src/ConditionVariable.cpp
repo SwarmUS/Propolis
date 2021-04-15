@@ -10,7 +10,7 @@ bool ConditionVariable::wait(uint32_t waitTime) {
         return false;
     }
     m_waiting = true;
-    std::chrono::std::unique_lock<std::mutex> lock(m_mutex);
+    std::unique_lock<std::mutex> lock(m_mutex);
     if (waitTime > 0) {
         auto chronoTime = std::chrono::milliseconds(waitTime);
         m_conditionVar.wait_for(lock, chronoTime);

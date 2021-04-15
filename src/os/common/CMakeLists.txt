@@ -3,7 +3,6 @@ set(LIB_ALIAS "SwarmUS::Propolis::OS::Common")
 
 set(LIB_SOURCES
         src/LockGuard.cpp
-        src/ThreadSafeQueue.cpp
         )
 
 set(LIB_HEADERS
