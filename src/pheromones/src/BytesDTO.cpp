@@ -1,7 +1,7 @@
 #include "BytesDTO.h"
 
 BytesDTO::BytesDTO(const Bytes& bytes) :
-    m_packetId(bytes.packet_no), m_packetNumber(bytes.packet_no), m_lastPacket(bytes.last_packet) {
+    m_packetId(bytes.packet_id), m_packetNumber(bytes.packet_no), m_lastPacket(bytes.last_packet) {
     setPayload(bytes.payload.bytes, bytes.payload.size);
 }
 
