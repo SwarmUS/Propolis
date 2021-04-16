@@ -18,7 +18,7 @@ MessageDTO::MessageDTO(const Message& message) :
         break;
 
     case Message_buzz_tag:
-        m_message = BuzzMessage(message.message.buzz);
+        m_message = BuzzMessageDTO(message.message.buzz);
         break;
 
     case Message_network_tag:

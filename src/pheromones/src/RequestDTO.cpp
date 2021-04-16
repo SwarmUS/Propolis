@@ -8,7 +8,7 @@ RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
         m_request = UserCallRequestDTO(request.message.user_call);
         break;
     case Request_hive_api_tag:
-        m_request = HiveMindHostApiRequest(request.message.hive_api);
+        m_request = HiveMindHostApiRequestDTO(request.message.hive_api);
         break;
     default:
         m_request = std::monostate();

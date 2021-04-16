@@ -4,7 +4,7 @@
 
 class BytesDTOFixture : public testing::Test {
   public:
-    const uint32_t m_byteReqId = 1;
+    const uint32_t m_byteReqId = 4;
     const uint32_t m_packetNumber = 1;
     const bool m_lastPacket = true;
 
