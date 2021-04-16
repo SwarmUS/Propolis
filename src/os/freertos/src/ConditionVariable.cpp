@@ -1,19 +1,5 @@
 #include "ConditionVariable.h"
 
-ConditionVariable::ConditionVariable() : m_taskHandle(NULL) {}
+void ConditionVariable::notify() { m_conditionVar.notify(); }
 
-void ConditionVariable::notify() {
-    if (m_taskHandle != NULL) {
-        xTaskNotifyGive(m_taskHandle);
-    }
-}
-
-bool ConditionVariable::wait(uint32_t waitTime) {
-    if (m_taskHandle == NULL) {
-        m_taskHandle = xTaskGetCurrentTaskHandle();
-        ulTaskNotifyTake(pdTRUE, waitTime);
-        m_taskHandle = NULL;
-        return true;
-    }
-    return false;
-}
+bool ConditionVariable::wait(uint32_t waitTime) { return m_conditionVar.wait(waitTime); }
