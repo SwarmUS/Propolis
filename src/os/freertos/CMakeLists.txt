@@ -3,7 +3,6 @@ set(LIB_ALIAS "SwarmUS::Propolis::OS::FreeRTOS")
 
 set(LIB_SOURCES
     src/ConditionVariable.cpp
-    src/FreeRTOSConditionVariable.cpp
     src/Mutex.cpp
 )
 
@@ -15,7 +14,6 @@ set(LIB_HEADERS
     include/BaseTask.tpp
 
     include/ConditionVariable.h
-    include/FreeRTOSConditionVariable.h
 
     include/Mutex.h
 
