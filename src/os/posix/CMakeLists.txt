@@ -2,6 +2,7 @@ set(LIB_NAME "swarmus-propolis-os-posix")
 set(LIB_ALIAS "SwarmUS::Propolis::OS::POSIX")
 
 set(LIB_SOURCES
+    src/ConditionVariable.cpp
     src/Mutex.cpp
 )
 
@@ -11,6 +12,8 @@ set(LIB_HEADERS
 
     include/BaseTask.h
     include/BaseTask.tpp
+
+    include/ConditionVariable.h
 
     include/Mutex.h
 
@@ -32,3 +35,7 @@ target_include_directories(${LIB_NAME}
        $<INSTALL_INTERFACE:include>
 
 )
+
+if(ENABLE_TESTS)
+    add_subdirectory(tests)
+endif()

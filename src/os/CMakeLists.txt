@@ -6,6 +6,7 @@ set(LIB_SOURCES
 
 set(LIB_HEADERS
         include/IAbstractTask.h
+        include/IConditionVariable.h
         include/IMutex.h
         )
 
