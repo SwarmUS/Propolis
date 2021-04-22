@@ -9,17 +9,17 @@ class GreetingDTO {
   public:
     GreetingDTO(const Greeting& greeting);
 
-    GreetingDTO(uint32_t id);
+    GreetingDTO(uint32_t agentId);
 
     /**
-     *@brief gets the id
-     *@return the id */
+     *@brief gets the agentId
+     *@return the agentId */
     uint16_t getId() const;
 
     /**
-     *@brief set the id
-     *@param [in] id the id to set */
-    void setId(uint32_t id);
+     *@brief set the agentId
+     *@param [in] agentId the agentId to set */
+    void setId(uint32_t agentId);
 
     /**
      *@brief serialize a Greeting for nanopb, sets the fields properly before using
@@ -29,7 +29,7 @@ class GreetingDTO {
     bool serialize(Greeting& greeting) const;
 
   private:
-    uint32_t m_id;
+    uint32_t m_agentId;
 };
 
 #endif // __GREETINGDTO_H_

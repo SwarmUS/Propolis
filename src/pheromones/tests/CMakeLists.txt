@@ -42,6 +42,8 @@ set(TEST_SOURCES
     GetNeighborsListRequestDTOUnitTests.cpp
     GetNeighborResponseDTOUnitTests.cpp
     GetNeighborsListResponseDTOUnitTests.cpp
+    GetAgentsListRequestDTOUnitTests.cpp
+    GetAgentsListResponseDTOUnitTests.cpp
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp

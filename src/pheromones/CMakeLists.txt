@@ -49,6 +49,8 @@ set(LIB_SOURCES
     src/GetNeighborsListRequestDTO.cpp
     src/GetNeighborResponseDTO.cpp
     src/GetNeighborsListResponseDTO.cpp
+    src/GetAgentsListRequestDTO.cpp
+    src/GetAgentsListResponseDTO.cpp
 
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
@@ -102,6 +104,8 @@ set(LIB_HEADERS
     include/pheromones/GetNeighborsListRequestDTO.h
     include/pheromones/GetNeighborResponseDTO.h
     include/pheromones/GetNeighborsListResponseDTO.h
+    include/pheromones/GetAgentsListRequestDTO.h
+    include/pheromones/GetAgentsListResponseDTO.h
 
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h
