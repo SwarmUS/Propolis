@@ -8,8 +8,8 @@ ResponseDTO::ResponseDTO(const Response& response) : m_id(response.id) {
     case Response_user_call_tag:
         m_response = UserCallResponseDTO(response.message.user_call);
         break;
-    case Response_hive_api_tag:
-        m_response = HiveMindHostApiResponse(response.message.hive_api);
+    case Response_hivemind_host_tag:
+        m_response = HiveMindHostApiResponse(response.message.hivemind_host);
         break;
     default:
         m_response = std::monostate();
@@ -55,8 +55,8 @@ bool ResponseDTO::serialize(Response& response) const {
         return userResponse->serialize(response.message.user_call);
     }
     if (const auto* hiveResponse = std::get_if<HiveMindHostApiResponseDTO>(&m_response)) {
-        response.which_message = Response_hive_api_tag;
-        return hiveResponse->serialize(response.message.hive_api);
+        response.which_message = Response_hivemind_host_tag;
+        return hiveResponse->serialize(response.message.hivemind_host);
     }
 
     return false;

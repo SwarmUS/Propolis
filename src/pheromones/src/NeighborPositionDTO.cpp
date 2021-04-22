@@ -1,7 +1,9 @@
 #include "NeighborPositionDTO.h"
 
 NeighborPositionDTO::NeighborPositionDTO(const NeighborPosition& pos) :
-    m_distance(pos.distance), m_relativeOrientation(pos.relative_orientation), m_inLOS(pos.in_los) {}
+    m_distance(pos.distance),
+    m_relativeOrientation(pos.relative_orientation),
+    m_inLOS(pos.in_los) {}
 
 NeighborPositionDTO::NeighborPositionDTO(float distance, float relativeOrientation, bool inLOS) :
     m_distance(distance), m_relativeOrientation(relativeOrientation), m_inLOS(inLOS) {}

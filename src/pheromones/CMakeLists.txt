@@ -55,6 +55,8 @@ set(LIB_SOURCES
     src/IpDiscoveryDTO.cpp
     src/NetworkApiDTO.cpp
 
+    src/HiveConnectHiveMindApiDTO.cpp
+
     src/CalibrationModeDTO.cpp
     src/StartCalibrationDTO.cpp
     src/SetCalibrationDistanceDTO.cpp
@@ -106,6 +108,8 @@ set(LIB_HEADERS
     include/pheromones/GetNeighborsListResponseDTO.h
     include/pheromones/GetAgentsListRequestDTO.h
     include/pheromones/GetAgentsListResponseDTO.h
+
+    include/pheromones/HiveConnectHiveMindApiDTO.h
 
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h

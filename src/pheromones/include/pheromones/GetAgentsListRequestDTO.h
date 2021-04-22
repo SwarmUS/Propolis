@@ -3,7 +3,6 @@
 
 #include <message.pb.h>
 
-
 class GetAgentsListRequestDTO {
   public:
     GetAgentsListRequestDTO(const GetAgentsListRequest& req);

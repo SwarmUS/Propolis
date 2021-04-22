@@ -39,7 +39,7 @@ TEST_F(RequestDTOFixture, RequestDTO_serialize_hive_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.id, gc_id);
-    EXPECT_EQ(req.which_message, Request_hive_api_tag);
+    EXPECT_EQ(req.which_message, Request_hivemind_host_tag);
 }
 
 TEST_F(RequestDTOFixture, RequestDTO_serialize_invalid) {

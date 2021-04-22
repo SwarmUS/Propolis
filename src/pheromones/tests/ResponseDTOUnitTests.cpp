@@ -53,7 +53,7 @@ TEST_F(ResponseDTOFixture, ResponseDTO_serialize_HiveMindAPI_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(resp.id, gc_id);
-    EXPECT_EQ(resp.which_message, Response_hive_api_tag);
+    EXPECT_EQ(resp.which_message, Response_hivemind_host_tag);
 }
 
 TEST_F(ResponseDTOFixture, ResponseDTO_serialize_invalid) {

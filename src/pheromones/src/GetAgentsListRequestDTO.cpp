@@ -1,8 +1,6 @@
 #include "GetAgentsListRequestDTO.h"
 
-GetAgentsListRequestDTO::GetAgentsListRequestDTO(const GetAgentsListRequest& req) {
-    (void)req;
-}
+GetAgentsListRequestDTO::GetAgentsListRequestDTO(const GetAgentsListRequest& req) { (void)req; }
 
 bool GetAgentsListRequestDTO::serialize(GetAgentsListRequest& req) const {
     (void)req;

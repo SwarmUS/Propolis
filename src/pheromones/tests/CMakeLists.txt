@@ -45,6 +45,8 @@ set(TEST_SOURCES
     GetAgentsListRequestDTOUnitTests.cpp
     GetAgentsListResponseDTOUnitTests.cpp
 
+    HiveConnectHiveMindApiDTOUnitTests.cpp
+
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
 
