@@ -3,6 +3,7 @@
 
 #include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
+#include "HiveConnectHiveMindApiDTO.h"
 #include "InterlocAPIDTO.h"
 #include "NetworkApiDTO.h"
 #include "RequestDTO.h"
@@ -29,6 +30,8 @@ class MessageDTO {
 
     MessageDTO(uint32_t sourceId, uint32_t destinationId, const InterlocAPIDTO& interlocApi);
 
+    MessageDTO(uint32_t sourceId, uint32_t destinationId, const HiveConnectHiveMindApiDTO& apiMsg);
+
     /**
      *@brief gets the source id
      *@return the source id */
@@ -48,7 +51,8 @@ class MessageDTO {
                        GreetingDTO,
                        BuzzMessageDTO,
                        NetworkApiDTO,
-                       InterlocAPIDTO>&
+                       InterlocAPIDTO,
+                       HiveConnectHiveMindApiDTO>&
     getMessage() const;
 
     /**
@@ -70,7 +74,8 @@ class MessageDTO {
                                        GreetingDTO,
                                        BuzzMessageDTO,
                                        NetworkApiDTO,
-                                       InterlocAPIDTO>& message);
+                                       InterlocAPIDTO,
+                                       HiveConnectHiveMindApiDTO>& message);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
@@ -90,7 +95,8 @@ class MessageDTO {
                  GreetingDTO,
                  BuzzMessageDTO,
                  NetworkApiDTO,
-                 InterlocAPIDTO>
+                 InterlocAPIDTO,
+                 HiveConnectHiveMindApiDTO>
         m_message;
 };
 

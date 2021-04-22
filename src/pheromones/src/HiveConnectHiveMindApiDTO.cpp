@@ -14,6 +14,12 @@ HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(const HiveConnectHiveMindAp
     }
 }
 
+HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(const GetAgentsListRequestDTO& req) :
+    m_message(req) {}
+
+HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(const GetAgentsListResponseDTO& resp) :
+    m_message(resp) {}
+
 const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
 HiveConnectHiveMindApiDTO::getMessage() const {
     return m_message;

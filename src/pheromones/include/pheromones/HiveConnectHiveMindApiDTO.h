@@ -10,6 +10,10 @@ class HiveConnectHiveMindApiDTO {
   public:
     HiveConnectHiveMindApiDTO(const HiveConnectHiveMindApi& apiMsg);
 
+    HiveConnectHiveMindApiDTO(const GetAgentsListRequestDTO& req);
+
+    HiveConnectHiveMindApiDTO(const GetAgentsListResponseDTO& resp);
+
     const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
     getMessage() const;
 
