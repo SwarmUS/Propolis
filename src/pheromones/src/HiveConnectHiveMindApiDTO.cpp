@@ -35,14 +35,12 @@ bool HiveConnectHiveMindApiDTO::serialize(HiveConnectHiveMindApi& apiMsg) const 
 
     if (const auto* agentsReq = std::get_if<GetAgentsListRequestDTO>(&m_message)) {
         apiMsg.which_message = HiveConnectHiveMindApi_agents_req_tag;
-        agentsReq->serialize(apiMsg.message.agents_req);
-        return true;
+        return agentsReq->serialize(apiMsg.message.agents_req);
     }
 
     if (const auto* agentsResp = std::get_if<GetAgentsListResponseDTO>(&m_message)) {
         apiMsg.which_message = HiveConnectHiveMindApi_agents_resp_tag;
-        agentsResp->serialize(apiMsg.message.agents_resp);
-        return true;
+        return agentsResp->serialize(apiMsg.message.agents_resp);
     }
 
     return false;
