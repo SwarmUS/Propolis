@@ -14,6 +14,10 @@ class HiveConnectHiveMindApiDTO {
 
     HiveConnectHiveMindApiDTO(const GetAgentsListResponseDTO& resp);
 
+    uint32_t getMessageId() const;
+
+    void setMessageId(uint32_t id) const;
+
     const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
     getMessage() const;
 
