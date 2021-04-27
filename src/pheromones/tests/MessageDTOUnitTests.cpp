@@ -131,7 +131,7 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_interlocAPI_valid) {
 TEST_F(MessageDTOFixture, MessageDTO_serialize_hiveconnect_hivemind_valid) {
     // Given
     Message msg;
-    m_message->setMessage(HiveConnectHiveMindApiDTO(GetAgentsListRequestDTO()));
+    m_message->setMessage(HiveConnectHiveMindApiDTO(1, GetAgentsListRequestDTO()));
 
     // Then
     bool ret = m_message->serialize(msg);
