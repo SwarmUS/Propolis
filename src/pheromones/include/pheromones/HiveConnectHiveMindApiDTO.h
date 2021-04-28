@@ -16,10 +16,10 @@ class HiveConnectHiveMindApiDTO {
 
     uint32_t getMessageId() const;
 
-    void setMessageId(uint32_t id) const;
-
     const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
     getMessage() const;
+
+    void setMessageId(uint32_t id);
 
     void setMessage(
         const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
@@ -28,7 +28,7 @@ class HiveConnectHiveMindApiDTO {
     bool serialize(HiveConnectHiveMindApi& apiMsg) const;
 
   private:
-    uint32_t m_id;
+    uint32_t m_messageId;
     std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO> m_message;
 };
 

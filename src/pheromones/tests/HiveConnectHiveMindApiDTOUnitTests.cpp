@@ -4,8 +4,13 @@
 class HiveConnectHiveMindApiDTOFixture : public testing::Test {
   public:
     HiveConnectHiveMindApiDTO* m_request;
+    const uint32_t m_messageId = 42;
 
-    void SetUp() override { m_request = new HiveConnectHiveMindApiDTO(HiveConnectHiveMindApi{}); }
+    void SetUp() override {
+        HiveConnectHiveMindApi api;
+        api.message_id = m_messageId;
+        m_request = new HiveConnectHiveMindApiDTO(api);
+    }
 
     void TearDown() override { delete m_request; }
 };
@@ -45,6 +50,7 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getAge
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(msg.which_message, HiveConnectHiveMindApi_agents_req_tag);
+    EXPECT_EQ(msg.message_id, m_messageId);
 }
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getAgentsResponse) {
@@ -58,4 +64,5 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getAge
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(msg.which_message, HiveConnectHiveMindApi_agents_resp_tag);
+    EXPECT_EQ(msg.message_id, m_messageId);
 }

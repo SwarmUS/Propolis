@@ -1,7 +1,7 @@
 #include "HiveConnectHiveMindApiDTO.h"
 
 HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(const HiveConnectHiveMindApi& apiMsg) :
-    m_id(apiMsg.message_id) {
+    m_messageId(apiMsg.message_id) {
     switch (apiMsg.which_message) {
     case HiveConnectHiveMindApi_agents_req_tag:
         m_message = GetAgentsListRequestDTO(apiMsg.message.agents_req);
@@ -17,16 +17,20 @@ HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(const HiveConnectHiveMindAp
 
 HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(uint32_t id,
                                                      const GetAgentsListRequestDTO& req) :
-    m_id(id), m_message(req) {}
+    m_messageId(id), m_message(req) {}
 
 HiveConnectHiveMindApiDTO::HiveConnectHiveMindApiDTO(uint32_t id,
                                                      const GetAgentsListResponseDTO& resp) :
-    m_id(id), m_message(resp) {}
+    m_messageId(id), m_message(resp) {}
+
+uint32_t HiveConnectHiveMindApiDTO::getMessageId() const { return m_messageId; }
 
 const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
 HiveConnectHiveMindApiDTO::getMessage() const {
     return m_message;
 }
+
+void HiveConnectHiveMindApiDTO::setMessageId(uint32_t id) { m_messageId = id; }
 
 void HiveConnectHiveMindApiDTO::setMessage(
     const std::variant<std::monostate, GetAgentsListRequestDTO, GetAgentsListResponseDTO>&
@@ -35,6 +39,7 @@ void HiveConnectHiveMindApiDTO::setMessage(
 }
 
 bool HiveConnectHiveMindApiDTO::serialize(HiveConnectHiveMindApi& apiMsg) const {
+    apiMsg.message_id = m_messageId;
 
     if (const auto* agentsReq = std::get_if<GetAgentsListRequestDTO>(&m_message)) {
         apiMsg.which_message = HiveConnectHiveMindApi_agents_req_tag;
