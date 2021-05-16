@@ -29,6 +29,10 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = InterlocAPIDTO(message.message.interloc);
         break;
 
+    case Message_hiveconnect_hivemind_tag:
+        m_message = HiveConnectHiveMindApiDTO(message.message.hiveconnect_hivemind);
+        break;
+
     default:
         m_message = std::monostate();
     }
@@ -54,6 +58,11 @@ MessageDTO::MessageDTO(uint32_t sourceId,
                        const InterlocAPIDTO& interlocApi) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(interlocApi) {}
 
+MessageDTO::MessageDTO(uint32_t sourceId,
+                       uint32_t destinationId,
+                       const HiveConnectHiveMindApiDTO& apiMsg) :
+    m_sourceId(sourceId), m_destinationId(destinationId), m_message(apiMsg) {}
+
 uint32_t MessageDTO::getSourceId() const { return m_sourceId; }
 
 uint32_t MessageDTO::getDestinationId() const { return m_destinationId; }
@@ -64,7 +73,8 @@ const std::variant<std::monostate,
                    GreetingDTO,
                    BuzzMessageDTO,
                    NetworkApiDTO,
-                   InterlocAPIDTO>&
+                   InterlocAPIDTO,
+                   HiveConnectHiveMindApiDTO>&
 MessageDTO::getMessage() const {
     return m_message;
 }
@@ -79,7 +89,8 @@ void MessageDTO::setMessage(const std::variant<std::monostate,
                                                GreetingDTO,
                                                BuzzMessageDTO,
                                                NetworkApiDTO,
-                                               InterlocAPIDTO>& message) {
+                                               InterlocAPIDTO,
+                                               HiveConnectHiveMindApiDTO>& message) {
     m_message = message;
 }
 
@@ -115,6 +126,11 @@ bool MessageDTO::serialize(Message& message) const {
     if (const auto* interlocAPI = std::get_if<InterlocAPIDTO>(&m_message)) {
         message.which_message = Message_interloc_tag;
         return interlocAPI->serialize(message.message.interloc);
+    }
+
+    if (const auto* hchmApi = std::get_if<HiveConnectHiveMindApiDTO>(&m_message)) {
+        message.which_message = Message_hiveconnect_hivemind_tag;
+        return hchmApi->serialize(message.message.hiveconnect_hivemind);
     }
 
     return false;

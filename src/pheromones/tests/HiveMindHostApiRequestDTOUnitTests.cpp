@@ -10,19 +10,6 @@ class HiveMindHostApiRequestDTOFixture : public testing::Test {
     void TearDown() override { delete m_request; }
 };
 
-TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_serialize_bytes_valid) {
-    // Given
-    HiveMindHostApiRequest req;
-    m_request->setRequest(BytesDTO(0, 0, false, NULL, 0));
-
-    // Then
-    bool ret = m_request->serialize(req);
-
-    // Expect
-    EXPECT_TRUE(ret);
-    EXPECT_EQ(req.which_request, HiveMindHostApiRequest_bytes_tag);
-}
-
 TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_constructor_bytes) {
     // Given
     HiveMindHostApiRequest req;
@@ -59,6 +46,31 @@ TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_constructor_g
     EXPECT_TRUE(std::holds_alternative<GetNeighborsListRequestDTO>(request.getRequest()));
 }
 
+TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_constructor_getAgents) {
+    // Given
+    HiveMindHostApiRequest req;
+    req.which_request = HiveMindHostApiRequest_agents_list_tag;
+
+    // Then
+    HiveMindHostApiRequestDTO request(req);
+
+    // Expect
+    EXPECT_TRUE(std::holds_alternative<GetAgentsListRequestDTO>(request.getRequest()));
+}
+
+TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_serialize_bytes_valid) {
+    // Given
+    HiveMindHostApiRequest req;
+    m_request->setRequest(BytesDTO(0, 0, false, NULL, 0));
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.which_request, HiveMindHostApiRequest_bytes_tag);
+}
+
 TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_serialize_getneighbor_valid) {
     // Given
     HiveMindHostApiRequest req;
@@ -84,6 +96,19 @@ TEST_F(HiveMindHostApiRequestDTOFixture,
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(req.which_request, HiveMindHostApiRequest_neighbors_list_tag);
+}
+
+TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_serialize_getAgents_valid) {
+    // Given
+    HiveMindHostApiRequest req;
+    m_request->setRequest(GetAgentsListRequestDTO());
+
+    // Then
+    bool ret = m_request->serialize(req);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(req.which_request, HiveMindHostApiRequest_agents_list_tag);
 }
 
 TEST_F(HiveMindHostApiRequestDTOFixture, HiveMindHostApiRequestDTO_serialize_invalid) {

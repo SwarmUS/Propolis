@@ -18,6 +18,18 @@ class MessageDTOFixture : public testing::Test {
     void TearDown() override { delete m_message; }
 };
 
+TEST_F(MessageDTOFixture, MessageDTO_constructor_hiveconnecthivemind_valid) {
+    // Given
+    Message msg;
+    msg.which_message = Message_hiveconnect_hivemind_tag;
+
+    // Then
+    MessageDTO message(msg);
+
+    // Expect
+    EXPECT_TRUE(std::holds_alternative<HiveConnectHiveMindApiDTO>(message.getMessage()));
+}
+
 TEST_F(MessageDTOFixture, MessageDTO_serialize_request_valid) {
     // Given
     Message msg;
@@ -114,6 +126,21 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_interlocAPI_valid) {
     EXPECT_EQ(msg.source_id, gc_sourceId);
     EXPECT_EQ(msg.destination_id, gc_destinationId);
     EXPECT_EQ(msg.which_message, Message_interloc_tag);
+}
+
+TEST_F(MessageDTOFixture, MessageDTO_serialize_hiveconnect_hivemind_valid) {
+    // Given
+    Message msg;
+    m_message->setMessage(HiveConnectHiveMindApiDTO(1, GetAgentsListRequestDTO()));
+
+    // Then
+    bool ret = m_message->serialize(msg);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.source_id, gc_sourceId);
+    EXPECT_EQ(msg.destination_id, gc_destinationId);
+    EXPECT_EQ(msg.which_message, Message_hiveconnect_hivemind_tag);
 }
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_invalid) {

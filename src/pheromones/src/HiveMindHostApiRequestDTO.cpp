@@ -11,6 +11,9 @@ HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const HiveMindHostApiReques
     case HiveMindHostApiRequest_neighbors_list_tag:
         m_request = GetNeighborsListRequestDTO(request.request.neighbors_list);
         break;
+    case HiveMindHostApiRequest_agents_list_tag:
+        m_request = GetAgentsListRequestDTO(request.request.agents_list);
+        break;
     default:
         m_request = std::monostate();
     }
@@ -23,14 +26,23 @@ HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetNeighborRequestDTO
 HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetNeighborsListRequestDTO& req) :
     m_request(req) {}
 
-const std::variant<std::monostate, BytesDTO, GetNeighborRequestDTO, GetNeighborsListRequestDTO>&
+HiveMindHostApiRequestDTO::HiveMindHostApiRequestDTO(const GetAgentsListRequestDTO& req) :
+    m_request(req) {}
+
+const std::variant<std::monostate,
+                   BytesDTO,
+                   GetNeighborRequestDTO,
+                   GetNeighborsListRequestDTO,
+                   GetAgentsListRequestDTO>&
 HiveMindHostApiRequestDTO::getRequest() const {
     return m_request;
 }
 
-void HiveMindHostApiRequestDTO::setRequest(
-    const std::variant<std::monostate, BytesDTO, GetNeighborRequestDTO, GetNeighborsListRequestDTO>&
-        request) {
+void HiveMindHostApiRequestDTO::setRequest(const std::variant<std::monostate,
+                                                              BytesDTO,
+                                                              GetNeighborRequestDTO,
+                                                              GetNeighborsListRequestDTO,
+                                                              GetAgentsListRequestDTO>& request) {
     m_request = request;
 }
 
@@ -48,6 +60,10 @@ bool HiveMindHostApiRequestDTO::serialize(HiveMindHostApiRequest& request) const
     if (const auto* req = std::get_if<GetNeighborsListRequestDTO>(&m_request)) {
         request.which_request = HiveMindHostApiRequest_neighbors_list_tag;
         return req->serialize(request.request.neighbors_list);
+    }
+    if (const auto* req = std::get_if<GetAgentsListRequestDTO>(&m_request)) {
+        request.which_request = HiveMindHostApiRequest_agents_list_tag;
+        return req->serialize(request.request.agents_list);
     }
 
     return false;

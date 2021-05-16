@@ -26,5 +26,5 @@ TEST_F(NeighborPositionDTOFixture, NeighborPosition_serialize_valid) {
     EXPECT_TRUE(ret);
     EXPECT_EQ(pos.distance, m_pos->getDistance());
     EXPECT_EQ(pos.relative_orientation, m_pos->getRelativeOrientation());
-    EXPECT_EQ(pos.inLOS, m_pos->inLOS());
+    EXPECT_EQ(pos.in_los, m_pos->inLOS());
 }

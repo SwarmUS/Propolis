@@ -8,6 +8,9 @@ HiveMindHostApiResponseDTO::HiveMindHostApiResponseDTO(const HiveMindHostApiResp
     case HiveMindHostApiResponse_neighbors_list_tag:
         m_response = GetNeighborsListResponseDTO(response.response.neighbors_list);
         break;
+    case HiveMindHostApiResponse_agents_list_tag:
+        m_response = GetAgentsListResponseDTO(response.response.agents_list);
+        break;
     default:
         m_response = std::monostate();
     }
@@ -20,14 +23,22 @@ HiveMindHostApiResponseDTO::HiveMindHostApiResponseDTO(
     const GetNeighborsListResponseDTO& response) :
     m_response(response) {}
 
-const std::variant<std::monostate, GetNeighborResponseDTO, GetNeighborsListResponseDTO>&
+HiveMindHostApiResponseDTO::HiveMindHostApiResponseDTO(const GetAgentsListResponseDTO& response) :
+    m_response(response) {}
+
+const std::variant<std::monostate,
+                   GetNeighborResponseDTO,
+                   GetNeighborsListResponseDTO,
+                   GetAgentsListResponseDTO>&
 HiveMindHostApiResponseDTO::getResponse() const {
     return m_response;
 }
 
 void HiveMindHostApiResponseDTO::setResponse(
-    const std::variant<std::monostate, GetNeighborResponseDTO, GetNeighborsListResponseDTO>&
-        response) {
+    const std::variant<std::monostate,
+                       GetNeighborResponseDTO,
+                       GetNeighborsListResponseDTO,
+                       GetAgentsListResponseDTO>& response) {
     m_response = response;
 }
 
@@ -41,6 +52,11 @@ bool HiveMindHostApiResponseDTO::serialize(HiveMindHostApiResponse& response) co
     if (const auto* resp = std::get_if<GetNeighborsListResponseDTO>(&m_response)) {
         response.which_response = HiveMindHostApiResponse_neighbors_list_tag;
         return resp->serialize(response.response.neighbors_list);
+    }
+
+    if (const auto* resp = std::get_if<GetAgentsListResponseDTO>(&m_response)) {
+        response.which_response = HiveMindHostApiResponse_agents_list_tag;
+        return resp->serialize(response.response.agents_list);
     }
 
     return false;

@@ -2,6 +2,7 @@
 #define __HIVEMINDAPIHOSTREQUESTDTO_H_
 
 #include "BytesDTO.h"
+#include "GetAgentsListRequestDTO.h"
 #include "GetNeighborRequestDTO.h"
 #include "GetNeighborsListRequestDTO.h"
 #include <message.pb.h>
@@ -13,11 +14,16 @@ class HiveMindHostApiRequestDTO {
     HiveMindHostApiRequestDTO(const BytesDTO& bytes);
     HiveMindHostApiRequestDTO(const GetNeighborRequestDTO& req);
     HiveMindHostApiRequestDTO(const GetNeighborsListRequestDTO& req);
+    HiveMindHostApiRequestDTO(const GetAgentsListRequestDTO& req);
 
     /**
      *@brief get the stored request
      *@return the stored request */
-    const std::variant<std::monostate, BytesDTO, GetNeighborRequestDTO, GetNeighborsListRequestDTO>&
+    const std::variant<std::monostate,
+                       BytesDTO,
+                       GetNeighborRequestDTO,
+                       GetNeighborsListRequestDTO,
+                       GetAgentsListRequestDTO>&
     getRequest() const;
 
     /**
@@ -26,7 +32,8 @@ class HiveMindHostApiRequestDTO {
     void setRequest(const std::variant<std::monostate,
                                        BytesDTO,
                                        GetNeighborRequestDTO,
-                                       GetNeighborsListRequestDTO>& request);
+                                       GetNeighborsListRequestDTO,
+                                       GetAgentsListRequestDTO>& request);
 
     /**
      *@brief serialize a HiveMindHostApiRequest for nanopb, sets the fields properly before using
@@ -36,7 +43,11 @@ class HiveMindHostApiRequestDTO {
     bool serialize(HiveMindHostApiRequest& request) const;
 
   private:
-    std::variant<std::monostate, BytesDTO, GetNeighborRequestDTO, GetNeighborsListRequestDTO>
+    std::variant<std::monostate,
+                 BytesDTO,
+                 GetNeighborRequestDTO,
+                 GetNeighborsListRequestDTO,
+                 GetAgentsListRequestDTO>
         m_request;
 };
 

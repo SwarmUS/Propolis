@@ -7,8 +7,8 @@ RequestDTO::RequestDTO(const Request& request) : m_id(request.id) {
     case Request_user_call_tag:
         m_request = UserCallRequestDTO(request.message.user_call);
         break;
-    case Request_hive_api_tag:
-        m_request = HiveMindHostApiRequestDTO(request.message.hive_api);
+    case Request_hivemind_host_tag:
+        m_request = HiveMindHostApiRequestDTO(request.message.hivemind_host);
         break;
     default:
         m_request = std::monostate();
@@ -44,8 +44,8 @@ bool RequestDTO::serialize(Request& request) const {
     }
 
     if (const auto* hiveRequest = std::get_if<HiveMindHostApiRequestDTO>(&m_request)) {
-        request.which_message = Request_hive_api_tag;
-        return hiveRequest->serialize(request.message.hive_api);
+        request.which_message = Request_hivemind_host_tag;
+        return hiveRequest->serialize(request.message.hivemind_host);
     }
 
     return false;

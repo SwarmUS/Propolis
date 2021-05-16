@@ -36,6 +36,18 @@ TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_constructor
     EXPECT_TRUE(std::holds_alternative<GetNeighborsListResponseDTO>(response.getResponse()));
 }
 
+TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_constructor_getAgents) {
+    // Given
+    HiveMindHostApiResponse resp;
+    resp.which_response = HiveMindHostApiResponse_agents_list_tag;
+
+    // Then
+    HiveMindHostApiResponseDTO response(resp);
+
+    // Expect
+    EXPECT_TRUE(std::holds_alternative<GetAgentsListResponseDTO>(response.getResponse()));
+}
+
 TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_serialize_getNeighbor_valid) {
     // Given
     NeighborPositionDTO pos(42, 24, true);
@@ -62,6 +74,19 @@ TEST_F(HiveMindHostApiResponseDTOFixture,
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(resp.which_response, HiveMindHostApiResponse_neighbors_list_tag);
+}
+
+TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_serialize_getAgents_valid) {
+    // Given
+    m_response->setResponse(GetAgentsListResponseDTO(NULL, 0));
+    HiveMindHostApiResponse resp;
+
+    // Then
+    bool ret = m_response->serialize(resp);
+
+    // Expect
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(resp.which_response, HiveMindHostApiResponse_agents_list_tag);
 }
 
 TEST_F(HiveMindHostApiResponseDTOFixture, HiveMindHostApiResponseDTO_serialize_invalid) {

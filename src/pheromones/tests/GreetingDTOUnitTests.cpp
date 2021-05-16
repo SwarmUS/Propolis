@@ -20,5 +20,5 @@ TEST_F(GreetingDTOFixture, GreetingDTO_serialize_valid) {
 
     // Expect
     EXPECT_TRUE(ret);
-    EXPECT_EQ(greeting.id, gc_id);
+    EXPECT_EQ(greeting.agent_id, gc_id);
 }

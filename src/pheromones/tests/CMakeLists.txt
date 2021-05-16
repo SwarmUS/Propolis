@@ -42,6 +42,10 @@ set(TEST_SOURCES
     GetNeighborsListRequestDTOUnitTests.cpp
     GetNeighborResponseDTOUnitTests.cpp
     GetNeighborsListResponseDTOUnitTests.cpp
+    GetAgentsListRequestDTOUnitTests.cpp
+    GetAgentsListResponseDTOUnitTests.cpp
+
+    HiveConnectHiveMindApiDTOUnitTests.cpp
 
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
