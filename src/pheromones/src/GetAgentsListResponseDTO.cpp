@@ -27,7 +27,7 @@ bool GetAgentsListResponseDTO::setRawAgentsLength(uint16_t agentsLength) {
 
 void GetAgentsListResponseDTO::setAgents(const uint16_t* agents, uint16_t agentsLength) {
     setRawAgentsLength(agentsLength);
-    memcpy(m_agents.data(), agents, m_agentsLength);
+    memcpy(m_agents.data(), agents, m_agentsLength*sizeof(uint16_t));
 }
 
 void GetAgentsListResponseDTO::setAgents(const uint32_t* agents, uint16_t agentsLength) {
