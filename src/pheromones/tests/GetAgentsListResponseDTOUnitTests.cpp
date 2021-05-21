@@ -31,7 +31,7 @@ TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_constructor_valid_
 
     // Expect
     EXPECT_EQ(resp.getAgentsLength(), 9);
-    for (uint16_t i = 0; i <= 9; i++) {
+    for (uint16_t i = 0; i < 9; i++) {
         EXPECT_EQ(agents[i], resp.getAgents().at(i));
     }
 }
