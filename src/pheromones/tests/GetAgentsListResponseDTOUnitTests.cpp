@@ -22,6 +22,20 @@ TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_constructor_noOver
     EXPECT_EQ(resp.getAgentsLength(), GetAgentsListResponseDTO::AGENTS_MAX_SIZE);
 }
 
+TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_constructor_valid_agent_list) {
+    // Given
+    uint16_t agents[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    // Then
+    GetAgentsListResponseDTO resp(agents, 9);
+
+    // Expect
+    EXPECT_EQ(resp.getAgentsLength(), 9);
+    for (uint16_t i = 0; i < 9; i++) {
+        EXPECT_EQ(agents[i], resp.getAgents().at(i));
+    }
+}
+
 TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_serialize_valid) {
     // Given
     GetAgentsListResponse resp;
