@@ -65,7 +65,7 @@ set(LIB_SOURCES
     src/CalibrationEndedDTO.cpp
 
     src/HiveConnectNetworkAccessDTO.cpp
-        src/HiveConnectRootNode.cpp src/HiveConnectMeshEnableDTO.cpp src/HiveConnectNetworkConfigSetRequestDTO.cpp)
+        src/HiveConnectRootNode.cpp src/HiveConnectMeshEnableDTO.cpp src/HiveConnectNetworkConfigSetRequestDTO.cpp src/HiveConnectNetworkConfigSetResponse.cpp)
 
 set(LIB_HEADERS
     include/pheromones/HiveMindHostDeserializer.h
@@ -123,7 +123,7 @@ set(LIB_HEADERS
     include/pheromones/CalibrationMessageDTO.h
     include/pheromones/InterlocAPIDTO.h
     include/pheromones/CalibrationEndedDTO.h
-    include/pheromones/HiveConnectNetworkAccessDTO.h include/pheromones/HiveConnectRootNodeDTO.h include/pheromones/HiveConnectMeshEnableDTO.h include/pheromones/HiveConnectNetworkConfigSetRequestDTO.h)
+    include/pheromones/HiveConnectNetworkAccessDTO.h include/pheromones/HiveConnectRootNodeDTO.h include/pheromones/HiveConnectMeshEnableDTO.h include/pheromones/HiveConnectNetworkConfigSetRequestDTO.h include/pheromones/HiveConnectNetworkConfigSetResponse.h)
 
 add_library(${LIB_NAME} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
 add_library(${LIB_ALIAS} ALIAS ${LIB_NAME})
