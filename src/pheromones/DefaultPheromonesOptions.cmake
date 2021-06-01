@@ -9,3 +9,6 @@ set_default(BUZZ_PAYLOAD_SIZE 16)
 set_default(BYTES_PAYLOAD_SIZE 200)
 set_default(NEIGHBORS_LIST_SIZE 50)
 set_default(AGENTS_LIST_SIZE 50)
+
+set_default(NETWORK_SSID_MAX_LENGTH 32) # IEEE max length for SSIDs
+set(NETWORK_PASSWORD_MAX_LENGTH 63) # WPA2 password max characters
