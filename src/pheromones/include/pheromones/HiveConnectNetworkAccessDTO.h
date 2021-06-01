@@ -7,7 +7,7 @@
 class HiveConnectNetworkAccessDTO {
   public:
     HiveConnectNetworkAccessDTO(const char* ssid, const char* password);
-    HiveConnectNetworkAccessDTO(const HiveConnectNetworkAccessDTO& hiveConnectNetworkAccessDto);
+    HiveConnectNetworkAccessDTO(const HiveConnectNetworkAccess& hiveConnectNetworkAccessDto);
 
     /**
      * @brief gets the ssid

@@ -6,7 +6,7 @@
 class HiveConnectMeshEnableDTO {
   public:
     HiveConnectMeshEnableDTO(bool meshEnable);
-    HiveConnectMeshEnableDTO(const HiveConnectMeshEnableDTO& hiveConnectMeshEnableDto);
+    HiveConnectMeshEnableDTO(const HiveConnectMeshEnable& hiveConnectMeshEnableDto);
 
     /**
      * @return the flag to enable mesh

@@ -4,8 +4,8 @@ HiveConnectRootNodeDTO::HiveConnectRootNodeDTO(bool isRootNode) {
     m_isRoot = isRootNode;
 }
 
-HiveConnectRootNodeDTO::HiveConnectRootNodeDTO(const HiveConnectRootNodeDTO& hiveConnectRootNodeDto) {
-    m_isRoot = hiveConnectRootNodeDto.m_isRoot;
+HiveConnectRootNodeDTO::HiveConnectRootNodeDTO(const HiveConnectRootNode& hiveConnectRootNodeDto) {
+    m_isRoot = hiveConnectRootNodeDto.is_root;
 }
 
 bool HiveConnectRootNodeDTO::isRootNode() const {return m_isRoot;}

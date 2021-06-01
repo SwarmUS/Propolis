@@ -10,10 +10,16 @@
 class HiveConnectNetworkConfigSetRequestDTO {
   public:
     HiveConnectNetworkConfigSetRequestDTO();
+    HiveConnectNetworkConfigSetRequestDTO(const HiveConnectNetworkConfigSetRequest& setRequest);
 
     void setSSIDAndPassword(const char* ssid, const char* password);
     void setRootNode(bool isRootNode);
     void enableMesh(bool enable);
+
+    std::optional<const char*> getSSID() const;
+    std::optional<const char*> getPassword() const;
+    std::optional<bool> getRootNode() const;
+    std::optional<bool> getMeshEnable() const;
 
     bool serialize(HiveConnectNetworkConfigSetRequest& setRequest);
 

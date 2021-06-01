@@ -4,8 +4,8 @@ HiveConnectMeshEnableDTO::HiveConnectMeshEnableDTO(bool meshEnable) {
     m_meshEnable = meshEnable;
 }
 
-HiveConnectMeshEnableDTO::HiveConnectMeshEnableDTO(const HiveConnectMeshEnableDTO& hiveConnectMeshEnableDto) {
-    m_meshEnable = hiveConnectMeshEnableDto.m_meshEnable;
+HiveConnectMeshEnableDTO::HiveConnectMeshEnableDTO(const HiveConnectMeshEnable& hiveConnectMeshEnableDto) {
+    m_meshEnable = hiveConnectMeshEnableDto.use_mesh;
 }
 
 bool HiveConnectMeshEnableDTO::isMeshEnabled() const {return m_meshEnable;}

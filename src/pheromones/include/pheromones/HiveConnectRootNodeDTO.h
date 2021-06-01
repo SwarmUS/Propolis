@@ -5,7 +5,7 @@
 class HiveConnectRootNodeDTO {
   public:
     HiveConnectRootNodeDTO(bool isRootNode);
-    HiveConnectRootNodeDTO(const HiveConnectRootNodeDTO& hiveConnectRootNodeDto);
+    HiveConnectRootNodeDTO(const HiveConnectRootNode& hiveConnectRootNodeDto);
 
     /**
      * @brief get the flag to know if node is the root node
