@@ -12,7 +12,7 @@ bool HiveConnectMeshEnableDTO::isMeshEnabled() const {return m_meshEnable;}
 
 void HiveConnectMeshEnableDTO::setMeshEnable(bool meshEnable) {m_meshEnable = meshEnable;}
 
-bool HiveConnectMeshEnableDTO::serialize(HiveConnectMeshEnable& meshEnable) {
+bool HiveConnectMeshEnableDTO::serialize(HiveConnectMeshEnable& meshEnable) const {
     meshEnable.use_mesh = m_meshEnable;
     return true;
 }

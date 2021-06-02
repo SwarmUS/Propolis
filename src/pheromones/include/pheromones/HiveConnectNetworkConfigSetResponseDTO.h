@@ -1,5 +1,5 @@
-#ifndef PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSE_H
-#define PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSE_H
+#ifndef PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSEDTO_H
+#define PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSEDTO_H
 
 #include "message.pb.h"
 #include "GenericResponseDTO.h"
@@ -11,8 +11,8 @@ class HiveConnectNetworkConfigSetResponseDTO {
 
     GenericResponseStatusDTO getResponse() const;
 
-    bool serialize(HiveConnectNetworkConfigSetResponse& setResponse);
+    bool serialize(HiveConnectNetworkConfigSetResponse& setResponse) const ;
   private:
     GenericResponseDTO m_genericResponse;
 };
-#endif // PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSE_H
+#endif // PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSEDTO_H

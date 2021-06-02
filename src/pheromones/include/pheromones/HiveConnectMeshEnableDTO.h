@@ -18,7 +18,7 @@ class HiveConnectMeshEnableDTO {
      */
     void setMeshEnable(bool meshEnable);
 
-    bool serialize(HiveConnectMeshEnable& meshEnable);
+    bool serialize(HiveConnectMeshEnable& meshEnable) const;
 
   private:
     bool m_meshEnable;
