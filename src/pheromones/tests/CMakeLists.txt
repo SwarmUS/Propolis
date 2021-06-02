@@ -57,6 +57,8 @@ set(TEST_SOURCES
     CalibrationMessageDTOUnitTests.cpp
     InterloAPIDTOUnitTests.cpp
     CalibrationEndedDTOUnitTests.cpp
+
+    HiveConnectNetworkAccessDTOTests.cpp
 )
 
 set(TEST_HEADERS
