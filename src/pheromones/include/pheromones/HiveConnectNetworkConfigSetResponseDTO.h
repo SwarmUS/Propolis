@@ -7,7 +7,7 @@
 class HiveConnectNetworkConfigSetResponseDTO {
   public:
     HiveConnectNetworkConfigSetResponseDTO(const HiveConnectNetworkConfigSetResponse& setResponse);
-    HiveConnectNetworkConfigSetResponseDTO(const GenericResponse genericResponse);
+    HiveConnectNetworkConfigSetResponseDTO(GenericResponse genericResponse);
 
     GenericResponseStatusDTO getResponse() const;
 
