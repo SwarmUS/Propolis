@@ -3,8 +3,19 @@
 
 class HiveConnectNetworkAccessDTOTestFixture : public testing::Test {};
 
-TEST_F(HiveConnectNetworkAccessDTOTestFixture, test_constructor_valid) {
+TEST_F(HiveConnectNetworkAccessDTOTestFixture, test_constructor_valid_values) {
     HiveConnectNetworkAccessDTO networkAccessDto("test_ssid", "test_password");
+
+    ASSERT_STREQ(networkAccessDto.getSSID(), "test_ssid");
+    ASSERT_STREQ(networkAccessDto.getPassword(), "test_password");
+}
+
+
+TEST_F(HiveConnectNetworkAccessDTOTestFixture, test_constructor_valid_struct) {
+    HiveConnectNetworkAccess networkAccess;
+    snprintf(networkAccess.ssid, NETWORK_SSID_MAX_LENGTH, "%s", "test_ssid");
+    snprintf(networkAccess.password, NETWORK_PASSWORD_MAX_LENGTH, "%s", "test_password");
+    HiveConnectNetworkAccessDTO networkAccessDto(networkAccess);
 
     ASSERT_STREQ(networkAccessDto.getSSID(), "test_ssid");
     ASSERT_STREQ(networkAccessDto.getPassword(), "test_password");
@@ -39,4 +50,18 @@ TEST_F(HiveConnectNetworkAccessDTOTestFixture, change_ssid_and_password) {
 
     ASSERT_STREQ(networkAccessDto.getSSID(), "test_ssid");
     ASSERT_STREQ(networkAccessDto.getPassword(), "test_password");
+}
+
+
+
+TEST_F(HiveConnectNetworkAccessDTOTestFixture, serialize) {
+    HiveConnectNetworkAccessDTO networkAccessDto("test_ssid", "test_password");
+
+    ASSERT_STREQ(networkAccessDto.getSSID(), "test_ssid");
+    ASSERT_STREQ(networkAccessDto.getPassword(), "test_password");
+
+    HiveConnectNetworkAccess networkAccess;
+    ASSERT_TRUE(networkAccessDto.serialize(networkAccess));
+    ASSERT_STREQ(networkAccessDto.getSSID(), networkAccess.ssid);
+    ASSERT_STREQ(networkAccessDto.getPassword(), networkAccess.password);
 }

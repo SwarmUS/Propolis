@@ -59,7 +59,7 @@ std::optional<bool> HiveConnectNetworkConfigSetRequestDTO::getMeshEnable() const
 }
 
 bool HiveConnectNetworkConfigSetRequestDTO::serialize(HiveConnectNetworkConfigSetRequest& setRequest) {
-    bool ret = false;
+    bool ret = true;
     setRequest.has_network_access = m_networkAccess.has_value();
     setRequest.has_root_node = m_rootNode.has_value();
     setRequest.has_mesh_enable = m_meshEnable.has_value();
