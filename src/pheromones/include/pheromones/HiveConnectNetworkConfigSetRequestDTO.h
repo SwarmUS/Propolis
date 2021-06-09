@@ -24,6 +24,7 @@ class HiveConnectNetworkConfigSetRequestDTO {
     bool serialize(HiveConnectNetworkConfigSetRequest& setRequest);
 
   private:
+    // All optionals since a setRequest could contain only a part of the settings to change
     std::optional<HiveConnectNetworkAccessDTO> m_networkAccess;
     std::optional<HiveConnectRootNodeDTO> m_rootNode;
     std::optional<HiveConnectMeshEnableDTO> m_meshEnable;
