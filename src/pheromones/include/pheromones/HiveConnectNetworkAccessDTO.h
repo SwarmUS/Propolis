@@ -27,7 +27,7 @@ class HiveConnectNetworkAccessDTO {
     void setSSID(const char* ssid);
     /**
      * @brief set the stored password
-     * @param [in] ssid a char pointer the password string
+     * @param [in] password a char pointer the password string
      */
     void setPassword(const char* password);
 
