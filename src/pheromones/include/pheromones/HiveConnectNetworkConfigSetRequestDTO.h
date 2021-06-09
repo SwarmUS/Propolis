@@ -1,10 +1,10 @@
 #ifndef PROPOLIS_HIVECONNECTNETWORKCONFIGSETREQUESTDTO_H
 #define PROPOLIS_HIVECONNECTNETWORKCONFIGSETREQUESTDTO_H
 
-#include "message.pb.h"
+#include "HiveConnectMeshEnableDTO.h"
 #include "HiveConnectNetworkAccessDTO.h"
 #include "HiveConnectRootNodeDTO.h"
-#include "HiveConnectMeshEnableDTO.h"
+#include "message.pb.h"
 #include <optional>
 
 class HiveConnectNetworkConfigSetRequestDTO {

@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "pheromones/HiveConnectRootNodeDTO.h"
+#include <gtest/gtest.h>
 
 class HiveConnectRootNodeDTOTests : public testing::Test {};
 
@@ -9,7 +9,6 @@ TEST_F(HiveConnectRootNodeDTOTests, test_constructor_valid) {
     ASSERT_TRUE(rootNodeDto.isRootNode());
 }
 
-
 TEST_F(HiveConnectRootNodeDTOTests, test_constructor_valid_struct) {
     HiveConnectRootNode rootNode;
     rootNode.is_root = true;
@@ -17,7 +16,6 @@ TEST_F(HiveConnectRootNodeDTOTests, test_constructor_valid_struct) {
 
     ASSERT_TRUE(rootNodeDto.isRootNode());
 }
-
 
 TEST_F(HiveConnectRootNodeDTOTests, test_change_root_noode) {
     HiveConnectRootNodeDTO rootNodeDto(true);
@@ -29,7 +27,6 @@ TEST_F(HiveConnectRootNodeDTOTests, test_change_root_noode) {
     ASSERT_FALSE(rootNodeDto.isRootNode());
 }
 
-
 TEST_F(HiveConnectRootNodeDTOTests, test_serialize) {
     HiveConnectRootNodeDTO rootNodeDto(true);
 
@@ -38,5 +35,3 @@ TEST_F(HiveConnectRootNodeDTOTests, test_serialize) {
     ASSERT_TRUE(rootNodeDto.serialize(rootNode));
     ASSERT_EQ(rootNodeDto.isRootNode(), rootNode.is_root);
 }
-
-

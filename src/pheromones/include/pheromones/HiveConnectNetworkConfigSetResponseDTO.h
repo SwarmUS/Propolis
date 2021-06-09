@@ -1,17 +1,19 @@
 #ifndef PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSEDTO_H
 #define PROPOLIS_HIVECONNECTNETWORKCONFIGSETRESPONSEDTO_H
 
-#include "message.pb.h"
 #include "GenericResponseDTO.h"
+#include "message.pb.h"
 
 class HiveConnectNetworkConfigSetResponseDTO {
   public:
     HiveConnectNetworkConfigSetResponseDTO(const HiveConnectNetworkConfigSetResponse& setResponse);
-    HiveConnectNetworkConfigSetResponseDTO(GenericResponse genericResponse);
+    HiveConnectNetworkConfigSetResponseDTO(const GenericResponse& genericResponse);
+    HiveConnectNetworkConfigSetResponseDTO(const GenericResponseDTO& genericResponseDto);
 
     GenericResponseStatusDTO getResponse() const;
 
-    bool serialize(HiveConnectNetworkConfigSetResponse& setResponse) const ;
+    bool serialize(HiveConnectNetworkConfigSetResponse& setResponse) const;
+
   private:
     GenericResponseDTO m_genericResponse;
 };

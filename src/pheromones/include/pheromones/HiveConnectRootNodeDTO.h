@@ -22,6 +22,5 @@ class HiveConnectRootNodeDTO {
 
   private:
     bool m_isRoot;
-
 };
 #endif // PROPOLIS_HIVECONNECTROOTNODEDTO_H

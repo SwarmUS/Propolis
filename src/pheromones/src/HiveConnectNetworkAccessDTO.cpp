@@ -6,14 +6,15 @@ HiveConnectNetworkAccessDTO::HiveConnectNetworkAccessDTO(const char* ssid, const
     setPassword(password);
 }
 
-HiveConnectNetworkAccessDTO::HiveConnectNetworkAccessDTO(const HiveConnectNetworkAccess& hiveConnectNetworkAccessDto) {
+HiveConnectNetworkAccessDTO::HiveConnectNetworkAccessDTO(
+    const HiveConnectNetworkAccess& hiveConnectNetworkAccessDto) {
     setSSID(hiveConnectNetworkAccessDto.ssid);
     setPassword(hiveConnectNetworkAccessDto.password);
 }
 
-const char * HiveConnectNetworkAccessDTO::getSSID() const {return m_ssid;}
+const char* HiveConnectNetworkAccessDTO::getSSID() const { return m_ssid; }
 
-const char * HiveConnectNetworkAccessDTO::getPassword() const {return m_password;}
+const char* HiveConnectNetworkAccessDTO::getPassword() const { return m_password; }
 
 void HiveConnectNetworkAccessDTO::setSSID(const char* ssid) {
     snprintf(m_ssid, NETWORK_SSID_MAX_LENGTH, "%s", ssid);

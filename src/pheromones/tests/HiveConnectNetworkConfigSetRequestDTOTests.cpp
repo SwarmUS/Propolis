@@ -1,10 +1,10 @@
-#include <gtest/gtest.h>
 #include "pheromones/HiveConnectNetworkConfigSetRequestDTO.h"
+#include <gtest/gtest.h>
 
 class HiveConnectNetworkConfigSetRequestDTOTestsFixture : public testing::Test {
   protected:
-    char m_ssid [NETWORK_SSID_MAX_LENGTH] = "test_ssid";
-    char m_password [NETWORK_PASSWORD_MAX_LENGTH] = "test_password";
+    char m_ssid[NETWORK_SSID_MAX_LENGTH] = "test_ssid";
+    char m_password[NETWORK_PASSWORD_MAX_LENGTH] = "test_password";
     bool m_isRootNode = true;
     bool m_useMesh = true;
 };
@@ -17,8 +17,8 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid
     ASSERT_FALSE(setRequestDto.getMeshEnable().has_value());
 }
 
-
-TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid_partial_structs_network_access) {
+TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture,
+       test_constructor_valid_partial_structs_network_access) {
     // Given
     HiveConnectNetworkConfigSetRequest setRequest;
     HiveConnectNetworkAccess networkAccess;
@@ -42,9 +42,8 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid
     ASSERT_FALSE(setRequestDto.getMeshEnable().has_value());
 }
 
-
-
-TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid_partial_structs_root_node) {
+TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture,
+       test_constructor_valid_partial_structs_root_node) {
     // Given
     HiveConnectNetworkConfigSetRequest setRequest;
     setRequest.has_network_access = false;
@@ -62,19 +61,17 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid
     ASSERT_TRUE(setRequestDto.getRootNode().has_value());
     ASSERT_EQ(setRequestDto.getRootNode().value(), m_isRootNode);
 
-
     ASSERT_FALSE(setRequestDto.getMeshEnable().has_value());
 }
 
-
-TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid_partial_structs_mesh_enable) {
+TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture,
+       test_constructor_valid_partial_structs_mesh_enable) {
     // Given
     HiveConnectNetworkConfigSetRequest setRequest;
     setRequest.has_network_access = false;
     setRequest.has_root_node = false;
     setRequest.mesh_enable.use_mesh = m_useMesh;
     setRequest.has_mesh_enable = true;
-
 
     // Then
     HiveConnectNetworkConfigSetRequestDTO setRequestDto(setRequest);
@@ -87,7 +84,6 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid
     ASSERT_TRUE(setRequestDto.getMeshEnable().has_value());
     ASSERT_EQ(setRequestDto.getMeshEnable().value(), m_useMesh);
 }
-
 
 TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_constructor_valid_complete_structs) {
     // Given
@@ -149,10 +145,8 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_set_root_node) {
     ASSERT_TRUE(setRequestDto.getRootNode().has_value());
     ASSERT_EQ(setRequestDto.getRootNode().value(), m_isRootNode);
 
-
     ASSERT_FALSE(setRequestDto.getMeshEnable().has_value());
 }
-
 
 TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_set_mesh_enable) {
     // Given
@@ -187,9 +181,7 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_partial
 
     ASSERT_FALSE(setRequest.has_root_node);
     ASSERT_FALSE(setRequest.has_mesh_enable);
-
 }
-
 
 TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_partial_root_node) {
     // Given
@@ -206,9 +198,7 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_partial
     ASSERT_TRUE(setRequest.has_root_node);
     ASSERT_EQ(setRequest.root_node.is_root, m_isRootNode);
     ASSERT_FALSE(setRequest.has_mesh_enable);
-
 }
-
 
 TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_partial_mesh_enable) {
     // Given
@@ -224,10 +214,8 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_partial
 
     ASSERT_FALSE(setRequest.has_root_node);
     ASSERT_TRUE(setRequest.has_mesh_enable);
-    ASSERT_EQ(setRequest.mesh_enable.use_mesh,m_useMesh);
-
+    ASSERT_EQ(setRequest.mesh_enable.use_mesh, m_useMesh);
 }
-
 
 TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_complete) {
     // Given
@@ -248,5 +236,5 @@ TEST_F(HiveConnectNetworkConfigSetRequestDTOTestsFixture, test_serialize_complet
     ASSERT_TRUE(setRequest.has_root_node);
     ASSERT_EQ(setRequest.root_node.is_root, m_isRootNode);
     ASSERT_TRUE(setRequest.has_mesh_enable);
-    ASSERT_EQ(setRequest.mesh_enable.use_mesh,m_useMesh);
+    ASSERT_EQ(setRequest.mesh_enable.use_mesh, m_useMesh);
 }

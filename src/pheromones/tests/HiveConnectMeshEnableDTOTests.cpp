@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "pheromones/HiveConnectMeshEnableDTO.h"
+#include <gtest/gtest.h>
 
 class HiveConnectMeshEnableDTOTests : public testing::Test {};
 
@@ -9,7 +9,6 @@ TEST_F(HiveConnectMeshEnableDTOTests, test_constructor_valid) {
     ASSERT_TRUE(meshEnableDTO.isMeshEnabled());
 }
 
-
 TEST_F(HiveConnectMeshEnableDTOTests, test_constructor_valid_struct) {
     HiveConnectMeshEnable meshEnable;
     meshEnable.use_mesh = true;
@@ -17,7 +16,6 @@ TEST_F(HiveConnectMeshEnableDTOTests, test_constructor_valid_struct) {
 
     ASSERT_TRUE(meshEnableDto.isMeshEnabled());
 }
-
 
 TEST_F(HiveConnectMeshEnableDTOTests, test_change_flag) {
     HiveConnectMeshEnableDTO meshEnableDTO(true);
@@ -29,7 +27,6 @@ TEST_F(HiveConnectMeshEnableDTOTests, test_change_flag) {
     ASSERT_FALSE(meshEnableDTO.isMeshEnabled());
 }
 
-
 TEST_F(HiveConnectMeshEnableDTOTests, test_serialize) {
     HiveConnectMeshEnableDTO meshEnableDTO(true);
 
@@ -38,5 +35,3 @@ TEST_F(HiveConnectMeshEnableDTOTests, test_serialize) {
     ASSERT_TRUE(meshEnableDTO.serialize(meshEnable));
     ASSERT_EQ(meshEnableDTO.isMeshEnabled(), meshEnable.use_mesh);
 }
-
-

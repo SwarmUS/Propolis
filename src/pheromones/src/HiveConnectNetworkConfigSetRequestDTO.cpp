@@ -6,7 +6,8 @@ HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO() {
     m_meshEnable = std::nullopt;
 }
 
-HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO(const HiveConnectNetworkConfigSetRequest& setRequest) {
+HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO(
+    const HiveConnectNetworkConfigSetRequest& setRequest) {
     if (setRequest.has_network_access) {
         setSSIDAndPassword(setRequest.network_access.ssid, setRequest.network_access.password);
     }
@@ -18,7 +19,8 @@ HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO(con
     }
 }
 
-void HiveConnectNetworkConfigSetRequestDTO::setSSIDAndPassword(const char* ssid, const char* password) {
+void HiveConnectNetworkConfigSetRequestDTO::setSSIDAndPassword(const char* ssid,
+                                                               const char* password) {
     m_networkAccess.emplace(ssid, password);
 }
 
@@ -30,14 +32,14 @@ void HiveConnectNetworkConfigSetRequestDTO::enableMesh(bool enable) {
     m_meshEnable.emplace(enable);
 }
 
-std::optional<const char *> HiveConnectNetworkConfigSetRequestDTO::getSSID() const {
+std::optional<const char*> HiveConnectNetworkConfigSetRequestDTO::getSSID() const {
     if (m_networkAccess.has_value()) {
         return m_networkAccess.value().getSSID();
     }
     return {};
 }
 
-std::optional<const char *> HiveConnectNetworkConfigSetRequestDTO::getPassword() const {
+std::optional<const char*> HiveConnectNetworkConfigSetRequestDTO::getPassword() const {
     if (m_networkAccess.has_value()) {
         return m_networkAccess.value().getPassword();
     }
@@ -58,7 +60,8 @@ std::optional<bool> HiveConnectNetworkConfigSetRequestDTO::getMeshEnable() const
     return {};
 }
 
-bool HiveConnectNetworkConfigSetRequestDTO::serialize(HiveConnectNetworkConfigSetRequest& setRequest) {
+bool HiveConnectNetworkConfigSetRequestDTO::serialize(
+    HiveConnectNetworkConfigSetRequest& setRequest) {
     bool ret = true;
     setRequest.has_network_access = m_networkAccess.has_value();
     setRequest.has_root_node = m_rootNode.has_value();
