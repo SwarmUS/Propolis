@@ -1,11 +1,5 @@
 #include "HiveConnectNetworkConfigSetRequestDTO.h"
 
-HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO() {
-    m_networkAccess = std::nullopt;
-    m_rootNode = std::nullopt;
-    m_meshEnable = std::nullopt;
-}
-
 HiveConnectNetworkConfigSetRequestDTO::HiveConnectNetworkConfigSetRequestDTO(
     const HiveConnectNetworkConfigSetRequest& setRequest) {
     if (setRequest.has_network_access) {

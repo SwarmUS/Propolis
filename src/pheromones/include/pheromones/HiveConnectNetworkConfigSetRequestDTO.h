@@ -9,7 +9,7 @@
 
 class HiveConnectNetworkConfigSetRequestDTO {
   public:
-    HiveConnectNetworkConfigSetRequestDTO();
+    HiveConnectNetworkConfigSetRequestDTO() = default;
     HiveConnectNetworkConfigSetRequestDTO(const HiveConnectNetworkConfigSetRequest& setRequest);
 
     void setSSIDAndPassword(const char* ssid, const char* password);
