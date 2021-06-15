@@ -57,7 +57,14 @@ set(TEST_SOURCES
     CalibrationMessageDTOUnitTests.cpp
     InterloAPIDTOUnitTests.cpp
     CalibrationEndedDTOUnitTests.cpp
-)
+
+    HiveConnectNetworkAccessDTOTests.cpp
+    HiveConnectRootNodeDTOTests.cpp
+    HiveConnectMeshEnableDTOTests.cpp
+    HiveConnectNetworkConfigSetRequestDTOTests.cpp
+    HiveConnectNetworkConfigSetResponseDTOTests.cpp
+    HiveConnectNetworkConfigGetRequestDTOTests.cpp
+    HiveConnectNetworkConfigGetResponseDTOTests.cpp)
 
 set(TEST_HEADERS
     mocks/Utils.h
