@@ -39,6 +39,8 @@ void GetAgentsListResponseDTO::setAgents(const uint32_t* agents, uint16_t agents
 
 bool GetAgentsListResponseDTO::serialize(GetAgentsListResponse& resp) const {
     resp.agents_count = m_agentsLength;
-    memcpy(resp.agents, m_agents.data(), m_agentsLength);
+    for (uint16_t i = 0; i < m_agentsLength; i++) {
+        resp.agents[i] = m_agents[i];
+    }
     return true;
 }

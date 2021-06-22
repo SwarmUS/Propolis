@@ -39,6 +39,8 @@ TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_constructor_valid_
 TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_serialize_valid) {
     // Given
     GetAgentsListResponse resp;
+    uint16_t agents[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    m_resp->setAgents(agents, 9);
 
     // Then
     bool ret = m_resp->serialize(resp);
@@ -46,4 +48,8 @@ TEST_F(GetAgentsListResponseDTOFixture, GetAgentsListResponse_serialize_valid) {
     // Expect
     EXPECT_TRUE(ret);
     EXPECT_EQ(resp.agents_count, m_resp->getAgentsLength());
+    auto& expectedAgents = m_resp->getRawAgents();
+    for (uint16_t i = 0; i < resp.agents_count; i++) {
+        EXPECT_EQ(resp.agents[i], expectedAgents[i]);
+    }
 }
