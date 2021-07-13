@@ -22,7 +22,7 @@ class HiveConnectNetworkConfigGetResponseDTO {
     bool isRootNode() const;
     bool isMeshEnabled() const;
 
-    bool serialize(HiveConnectNetworkConfigGetResponse& getResponse);
+    bool serialize(HiveConnectNetworkConfigGetResponse& getResponse) const;
 
   private:
     HiveConnectNetworkAccessDTO m_networkAccess;
