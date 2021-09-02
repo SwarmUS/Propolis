@@ -48,8 +48,8 @@ class GetNeighborsListResponseDTO {
     bool serialize(GetNeighborsListResponse& resp) const;
 
   private:
-    std::array<uint16_t, NEIGHBORS_MAX_SIZE> m_neighbors;
-    uint16_t m_neighborsLength;
+    std::array<uint16_t, NEIGHBORS_MAX_SIZE> m_neighbors{};
+    uint16_t m_neighborsLength{};
 };
 
 #endif // __GETNEIGHBORSLISTRESPONSEDTO_H_
