@@ -29,7 +29,9 @@ bool GetNeighborsListResponseDTO::setRawNeighborsLength(uint16_t neighborsLength
 void GetNeighborsListResponseDTO::setNeighbors(const uint16_t* neighbors,
                                                uint16_t neighborsLength) {
     setRawNeighborsLength(neighborsLength);
-    memcpy(m_neighbors.data(), neighbors, m_neighborsLength);
+    for (uint16_t i = 0; i < m_neighborsLength; i++) {
+        m_neighbors[i] = neighbors[i];
+    }
 }
 
 void GetNeighborsListResponseDTO::setNeighbors(const uint32_t* neighbors,
@@ -42,6 +44,8 @@ void GetNeighborsListResponseDTO::setNeighbors(const uint32_t* neighbors,
 
 bool GetNeighborsListResponseDTO::serialize(GetNeighborsListResponse& resp) const {
     resp.neighbors_count = m_neighborsLength;
-    memcpy(resp.neighbors, m_neighbors.data(), m_neighborsLength);
+    for (uint16_t i = 0; i < m_neighborsLength; i++) {
+        resp.neighbors[i] = m_neighbors[i];
+    }
     return true;
 }
