@@ -1,8 +1,8 @@
 
 #include "mocks/Utils.h"
+#include <cstring>
 #include <gtest/gtest.h>
 #include <pheromones/GetNeighborsListResponseDTO.h>
-#include <cstring>
 
 class GetNeighborsListResponseDTOFixture : public testing::Test {
   public:
@@ -11,7 +11,6 @@ class GetNeighborsListResponseDTOFixture : public testing::Test {
     void SetUp() override {
         uint16_t neighbors[] = {11, 22, 33, 44};
         m_resp = new GetNeighborsListResponseDTO(neighbors, 4);
-
     }
 
     void TearDown() override { delete m_resp; }
