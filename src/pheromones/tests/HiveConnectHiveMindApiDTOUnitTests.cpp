@@ -39,7 +39,6 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_agen
     EXPECT_TRUE(std::holds_alternative<GetAgentsListResponseDTO>(message.getMessage()));
 }
 
-
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_config_get_request) {
     // Given
     HiveConnectHiveMindApi msg;
@@ -49,9 +48,9 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_conf
     HiveConnectHiveMindApiDTO message(msg);
 
     // Expect
-    EXPECT_TRUE(std::holds_alternative<HiveConnectNetworkConfigGetRequestDTO>(message.getMessage()));
+    EXPECT_TRUE(
+        std::holds_alternative<HiveConnectNetworkConfigGetRequestDTO>(message.getMessage()));
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_config_set_request) {
     // Given
@@ -62,9 +61,9 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_conf
     HiveConnectHiveMindApiDTO message(msg);
 
     // Expect
-    EXPECT_TRUE(std::holds_alternative<HiveConnectNetworkConfigSetRequestDTO>(message.getMessage()));
+    EXPECT_TRUE(
+        std::holds_alternative<HiveConnectNetworkConfigSetRequestDTO>(message.getMessage()));
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_config_get_response) {
     // Given
@@ -75,9 +74,9 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_conf
     HiveConnectHiveMindApiDTO message(msg);
 
     // Expect
-    EXPECT_TRUE(std::holds_alternative<HiveConnectNetworkConfigGetResponseDTO>(message.getMessage()));
+    EXPECT_TRUE(
+        std::holds_alternative<HiveConnectNetworkConfigGetResponseDTO>(message.getMessage()));
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_config_set_response) {
     // Given
@@ -88,9 +87,9 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_constructor_conf
     HiveConnectHiveMindApiDTO message(msg);
 
     // Expect
-    EXPECT_TRUE(std::holds_alternative<HiveConnectNetworkConfigSetResponseDTO>(message.getMessage()));
+    EXPECT_TRUE(
+        std::holds_alternative<HiveConnectNetworkConfigSetResponseDTO>(message.getMessage()));
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getAgentsRequest) {
     // Given
@@ -120,7 +119,6 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getAge
     EXPECT_EQ(msg.message_id, m_messageId);
 }
 
-
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getConfigRequest) {
     // Given
     m_request->setMessage(HiveConnectNetworkConfigGetRequestDTO());
@@ -134,7 +132,6 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getCon
     EXPECT_EQ(msg.which_message, HiveConnectHiveMindApi_network_config_get_request_tag);
     EXPECT_EQ(msg.message_id, m_messageId);
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_setConfigRequest) {
     // Given
@@ -150,13 +147,13 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_setCon
     EXPECT_EQ(msg.message_id, m_messageId);
 }
 
-
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getConfigResponse) {
     // Given
     HiveConnectNetworkAccessDTO networkAccessDto("test_ssid", "test_password");
     HiveConnectRootNodeDTO rootNodeDto(true);
     HiveConnectMeshEnableDTO meshEnableDto(true);
-    m_request->setMessage(HiveConnectNetworkConfigGetResponseDTO(networkAccessDto, rootNodeDto, meshEnableDto));
+    m_request->setMessage(
+        HiveConnectNetworkConfigGetResponseDTO(networkAccessDto, rootNodeDto, meshEnableDto));
     HiveConnectHiveMindApi msg;
 
     // Then
@@ -176,9 +173,7 @@ TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_getCon
 
     EXPECT_TRUE(msg.message.network_config_get_response.has_mesh_enable);
     EXPECT_TRUE(msg.message.network_config_get_response.mesh_enable.use_mesh);
-
 }
-
 
 TEST_F(HiveConnectHiveMindApiDTOFixture, HiveConnectHiveMindApi_serialize_setConfigResponse) {
     // Given
