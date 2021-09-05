@@ -43,7 +43,7 @@ bool HiveConnectNetworkConfigGetResponseDTO::isMeshEnabled() const {
 }
 
 bool HiveConnectNetworkConfigGetResponseDTO::serialize(
-    HiveConnectNetworkConfigGetResponse& getResponse) {
+    HiveConnectNetworkConfigGetResponse& getResponse) const {
     getResponse.has_network_access = true;
     getResponse.has_root_node = true;
     getResponse.has_mesh_enable = true;

@@ -24,7 +24,7 @@ void HiveConnectNetworkAccessDTO::setPassword(const char* password) {
     snprintf(m_password, NETWORK_PASSWORD_MAX_LENGTH, "%s", password);
 }
 
-bool HiveConnectNetworkAccessDTO::serialize(HiveConnectNetworkAccess& networkAccess) {
+bool HiveConnectNetworkAccessDTO::serialize(HiveConnectNetworkAccess& networkAccess) const {
     snprintf(networkAccess.ssid, NETWORK_SSID_MAX_LENGTH, "%s", m_ssid);
     snprintf(networkAccess.password, NETWORK_PASSWORD_MAX_LENGTH, "%s", m_password);
     return true;

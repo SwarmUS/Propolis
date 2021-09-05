@@ -31,7 +31,7 @@ class HiveConnectNetworkAccessDTO {
      */
     void setPassword(const char* password);
 
-    bool serialize(HiveConnectNetworkAccess& networkAccess);
+    bool serialize(HiveConnectNetworkAccess& networkAccess) const;
 
   private:
     char m_ssid[NETWORK_SSID_MAX_LENGTH];

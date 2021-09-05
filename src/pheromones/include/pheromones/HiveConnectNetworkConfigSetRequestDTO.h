@@ -21,7 +21,7 @@ class HiveConnectNetworkConfigSetRequestDTO {
     std::optional<bool> getRootNode() const;
     std::optional<bool> getMeshEnable() const;
 
-    bool serialize(HiveConnectNetworkConfigSetRequest& setRequest);
+    bool serialize(HiveConnectNetworkConfigSetRequest& setRequest) const;
 
   private:
     // All optionals since a setRequest could contain only a part of the settings to change
