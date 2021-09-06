@@ -50,13 +50,11 @@ set(TEST_SOURCES
     IPDiscoveryDTOUnitTests.cpp
     NetworkApiDTOUnitTests.cpp
 
-    CalibrationModeDTOUnitTests.cpp
-    StartCalibrationDTOUnitTests.cpp
-    StopCalibrationDTOUnitTests.cpp
-    SetCalibrationDistanceDTOUnitTests.cpp
-    CalibrationMessageDTOUnitTests.cpp
-    InterloAPIDTOUnitTests.cpp
-    CalibrationEndedDTOUnitTests.cpp
+    interloc/InterlocStateDTOUnitTest.cpp
+    interloc/SetInterlocStateDTOUnitTests.cpp
+    interloc/ConfigureTWRCalibrationDTOUnitTests.cpp
+    interloc/InterlocConfigurationDTOUnitTests.cpp
+    #interloc/InterloAPIDTOUnitTests.cpp
 
     HiveConnectNetworkAccessDTOTests.cpp
     HiveConnectRootNodeDTOTests.cpp

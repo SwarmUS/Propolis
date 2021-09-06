@@ -1,15 +1,15 @@
-#ifndef __SETCALIBRATIONDISTANCEDTO_H__
-#define __SETCALIBRATIONDISTANCEDTO_H__
+#ifndef __CONFIGURETWRCALIBRATIONDTO_H__
+#define __CONFIGURETWRCALIBRATIONDTO_H__
 
 #include <message.pb.h>
 
 /**
- * @brief Class to represent a Set Calibration Distance protobuf message
+ * @brief Class to represent a Configure TWR Calibration protobuf message
  */
-class SetCalibrationDistanceDTO {
+class ConfigureTWRCalibrationDTO {
   public:
-    SetCalibrationDistanceDTO(const SetCalibrationDistance& message);
-    SetCalibrationDistanceDTO(float distance);
+    ConfigureTWRCalibrationDTO(const ConfigureTWRCalibration& message);
+    ConfigureTWRCalibrationDTO(float distance);
 
     /**
      * @brief Returns the distance in the message
@@ -28,10 +28,10 @@ class SetCalibrationDistanceDTO {
      * @param message [out] message to serialize to
      * @return True if successful, false otherwise
      */
-    bool serialize(SetCalibrationDistance& message) const;
+    bool serialize(ConfigureTWRCalibration& message) const;
 
   private:
     float m_distance;
 };
 
-#endif //__SETCALIBRATIONDISTANCEDTO_H__
+#endif //__CONFIGURETWRCALIBRATIONDTO_H__

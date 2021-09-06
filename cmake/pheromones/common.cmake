@@ -13,7 +13,7 @@ function(pheromones_fetch_populate)
         ${PROJECT_NAME}_pheromones
 
         GIT_REPOSITORY  https://github.com/SwarmUS/Pheromones
-        GIT_TAG         743897e
+        GIT_TAG         fe9d32c6247839f35f580918f14d88fc9a5efb25
         GIT_PROGRESS    TRUE
     )
 

@@ -57,12 +57,14 @@ set(LIB_SOURCES
 
     src/HiveConnectHiveMindApiDTO.cpp
 
-    src/CalibrationModeDTO.cpp
-    src/StartCalibrationDTO.cpp
-    src/SetCalibrationDistanceDTO.cpp
-    src/CalibrationMessageDTO.cpp
-    src/InterlocAPIDTO.cpp
-    src/CalibrationEndedDTO.cpp
+    src/interloc/InterlocStateDTO.cpp
+    src/interloc/SetInterlocStateDTO.cpp
+    src/interloc/ConfigureTWRCalibrationDTO.cpp
+    src/interloc/ConfigureAngleCalibrationDTO.cpp
+    src/interloc/InterlocConfigurationDTO.cpp
+    #src/interloc/CalibrationMessageDTO.cpp
+    src/interloc/InterlocAPIDTO.cpp
+    #src/interloc/CalibrationEndedDTO.cpp
 
     src/HiveConnectNetworkAccessDTO.cpp
     src/HiveConnectRootNode.cpp
@@ -120,13 +122,13 @@ set(LIB_HEADERS
     include/pheromones/IpDiscoveryDTO.h
     include/pheromones/NetworkApiDTO.h
 
-    include/pheromones/CalibrationModeDTO.h
-    include/pheromones/StartCalibrationDTO.h
-    include/pheromones/StopCalibrationDTO.h
-    include/pheromones/SetCalibrationDistanceDTO.h
-    include/pheromones/CalibrationMessageDTO.h
-    include/pheromones/InterlocAPIDTO.h
-    include/pheromones/CalibrationEndedDTO.h
+    include/pheromones/interloc/InterlocStateDTO.h
+    include/pheromones/interloc/SetInterlocStateDTO.h
+    include/pheromones/interloc/ConfigureTWRCalibrationDTO.h
+    include/pheromones/interloc/ConfigureAngleCalibrationDTO.h
+    include/pheromones/interloc/InterlocAPIDTO.h
+    include/pheromones/interloc/InterlocConfigurationDTO.h
+
     include/pheromones/HiveConnectNetworkAccessDTO.h
     include/pheromones/HiveConnectRootNodeDTO.h
     include/pheromones/HiveConnectMeshEnableDTO.h

@@ -111,22 +111,22 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_networkAPI_valid) {
     EXPECT_EQ(msg.which_message, Message_network_tag);
 }
 
-TEST_F(MessageDTOFixture, MessageDTO_serialize_interlocAPI_valid) {
-    // Given
-    InterlocAPIDTO interlocApidto =
-        CalibrationMessageDTO(CalibrationMessageDTO(StopCalibrationDTO()));
-    Message msg;
-    m_message->setMessage(interlocApidto);
-
-    // Then
-    bool ret = m_message->serialize(msg);
-
-    // Expect
-    EXPECT_TRUE(ret);
-    EXPECT_EQ(msg.source_id, gc_sourceId);
-    EXPECT_EQ(msg.destination_id, gc_destinationId);
-    EXPECT_EQ(msg.which_message, Message_interloc_tag);
-}
+// TEST_F(MessageDTOFixture, MessageDTO_serialize_interlocAPI_valid) {
+//    // Given
+//    InterlocAPIDTO interlocApidto =
+//        CalibrationMessageDTO(CalibrationMessageDTO(StopCalibrationDTO()));
+//    Message msg;
+//    m_message->setMessage(interlocApidto);
+//
+//    // Then
+//    bool ret = m_message->serialize(msg);
+//
+//    // Expect
+//    EXPECT_TRUE(ret);
+//    EXPECT_EQ(msg.source_id, gc_sourceId);
+//    EXPECT_EQ(msg.destination_id, gc_destinationId);
+//    EXPECT_EQ(msg.which_message, Message_interloc_tag);
+//}
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_hiveconnect_hivemind_valid) {
     // Given

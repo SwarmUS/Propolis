@@ -4,10 +4,10 @@
 #include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
 #include "HiveConnectHiveMindApiDTO.h"
-#include "InterlocAPIDTO.h"
 #include "NetworkApiDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
+#include "interloc/InterlocAPIDTO.h"
 #include <cstdint>
 #include <message.pb.h>
 #include <variant>
