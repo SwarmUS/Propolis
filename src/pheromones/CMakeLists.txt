@@ -62,6 +62,7 @@ set(LIB_SOURCES
     src/interloc/ConfigureTWRCalibrationDTO.cpp
     src/interloc/ConfigureAngleCalibrationDTO.cpp
     src/interloc/InterlocConfigurationDTO.cpp
+    src/interloc/InterlocStateChangeDTO.cpp
     #src/interloc/CalibrationMessageDTO.cpp
     src/interloc/InterlocAPIDTO.cpp
     #src/interloc/CalibrationEndedDTO.cpp
@@ -128,6 +129,7 @@ set(LIB_HEADERS
     include/pheromones/interloc/ConfigureAngleCalibrationDTO.h
     include/pheromones/interloc/InterlocAPIDTO.h
     include/pheromones/interloc/InterlocConfigurationDTO.h
+    include/pheromones/interloc/InterlocStateChangeDTO.h
 
     include/pheromones/HiveConnectNetworkAccessDTO.h
     include/pheromones/HiveConnectRootNodeDTO.h
