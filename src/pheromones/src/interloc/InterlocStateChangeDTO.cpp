@@ -19,7 +19,7 @@ void InterlocStateChangeDTO::setPreviousState(InterlocStateDTO state) { m_previo
 
 void InterlocStateChangeDTO::setNewState(InterlocStateDTO state) { m_newState = state; }
 
-bool InterlocStateChangeDTO::serialize(InterlocStateChange& message) {
+bool InterlocStateChangeDTO::serialize(InterlocStateChange& message) const {
     message.previousState = dtoToInterlocState(m_previousState);
     message.newState = dtoToInterlocState(m_newState);
     return true;

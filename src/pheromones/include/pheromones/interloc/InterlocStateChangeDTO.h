@@ -24,7 +24,7 @@ class InterlocStateChangeDTO {
      *pb_encode
      *@param [out] message the message to serialize
      *@return a boolean, true if successfull (fields were recognized) false if not */
-    bool serialize(InterlocStateChange& message);
+    bool serialize(InterlocStateChange& message) const;
 
   private:
     InterlocStateDTO m_previousState;

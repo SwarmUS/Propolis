@@ -13,6 +13,8 @@
 class InterlocConfigurationDTO {
   public:
     InterlocConfigurationDTO(const InterlocConfiguration& message);
+    InterlocConfigurationDTO(const ConfigureAngleCalibrationDTO& configureDTO);
+    InterlocConfigurationDTO(const ConfigureTWRCalibrationDTO& configureDTO);
 
     /**
      * @brief Returns the inner configuration message

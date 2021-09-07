@@ -55,7 +55,9 @@ set(TEST_SOURCES
     interloc/ConfigureTWRCalibrationDTOUnitTests.cpp
     interloc/InterlocConfigurationDTOUnitTests.cpp
     interloc/InterlocStateChangeDTOUnitTests.cpp
-    #interloc/InterloAPIDTOUnitTests.cpp
+    interloc/InterloAPIDTOUnitTests.cpp
+    interloc/InterlocRxFrameInfoDTOUnitTests.cpp
+    interloc/InterlocRxFrameRawAngleDataDTOUnitTests.cpp
 
     HiveConnectNetworkAccessDTOTests.cpp
     HiveConnectRootNodeDTOTests.cpp

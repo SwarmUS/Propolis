@@ -19,6 +19,15 @@ InterlocConfigurationDTO::InterlocConfigurationDTO(const InterlocConfiguration& 
     }
 }
 
+InterlocConfigurationDTO::InterlocConfigurationDTO(
+    const ConfigureAngleCalibrationDTO& configureDTO) {
+    m_configMessage = configureDTO;
+}
+
+InterlocConfigurationDTO::InterlocConfigurationDTO(const ConfigureTWRCalibrationDTO& configureDTO) {
+    m_configMessage = configureDTO;
+}
+
 const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>
 InterlocConfigurationDTO::getConfigurationMessage() const {
     return m_configMessage;
