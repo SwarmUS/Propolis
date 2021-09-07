@@ -58,6 +58,8 @@ set(TEST_SOURCES
     interloc/InterloAPIDTOUnitTests.cpp
     interloc/InterlocRxFrameInfoDTOUnitTests.cpp
     interloc/InterlocRxFrameRawAngleDataDTOUnitTests.cpp
+    interloc/InterlocRawAngleDataDTOUnitTests.cpp
+    interloc/InterlocOutputMessageDTOUnitTests.cpp
 
     HiveConnectNetworkAccessDTOTests.cpp
     HiveConnectRootNodeDTOTests.cpp

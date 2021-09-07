@@ -4,7 +4,12 @@
 InterlocRxFrameRawAngleDataDTO::InterlocRxFrameRawAngleDataDTO(
     const InterlocRxFrameRawAngleData& message) {
     m_frameId = message.frameId;
-    m_frameInfosLength = message.frameInfos_count;
+
+    // If framesInfo_count is bigger than maximum size, there was a problem in the transmission, so
+    // just discard all data
+    m_frameInfosLength = message.frameInfos_count < INTERLOC_BEEBOARDS_SIZE_MAX_LENGTH
+                             ? message.frameInfos_count
+                             : 0;
 
     for (uint8_t i = 0; i < m_frameInfosLength; i++) {
         m_frameInfos[i] = InterlocRxFrameInfoDTO(message.frameInfos[i]);

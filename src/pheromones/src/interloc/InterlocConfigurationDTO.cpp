@@ -28,7 +28,7 @@ InterlocConfigurationDTO::InterlocConfigurationDTO(const ConfigureTWRCalibration
     m_configMessage = configureDTO;
 }
 
-const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>
+const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>&
 InterlocConfigurationDTO::getConfigurationMessage() const {
     return m_configMessage;
 }

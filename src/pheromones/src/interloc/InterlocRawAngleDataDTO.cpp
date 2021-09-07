@@ -1,7 +1,13 @@
 #include <interloc/InterlocRawAngleDataDTO.h>
 
+InterlocRawAngleDataDTO::InterlocRawAngleDataDTO() { m_frameLength = 0; }
+
 InterlocRawAngleDataDTO::InterlocRawAngleDataDTO(const InterlocRawAngleData& message) {
-    m_frameLength = message.frames_count;
+    // If frames_count is bigger than maximum size, there was a problem in the transmission, so
+    // just discard all data
+    m_frameLength =
+        message.frames_count < INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE ? message.frames_count : 0;
+
     for (uint8_t i = 0; i < m_frameLength; i++) {
         m_frames[i] = InterlocRxFrameRawAngleDataDTO(message.frames[i]);
     }
@@ -33,3 +39,11 @@ bool InterlocRawAngleDataDTO::serialize(InterlocRawAngleData& message) const {
 
     return true;
 }
+
+const std::array<InterlocRxFrameRawAngleDataDTO,
+                 InterlocRawAngleDataDTO::INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
+InterlocRawAngleDataDTO::getFrames() const {
+    return m_frames;
+}
+
+uint8_t InterlocRawAngleDataDTO::getFramesLength() const { return m_frameLength; }

@@ -20,7 +20,7 @@ class InterlocConfigurationDTO {
      * @brief Returns the inner configuration message
      * @return The configuration message
      */
-    const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>
+    const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>&
     getConfigurationMessage() const;
 
     /**

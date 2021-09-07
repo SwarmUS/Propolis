@@ -10,8 +10,13 @@ class InterlocRawAngleDataDTO {
   public:
     static constexpr uint8_t INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE = INTERLOC_RAW_ANGLE_FRAMES_SIZE;
 
+    InterlocRawAngleDataDTO();
     InterlocRawAngleDataDTO(const InterlocRawAngleData& message);
     InterlocRawAngleDataDTO(const InterlocRxFrameRawAngleDataDTO* frames, uint8_t framesLength);
+
+    uint8_t getFramesLength() const;
+    const std::array<InterlocRxFrameRawAngleDataDTO, INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
+    getFrames() const;
 
     void setFrames(const InterlocRxFrameRawAngleDataDTO* frames, uint8_t framesLength);
 
