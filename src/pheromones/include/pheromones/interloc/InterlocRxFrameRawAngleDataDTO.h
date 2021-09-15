@@ -19,11 +19,11 @@ class InterlocRxFrameRawAngleDataDTO {
 
     uint32_t getFrameId() const;
     uint8_t getFrameInfosLength() const;
-    std::array<InterlocRxFrameInfoDTO, INTERLOC_BEEBOARDS_SIZE_MAX_LENGTH>& getFrameInfos();
+    const std::array<InterlocRxFrameInfoDTO, INTERLOC_BEEBOARDS_SIZE_MAX_LENGTH>& getFrameInfos()
+        const;
 
     void setFrameId(uint32_t frameId);
     void setFrameInfos(const InterlocRxFrameInfoDTO* frameInfos, uint8_t frameInfosLength);
-    void setFrameInfosLength(uint8_t frameInfosLength);
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using

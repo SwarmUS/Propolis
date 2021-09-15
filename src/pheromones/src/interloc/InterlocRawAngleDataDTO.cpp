@@ -25,6 +25,10 @@ void InterlocRawAngleDataDTO::setFrames(const InterlocRxFrameRawAngleDataDTO* fr
 
     for (uint8_t i = 0; i < m_frameLength; i++) {
         m_frames[i] = frames[i];
+
+        // Deep copy
+        m_frames[i].setFrameInfos(frames[i].getFrameInfos().data(),
+                                  frames[i].getFrameInfosLength());
     }
 }
 
@@ -42,12 +46,8 @@ bool InterlocRawAngleDataDTO::serialize(InterlocRawAngleData& message) const {
 
 uint8_t InterlocRawAngleDataDTO::getFramesLength() const { return m_frameLength; }
 
-std::array<InterlocRxFrameRawAngleDataDTO,
-           InterlocRawAngleDataDTO::INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
-InterlocRawAngleDataDTO::getFrames() {
+const std::array<InterlocRxFrameRawAngleDataDTO,
+                 InterlocRawAngleDataDTO::INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
+InterlocRawAngleDataDTO::getFrames() const {
     return m_frames;
-}
-
-void InterlocRawAngleDataDTO::setFramesLength(uint8_t framesLength) {
-    m_frameLength = framesLength;
 }

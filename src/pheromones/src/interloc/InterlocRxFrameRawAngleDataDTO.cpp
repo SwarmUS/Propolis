@@ -57,12 +57,8 @@ uint32_t InterlocRxFrameRawAngleDataDTO::getFrameId() const { return m_frameId; 
 
 uint8_t InterlocRxFrameRawAngleDataDTO::getFrameInfosLength() const { return m_frameInfosLength; }
 
-std::array<InterlocRxFrameInfoDTO,
-           InterlocRxFrameRawAngleDataDTO::INTERLOC_BEEBOARDS_SIZE_MAX_LENGTH>&
-InterlocRxFrameRawAngleDataDTO::getFrameInfos() {
+const std::array<InterlocRxFrameInfoDTO,
+                 InterlocRxFrameRawAngleDataDTO::INTERLOC_BEEBOARDS_SIZE_MAX_LENGTH>&
+InterlocRxFrameRawAngleDataDTO::getFrameInfos() const {
     return m_frameInfos;
-}
-
-void InterlocRxFrameRawAngleDataDTO::setFrameInfosLength(uint8_t frameInfosLength) {
-    m_frameInfosLength = frameInfosLength;
 }
