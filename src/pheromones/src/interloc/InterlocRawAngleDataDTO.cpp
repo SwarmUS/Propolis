@@ -40,10 +40,14 @@ bool InterlocRawAngleDataDTO::serialize(InterlocRawAngleData& message) const {
     return true;
 }
 
-const std::array<InterlocRxFrameRawAngleDataDTO,
-                 InterlocRawAngleDataDTO::INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
-InterlocRawAngleDataDTO::getFrames() const {
+uint8_t InterlocRawAngleDataDTO::getFramesLength() const { return m_frameLength; }
+
+std::array<InterlocRxFrameRawAngleDataDTO,
+           InterlocRawAngleDataDTO::INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
+InterlocRawAngleDataDTO::getFrames() {
     return m_frames;
 }
 
-uint8_t InterlocRawAngleDataDTO::getFramesLength() const { return m_frameLength; }
+void InterlocRawAngleDataDTO::setFramesLength(uint8_t framesLength) {
+    m_frameLength = framesLength;
+}
