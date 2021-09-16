@@ -6,7 +6,7 @@ InterlocRawAngleDataDTO::InterlocRawAngleDataDTO(const InterlocRawAngleData& mes
     // If frames_count is bigger than maximum size, there was a problem in the transmission, so
     // just discard all data
     m_frameLength =
-        message.frames_count < INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE ? message.frames_count : 0;
+        message.frames_count <= INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE ? message.frames_count : 0;
 
     for (uint8_t i = 0; i < m_frameLength; i++) {
         m_frames[i] = InterlocRxFrameRawAngleDataDTO(message.frames[i]);

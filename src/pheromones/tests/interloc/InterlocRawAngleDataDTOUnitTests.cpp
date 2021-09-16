@@ -28,7 +28,7 @@ TEST_F(InterlocRawAngleDataTestFixture, InterlocRawAngleData_setFrames) {
     InterlocRawAngleData msg;
     msg.frames_count = 0;
 
-    constexpr uint8_t framesLength = 4;
+    constexpr uint8_t framesLength = 3;
 
     InterlocRawAngleDataDTO dto = InterlocRawAngleDataDTO(msg);
 
