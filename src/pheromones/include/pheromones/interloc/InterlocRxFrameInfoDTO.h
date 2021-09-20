@@ -29,7 +29,7 @@ class InterlocRxFrameInfoDTO {
 
     /**
      * Sets the frame's angle calculated from I and Q components in the accumualtor
-     * @param timestamp Angle
+     * @param angle Angle
      */
     void setAccumulatorAngle(float angle);
 
