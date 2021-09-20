@@ -14,7 +14,7 @@ class InterlocAPIDTO {
     InterlocAPIDTO(const InterlocOutputMessageDTO& interlocOutputMsg);
 
     /**
-     * @brief Gets the API call
+     * @brief Gets the specific API call
      * @return API call
      */
     const std::variant<std::monostate,

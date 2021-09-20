@@ -14,10 +14,24 @@ class InterlocRawAngleDataDTO {
     InterlocRawAngleDataDTO(const InterlocRawAngleData& message);
     InterlocRawAngleDataDTO(const InterlocRxFrameRawAngleDataDTO* frames, uint8_t framesLength);
 
+    /**
+     * Gives the length of the Frames array
+     * @return Length of the array
+     */
     uint8_t getFramesLength() const;
+
+    /**
+     * Returns the array of frames
+     * @return Array of frames
+     */
     const std::array<InterlocRxFrameRawAngleDataDTO, INTERLOC_RAW_ANGLE_FRAMES_MAX_SIZE>&
     getFrames() const;
 
+    /**
+     * Sets the frame array by copying a source array
+     * @param frames Source frame array
+     * @param framesLength Number of frames to copy
+     */
     void setFrames(const InterlocRxFrameRawAngleDataDTO* frames, uint8_t framesLength);
 
     /**

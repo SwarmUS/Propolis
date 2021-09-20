@@ -13,10 +13,28 @@ class InterlocStateChangeDTO {
     InterlocStateChangeDTO(const InterlocStateChange& message);
     InterlocStateChangeDTO(InterlocStateDTO previousState, InterlocStateDTO newState);
 
+    /**
+     * Returns the previous state
+     * @return State
+     */
     InterlocStateDTO getPreviousState() const;
+
+    /**
+     * Returns the new state
+     * @return State
+     */
     InterlocStateDTO getNewState() const;
 
+    /**
+     * Sets the previous state
+     * @param state State
+     */
     void setPreviousState(InterlocStateDTO state);
+
+    /**
+     * Sets the new state
+     * @param state State
+     */
     void setNewState(InterlocStateDTO state);
 
     /**

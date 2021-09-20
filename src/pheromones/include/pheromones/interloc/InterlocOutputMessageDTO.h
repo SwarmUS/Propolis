@@ -12,9 +12,17 @@ class InterlocOutputMessageDTO {
     InterlocOutputMessageDTO(const InterlocStateChangeDTO& message);
     InterlocOutputMessageDTO(const InterlocRawAngleDataDTO& message);
 
+    /**
+     * Gives the specific output message contained in the DTO
+     * @return Output Message
+     */
     const std::variant<std::monostate, InterlocStateChangeDTO, InterlocRawAngleDataDTO>&
     getMessage() const;
 
+    /**
+     * Sets the message to be contained in the serialized protobuf stream
+     * @param message Output Message
+     */
     void setMessage(
         const std::variant<std::monostate, InterlocStateChangeDTO, InterlocRawAngleDataDTO>&
             message);
