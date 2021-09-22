@@ -4,7 +4,6 @@ set(LIB_ALIAS "SwarmUS::Propolis::OS::POSIX")
 set(LIB_SOURCES
     src/ConditionVariable.cpp
     src/Mutex.cpp
-    src/Task.cpp
 )
 
 set(LIB_HEADERS
