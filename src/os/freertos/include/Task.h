@@ -9,11 +9,11 @@ namespace Task {
 
     typedef Time TickType_t;
 
-    inline void delay(uint16_t ms);
+    inline void delay(uint32_t ms);
 
-    inline void delayUntil(Time& current, uint16_t ms);
+    inline void delayUntil(Time& current, uint32_t ms);
 
-    inline Time getTime();
+    inline Task::Time getTime();
 
     inline void startScheduler();
 } // namespace Task
