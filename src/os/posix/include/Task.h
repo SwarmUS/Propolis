@@ -1,19 +1,23 @@
 #ifndef __TASK_H__
 #define __TASK_H__
 
+#include <chrono>
 #include <errno.h>
 #include <stdint.h>
 #include <thread>
 #include <time.h>
 
 namespace Task {
-    inline void delay(int ms) { std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
 
-    inline void startScheduler() {
-        while (true) {
-            delay(1000);
-        }
-    }
+    typedef std::chrono::time_point<std::chrono::system_clock> Time;
+
+    inline void delay(uint ms);
+
+    inline void delayUntil(Time& current, uint ms);
+
+    inline Time getTime();
+
+    inline void startScheduler();
 } // namespace Task
 
 #endif //__TASK_H__

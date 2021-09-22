@@ -6,9 +6,16 @@
 #include <stdint.h>
 
 namespace Task {
-    inline void delay(TickType_t ms) { vTaskDelay(ms); }
 
-    inline void startScheduler() { vTaskStartScheduler(); }
+    typedef Time TickType_t;
+
+    inline void delay(TickType_t ms);
+
+    inline void delayUntil(Time& current, uint ms);
+
+    inline Time getTime();
+
+    inline void startScheduler();
 } // namespace Task
 
 #endif //__TASK_H__
