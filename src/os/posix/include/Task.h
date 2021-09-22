@@ -11,7 +11,7 @@ namespace Task {
 
     typedef std::chrono::time_point<std::chrono::system_clock> Time;
 
-    inline void delay(uint ms) { std::this_thread::sleep_for(std::chrono::milliseconds(ms)); };
+    inline void delay(uint ms) { std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
 
     inline void delayUntil(Time& current, uint ms) {
 
@@ -19,7 +19,7 @@ namespace Task {
         current = std::chrono::system_clock::now();
     }
 
-    inline Time getTime() { return std::chrono::system_clock::now(); };
+    inline Time getTime() { return std::chrono::system_clock::now(); }
 
     inline void startScheduler() {
         while (true) {
