@@ -7,13 +7,13 @@
 
 namespace Task {
 
-    typedef Time TickType_t;
+    typedef TickType_t Time;
 
     inline void delay(uint32_t ms);
 
     inline void delayUntil(Time& current, uint32_t ms);
 
-    inline Task::Time getTime();
+    inline Time getTime();
 
     inline void startScheduler();
 } // namespace Task
