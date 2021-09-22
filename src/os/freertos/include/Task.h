@@ -9,9 +9,9 @@ namespace Task {
 
     typedef Time TickType_t;
 
-    inline void delay(TickType_t ms);
+    inline void delay(uint16_t ms);
 
-    inline void delayUntil(Time& current, uint ms);
+    inline void delayUntil(Time& current, uint16_t ms);
 
     inline Time getTime();
 
