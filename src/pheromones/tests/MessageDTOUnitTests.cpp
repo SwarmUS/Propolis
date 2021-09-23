@@ -113,8 +113,7 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_networkAPI_valid) {
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_interlocAPI_valid) {
     // Given
-    InterlocAPIDTO interlocApidto =
-        CalibrationMessageDTO(CalibrationMessageDTO(StopCalibrationDTO()));
+    SetInterlocStateDTO interlocApidto = SetInterlocStateDTO(InterlocStateDTO::STANDBY);
     Message msg;
     m_message->setMessage(interlocApidto);
 

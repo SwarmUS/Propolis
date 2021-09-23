@@ -12,3 +12,6 @@ set_default(AGENTS_LIST_SIZE 50)
 
 set_default(NETWORK_SSID_MAX_LENGTH 32) # IEEE max length for SSIDs
 set(NETWORK_PASSWORD_MAX_LENGTH 63) # WPA2 password max characters
+
+set_default(INTERLOC_BEEBOARDS_SIZE 3)
+set_default(INTERLOC_RAW_ANGLE_FRAMES_SIZE 3)
