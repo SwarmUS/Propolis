@@ -10,6 +10,7 @@ class BuzzMessagesDTO {
   public:
     static constexpr uint16_t MESSAGES_MAX_SIZE = BUZZ_MESSAGES_LIST_SIZE;
 
+    BuzzMessagesDTO();
     BuzzMessagesDTO(const BuzzMessages& messages);
     BuzzMessagesDTO(BuzzMessageDTO* messages, uint16_t messagesLength);
 

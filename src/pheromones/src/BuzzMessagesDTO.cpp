@@ -1,5 +1,7 @@
 #include "BuzzMessagesDTO.h"
 
+BuzzMessagesDTO::BuzzMessagesDTO() : m_messagesLength(0) {}
+
 BuzzMessagesDTO::BuzzMessagesDTO(const BuzzMessages& messages) {
     setMessages(messages.messages, messages.messages_count);
 }
