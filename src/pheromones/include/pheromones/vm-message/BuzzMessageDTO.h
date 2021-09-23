@@ -10,6 +10,7 @@ class BuzzMessageDTO {
     static constexpr uint16_t PAYLOAD_MAX_SIZE = BUZZ_PAYLOAD_SIZE;
 
     BuzzMessageDTO();
+
     BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLength);
 
     BuzzMessageDTO(const BuzzMessage& msg);
