@@ -1,4 +1,4 @@
-#include "BuzzMessagesDTO.h"
+#include "vm-message/BuzzMessagesDTO.h"
 
 BuzzMessagesDTO::BuzzMessagesDTO() : m_messagesLength(0) {}
 

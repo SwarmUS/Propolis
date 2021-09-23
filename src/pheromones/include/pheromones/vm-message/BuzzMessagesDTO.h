@@ -4,7 +4,7 @@
 #include "pheromones/PheromonesSettings.h"
 #include <array>
 #include <message.pb.h>
-#include <pheromones/BuzzMessageDTO.h>
+#include <pheromones/vm-message/BuzzMessageDTO.h>
 
 class BuzzMessagesDTO {
   public:
