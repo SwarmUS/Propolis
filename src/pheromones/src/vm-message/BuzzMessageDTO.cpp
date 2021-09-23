@@ -1,4 +1,6 @@
-#include "BuzzMessageDTO.h"
+#include "vm-message/BuzzMessageDTO.h"
+
+BuzzMessageDTO::BuzzMessageDTO() { m_payloadLength = 0; }
 
 BuzzMessageDTO::BuzzMessageDTO(const uint8_t* payload, uint16_t payloadLength) {
     setPayload(payload, payloadLength);
