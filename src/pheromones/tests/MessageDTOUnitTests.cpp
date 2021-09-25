@@ -81,9 +81,11 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_greeting_valid) {
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_buzz_valid) {
     // Given
-    BuzzMessageDTO buzzMsg(NULL, 0);
+    VmMessage vmMsg;
+    vmMsg.which_message = VmMessage_buzz_tag;
+    VmMessageDTO vmMsgDto(vmMsg);
     Message msg;
-    m_message->setMessage(buzzMsg);
+    m_message->setMessage(vmMsgDto);
 
     // Then
     bool ret = m_message->serialize(msg);
@@ -92,7 +94,7 @@ TEST_F(MessageDTOFixture, MessageDTO_serialize_buzz_valid) {
     EXPECT_TRUE(ret);
     EXPECT_EQ(msg.source_id, gc_sourceId);
     EXPECT_EQ(msg.destination_id, gc_destinationId);
-    EXPECT_EQ(msg.which_message, Message_buzz_tag);
+    EXPECT_EQ(msg.which_message, Message_vm_tag);
 }
 
 TEST_F(MessageDTOFixture, MessageDTO_serialize_networkAPI_valid) {

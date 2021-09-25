@@ -1,6 +1,6 @@
 #include "mocks/Utils.h"
 #include <gtest/gtest.h>
-#include <pheromones/BuzzMessageDTO.h>
+#include <pheromones/vm-message/BuzzMessageDTO.h>
 
 class BuzzMessageDTOFixture : public testing::Test {
   public:

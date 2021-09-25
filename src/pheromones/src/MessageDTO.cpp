@@ -17,8 +17,8 @@ MessageDTO::MessageDTO(const Message& message) :
         m_message = GreetingDTO(message.message.greeting);
         break;
 
-    case Message_buzz_tag:
-        m_message = BuzzMessageDTO(message.message.buzz);
+    case Message_vm_tag:
+        m_message = VmMessageDTO(message.message.vm);
         break;
 
     case Message_network_tag:
@@ -47,7 +47,7 @@ MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const Response
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const GreetingDTO& greeting) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(greeting) {}
 
-MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const BuzzMessageDTO& msg) :
+MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const VmMessageDTO& msg) :
     m_sourceId(sourceId), m_destinationId(destinationId), m_message(msg) {}
 
 MessageDTO::MessageDTO(uint32_t sourceId, uint32_t destinationId, const NetworkApiDTO& networkAPI) :
@@ -71,7 +71,7 @@ const std::variant<std::monostate,
                    RequestDTO,
                    ResponseDTO,
                    GreetingDTO,
-                   BuzzMessageDTO,
+                   VmMessageDTO,
                    NetworkApiDTO,
                    InterlocAPIDTO,
                    HiveConnectHiveMindApiDTO>&
@@ -87,7 +87,7 @@ void MessageDTO::setMessage(const std::variant<std::monostate,
                                                RequestDTO,
                                                ResponseDTO,
                                                GreetingDTO,
-                                               BuzzMessageDTO,
+                                               VmMessageDTO,
                                                NetworkApiDTO,
                                                InterlocAPIDTO,
                                                HiveConnectHiveMindApiDTO>& message) {
@@ -113,9 +113,9 @@ bool MessageDTO::serialize(Message& message) const {
         return greeting->serialize(message.message.greeting);
     }
 
-    if (const auto* buzzMsg = std::get_if<BuzzMessageDTO>(&m_message)) {
-        message.which_message = Message_buzz_tag;
-        return buzzMsg->serialize(message.message.buzz);
+    if (const auto* buzzMsg = std::get_if<VmMessageDTO>(&m_message)) {
+        message.which_message = Message_vm_tag;
+        return buzzMsg->serialize(message.message.vm);
     }
 
     if (const auto* networkAPI = std::get_if<NetworkApiDTO>(&m_message)) {

@@ -1,13 +1,13 @@
 #ifndef __MESSAGEDTO_H_
 #define __MESSAGEDTO_H_
 
-#include "BuzzMessageDTO.h"
 #include "GreetingDTO.h"
 #include "HiveConnectHiveMindApiDTO.h"
 #include "NetworkApiDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
 #include "interloc/InterlocAPIDTO.h"
+#include "vm-message/VmMessageDTO.h"
 #include <cstdint>
 #include <message.pb.h>
 #include <variant>
@@ -24,7 +24,7 @@ class MessageDTO {
 
     MessageDTO(uint32_t sourceId, uint32_t destinationId, const GreetingDTO& greeting);
 
-    MessageDTO(uint32_t sourceId, uint32_t destinationId, const BuzzMessageDTO& msg);
+    MessageDTO(uint32_t sourceId, uint32_t destinationId, const VmMessageDTO& msg);
 
     MessageDTO(uint32_t sourceId, uint32_t destinationId, const NetworkApiDTO& networkAPI);
 
@@ -49,7 +49,7 @@ class MessageDTO {
                        RequestDTO,
                        ResponseDTO,
                        GreetingDTO,
-                       BuzzMessageDTO,
+                       VmMessageDTO,
                        NetworkApiDTO,
                        InterlocAPIDTO,
                        HiveConnectHiveMindApiDTO>&
@@ -72,7 +72,7 @@ class MessageDTO {
                                        RequestDTO,
                                        ResponseDTO,
                                        GreetingDTO,
-                                       BuzzMessageDTO,
+                                       VmMessageDTO,
                                        NetworkApiDTO,
                                        InterlocAPIDTO,
                                        HiveConnectHiveMindApiDTO>& message);
@@ -93,7 +93,7 @@ class MessageDTO {
                  RequestDTO,
                  ResponseDTO,
                  GreetingDTO,
-                 BuzzMessageDTO,
+                 VmMessageDTO,
                  NetworkApiDTO,
                  InterlocAPIDTO,
                  HiveConnectHiveMindApiDTO>

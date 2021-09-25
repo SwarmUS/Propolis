@@ -23,7 +23,8 @@ set(TEST_SOURCES
     UserCallResponseDTOUnitTests.cpp
     UserCallTargetDTOUnitTests.cpp
     
-    BuzzMessageDTOUnitTests.cpp
+    vm-message/BuzzMessageDTOUnitTests.cpp
+    vm-message/BuzzMessagesDTOUnitTests.cpp
   
     HiveMindHostSerializerUnitTests.cpp
     HiveMindHostAccumulatorSerializerUnitTests.cpp

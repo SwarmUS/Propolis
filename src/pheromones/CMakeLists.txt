@@ -23,7 +23,9 @@ set(LIB_SOURCES
     src/GenericResponseDTO.cpp
     src/GreetingDTO.cpp
 
-    src/BuzzMessageDTO.cpp
+    src/vm-message/BuzzMessageDTO.cpp
+    src/vm-message/BuzzMessagesDTO.cpp
+    src/vm-message/VmMessageDTO.cpp
 
     src/FunctionCallArgumentDTO.cpp
     src/FunctionCallRequestDTO.cpp
@@ -90,7 +92,9 @@ set(LIB_HEADERS
     include/pheromones/FunctionCallRequestDTO.h
     include/pheromones/FunctionCallResponseDTO.h
 
-    include/pheromones/BuzzMessageDTO.h
+    include/pheromones/vm-message/BuzzMessageDTO.h
+    include/pheromones/vm-message/BuzzMessagesDTO.h
+    include/pheromones/vm-message/VmMessageDTO.h
 
     include/pheromones/FunctionListLengthRequestDTO.h
     include/pheromones/FunctionListLengthResponseDTO.h
