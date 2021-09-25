@@ -6,8 +6,8 @@
 #include "NetworkApiDTO.h"
 #include "RequestDTO.h"
 #include "ResponseDTO.h"
-#include "vm-message/VmMessageDTO.h"
 #include "interloc/InterlocAPIDTO.h"
+#include "vm-message/VmMessageDTO.h"
 #include <cstdint>
 #include <message.pb.h>
 #include <variant>
