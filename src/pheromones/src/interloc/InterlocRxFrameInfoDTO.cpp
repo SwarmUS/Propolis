@@ -6,6 +6,7 @@ InterlocRxFrameInfoDTO::InterlocRxFrameInfoDTO(const InterlocRxFrameInfo& messag
     m_rxTimestamp = message.rxTimestamp;
     m_sfdAngle = message.sfdAngle;
     m_accumulatorAngle = message.accumulatorAngle;
+    m_messageId = message.messageId;
 }
 
 InterlocRxFrameInfoDTO::InterlocRxFrameInfoDTO() {
@@ -13,6 +14,7 @@ InterlocRxFrameInfoDTO::InterlocRxFrameInfoDTO() {
     m_rxTimestamp = 0;
     m_sfdAngle = 0;
     m_accumulatorAngle = 0;
+    m_messageId = 0;
 }
 
 void InterlocRxFrameInfoDTO::setBeeboardPort(uint32_t port) { m_beeboardPort = port; }
@@ -31,11 +33,16 @@ float InterlocRxFrameInfoDTO::getSfdAngle() const { return m_sfdAngle; }
 
 float InterlocRxFrameInfoDTO::getAccumulatorAngle() const { return m_accumulatorAngle; }
 
+uint32_t InterlocRxFrameInfoDTO::getMessageId() const { return m_messageId; }
+
+void InterlocRxFrameInfoDTO::setMessageId(uint32_t messageId) { m_messageId = messageId; }
+
 bool InterlocRxFrameInfoDTO::serialize(InterlocRxFrameInfo& message) const {
     message.beeboardPort = m_beeboardPort;
     message.rxTimestamp = m_rxTimestamp;
     message.sfdAngle = m_sfdAngle;
     message.accumulatorAngle = m_accumulatorAngle;
+    message.messageId = m_messageId;
 
     return true;
 }

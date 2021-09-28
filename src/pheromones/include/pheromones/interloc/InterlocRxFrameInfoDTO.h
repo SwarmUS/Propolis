@@ -34,6 +34,12 @@ class InterlocRxFrameInfoDTO {
     void setAccumulatorAngle(float angle);
 
     /**
+     * Sets the message ID used to compare if the same message was received on all beeboards
+     * @param messageId message ID
+     */
+    void setMessageId(uint32_t messageId);
+
+    /**
      * Returns the BeeBoard port
      * @return BeeBoard port
      */
@@ -58,6 +64,12 @@ class InterlocRxFrameInfoDTO {
     float getAccumulatorAngle() const;
 
     /**
+     * Returns the messageID
+     * @return message ID
+     */
+    uint32_t getMessageId() const;
+
+    /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
      *pb_encode
      *@param [out] message the message to serialize
@@ -69,6 +81,7 @@ class InterlocRxFrameInfoDTO {
     uint64_t m_rxTimestamp;
     float m_sfdAngle;
     float m_accumulatorAngle;
+    uint32_t m_messageId;
 };
 
 #endif //__INTERLOCRXFRAMEINFODTO_H__

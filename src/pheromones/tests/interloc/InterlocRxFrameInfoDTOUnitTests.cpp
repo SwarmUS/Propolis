@@ -14,6 +14,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_construct_fromProto) 
     msg.rxTimestamp = 2;
     msg.sfdAngle = 3.3;
     msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
 
     auto dto = InterlocRxFrameInfoDTO(msg);
 
@@ -21,6 +22,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_construct_fromProto) 
     EXPECT_EQ(dto.getRxTimestamp(), msg.rxTimestamp);
     EXPECT_EQ(dto.getSfdAngle(), msg.sfdAngle);
     EXPECT_EQ(dto.getAccumulatorAngle(), msg.accumulatorAngle);
+    EXPECT_EQ(dto.getMessageId(), msg.messageId);
 }
 
 TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setBeeboardPort) {
@@ -29,6 +31,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setBeeboardPort) {
     msg.rxTimestamp = 2;
     msg.sfdAngle = 3.3;
     msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
 
     uint8_t beeboardPort = 42;
 
@@ -39,6 +42,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setBeeboardPort) {
     EXPECT_EQ(dto.getRxTimestamp(), msg.rxTimestamp);
     EXPECT_EQ(dto.getSfdAngle(), msg.sfdAngle);
     EXPECT_EQ(dto.getAccumulatorAngle(), msg.accumulatorAngle);
+    EXPECT_EQ(dto.getMessageId(), msg.messageId);
 }
 
 TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setRxTimestamp) {
@@ -47,6 +51,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setRxTimestamp) {
     msg.rxTimestamp = 2;
     msg.sfdAngle = 3.3;
     msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
 
     uint64_t timestamp = 42;
 
@@ -57,6 +62,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setRxTimestamp) {
     EXPECT_EQ(dto.getRxTimestamp(), timestamp);
     EXPECT_EQ(dto.getSfdAngle(), msg.sfdAngle);
     EXPECT_EQ(dto.getAccumulatorAngle(), msg.accumulatorAngle);
+    EXPECT_EQ(dto.getMessageId(), msg.messageId);
 }
 
 TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setSfdAngle) {
@@ -65,6 +71,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setSfdAngle) {
     msg.rxTimestamp = 2;
     msg.sfdAngle = 3.3;
     msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
 
     float angle = 42.42;
 
@@ -75,6 +82,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setSfdAngle) {
     EXPECT_EQ(dto.getRxTimestamp(), msg.rxTimestamp);
     EXPECT_EQ(dto.getSfdAngle(), angle);
     EXPECT_EQ(dto.getAccumulatorAngle(), msg.accumulatorAngle);
+    EXPECT_EQ(dto.getMessageId(), msg.messageId);
 }
 
 TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setAccumulatorAngle) {
@@ -83,6 +91,7 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setAccumulatorAngle) 
     msg.rxTimestamp = 2;
     msg.sfdAngle = 3.3;
     msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
 
     float angle = 42.42;
 
@@ -93,6 +102,27 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setAccumulatorAngle) 
     EXPECT_EQ(dto.getRxTimestamp(), msg.rxTimestamp);
     EXPECT_EQ(dto.getSfdAngle(), msg.sfdAngle);
     EXPECT_EQ(dto.getAccumulatorAngle(), angle);
+    EXPECT_EQ(dto.getMessageId(), msg.messageId);
+}
+
+TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_setMessageId) {
+    InterlocRxFrameInfo msg;
+    msg.beeboardPort = 1;
+    msg.rxTimestamp = 2;
+    msg.sfdAngle = 3.3;
+    msg.accumulatorAngle = 4.4;
+    msg.messageId = 42;
+
+    uint32_t newMessageId = 69;
+
+    auto dto = InterlocRxFrameInfoDTO(msg);
+    dto.setMessageId(newMessageId);
+
+    EXPECT_EQ(dto.getBeeboardPort(), msg.beeboardPort);
+    EXPECT_EQ(dto.getRxTimestamp(), msg.rxTimestamp);
+    EXPECT_EQ(dto.getSfdAngle(), msg.sfdAngle);
+    EXPECT_EQ(dto.getAccumulatorAngle(), msg.accumulatorAngle);
+    EXPECT_EQ(dto.getMessageId(), newMessageId);
 }
 
 TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_serialize) {
@@ -102,12 +132,14 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_serialize) {
     uint64_t rxTimestamp = 2;
     float sfdAngle = 3.4;
     float accumulatorAngle = 5.6;
+    uint32_t messageId = 42;
 
     auto dto = InterlocRxFrameInfoDTO();
     dto.setBeeboardPort(beeboardPort);
     dto.setRxTimestamp(rxTimestamp);
     dto.setSfdAngle(sfdAngle);
     dto.setAccumulatorAngle(accumulatorAngle);
+    dto.setMessageId(messageId);
 
     bool ret = dto.serialize(msg);
 
@@ -116,4 +148,5 @@ TEST_F(InterlocRxFrameInfoTestFixture, InterlocRxFrameInfo_serialize) {
     EXPECT_EQ(msg.rxTimestamp, rxTimestamp);
     EXPECT_EQ(msg.sfdAngle, sfdAngle);
     EXPECT_EQ(msg.accumulatorAngle, accumulatorAngle);
+    EXPECT_EQ(msg.messageId, messageId);
 }
