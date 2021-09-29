@@ -9,9 +9,11 @@ namespace Task {
 
     typedef TickType_t Time;
 
-    inline void delay(uint32_t ms) { vTaskDelay(ms); }
+    inline void delay(uint32_t ms) { vTaskDelay(ms / portTICK_PERIOD_MS); }
 
-    inline void delayUntil(Time& current, uint32_t ms) { vTaskDelayUntil(&current, ms); }
+    inline void delayUntil(Time& current, uint32_t ms) {
+        vTaskDelayUntil(&current, ms / portTICK_PERIOD_MS);
+    }
 
     inline Time getTime() { return xTaskGetTickCount(); }
 
