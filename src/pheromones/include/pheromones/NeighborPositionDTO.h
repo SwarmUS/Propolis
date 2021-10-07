@@ -25,7 +25,7 @@ class NeighborPositionDTO {
     void setDistance(float distance);
 
     /**@brief set the azimuth
-     *@param orientation the azimuth in degrees*/
+     *@param azimuth the azimuth in degrees*/
     void setAzimuth(float azimuth);
 
     /**@brief set if the robot is in LOS
