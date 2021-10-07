@@ -6,7 +6,7 @@
 class NeighborPositionDTO {
   public:
     NeighborPositionDTO(const NeighborPosition& pos);
-    NeighborPositionDTO(float distance, float relativeOrientation, bool inLOS);
+    NeighborPositionDTO(float distance, float azimuth, bool inLOS);
 
     /**@brief get the distance
      *@return the distance in meters*/
@@ -16,17 +16,17 @@ class NeighborPositionDTO {
      *@return true  if the robot is in LOS*/
     bool inLOS() const;
 
-    /**@brief get the relative orientation
-     *@return the orientation in degrees*/
-    float getRelativeOrientation() const;
+    /**@brief get the azimuth
+     *@return the azimuth*/
+    float getAzimuth() const;
 
     /**@brief get the distance
      *@param distance the distance in meters*/
     void setDistance(float distance);
 
-    /**@brief set the relative orientation
-     *@param orientation the orientation in degrees*/
-    void setRelativeOrientation(float orientation);
+    /**@brief set the azimuth
+     *@param orientation the azimuth in degrees*/
+    void setAzimuth(float azimuth);
 
     /**@brief set if the robot is in LOS
      *@param inLOS  if the robot is in LOS*/
@@ -41,7 +41,7 @@ class NeighborPositionDTO {
 
   private:
     float m_distance;
-    float m_relativeOrientation;
+    float m_azimuth;
     bool m_inLOS;
 };
 
