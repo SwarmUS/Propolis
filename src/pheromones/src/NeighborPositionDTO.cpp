@@ -1,30 +1,26 @@
 #include "NeighborPositionDTO.h"
 
 NeighborPositionDTO::NeighborPositionDTO(const NeighborPosition& pos) :
-    m_distance(pos.distance),
-    m_relativeOrientation(pos.relative_orientation),
-    m_inLOS(pos.in_los) {}
+    m_distance(pos.distance), m_azimuth(pos.azimuth), m_inLOS(pos.in_los) {}
 
-NeighborPositionDTO::NeighborPositionDTO(float distance, float relativeOrientation, bool inLOS) :
-    m_distance(distance), m_relativeOrientation(relativeOrientation), m_inLOS(inLOS) {}
+NeighborPositionDTO::NeighborPositionDTO(float distance, float azimuth, bool inLOS) :
+    m_distance(distance), m_azimuth(azimuth), m_inLOS(inLOS) {}
 
 float NeighborPositionDTO::getDistance() const { return m_distance; }
 
 bool NeighborPositionDTO::inLOS() const { return m_inLOS; }
 
-float NeighborPositionDTO::getRelativeOrientation() const { return m_relativeOrientation; }
+float NeighborPositionDTO::getAzimuth() const { return m_azimuth; }
 
 void NeighborPositionDTO::setDistance(float distance) { m_distance = distance; }
 
-void NeighborPositionDTO::setRelativeOrientation(float orientation) {
-    m_relativeOrientation = orientation;
-}
+void NeighborPositionDTO::setAzimuth(float azimuth) { m_azimuth = azimuth; }
 
 void NeighborPositionDTO::setInLOS(bool inLOS) { m_inLOS = inLOS; }
 
 bool NeighborPositionDTO::serialize(NeighborPosition& pos) const {
     pos.distance = m_distance;
-    pos.relative_orientation = m_relativeOrientation;
+    pos.azimuth = m_azimuth;
     pos.in_los = m_inLOS;
     return true;
 }
