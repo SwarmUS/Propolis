@@ -2,6 +2,7 @@
 #define __INTERLOCCONFIGURATIONDTO_H__
 
 #include "ConfigureAngleCalibrationDTO.h"
+#include "ConfigureInterlocDumpsDTO.h"
 #include "ConfigureTWRCalibrationDTO.h"
 #include <message.pb.h>
 #include <variant>
@@ -15,12 +16,16 @@ class InterlocConfigurationDTO {
     InterlocConfigurationDTO(const InterlocConfiguration& message);
     InterlocConfigurationDTO(const ConfigureAngleCalibrationDTO& configureDTO);
     InterlocConfigurationDTO(const ConfigureTWRCalibrationDTO& configureDTO);
+    InterlocConfigurationDTO(const ConfigureInterlocDumpsDTO& configureDTO);
 
     /**
      * @brief Returns the inner configuration message
      * @return The configuration message
      */
-    const std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>&
+    const std::variant<std::monostate,
+                       ConfigureAngleCalibrationDTO,
+                       ConfigureTWRCalibrationDTO,
+                       ConfigureInterlocDumpsDTO>&
     getConfigurationMessage() const;
 
     /**
@@ -31,7 +36,10 @@ class InterlocConfigurationDTO {
     bool serialize(InterlocConfiguration& message) const;
 
   private:
-    std::variant<std::monostate, ConfigureAngleCalibrationDTO, ConfigureTWRCalibrationDTO>
+    std::variant<std::monostate,
+                 ConfigureAngleCalibrationDTO,
+                 ConfigureTWRCalibrationDTO,
+                 ConfigureInterlocDumpsDTO>
         m_configMessage;
 };
 
