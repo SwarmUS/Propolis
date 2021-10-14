@@ -1,9 +1,9 @@
 #ifndef __INTERLOCDUMPDTO_H__
 #define __INTERLOCDUMPDTO_H__
 
-#include <GetNeighborResponseDTO.h>
 #include <array>
 #include <message.pb.h>
+#include <pheromones/GetNeighborResponseDTO.h>
 #include <pheromones/PheromonesSettings.h>
 
 class InterlocDumpDTO {
