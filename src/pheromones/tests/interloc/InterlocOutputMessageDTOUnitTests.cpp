@@ -34,6 +34,19 @@ TEST_F(InterlocOutputMessageTestFixture, InterlocOutputMessage_deserialize_RawAn
     EXPECT_TRUE(std::holds_alternative<InterlocRawAngleDataDTO>(ret));
 }
 
+TEST_F(InterlocOutputMessageTestFixture, InterlocOutputMessage_deserialize_Dump) {
+    InterlocOutputMessage msg;
+    InterlocDump internalMsg{};
+
+    msg.which_outputMessage = InterlocOutputMessage_interlocDump_tag;
+    msg.outputMessage.interlocDump = internalMsg;
+
+    InterlocOutputMessageDTO dto = InterlocOutputMessageDTO(msg);
+    auto ret = dto.getMessage();
+
+    EXPECT_TRUE(std::holds_alternative<InterlocDumpDTO>(ret));
+}
+
 TEST_F(InterlocOutputMessageTestFixture, InterlocOutputMessage_deserialize_Invalid) {
     InterlocOutputMessage msg;
     msg.which_outputMessage = PB_SIZE_MAX;
@@ -65,4 +78,17 @@ TEST_F(InterlocOutputMessageTestFixture, InterlocOutputMessage_serialize_RawAngl
 
     EXPECT_TRUE(ret);
     EXPECT_EQ(msg.which_outputMessage, InterlocOutputMessage_rawAngleData_tag);
+}
+
+TEST_F(InterlocOutputMessageTestFixture, InterlocOutputMessage_serialize_Dump) {
+    InterlocOutputMessage msg;
+    InterlocDump dumpMsg;
+    dumpMsg.positionUpdates_count = 0;
+    InterlocDumpDTO dumpDto = InterlocDumpDTO(dumpMsg);
+
+    InterlocOutputMessageDTO dto = InterlocOutputMessageDTO(dumpDto);
+    auto ret = dto.serialize(msg);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(msg.which_outputMessage, InterlocOutputMessage_interlocDump_tag);
 }
