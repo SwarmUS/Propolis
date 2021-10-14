@@ -1,5 +1,10 @@
 #include "GetNeighborResponseDTO.h"
 
+GetNeighborResponseDTO::GetNeighborResponseDTO() {
+    m_neighborId = 0;
+    m_pos = NeighborPositionDTO(0, 0, false);
+}
+
 GetNeighborResponseDTO::GetNeighborResponseDTO(const GetNeighborResponse resp) :
     m_neighborId(resp.neighbor_id) {
     if (resp.has_position) {

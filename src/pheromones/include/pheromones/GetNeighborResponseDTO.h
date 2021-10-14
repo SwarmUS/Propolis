@@ -7,6 +7,7 @@
 
 class GetNeighborResponseDTO {
   public:
+    GetNeighborResponseDTO();
     GetNeighborResponseDTO(const GetNeighborResponse resp);
     GetNeighborResponseDTO(uint16_t neighborId, const std::optional<NeighborPositionDTO>& pos);
 
