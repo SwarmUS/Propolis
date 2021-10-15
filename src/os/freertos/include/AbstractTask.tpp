@@ -27,7 +27,7 @@ bool AbstractTask<stackSize>::start() {
 
 template <unsigned int stackSize>
 bool AbstractTask<stackSize>::isRunning() {
-    return (eTaskGetState(m_taskHandle) != eDeleted && eTaskGetState(m_taskHandle) == eInvalid);
+    return (eTaskGetState(m_taskHandle) != eDeleted && eTaskGetState(m_taskHandle) != eInvalid);
 }
 
 template <unsigned int stackSize>
