@@ -27,8 +27,8 @@ class InterlocDumpDTO {
 
     /**
      * Sets the updates array by copying a source array
-     * @param frames Source updates array
-     * @param framesLength Number of updates to copy
+     * @param updates Source updates array
+     * @param updatesLength Number of updates to copy
      */
     void setUpdates(const GetNeighborResponseDTO* updates, uint8_t updatesLength);
 
