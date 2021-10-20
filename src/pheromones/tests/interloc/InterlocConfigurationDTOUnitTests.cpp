@@ -33,6 +33,18 @@ TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Construct_TWRConf
     EXPECT_TRUE(std::holds_alternative<ConfigureTWRCalibrationDTO>(dto.getConfigurationMessage()));
 }
 
+TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Construct_DumpConfig) {
+    ConfigureInterlocDumps configMsg{};
+    InterlocConfiguration msg{};
+
+    msg.configurationMessage.configureInterlocDumps = configMsg;
+    msg.which_configurationMessage = InterlocConfiguration_configureInterlocDumps_tag;
+
+    InterlocConfigurationDTO dto = InterlocConfigurationDTO(msg);
+
+    EXPECT_TRUE(std::holds_alternative<ConfigureInterlocDumpsDTO>(dto.getConfigurationMessage()));
+}
+
 TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_AngleConfig) {
     ConfigureAngleCalibration configMsg{};
     InterlocConfiguration msg{};
@@ -64,4 +76,20 @@ TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_TWRConf
 
     EXPECT_TRUE(ret);
     EXPECT_EQ(outputMsg.configurationMessage.configureTWRCalibration.distance, configMsg.distance);
+}
+
+TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_DumpConfig) {
+    ConfigureInterlocDumps configMsg;
+    InterlocConfiguration msg;
+    InterlocConfiguration outputMsg;
+
+    configMsg.enable = true;
+    msg.configurationMessage.configureInterlocDumps = configMsg;
+    msg.which_configurationMessage = InterlocConfiguration_configureInterlocDumps_tag;
+
+    InterlocConfigurationDTO dto = InterlocConfigurationDTO(msg);
+    auto ret = dto.serialize(outputMsg);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(outputMsg.configurationMessage.configureInterlocDumps.enable, configMsg.enable);
 }
