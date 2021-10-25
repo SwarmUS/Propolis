@@ -45,6 +45,18 @@ TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Construct_DumpCon
     EXPECT_TRUE(std::holds_alternative<ConfigureInterlocDumpsDTO>(dto.getConfigurationMessage()));
 }
 
+TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Construct_AngleParameters) {
+    ConfigureAngleParameters configMsg{};
+    InterlocConfiguration msg{};
+
+    msg.configurationMessage.configureAngleParameters = configMsg;
+    msg.which_configurationMessage = InterlocConfiguration_configureAngleParameters_tag;
+
+    InterlocConfigurationDTO dto = InterlocConfigurationDTO(msg);
+
+    EXPECT_TRUE(std::holds_alternative<ConfigureAngleParametersDTO>(dto.getConfigurationMessage()));
+}
+
 TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_AngleConfig) {
     ConfigureAngleCalibration configMsg{};
     InterlocConfiguration msg{};
@@ -92,4 +104,21 @@ TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_DumpCon
 
     EXPECT_TRUE(ret);
     EXPECT_EQ(outputMsg.configurationMessage.configureInterlocDumps.enable, configMsg.enable);
+}
+
+TEST_F(InterlocConfigurationTestFixture, InterlocConfiguration_Serialize_AngleParameters) {
+    ConfigureAngleParameters configMsg;
+    InterlocConfiguration msg;
+    InterlocConfiguration outputMsg;
+
+    configMsg.anglePairId = 42;
+    msg.configurationMessage.configureAngleParameters = configMsg;
+    msg.which_configurationMessage = InterlocConfiguration_configureAngleParameters_tag;
+
+    InterlocConfigurationDTO dto = InterlocConfigurationDTO(msg);
+    auto ret = dto.serialize(outputMsg);
+
+    EXPECT_TRUE(ret);
+    EXPECT_EQ(outputMsg.configurationMessage.configureAngleParameters.anglePairId,
+              configMsg.anglePairId);
 }
