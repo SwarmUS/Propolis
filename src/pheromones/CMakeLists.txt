@@ -72,6 +72,7 @@ set(LIB_SOURCES
     src/interloc/InterlocRxFrameRawAngleDataDTO.cpp
     src/interloc/ConfigureInterlocDumpsDTO.cpp
     src/interloc/InterlocDumpDTO.cpp
+    src/interloc/ConfigureAngleParametersDTO.cpp
 
     src/HiveConnectNetworkAccessDTO.cpp
     src/HiveConnectRootNode.cpp
@@ -144,6 +145,7 @@ set(LIB_HEADERS
     include/pheromones/interloc/InterlocOutputMessageDTO.h
     include/pheromones/interloc/ConfigureInterlocDumpsDTO.h
     include/pheromones/interloc/InterlocDumpDTO.h
+    include/pheromones/interloc/ConfigureAngleParametersDTO.h
 
     include/pheromones/HiveConnectNetworkAccessDTO.h
     include/pheromones/HiveConnectRootNodeDTO.h

@@ -63,6 +63,7 @@ set(TEST_SOURCES
     interloc/InterlocOutputMessageDTOUnitTests.cpp
     interloc/ConfigureInterlocDumpsDTOUnitTests.cpp
     interloc/InterlocDumpDTOUnitTest.cpp
+    interloc/ConfigureAngleParametersDTOUnitTests.cpp
 
     HiveConnectNetworkAccessDTOTests.cpp
     HiveConnectRootNodeDTOTests.cpp
