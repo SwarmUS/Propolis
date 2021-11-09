@@ -11,21 +11,20 @@ class ConfigureAngleParametersDTO {
     ConfigureAngleParametersDTO(const ConfigureAngleParameters& message);
 
     uint8_t getPairId() const;
+
     const std::array<uint8_t, INTERLOC_ANTENNAS_PER_PAIR>& getAntennas() const;
     uint8_t getAntennasLength() const;
+
     const std::array<uint8_t, INTERLOC_MAX_ANTENNA_PAIRS>& getSlopeDecision() const;
     uint8_t getSlopeDecisionLength() const;
-    float getTdoaNormalizationFactor() const;
-    const std::array<float, INTERLOC_MAX_TDOA_SLOPES>& getTdoaSlopes() const;
-    uint8_t getTdoaSlopesLength() const;
-    const std::array<float, INTERLOC_MAX_TDOA_SLOPES>& getTdoaIntercepts() const;
-    uint8_t getTdoaInterceptsLength() const;
-    float getPdoaNormalizationFactor() const;
-    float getPdoaSlope() const;
+
+    const std::array<float, INTERLOC_MAX_PDOA_SLOPES>& getPdoaSlopes() const;
+    uint8_t getPdoaSlopesLength() const;
+
     const std::array<float, INTERLOC_MAX_PDOA_SLOPES>& getPdoaIntercepts() const;
     uint8_t getPdoaInterceptsLength() const;
-    const std::array<float, INTERLOC_MAX_PDOA_SLOPES>& getPdoaOrigins() const;
-    uint8_t getPdoaOriginsLength() const;
+
+    float getPdoaNormalizationFactor() const;
 
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
@@ -42,18 +41,11 @@ class ConfigureAngleParametersDTO {
     std::array<uint8_t, INTERLOC_MAX_ANTENNA_PAIRS> m_slopeDecision;
     uint8_t m_slopeDecisionLength;
 
-    float m_tdoaNormalizationFactor;
-    std::array<float, INTERLOC_MAX_TDOA_SLOPES> m_tdoaSlopes;
-    uint8_t m_tdoaSlopesLength;
-    std::array<float, INTERLOC_MAX_TDOA_SLOPES> m_tdoaIntercepts;
-    uint8_t m_tdoaInterceptsLength;
-
-    float m_pdoaNormalizationFactor;
-    float m_pdoaSlope;
+    std::array<float, INTERLOC_MAX_PDOA_SLOPES> m_pdoaSlopes;
+    uint8_t m_pdoaSlopesLength;
     std::array<float, INTERLOC_MAX_PDOA_SLOPES> m_pdoaIntercepts;
     uint8_t m_pdoaInterceptsLength;
-    std::array<float, INTERLOC_MAX_PDOA_SLOPES> m_pdoaOrigins;
-    uint8_t m_pdoaOriginsLength;
+    float m_pdoaNormalizationFactor;
 };
 
 #endif //__CONFIGUREANGLEPARAMETERSDTO_H__
