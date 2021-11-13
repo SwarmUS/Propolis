@@ -26,6 +26,8 @@ class ConfigureAngleParametersDTO {
 
     float getPdoaNormalizationFactor() const;
 
+    float getBoardOrientationOffset() const;
+
     /**
      *@brief serialize a Message for nanopb, sets the fields properly before using
      *pb_encode
@@ -46,6 +48,8 @@ class ConfigureAngleParametersDTO {
     std::array<float, INTERLOC_MAX_PDOA_SLOPES> m_pdoaIntercepts;
     uint8_t m_pdoaInterceptsLength;
     float m_pdoaNormalizationFactor;
+
+    float m_boardOientationOffset;
 };
 
 #endif //__CONFIGUREANGLEPARAMETERSDTO_H__

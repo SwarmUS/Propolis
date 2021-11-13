@@ -59,6 +59,17 @@ TEST_F(ConfigureAngleParametersFixture, ConfigureInterlocDumps_deserialize_pdoaN
     EXPECT_EQ(dto.getPdoaNormalizationFactor(), msg.pdoaNormalizationFactor);
 }
 
+TEST_F(ConfigureAngleParametersFixture, ConfigureInterlocDumps_deserialize_boardOffset) {
+    ConfigureAngleParameters msg;
+    memset(&msg, 0, sizeof(msg));
+
+    msg.boardOrientationOffset = 42.42;
+
+    auto dto = ConfigureAngleParametersDTO(msg);
+
+    EXPECT_EQ(dto.getBoardOrientationOffset(), msg.boardOrientationOffset);
+}
+
 TEST_F(ConfigureAngleParametersFixture, ConfigureInterlocDumps_deserialize_pdoaIntercepts) {
     ConfigureAngleParameters msg;
     memset(&msg, 0, sizeof(msg));

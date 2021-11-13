@@ -27,6 +27,7 @@ ConfigureAngleParametersDTO::ConfigureAngleParametersDTO(const ConfigureAnglePar
     }
 
     m_pdoaNormalizationFactor = message.pdoaNormalizationFactor;
+    m_boardOientationOffset = message.boardOrientationOffset;
 }
 
 uint8_t ConfigureAngleParametersDTO::getPairId() const { return m_pairId; }
@@ -67,6 +68,10 @@ const std::array<float, INTERLOC_MAX_PDOA_SLOPES>& ConfigureAngleParametersDTO::
     return m_pdoaIntercepts;
 }
 
+float ConfigureAngleParametersDTO::getBoardOrientationOffset() const {
+    return m_boardOientationOffset;
+}
+
 bool ConfigureAngleParametersDTO::serialize(ConfigureAngleParameters& message) const {
     message.anglePairId = m_pairId;
 
@@ -89,6 +94,8 @@ bool ConfigureAngleParametersDTO::serialize(ConfigureAngleParameters& message) c
     for (unsigned int i = 0; i < m_pdoaInterceptsLength; i++) {
         message.pdoaIntercepts[i] = m_pdoaIntercepts[i];
     }
+
+    message.boardOrientationOffset = m_boardOientationOffset;
 
     return true;
 }
