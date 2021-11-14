@@ -19,6 +19,11 @@ InterlocConfigurationDTO::InterlocConfigurationDTO(const InterlocConfiguration& 
             ConfigureInterlocDumpsDTO(message.configurationMessage.configureInterlocDumps);
         break;
 
+    case InterlocConfiguration_configureAngleParameters_tag:
+        m_configMessage =
+            ConfigureAngleParametersDTO(message.configurationMessage.configureAngleParameters);
+        break;
+
     default:
         m_configMessage = std::monostate();
     }
@@ -37,10 +42,16 @@ InterlocConfigurationDTO::InterlocConfigurationDTO(const ConfigureInterlocDumpsD
     m_configMessage = configureDTO;
 }
 
+InterlocConfigurationDTO::InterlocConfigurationDTO(
+    const ConfigureAngleParametersDTO& configureDTO) {
+    m_configMessage = configureDTO;
+}
+
 const std::variant<std::monostate,
                    ConfigureAngleCalibrationDTO,
                    ConfigureTWRCalibrationDTO,
-                   ConfigureInterlocDumpsDTO>&
+                   ConfigureInterlocDumpsDTO,
+                   ConfigureAngleParametersDTO>&
 InterlocConfigurationDTO::getConfigurationMessage() const {
     return m_configMessage;
 }
@@ -59,6 +70,11 @@ bool InterlocConfigurationDTO::serialize(InterlocConfiguration& message) const {
     if (const auto* configMessage = std::get_if<ConfigureInterlocDumpsDTO>(&m_configMessage)) {
         message.which_configurationMessage = InterlocConfiguration_configureInterlocDumps_tag;
         return configMessage->serialize(message.configurationMessage.configureInterlocDumps);
+    }
+
+    if (const auto* configMessage = std::get_if<ConfigureAngleParametersDTO>(&m_configMessage)) {
+        message.which_configurationMessage = InterlocConfiguration_configureAngleParameters_tag;
+        return configMessage->serialize(message.configurationMessage.configureAngleParameters);
     }
 
     return false;
