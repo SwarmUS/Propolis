@@ -21,6 +21,12 @@ class IAbstractTask {
     virtual bool start() = 0;
 
     /**
+     *@brief Gets the name of the task
+     *@return returns a pointer to the name of the task
+     **/
+    virtual const char* getTaskName() = 0;
+
+    /**
      *@brief check if the task is currently running
      *
      *@return true if the task is running, false if not */

@@ -29,6 +29,11 @@ bool AbstractTask<stackSize>::start() {
 }
 
 template <unsigned int stackSize>
+const char* AbstractTask<stackSize>::getTaskName() {
+    return m_taskName;
+}
+
+template <unsigned int stackSize>
 bool AbstractTask<stackSize>::isRunning() {
     return m_taskRunning;
 }

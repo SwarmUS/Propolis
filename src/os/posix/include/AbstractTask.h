@@ -15,6 +15,8 @@ class AbstractTask : public IAbstractTask {
 
     bool start() override;
 
+    const char* getTaskName() override;
+
     bool isRunning() override;
 
     TaskHandle_t getTaskHandle() override;
