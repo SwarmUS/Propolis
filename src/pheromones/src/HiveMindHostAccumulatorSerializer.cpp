@@ -10,8 +10,8 @@ bool HiveMindHostAccumulatorSerializer::serializeToStream(const MessageDTO& mess
     Message msgSend;
     message.serialize(msgSend);
 
-    pb_ostream_t outputStream{HiveMindHostAccumulatorSerializer::streamCallback, this, SIZE_MAX, 0,
-                              0};
+    pb_ostream_t outputStream{HiveMindHostAccumulatorSerializer::streamCallback, this,
+                              2 * Message_size, 0, 0};
 
     if (pb_encode_ex(&outputStream, Message_fields, &msgSend, PB_ENCODE_DELIMITED)) {
         bool ret = m_stream.send(m_data.data(), m_messageLength);
