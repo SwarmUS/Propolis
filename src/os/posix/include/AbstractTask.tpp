@@ -2,7 +2,8 @@
 #define ABSTRACTTASK_TPP
 
 template <unsigned int stackSize>
-AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority): m_taskName(taskName) {
+AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) :
+    m_taskName(taskName) {
     (void)priority;
 }
 
