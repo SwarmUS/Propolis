@@ -8,7 +8,7 @@ bool HiveMindHostSerializer::serializeToStream(const MessageDTO& message) {
     Message msgSend;
     message.serialize(msgSend);
 
-    pb_ostream_t outputStream{HiveMindHostSerializer::streamCallback, this, SIZE_MAX, 0, 0};
+    pb_ostream_t outputStream{HiveMindHostSerializer::streamCallback, this, 2 * Message_size, 0, 0};
 
     return pb_encode_ex(&outputStream, Message_fields, &msgSend, PB_ENCODE_DELIMITED);
 }

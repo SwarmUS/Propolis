@@ -4,6 +4,7 @@
 #include "IAbstractTask.h"
 #include "OSMacros.h"
 #include <stdint.h>
+#include <string>
 #include <thread>
 
 template <unsigned int stackSize>
@@ -15,6 +16,8 @@ class AbstractTask : public IAbstractTask {
 
     bool start() override;
 
+    const char* getTaskName() override;
+
     bool isRunning() override;
 
     TaskHandle_t getTaskHandle() override;
@@ -24,6 +27,7 @@ class AbstractTask : public IAbstractTask {
 
     static void wrapper(void* params);
 
+    const char* m_taskName;
     bool m_taskRunning = false;
     std::thread m_thread;
 };

@@ -2,8 +2,8 @@
 #define ABSTRACTTASK_TPP
 
 template <unsigned int stackSize>
-AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) {
-    (void)taskName;
+AbstractTask<stackSize>::AbstractTask(const char* taskName, UBaseType_t priority) :
+    m_taskName(taskName) {
     (void)priority;
 }
 
@@ -26,6 +26,11 @@ bool AbstractTask<stackSize>::start() {
         return true;
     }
     return false;
+}
+
+template <unsigned int stackSize>
+const char* AbstractTask<stackSize>::getTaskName() {
+    return m_taskName;
 }
 
 template <unsigned int stackSize>
