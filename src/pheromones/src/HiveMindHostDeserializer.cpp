@@ -8,7 +8,7 @@ HiveMindHostDeserializer::HiveMindHostDeserializer(IProtobufInputStream& stream)
 bool HiveMindHostDeserializer::deserializeFromStream(MessageDTO& message) {
     Message msgReceive = Message_init_default;
 
-    pb_istream_t inputStream{HiveMindHostDeserializer::streamCallback, this, SIZE_MAX, 0};
+    pb_istream_t inputStream{HiveMindHostDeserializer::streamCallback, this, 2 * Message_size, 0};
 
     bool status = pb_decode_ex(&inputStream, Message_fields, &msgReceive, PB_DECODE_DELIMITED);
 
